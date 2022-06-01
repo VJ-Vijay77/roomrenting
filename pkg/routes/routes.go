@@ -1,0 +1,28 @@
+package routes
+
+import (
+	"github.com/VJ-Vijay77/r4room/pkg/controller"
+	"github.com/gin-gonic/gin"
+)
+
+func InitRoutes(api *gin.Engine) {
+	//loading gohtml files from templates directory
+	api.LoadHTMLGlob("templates/*.gohtml")
+	
+	//loading static files like css or js
+	api.Static("static/","./static")
+
+	//Get methods
+	api.GET("/user_login", controller.UserLogin)
+	api.GET("/user_signup",controller.UserSignup)
+	api.GET("/user_home",controller.UserHome)
+	api.GET("/admin_login",controller.AdminLogin)
+	api.GET("/admin_home",controller.AdminHome)
+	
+	//Post methods
+	api.POST("/user_login", controller.PUserLogin)
+	api.POST("/user_signup",controller.PUserSignup)
+	api.POST("/admin_login",controller.PAdminLogin)
+
+
+}
