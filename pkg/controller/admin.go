@@ -12,6 +12,7 @@ func AdminLogin(c *gin.Context) {
 	c.HTML(200, "adminlogin.gohtml", gin.H{})
 }
 
+//validating admin credentials from database
 func PAdminLogin(c *gin.Context) {
 	db := database.GetDb()
 	Email := c.PostForm("email")

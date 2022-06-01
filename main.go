@@ -9,8 +9,15 @@ import (
 
 
 func main() {
+	//getting gin engine
 	Engine := gingonic.GinInit()
+
+	//connecting database
 	database.GetDb()
+
+	//activating routes
 	routes.InitRoutes(Engine)
+	
+	//starting the port
 	Engine.Run()
 }

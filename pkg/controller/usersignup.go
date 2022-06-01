@@ -12,6 +12,8 @@ import (
 func UserSignup(c *gin.Context) {
 	c.HTML(200, "usersignup.gohtml", nil)
 }
+
+//validating user credentials from database
 func PUserSignup(c *gin.Context) {
 	db := database.GetDb()
 	FirstName := c.PostForm("firstname")

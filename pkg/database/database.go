@@ -9,6 +9,7 @@ import (
 	"gorm.io/gorm"
 )
 
+//connecting database and returning database engine
 func GetDb() *gorm.DB {
 	err := godotenv.Load(".env")
 	if err != nil {

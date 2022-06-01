@@ -1,5 +1,6 @@
 package models
 
+//model representing the table in database
 type Users struct{
 	ID uint 
 	First_Name string 
