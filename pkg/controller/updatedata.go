@@ -106,6 +106,13 @@ func DeleteUser(c *gin.Context) {
 //add user
 func AddUsers(c *gin.Context) {
 	
+	//checking session
+	ok := AdminLogedCheck(c)
+	if !ok {
+		c.Redirect(303, "/admin_login")
+		return
+	}
+
  c.HTML(200,"addusers.gohtml",nil)
 }
 

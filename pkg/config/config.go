@@ -1,5 +1,5 @@
 package config
 
-//  type AppConfig struct {
-
-//  }
+  type AppConfig struct {
+	
+  }

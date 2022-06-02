@@ -8,10 +8,26 @@ import (
 
 //rendering admin homepage
 func AdminHome(c *gin.Context) {
+
+	//checking session
+	ok := AdminLogedCheck(c)
+	if !ok {
+		c.Redirect(303, "/admin_login")
+		return
+	}
+
 	c.HTML(200, "adminhome.gohtml", nil)
 }
 
 func UserManagement(c *gin.Context){
+
+	//checking session
+	ok := AdminLogedCheck(c)
+	if !ok {
+		c.Redirect(303, "/admin_login")
+		return
+	}
+
 	c.HTML(200,"usermanagement.gohtml",nil)
 }
 
@@ -19,6 +35,14 @@ func UserManagement(c *gin.Context){
 
 //rendering all users page
 func AllUsers(c *gin.Context) {
+
+	//checking session
+	ok := AdminLogedCheck(c)
+	if !ok {
+		c.Redirect(303, "/admin_login")
+		return
+	}
+
 	db := database.GetDb()
 	var data []models.Users
 	
@@ -32,10 +56,26 @@ func AllUsers(c *gin.Context) {
 
 //rendering add room page
 func AddRoom(c *gin.Context) {
+
+	//checking session
+	ok := AdminLogedCheck(c)
+	if !ok {
+		c.Redirect(303, "/admin_login")
+		return
+	}
+
 	c.HTML(200, "addroom.gohtml", nil)
 }
 
 //rendering remove room page
 func RemoveRoom(c *gin.Context) {
+
+	//checking session
+	ok := AdminLogedCheck(c)
+	if !ok {
+		c.Redirect(303, "/admin_login")
+		return
+	}
+
 	c.HTML(200, "removeroom.gohtml", nil)
 }

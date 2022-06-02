@@ -12,6 +12,9 @@ func InitRoutes(api *gin.Engine) {
 	//loading static files like css or js
 	api.Static("static/","./static")
 
+	//index router
+	api.GET("/",controller.Index)
+
 	//Get methods
 	api.GET("/user_login", controller.UserLogin)
 	api.GET("/user_signup",controller.UserSignup)
@@ -45,5 +48,7 @@ func InitRoutes(api *gin.Engine) {
 	//search user
 	api.POST("/admin/user_management/searchusers",controller.SearchUsers)
 
-
+	//user/admin logout 
+	api.GET("/user_logout",controller.UserLogout) 
+	api.GET("/admin_logout",controller.AdminLogout) 
 }
