@@ -22,9 +22,8 @@ func AllUsers(c *gin.Context) {
 	db := database.GetDb()
 	var data []models.Users
 	
-
-	db.Find(&data)
-	
+	//ordering all data by id
+	db.Order("id").Find(&data)
 
 	c.HTML(200, "allusers.gohtml", gin.H{
 		"data":data,

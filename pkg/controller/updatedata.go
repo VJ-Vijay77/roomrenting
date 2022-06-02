@@ -102,3 +102,38 @@ func DeleteUser(c *gin.Context) {
 	c.Redirect(303,"/admin/user_management/allusers")
 	
 }
+
+//add user
+func AddUsers(c *gin.Context) {
+	
+ c.HTML(200,"addusers.gohtml",nil)
+}
+
+func PAddUsers(c *gin.Context) {
+	db := database.GetDb()
+	FirstName := c.PostForm("firstname")
+	LastName := c.PostForm("lastname")
+	Email := c.PostForm("email")
+	Password := c.PostForm("password")
+
+	var users models.Users
+
+	db.Raw("SELECT email FROM users WHERE email=?",Email).Scan(&users)
+	if users.Email == Email{
+		dialog.Alert("The Email is already taken!!")
+		c.Redirect(303,"/admin/user_management/addusers")
+		return
+	}
+	
+		users.First_Name=FirstName
+		users.Last_Name=LastName
+		users.Email=Email
+		users.Password=Password
+		users.Block_Status=true
+		
+    db.Select("first_name","last_name","email","password","block_status").Create(&users)
+	dialog.Alert("Account Create Successfully!")
+	
+	c.Redirect(303,"/admin/user_management/addusers")
+}
+

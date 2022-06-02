@@ -32,11 +32,18 @@ func InitRoutes(api *gin.Engine) {
 	api.GET("/admin/remove_room",controller.RemoveRoom)
 
 	//user management update delete add
-	api.POST("admin/user_management/fnupdate/:ID",controller.UpdateFUser)
-	api.POST("admin/user_management/lnupdate/:ID",controller.UpdateLUser)
-	api.GET("admin/user_management/block/:ID",controller.BlockUser)
-	api.GET("admin/user_management/unblock/:ID",controller.UnBlockUser)
-	api.GET("admin/user_management/delete/:ID",controller.DeleteUser)
+	api.POST("/admin/user_management/fnupdate/:ID",controller.UpdateFUser)
+	api.POST("/admin/user_management/lnupdate/:ID",controller.UpdateLUser)
+	api.GET("/admin/user_management/block/:ID",controller.BlockUser)
+	api.GET("/admin/user_management/unblock/:ID",controller.UnBlockUser)
+	api.GET("/admin/user_management/delete/:ID",controller.DeleteUser)
+
+	//add user 
+	api.GET("/admin/user_management/addusers",controller.AddUsers)
+	api.POST("/admin/user_management/addusers",controller.PAddUsers)
+
+	//search user
+	api.POST("/admin/user_management/searchusers",controller.SearchUsers)
 
 
 }
