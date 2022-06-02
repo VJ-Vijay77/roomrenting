@@ -34,8 +34,9 @@ func PUserSignup(c *gin.Context) {
 		users.Last_Name=LastName
 		users.Email=Email
 		users.Password=Password
+		users.Block_Status=true
 		
-    db.Select("first_name","last_name","email","password").Create(&users)
+    db.Select("first_name","last_name","email","password","block_status").Create(&users)
 	dialog.Alert("Account Create Successfully!,\n\t\tClick Ok to Login.")
 	
 	c.Redirect(303,"/user_login")

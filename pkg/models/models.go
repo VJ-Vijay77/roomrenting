@@ -8,5 +8,6 @@ type Users struct{
 	Email string 
 	Password string 
 	Role string
+	Block_Status bool
 }
 

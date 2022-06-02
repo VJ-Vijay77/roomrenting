@@ -19,9 +19,7 @@ form.addEventListener('submit', (e) => {
     
     //last name
   else  if (lastname.value==='' || lastname.value== null){
-        messages.push('last Name is required!')
-    }else if(lastname.value.length <= 2 ){
-        messages.push('last Name must have 3 characters')
+        messages.push('Last Name is required!')
     }
 
     else if (!/^[A-Za-z ]+$/.test(lastname.value)){

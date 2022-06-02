@@ -19,9 +19,14 @@ func PUserLogin(c *gin.Context) {
 	Password := c.PostForm("userpassword")
 	
 	var ds models.Users
-	db.Raw("SELECT email,password FROM users WHERE email=? AND password=?", Email,Password).Scan(&ds)
+	db.Raw("SELECT email,password,block_status FROM users WHERE email=? AND password=?", Email,Password).Scan(&ds)
 	if Email != ds.Email || Password != ds.Password {
 		dialog.Alert("Username or Password is Incorrect\n\t\tTry again!")
+		c.Redirect(303,"/user_login")
+		return
+	}
+	if !ds.Block_Status {
+		dialog.Alert("You have been blocked by Admin!\n  contact:vijayadmin@admin")
 		c.Redirect(303,"/user_login")
 		return
 	}

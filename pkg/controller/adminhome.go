@@ -1,10 +1,36 @@
 package controller
 
 import (
+	"github.com/VJ-Vijay77/r4room/pkg/database"
+	"github.com/VJ-Vijay77/r4room/pkg/models"
 	"github.com/gin-gonic/gin"
 )
 
 //rendering admin homepage
 func AdminHome(c *gin.Context) {
 	c.HTML(200, "adminhome.gohtml", nil)
+}
+
+//rendering user management page
+func UserManagement(c *gin.Context) {
+	db := database.GetDb()
+	var data []models.Users
+	
+
+	db.Find(&data)
+	
+
+	c.HTML(200, "usermanagement.gohtml", gin.H{
+		"data":data,
+	})
+}
+
+//rendering add room page
+func AddRoom(c *gin.Context) {
+	c.HTML(200, "addroom.gohtml", nil)
+}
+
+//rendering remove room page
+func RemoveRoom(c *gin.Context) {
+	c.HTML(200, "removeroom.gohtml", nil)
 }
