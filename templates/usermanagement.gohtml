@@ -11,67 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>user management</h1>
-<br>
-<h3>All Users List</h3>
-    
-    <!-- table -->
-    <!-- <div class="container"> -->
-    <table class="table table-hover table-dark">
-        <thead>
-          <tr>
-            
-            <th scope="col">ID</th>
+    <h1><a href="/admin/user_management/allusers">See all Users</a></h1>
 
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Ative Status</th>
-            <th scope="col">B/uB/D</th>
-            <th scope="col">Edit/Update</th>
-
-        </tr>
-        </thead>
-        <tbody>
-            {{range .data}}
-          <tr>
-            
-            <td>{{.ID}}</td>
-            <td>{{.First_Name}}</td>
-            <td>{{.Last_Name}}</td>
-            <td>{{.Email}}</td>
-            <td>{{.Block_Status}}</td>
-            <td>
-                
-              <!-- Example single danger button -->
-              <div class="btn-group">
-    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Action
-    </button>
-    <div class="dropdown-menu">
-      <a class="dropdown-item badge-secondary" href="/admin/user_management/block/{{.ID}}">Block</a>
-      <a class="dropdown-item badge-secondary" href="/admin/user_management/unblock/{{.ID}}">UnBlock</a>
-      <a class="dropdown-item badge-secondary" href="/admin/user_management/delete/{{.ID}}">Delete</a>
-   
-  </div>
-
-            </td>
-
-            <td>
-                <form action="/admin/user_management/fnupdate/{{.ID}}" method="post">
-                    <input type="text" name="updateuserdata" placeholder="First Name">
-                    <button type="submit">Update</button>
-                   </form>
-                    <form action="/admin/user_management/lnupdate/{{.ID}}" method="post">
-                        <input type="text" name="updateuserdata" placeholder="Last Name">
-                        <button type="submit">Update</button>
-                </form>
-            </td>
-          </tr>
-          {{end}}
-        </tbody>
-      </table>
-      <!-- </div> -->
-
-</body>
-</html>
+    </body>
+    </html>

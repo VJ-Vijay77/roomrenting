@@ -26,6 +26,7 @@ func InitRoutes(api *gin.Engine) {
 
 
 	//admin sub Get methods
+	api.GET("/admin/user_management/allusers",controller.AllUsers)
 	api.GET("/admin/user_management",controller.UserManagement)
 	api.GET("/admin/add_room",controller.AddRoom)
 	api.GET("/admin/remove_room",controller.RemoveRoom)

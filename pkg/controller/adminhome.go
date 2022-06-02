@@ -11,8 +11,14 @@ func AdminHome(c *gin.Context) {
 	c.HTML(200, "adminhome.gohtml", nil)
 }
 
-//rendering user management page
-func UserManagement(c *gin.Context) {
+func UserManagement(c *gin.Context){
+	c.HTML(200,"usermanagement.gohtml",nil)
+}
+
+
+
+//rendering all users page
+func AllUsers(c *gin.Context) {
 	db := database.GetDb()
 	var data []models.Users
 	
@@ -20,7 +26,7 @@ func UserManagement(c *gin.Context) {
 	db.Find(&data)
 	
 
-	c.HTML(200, "usermanagement.gohtml", gin.H{
+	c.HTML(200, "allusers.gohtml", gin.H{
 		"data":data,
 	})
 }
