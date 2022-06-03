@@ -9,30 +9,37 @@
 <script src="https://kit.fontawesome.com/d67b07a9d9.js" crossorigin="anonymous"></script>
 
     <script defer src="/static/mobile.js"></script>
+    <style>
+        body{
+            background-image: url(https://images.unsplash.com/photo-1598928506311-c55ded91a20c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80);
+            
+        }
+    </style>
 </head>
 <body>
 
 
 
 
-<section class="vh-100" style="background-color: #508bfc;">
+<section class="vh-100" >
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-          <div class="card shadow-2-strong" style="border-radius: 1rem;">
-            <div class="card-body p-5 text-center">
+          <div class="card shadow-2-strong" style="border-radius: 2rem;background-image: url(https://images.unsplash.com/photo-1591899916510-d8eea9eb7b25?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80);">
+            <div class="card-body p-4 text-center">
                
-               
-               
+                <h3 class="mb-3" style="font-weight: 600;">Sign in Using Mobile</h3>
+                    <i class="fa-solid fa-bed fa-1x" style="color: #ff6219;"></i>
+                    <span class="h4 fw-bold mb-0" style="font-family: Verdana, Geneva, Tahoma, sans-serif;" >R4Rooms</span><br><br>
+               <hr>
                 <form method="post" id="form" action="/login_with_otp">
             
-                    <h3 class="mb-5">Sign in</h3>
             
                     <div class="text-danger" style="font-size: medium;" id="error"></div>
             
                     <div class="form-outline mb-4">
-                <label class="form-label" for="mobilevalidation">Mobile Number</label>
-                <input type="text" name="mobile" id="mobilevalidation" class="form-control form-control-lg" />
+                <label class="form-label" style="font-weight: 600;font-size: large;" for="mobilevalidation">Mobile Number</label>
+                <input type="text" name="mobile" id="mobilevalidation" class="form-control form-control-lg" placeholder="10-Digit Mobile Number" />
                 
               </div>
     
@@ -41,13 +48,17 @@
               <hr class="my-4">
   
             </form>
-
-            </div>
+            <button class="btn btn-group-sm mb-3 btn-dark btn-outline-dark rounded-2"><a href="/user_login" style="text-decoration: none;color: white; font-weight: 600;" > Login Using Password</a></button>
+            <button class="btn btn-group-sm mb-3 btn-dark btn-outline-dark rounded-2" style="font-weight: 600;color: white;"><i class="fa-brands fa-google"></i> Login Using Google</button>
+                
+        </div>
           </div>
         </div>
       </div>
     </div>
+    
   </section>
+  
 
   </body>
   </html>
