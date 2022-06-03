@@ -9,5 +9,6 @@ type Users struct{
 	Password string 
 	Role string
 	Block_Status bool
+	Mobile string
 }
 

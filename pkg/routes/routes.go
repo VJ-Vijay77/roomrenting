@@ -17,6 +17,8 @@ func InitRoutes(api *gin.Engine) {
 
 	//Get methods
 	api.GET("/user_login", controller.UserLogin)
+	api.GET("/login_with_otp", controller.UserOtpLogin)
+	api.GET("/validate_otp", controller.ValidateOtp)
 	api.GET("/user_signup",controller.UserSignup)
 	api.GET("/user_home",controller.UserHome)
 	api.GET("/admin_login",controller.AdminLogin)
@@ -24,6 +26,8 @@ func InitRoutes(api *gin.Engine) {
 	
 	//Post methods
 	api.POST("/user_login", controller.PUserLogin)
+	api.POST("/login_with_otp", controller.PUserOtpLogin)
+	api.POST("/validate_otp", controller.PValidateOtp)
 	api.POST("/user_signup",controller.PUserSignup)
 	api.POST("/admin_login",controller.PAdminLogin)
 

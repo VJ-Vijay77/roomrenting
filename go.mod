@@ -9,6 +9,11 @@ require (
 )
 
 require (
+	github.com/golang/mock v1.6.0 // indirect
+	github.com/pkg/errors v0.9.1 // indirect
+)
+
+require (
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/gin-gonic/gin v1.8.0 // indirect
 	github.com/go-playground/locales v0.14.0 // indirect
@@ -34,6 +39,7 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.1 // indirect
 	github.com/rimiti/kill-port v1.0.0 // indirect
+	github.com/twilio/twilio-go v0.26.0
 	github.com/ugorji/go/codec v1.2.7 // indirect
 	golang.org/x/crypto v0.0.0-20220525230936-793ad666bf5e // indirect
 	golang.org/x/net v0.0.0-20220526153639-5463443f8c37 // indirect
