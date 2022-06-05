@@ -183,5 +183,5 @@ func UserLogout(c *gin.Context) {
 		HttpOnly: true,
 	}
 	sessions.Save(c.Request, c.Writer)
-	c.Redirect(303, "/user_login")
+	c.Redirect(303, "/user_home")
 }

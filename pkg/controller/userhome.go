@@ -14,7 +14,7 @@ func UserHome(c *gin.Context) {
 	//checking session
 	ok := UserLogedCheck(c)
 	if !ok {
-		c.Redirect(303, "/user_login")
+		c.HTML(200,"userhome.gohtml",nil)
 		return
 	}
 	db := database.GetDb()

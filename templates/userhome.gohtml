@@ -38,11 +38,13 @@
       
   
   
-        <button type="button" class="btn btn-sm btn-outline-warning text-white"><a href="/user_signup" class="navbar nav-item text-white" style="text-decoration: none;">SignUp</a></button> 
+       {{if not .username}} <button type="button" class="btn btn-sm btn-outline-warning text-white"><a href="/user_signup" class="navbar nav-item text-white" style="text-decoration: none;">SignUp</a></button> {{end}}
 
-        <button type="button" class="btn btn-sm btn-outline-info text-white" style="margin-left: 1%;"><a href="/user_login" class="navbar nav-item text-white" style="text-decoration: none;">{{.username}}</a></button> </a>
-        <button class="btn btn-dark"><a style="text-decoration: none;color: wheat;" href="/user_logout">Logout</a></button>
-
+       {{if .username}} <button type="button" class="btn btn-sm btn-outline-info text-white" style="margin-left: 1%;"><a href="/user_login" class="navbar nav-item text-white" style="text-decoration: none;">{{.username}}</a></button> </a>
+       {{else}} <button type="button" class="btn btn-sm btn-outline-info text-white" style="margin-left: 1%;"><a href="/user_login" class="navbar nav-item text-white" style="text-decoration: none;">Login</a></button> </a>
+       {{end}}
+       {{if .username}} <button class="btn btn-dark"><a style="text-decoration: none;color: wheat;" href="/user_logout">Logout</a></button>
+       {{else}}{{end}}
 
         
       </nav> 
