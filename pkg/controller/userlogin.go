@@ -109,7 +109,6 @@ func ValidateOtp(c *gin.Context) {
 		Password: authToken,
 	})
 	
-	
 	params := &openapi.CreateMessageParams{}
 	params.SetTo(Mobile)
 	params.SetFrom("+19844647150")

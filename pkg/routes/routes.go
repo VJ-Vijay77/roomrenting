@@ -55,4 +55,10 @@ func InitRoutes(api *gin.Engine) {
 	//user/admin logout 
 	api.GET("/user_logout",controller.UserLogout) 
 	api.GET("/admin_logout",controller.AdminLogout) 
+
+
+	//room searching and info pages
+	api.GET("/user/room_search",controller.SearchRooms)
+
+
 }

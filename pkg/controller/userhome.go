@@ -1,6 +1,10 @@
 package controller
 
 import (
+	"fmt"
+
+	"github.com/VJ-Vijay77/r4room/pkg/database"
+	"github.com/VJ-Vijay77/r4room/pkg/models"
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,6 +17,15 @@ func UserHome(c *gin.Context) {
 		c.Redirect(303, "/user_login")
 		return
 	}
-
-	c.HTML(200, "userhome.gohtml", gin.H{})
+	db := database.GetDb()
+	session, _ := Store.Get(c.Request, "session")
+	useriD := session.Values["userID"]
+	userID := fmt.Sprintf("%s", useriD)
+	var userinfos models.Users
+	db.Raw("SELECT first_name FROM users where email=?", userID).Scan(&userinfos)
+	UserName := userinfos.First_Name
+	c.HTML(200, "userhome.gohtml", gin.H{
+		"data": userinfos,
+		"username":UserName,
+	})
 }
