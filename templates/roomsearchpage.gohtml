@@ -51,105 +51,37 @@
     <!-- navbar end -->
 
     <!-- search rooms start -->
+    <div class="row">
+      {{range .rooms}}
+      <div class="col-md-6">
     <div class="container pt-5">
-        <div class="row">
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="/static/searchpage/images/room1.jpeg" alt="Card image cap">
-                    <div class="card-body">
-                      <h5 class="card-title">Room 1</h5>
-                      <p class="card-text">Some quick example text to build on the Rooms and make up the bulk of the card's content.</p>
-                      <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                  </div>
+  
+      <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="/static/searchpage/images/room1.jpeg" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+             <h5 class="card-title">Rs <strong> {{.Room_Price}} </strong> / -</h5>
+              <p class="card-text">{{.Room_Name}}</p>
+              <p class="card-text">1 Hall 2 Bedroom 1 Bathroom</p>
+              <a href="#" class="btn btn-primary">Check-In Now</a>
+              <p class="card-text"><small class="text-muted">Available</small></p>
             </div>
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="/static/searchpage/images/room2.jpeg" alt="Card image cap">
-                    <div class="card-body">
-                      <h5 class="card-title">Room 2</h5>
-                      <p class="card-text">Some quick example text to build on the Rooms and make up the bulk of the card's content.</p>
-                      <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                  </div>
-            </div>
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="/static/searchpage/images/room3.jpeg" alt="Card image cap">
-                    <div class="card-body">
-                      <h5 class="card-title">Room 3</h5>
-                      <p class="card-text">Some quick example text to build on the Rooms and make up the bulk of the card's content.</p>
-                      <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                  </div>
-            </div>
-        
-          <div class="w-100 pt-5"></div>
-          <div class="col">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="/static/searchpage/images/room8.jpeg" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Room 4</h5>
-                  <p class="card-text">Some quick example text to build on the Rooms and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
           </div>
-          <div class="col">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="/static/searchpage/images/room5.jpeg" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Room 5</h5>
-                  <p class="card-text">Some quick example text to build on the Rooms and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-          </div>
-          <div class="col">Room
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="/static/searchpage/images/room6.jpeg" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Rooms</h5>
-                  <p class="card-text">Some quick example text to build on the Rooms and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-          </div>
-            
-          <div class="w-100 pt-5"></div>
-          <div class="col">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="/static/searchpage/images/room7.jpeg" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Rooms</h5>
-                  <p class="card-text">Some quick example text to build on the Rooms and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-          </div>
-          <div class="col">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="/static/searchpage/images/room8.jpeg" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Rooms</h5>
-                  <p class="card-text">Some quick example text to build on the Rooms and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-          </div>
-          <div class="col">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="/static/searchpage/images/room9.jpeg" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Rooms</h5>
-                  <p class="card-text">Some quick example text to build on the Rooms and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-          </div>
-        
         </div>
       </div>
+                   
+            </div>
+              
+          </div>{{else}}
+          <h1>No Rooms Available</h1>
+          {{end}}
+            
+          </div>
+          
+            
 <!-- search rooms end -->
 
 

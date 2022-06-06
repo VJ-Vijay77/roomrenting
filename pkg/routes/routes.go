@@ -36,7 +36,9 @@ func InitRoutes(api *gin.Engine) {
 	api.GET("/admin/user_management/allusers",controller.AllUsers)
 	api.GET("/admin/user_management",controller.UserManagement)
 	api.GET("/admin/add_room",controller.AddRoom)
+	api.POST("/admin/add_room",controller.PAddRoom)
 	api.GET("/admin/remove_room",controller.RemoveRoom)
+	api.GET("/admin/remove_room/delete/:ID",controller.DeleteRoom)
 
 	//user management update delete add
 	api.POST("/admin/user_management/fnupdate/:ID",controller.UpdateFUser)

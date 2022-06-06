@@ -12,3 +12,17 @@ type Users struct{
 	Mobile string
 }
 
+type Rooms struct{
+	ID int
+	Room_Name string
+	Room_Photo_Path string
+	Room_Price string
+	Category string
+}
+
+
+
+type Category struct {
+	ID int
+	Category_Name string
+}
