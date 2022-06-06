@@ -10,13 +10,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     
 </head>
-<body>
+<body style="overflow: hidden;">
     
    
 
-   <!-- navbar start -->
+ <!-- navbar start -->
 
-   <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="background-color: rgb(0, 0, 0) !important;">
+ <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="background-color: rgb(0, 0, 0) !important;">
     <div class="container-fluid">
       <a class="navbar-brand" href="/user_home">
         <img src="/static/home/images/R4Rooms.png" width="130" height="45" alt="LOGO">
@@ -52,45 +52,63 @@
 
     
   </nav> 
-<!-- navbar end -->
+  <div class="navbelow pt-2 ps-2">Home : Rooms > Location > Room ID {{.roomid}}</div>
+  <hr>
+  <!-- navbar end -->
 
-    <!-- search rooms start -->
-    <div class="row">
-      {{range .rooms}}
-      <div class="col-md-3">
-    <div class="container pt-5">
-  
+      
 
-              <div class="card mb-3">
-                <img src="/static/searchpage/images/room1.jpeg" class="card-img-top" alt="...">
+        <!--
+        {{.roomname}}
+        {{.roomprice}}
+        {{.roomcategory}}
+        {{.roomid}} -->
+        <div class="row ps-5">
+            
+                <div class="col-8 cols-md-9 col-lg-6">
+
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="/static/searchpage/images/room3.jpeg" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="/static/searchpage/images/room3.jpeg" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="/static/searchpage/images/room6.jpeg" class="d-block w-100" alt="...">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+          </div>
+<!--  <div class="col-8 cols-md-9 col-lg-6"> -->
+          <div class="col-4 cols-md-3 col-lg-6">
+            <div class="card" style="width: 80%;overflow-x: hidden;">
                 <div class="card-body">
-                  <h5 class="card-title">Rs <strong>{{.Room_Price}}</strong> /-</h5>
-                  <p class="card-text">{{.Room_Name}}</p>
-                  <p class="card-text">1 Bedroom 2 Bathroom 1 Hall</p>
-                  <a href="/user/room_info/{{.ID}}" class="btn btn-primary">Check-In Now</a>
-                  <p class="card-text"><small class="text-muted">Available</small></p>
+                  <h5 class="card-title">{{.roomname}}</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">Category : {{.roomcategory}}</h6>
+                  <p class="card-text">1 Hall 2 Bedroom 1 Bathroom Balcony</p>
+                  <h1><p class="card-text">Rs {{.roomprice}}</p></h1>
+                  <button type="button" class="btn btn-outline-warning"><a href="#" style="text-decoration: none;color: black;">Check-In Now</a></button>
+                  
                 </div>
               </div>
-              
-
-            </div>
-              
-          </div>{{else}}
-          <h1>No Rooms Available</h1>
-          {{end}}
-            
           </div>
+
           
-            
-<!-- search rooms end -->
+        </div>
+        
 
 
-
-
-
-
-
-
+     
 
 
 
@@ -99,5 +117,5 @@
 
 
   
-</body>
-</html>
+     </body>
+     </html>

@@ -15,3 +15,17 @@ func SearchRooms(c *gin.Context) {
 		"rooms":rooms,
 	})
 }
+
+func RoomInfo(c *gin.Context) {
+	db := database.GetDb()
+	ID := c.Param("ID")
+	var roominfo models.Rooms
+	db.Raw("SELECT room_name,id,room_price,category FROM rooms WHERE id=?",ID).Scan(&roominfo)
+	c.HTML(200,"roominfo.gohtml",gin.H{
+		"roomname":roominfo.Room_Name,
+		"roomid":roominfo.ID,
+		"roomcategory":roominfo.Category,
+		"roomprice":roominfo.Room_Price,
+
+	})
+}
