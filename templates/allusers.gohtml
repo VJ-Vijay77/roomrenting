@@ -14,9 +14,11 @@
     </script>
   </head>
 <body>
-    <h1>user management</h1>
+    <h1>User management</h1>
 <br>
 <h3>All Users List</h3>
+
+
     
     <!-- table -->
     <!-- <div class="container"> -->
@@ -82,6 +84,49 @@
       </table>
       <!-- </div> -->
 
+
+      <!-- Search start here!! -->
+<div>
+  <div class="container">
+    <h1>Search any user by first name</h1>
+    <form action="/admin/user_management/searchusers" method="post">
+        <input type="text" name="search" placeholder="Type user first name">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+  
+</div>
+<div>
+
+  {{range .userdata}}
+   
+  <div class="container">
+      <table class="table table-hover table-dark">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Mobile</th>
+               
+          </tr>
+          </thead>
+          <tbody>
+              
+            <tr>
+              
+              <td>{{.ID}}</td>
+              <td>{{.First_Name}}</td>
+              <td>{{.Last_Name}}</td>
+              <td>{{.Email}}</td>
+              <td>{{.Mobile}}</td>
+              
+              </tr>
+              {{end}}
+              </tbody>
+              </table>
+</div>
+</div>
 
 
 

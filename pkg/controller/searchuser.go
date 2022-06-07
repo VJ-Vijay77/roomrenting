@@ -18,13 +18,19 @@ func SearchUsers(c *gin.Context) {
 
 	if result != Name || result == "" {
 		dialog.Alert("User Not Found")
-		c.Redirect(303, "/admin/user_management/addusers")
+		c.Redirect(303, "/admin/user_management/allusers")
 		return
 	} 
 	db.Raw("SELECT id,first_name,last_name,email,mobile FROM users WHERE first_name=?", Name).Scan(&results)
 
-	c.HTML(200, "addusers.gohtml", gin.H{
+	var data []models.Users
+
+	//ordering all data by id
+	db.Order("id").Find(&data)
+
+	c.HTML(200, "allusers.gohtml", gin.H{
 		"userdata": results,
+		"data":data,
 	})
 	//  c.Redirect(303, "/admin/user_management/addusers")
 	// c.HTML(200,"addusers.gohtml",gin.H{"data":result,})
