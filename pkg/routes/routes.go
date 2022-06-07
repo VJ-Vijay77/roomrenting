@@ -43,7 +43,7 @@ func InitRoutes(api *gin.Engine) {
 	//user management update delete add
 	api.POST("/admin/user_management/fnupdate/:ID",controller.UpdateFUser)
 	api.POST("/admin/user_management/lnupdate/:ID",controller.UpdateLUser)
-	api.GET("/admin/user_management/block/:ID",controller.BlockUser)
+	api.Any("/admin/user_management/block/:ID",controller.BlockUser)
 	api.GET("/admin/user_management/unblock/:ID",controller.UnBlockUser)
 	api.GET("/admin/user_management/delete/:ID",controller.DeleteUser)
 
