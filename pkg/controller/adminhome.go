@@ -64,8 +64,13 @@ func AddRoom(c *gin.Context) {
 		c.Redirect(303, "/admin_login")
 		return
 	}
+	db := database.GetDb()
+	var categories []models.Category
+	db.Raw("SELECT id,category_name FROM category").Scan(&categories)
 
-	c.HTML(200, "addroom.gohtml", nil)
+	c.HTML(200, "addroom.gohtml",gin.H{
+		"category":categories,
+	})
 }
 
 func PAddRoom(c *gin.Context) {
@@ -81,8 +86,16 @@ func PAddRoom(c *gin.Context) {
 	RoomPicPath := c.PostForm("roompicpath")
 	RoomPrice := c.PostForm("roomprice")
 	RoomCategory := c.PostForm("roomcategory")
+	
+	//RoomCategory:= c.Request.FormValue("roomcategory")
 
 	var addroom models.Rooms
+	db.Raw("SELECT room_name FROM rooms WHERE room_name=?",RoomName).Scan(&addroom)
+	if addroom.Room_Name == RoomName {
+		dialog.Alert("Room already exists!")
+		c.Redirect(303,"/admin/add_room")
+		return
+	}
 
 	addroom.Room_Name = RoomName
 	addroom.Room_Photo_Path = RoomPicPath
@@ -90,11 +103,6 @@ func PAddRoom(c *gin.Context) {
 	addroom.Category = RoomCategory
 
 	db.Select("room_name","room_photo_path","room_price", "category").Create(&addroom)
-
-	//    if  {
-	// 			dialog.Alert("Something Went Wrong!")
-	// 			c.Redirect(303,"/admin/add_room")
-	// 		}
 	dialog.Alert("Room Added Successfully!")
 	c.Redirect(303, "/admin/add_room")
 }

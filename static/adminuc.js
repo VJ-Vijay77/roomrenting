@@ -2,6 +2,7 @@ const firstname = document.getElementById('form3Example1')
 const lastname = document.getElementById('form3Example2')
 const email = document.getElementById('form3Example3')
 const password = document.getElementById('form3Example4')
+const mobile = document.getElementById('form3Example5')
 const form = document.getElementById('form')
 const errorElement = document.getElementById('error')
 var regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
@@ -37,6 +38,12 @@ form.addEventListener('submit', (e) => {
     }else if(password.value.length <= 4 ){
         messages.push('password must have 5 characters')
     }
+    //mobile validation
+else if(mobile.value.length <= 9 || mobile.value.length>=11 ){
+    messages.push('mobile must/only have 10 digits')
+}else if(!/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(mobile.value)){
+    messages.push('Enter valid Mobile number!')
+}
     
     
 
