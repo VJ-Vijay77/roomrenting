@@ -5,28 +5,47 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AddRoom</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-    <h1>add room</h1>
+    <h1>Add room here</h1>
 
     <div class="container">
-    <form class="row g-3" method="post" action="/admin/add_room">
+    <form class="row g-3" id="form" method="post" action="/admin/add_room">
         <div class="col-md-6">
           <label for="inputRoom4" class="form-label">Room Name</label>
           <input type="text" name="roomname" class="form-control" id="inputRoom4">
         </div>
         <div class="col-md-6">
-          <label for="inputroompath" class="form-label">Room Pic Path</label>
+          <label for="inputroomprice" class="form-label">Room Price</label>
+          <input type="text" name="roomprice" class="form-control" id="inputroomprice">
+        </div>
+
+
+        <!-- pic path -->
+        <div class="col-md-6">
+          <label for="inputroompath" class="form-label">Room CoverPic Path</label>
           <input type="text" name="roompicpath" class="form-control" id="inputroompath">
         </div>
-        <div class="col-md-6">
-            <label for="inputroomprice" class="form-label">Room Price</label>
-            <input type="text" name="roomprice" class="form-control" id="inputroomprice">
-          </div>
-
+        <div class="col-md-3">
+          <label for="inputroompath1" class="form-label">Room SubPic1 Path</label>
+          <input type="text" name="roompicpath1" class="form-control" id="inputroompath1">
+        </div> <div class="col-md-3">
+          <label for="inputroompath2" class="form-label">Room subPic2 Path</label>
+          <input type="text" name="roompicpath2" class="form-control" id="inputroompath2">
+        </div> <div class="col-md-3">
+          <label for="inputroompath3" class="form-label">Room subPic3 Path</label>
+          <input type="text" name="roompicpath3" class="form-control" id="inputroompath3">
+        </div>
+        <div class="col-md-3">
+          <label for="inputroompath4" class="form-label">Room subPic4 Path</label>
+          <input type="text" name="roompicpath4" class="form-control" id="inputroompath4">
+        </div>
+<!-- pic path end -->
+        
           <div class="col-md-6">
             <label for="inputroomcategory" class="form-label">Room Category</label>
             <input type="text" name="roomcategory" class="form-control" id="inputroomcategory">
@@ -61,6 +80,32 @@
       <!-- js,popper from  bootstrap -->
       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>     <!-- ended js,popper from  bootstrap -->
-      
+    <script>
+      $("#form").submit(function(e) {
+
+e.preventDefault(); // avoid to execute the actual submit of the form.
+
+var form = $(this);
+var actionUrl = form.attr('/admin/add_room');
+
+$.ajax({
+    type: 'POST',
+    url: actionUrl,
+    data: form.serialize(), // serializes the form's elements.
+    success: function(k) {
+ 
+      if (k==true){
+        swal("Successfully Added!", "You Added a room", "success");
+      }else if(k==false){
+        swal("Error!", "Room already exists!", "error");
+      }
+     // alert(JSON.stringify(k));
+       
+   
+    }
+});
+
+});
+    </script>  
 </body>
 </html>

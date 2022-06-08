@@ -57,12 +57,14 @@
     <!-- search rooms start -->
     <div class="row">
       {{range .rooms}}
+     
       <div class="col-md-3">
     <div class="container pt-5">
   
 
               <div class="card mb-3">
-                <img src="/static/searchpage/images/room1.jpeg" class="card-img-top" alt="...">
+                <img src="{{.Cover}}" class="card-img-top" alt="...">
+                <!-- <img src="/static/searchpage/images/Room 1/cover.jpeg" class="card-img-top" alt="..."> -->
                 <div class="card-body">
                   <h5 class="card-title">Rs <strong>{{.Room_Price}}</strong> /-</h5>
                   <p class="card-text">{{.Room_Name}}</p>

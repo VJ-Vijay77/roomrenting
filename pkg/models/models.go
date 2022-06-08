@@ -15,9 +15,14 @@ type Users struct{
 type Rooms struct{
 	ID int
 	Room_Name string
-	Room_Photo_Path string
 	Room_Price string
 	Category string
+	Cover string
+	Sub1 string
+	Sub2 string
+	Sub3 string
+	Sub4 string
+	Sub5 string
 }
 
 

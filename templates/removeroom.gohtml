@@ -7,7 +7,7 @@
     <title>RemoveRoom</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-    
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </head>
 <body>
@@ -20,7 +20,7 @@
             <th scope="col">Room ID</th>
 
             <th scope="col">Room Name</th>
-            <th scope="col">Room Pic Path</th>
+            
             <th scope="col">Room Price</th>
             <th scope="col">Category</th>
            <th scope="col">Delete</th>
@@ -34,12 +34,12 @@
             
             <td>{{.ID}}</td>
             <td>{{.Room_Name}}</td>
-            <td>{{if .Room_Photo_Path}}{{.Room_Photo_Path}}{{else}}No Path Provided{{end}}</td>
+           
             <td>{{.Room_Price}}</td>
             <td>{{.Category}}</td>
 
             <td>
-                <button type="button" class="btn btn-danger"><a href="/admin/remove_room/delete/{{.ID}}" style="text-decoration: none;color: white;">Delete</a></button>
+                <button type="button" class="btn btn-danger" onclick="deleteroom('{{.ID}}')">Delete</button>
 
             </td>
         
@@ -54,6 +54,31 @@
 
 
        <!-- js,popper from  bootstrap -->
-    
+  <script>
+  function deleteroom(ID){
+
+    swal({
+        title: "Are you sure you want to delete?",
+        text: "Once the room is deleted,all data will be erased!.",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+
+
+            location.href='/admin/remove_room/delete/'+ID;
+
+            swal("Successfull", "Room Removed Successfully", "success");
+         
+         } // } else {
+        //   swal("Your imaginary file is safe!");
+        // }
+      });
+
+    }
+   
+  </script>  
 </body>
 </html>

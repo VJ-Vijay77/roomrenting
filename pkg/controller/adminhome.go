@@ -1,12 +1,12 @@
 package controller
 
 import (
-	"fmt"
+	"encoding/json"
+	"time"
 
 	"github.com/VJ-Vijay77/r4room/pkg/database"
 	"github.com/VJ-Vijay77/r4room/pkg/models"
 	"github.com/gin-gonic/gin"
-	"tawesoft.co.uk/go/dialog"
 )
 
 //rendering admin homepage
@@ -68,13 +68,13 @@ func AddRoom(c *gin.Context) {
 	var categories []models.Category
 	db.Raw("SELECT id,category_name FROM category").Scan(&categories)
 
-	c.HTML(200, "addroom.gohtml",gin.H{
-		"category":categories,
+	c.HTML(200, "addroom.gohtml", gin.H{
+		"category": categories,
 	})
 }
 
 func PAddRoom(c *gin.Context) {
-
+	var ok bool
 	//checking session
 	// ok := AdminLogedCheck(c)
 	// if !ok {
@@ -83,28 +83,41 @@ func PAddRoom(c *gin.Context) {
 	// }
 	db := database.GetDb()
 	RoomName := c.PostForm("roomname")
-	RoomPicPath := c.PostForm("roompicpath")
+	CoverPicPath := c.PostForm("roompicpath")
 	RoomPrice := c.PostForm("roomprice")
 	RoomCategory := c.PostForm("roomcategory")
-	
-	//RoomCategory:= c.Request.FormValue("roomcategory")
+	SubPicPath1 := c.PostForm("roompicpath1")
+	SubPicPath2 := c.PostForm("roompicpath2")
+	SubPicPath3 := c.PostForm("roompicpath3")
+	SubPicPath4 := c.PostForm("roompicpath4")
 
 	var addroom models.Rooms
-	db.Raw("SELECT room_name FROM rooms WHERE room_name=?",RoomName).Scan(&addroom)
+	db.Raw("SELECT room_name FROM rooms WHERE room_name=?", RoomName).Scan(&addroom)
 	if addroom.Room_Name == RoomName {
-		dialog.Alert("Room already exists!")
-		c.Redirect(303,"/admin/add_room")
+		ok = false
+		k, _ := json.Marshal(ok)
+		c.Writer.Header().Set("Content-Type", "application/json")
+		c.Writer.Write(k)
+
 		return
 	}
 
 	addroom.Room_Name = RoomName
-	addroom.Room_Photo_Path = RoomPicPath
 	addroom.Room_Price = RoomPrice
 	addroom.Category = RoomCategory
+	addroom.Cover = CoverPicPath
+	addroom.Sub1 = SubPicPath1
+	addroom.Sub2 = SubPicPath2
+	addroom.Sub3 = SubPicPath3
+	addroom.Sub4 = SubPicPath4
 
-	db.Select("room_name","room_photo_path","room_price", "category").Create(&addroom)
-	dialog.Alert("Room Added Successfully!")
-	c.Redirect(303, "/admin/add_room")
+	db.Select("room_name", "room_price", "category", "cover", "sub1", "sub2", "sub3", "sub4", "sub5").Create(&addroom)
+
+	ok = true
+	k, _ := json.Marshal(ok)
+	c.Writer.Header().Set("Content-Type", "application/json")
+	c.Writer.Write(k)
+	//c.Redirect(303, "/admin/add_room")
 }
 
 //rendering remove room page
@@ -119,16 +132,17 @@ func RemoveRoom(c *gin.Context) {
 	db := database.GetDb()
 	var room []models.Rooms
 	db.Order("id").Find(&room)
-	c.HTML(200,"removeroom.gohtml",gin.H{
-		"allrooms":room,
+	c.HTML(200, "removeroom.gohtml", gin.H{
+		"allrooms": room,
 	})
 }
 
-func DeleteRoom(c *gin.Context){
+func DeleteRoom(c *gin.Context) {
 	ID := c.Param("ID")
-	fmt.Println(ID)
+
 	db := database.GetDb()
 	var rooms models.Rooms
-	db.Raw("DELETE FROM rooms WHERE id=?",ID).Scan(&rooms)
-	c.Redirect(303,"/admin/remove_room")
+	db.Raw("DELETE FROM rooms WHERE id=?", ID).Scan(&rooms)
+	time.Sleep(1 * time.Second)
+	c.Redirect(303, "/admin/remove_room")
 }
