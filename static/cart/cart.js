@@ -12,7 +12,7 @@ function removecartitem(CID) {
 
             location.href='/user/cart/delete/'+CID;
 
-            swal("Successfull", "User Deleted Successfully", "success");
+            swal("Successfull", "Item Removed Successfully", "success");
          
          } // } else {
         //   swal("Your imaginary file is safe!");

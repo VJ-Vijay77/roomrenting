@@ -66,7 +66,7 @@ func InitRoutes(api *gin.Engine) {
 	//cart management
 	api.GET("/user/cart",controller.Cart)
 	api.GET("/user/cart/:RID",controller.AddToCart)
-//	api.GET("/user/cart/delete/:CID",controller.DeleteCart)
+	api.GET("/user/cart/delete/:CID",controller.DeleteCart)
 
 
 }
