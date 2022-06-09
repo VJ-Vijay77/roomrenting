@@ -24,6 +24,7 @@ func SearchRooms(c *gin.Context) {
 	var rooms []models.Rooms
 	
 	db.Order("room_name").Find(&rooms)
+	
 	var UserID int
 	db.Raw("SELECT id FROM users WHERE email=?", userID).Scan(&UserID)
 	var count int
@@ -52,6 +53,11 @@ func RoomInfo(c *gin.Context) {
 	//db.Raw("SELECT room_name,id,room_price,category,cover,sub1,sub2,sub3,sub4,sub5 FROM rooms WHERE id=?", ID).Scan(&roominfo)
 	db.Where("id=?",ID).Find(&roominfo)
 
+	var UserID int
+	db.Raw("SELECT id FROM users WHERE email=?", userID).Scan(&UserID)
+	var count int
+	db.Raw("SELECT COUNT(user_id) FROM carts WHERE user_id=?",UserID).Scan(&count)
+	
 	
 	c.HTML(200, "roominfo.gohtml", gin.H{
 		 "roomname":     roominfo.Room_Name,
@@ -65,7 +71,7 @@ func RoomInfo(c *gin.Context) {
 		 "sub4":roominfo.Sub4,
 		 "sub5":roominfo.Sub5,
 		"username":UserName,
-		//"info":roominfo,
+		"count":count,
 		
 	})
 }

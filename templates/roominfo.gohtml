@@ -11,7 +11,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-</head>
+    <style>
+      .start-100 {
+        left: 97% !important;
+    }
+    </style>
+  </head>
 <body style="overflow: hidden;">
     
    
@@ -51,7 +56,11 @@
  {{end}}
  {{if .username}} <button class="btn btn-dark pe-4 me-4"><a style="text-decoration: none;color: wheat;" href="/user_logout">Logout</a></button>
  {{else}}{{end}} 
-<a href="/user/cart" class="me-3" style="width: 7%;"> <img src="/static/home/images/trolley.png" style="width: 38px"> </a>
+ {{if ne .count 0}}  <a href="/user/cart" class="me-5" style="width: 7%;"> <img class="position-relative" src="/static/home/images/trolley.png"
+  style="width: 38px"><span class="position-absolute top-1 start-100 translate-middle badge rounded-pill bg-danger">
+    {{.count}} </a>{{else}}
+    <a href="/user/cart" class="me-5" style="width: 7%;"> <img class="position-relative" src="/static/home/images/trolley.png"
+      style="width: 38px"></a>{{end}}
 
   
 </nav> 
