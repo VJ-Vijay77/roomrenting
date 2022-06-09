@@ -19,7 +19,11 @@ func Cart(c *gin.Context) {
 	db := database.GetDb()
 	var UserID int
 	db.Raw("SELECT id FROM users WHERE email=?", user_ID).Scan(&UserID)
-
+	
+	// counter setting
+	var count int
+	db.Raw("SELECT COUNT(user_id) FROM carts WHERE user_id=?",UserID).Scan(&count)
+	
 	var userinfos models.Users
 	db.Raw("SELECT first_name FROM users where email=?", user_ID).Scan(&userinfos)
 	UserName := userinfos.First_Name
@@ -28,6 +32,7 @@ func Cart(c *gin.Context) {
 	c.HTML(200, "cart.gohtml", gin.H{
 		"cart":     cartitems,
 		"username": UserName,
+		"count":count,
 	})
 }
 
