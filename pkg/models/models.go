@@ -38,3 +38,16 @@ type Carts struct {
 	Room_Id int
 	User_Id int
 }
+
+type Cart_Infos struct {
+	Cartsid int
+	Room_Name string
+	Room_Price string
+	Cartsroomid int
+	Cover string
+	Category string
+	User_Id int
+	User_Name string
+	
+
+}
