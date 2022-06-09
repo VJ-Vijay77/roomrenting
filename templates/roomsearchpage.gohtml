@@ -14,45 +14,46 @@
     
    
 
-   <!-- navbar start -->
+    <!-- navbar start -->
 
-   <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="background-color: rgb(0, 0, 0) !important;">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/user_home">
-        <img src="/static/home/images/R4Rooms.png" width="130" height="45" alt="LOGO">
-      </a>
-    </div>
-    <div class="container">
-    <!-- <form class="form-inline my-2 my-lg-0" method="post"> -->
-      <input class="form-control mr-sm-2" type="search" placeholder="Search Your Location..." aria-label="Search">
-    <a href="/user/room_search" style="text-decoration: none;">  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button></a>
-    <!-- </form> -->
-    </div>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="background-color: rgb(0, 0, 0) !important;">
+      <div class="container-fluid">
+        <a class="navbar-brand ps-3" href="/user_home">
+          <img src="/static/home/images/R4Rooms.png" width="130" height="45" alt="LOGO">
+        </a>
+      </div>
+      <div class="container">
+      <!-- <form class="form-inline my-2 my-lg-0" method="post"> -->
+        <input class="form-control mr-sm-2" type="search" placeholder="Search Your Location..." aria-label="Search">
+      <a href="/user/room_search" style="text-decoration: none;">  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button></a>
+      <!-- </form> -->
+      </div>
 
-    <div class="dropdown">
-      <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-        EN
-      </button>
-      <ul class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton1">
-        <li><a class="dropdown-item bg-dark text-white" href="#">French</a></li>
-        <li><a class="dropdown-item bg-dark text-white" href="#">Hindi</a></li>
-        <li><a class="dropdown-item bg-dark text-white" href="#">Tamil</a></li>
-      </ul>
-    </div>
-  
-
-
-   {{if not .username}} <button type="button" class="btn btn-sm btn-outline-warning text-white"><a href="/user_signup" class="navbar nav-item text-white" style="text-decoration: none;">SignUp</a></button> {{end}}
-
-   {{if .username}} <button type="button" class="btn btn-sm btn-outline-info text-white" style="margin-left: 1%;"><a href="/user_login" class="navbar nav-item text-white" style="text-decoration: none;">{{.username}}</a></button> </a>
-   {{else}} <button type="button" class="btn btn-sm btn-outline-info text-white" style="margin-left: 1%;"><a href="/user_login" class="navbar nav-item text-white" style="text-decoration: none;">Login</a></button> </a>
-   {{end}}
-   {{if .username}} <button class="btn btn-dark"><a style="text-decoration: none;color: wheat;" href="/user_logout">Logout</a></button>
-   {{else}}{{end}}
-
+      <div class="dropdown me-4">
+        <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          EN
+        </button>
+        <ul class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton1">
+          <li><a class="dropdown-item bg-dark text-white" href="#">French</a></li>
+          <li><a class="dropdown-item bg-dark text-white" href="#">Hindi</a></li>
+          <li><a class="dropdown-item bg-dark text-white" href="#">Tamil</a></li>
+        </ul>
+      </div>
     
-  </nav> 
-<!-- navbar end -->
+
+
+     {{if not .username}} <button type="button" class="btn btn-sm btn-outline-warning text-white"><a href="/user_signup" class="navbar nav-item text-white" style="text-decoration: none;">SignUp</a></button> {{end}}
+
+     {{if .username}} <button type="button" class="btn btn-sm btn-outline-info text-white me-2" style="margin-left: 1%;"><a href="/user_login" class="navbar nav-item text-white" style="text-decoration: none;">{{.username}}</a></button> </a>
+     {{else}} <button type="button" class="btn btn-sm btn-outline-info text-white me-4" style="margin-left: 1%;"><a href="/user_login" class="navbar nav-item text-white" style="text-decoration: none;">Login</a></button> </a>
+     {{end}}
+     {{if .username}} <button class="btn btn-dark pe-4 me-4"><a style="text-decoration: none;color: wheat;" href="/user_logout">Logout</a></button>
+     {{else}}{{end}} 
+    <a href="/user/cart" class="me-3" style="width: 7%;"> <img src="/static/home/images/trolley.png" style="width: 38px"> </a>
+
+      
+    </nav> 
+  <!-- navbar end -->
 
     <!-- search rooms start -->
     <div class="row">

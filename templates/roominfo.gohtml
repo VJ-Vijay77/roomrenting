@@ -5,10 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>R4Rooms | SearchRooms</title>
+    <script src="/static/roominfo/roominfo.js"></script>
     <link rel="stylesheet" href="/static/searchpage/css/searchpage.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body style="overflow: hidden;">
     
@@ -17,52 +19,46 @@
  <!-- navbar start -->
 
  <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="background-color: rgb(0, 0, 0) !important;">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/user_home">
-        <img src="/static/home/images/R4Rooms.png" width="130" height="45" alt="LOGO">
-      </a>
-    </div>
-    <div class="container">
-    <!-- <form class="form-inline my-2 my-lg-0" method="post"> -->
-      <input class="form-control mr-sm-2" type="search" placeholder="Search Your Location..." aria-label="Search">
-    <a href="/user/room_search" style="text-decoration: none;">  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button></a>
-    <!-- </form> -->
-    </div>
+  <div class="container-fluid">
+    <a class="navbar-brand ps-3" href="/user_home">
+      <img src="/static/home/images/R4Rooms.png" width="130" height="45" alt="LOGO">
+    </a>
+  </div>
+  <div class="container">
+  <!-- <form class="form-inline my-2 my-lg-0" method="post"> -->
+    <input class="form-control mr-sm-2" type="search" placeholder="Search Your Location..." aria-label="Search">
+  <a href="/user/room_search" style="text-decoration: none;">  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button></a>
+  <!-- </form> -->
+  </div>
 
-    <div class="dropdown">
-      <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-        EN
-      </button>
-      <ul class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton1">
-        <li><a class="dropdown-item bg-dark text-white" href="#">French</a></li>
-        <li><a class="dropdown-item bg-dark text-white" href="#">Hindi</a></li>
-        <li><a class="dropdown-item bg-dark text-white" href="#">Tamil</a></li>
-      </ul>
-    </div>
+  <div class="dropdown me-4">
+    <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+      EN
+    </button>
+    <ul class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton1">
+      <li><a class="dropdown-item bg-dark text-white" href="#">French</a></li>
+      <li><a class="dropdown-item bg-dark text-white" href="#">Hindi</a></li>
+      <li><a class="dropdown-item bg-dark text-white" href="#">Tamil</a></li>
+    </ul>
+  </div>
+
+
+
+ {{if not .username}} <button type="button" class="btn btn-sm btn-outline-warning text-white"><a href="/user_signup" class="navbar nav-item text-white" style="text-decoration: none;">SignUp</a></button> {{end}}
+
+ {{if .username}} <button type="button" class="btn btn-sm btn-outline-info text-white me-2" style="margin-left: 1%;"><a href="/user_login" class="navbar nav-item text-white" style="text-decoration: none;">{{.username}}</a></button> </a>
+ {{else}} <button type="button" class="btn btn-sm btn-outline-info text-white me-4" style="margin-left: 1%;"><a href="/user_login" class="navbar nav-item text-white" style="text-decoration: none;">Login</a></button> </a>
+ {{end}}
+ {{if .username}} <button class="btn btn-dark pe-4 me-4"><a style="text-decoration: none;color: wheat;" href="/user_logout">Logout</a></button>
+ {{else}}{{end}} 
+<a href="/user/cart" class="me-3" style="width: 7%;"> <img src="/static/home/images/trolley.png" style="width: 38px"> </a>
+
   
+</nav> 
 
-
-   {{if not .username}} <button type="button" class="btn btn-sm btn-outline-warning text-white"><a href="/user_signup" class="navbar nav-item text-white" style="text-decoration: none;">SignUp</a></button> {{end}}
-
-   {{if .username}} <button type="button" class="btn btn-sm btn-outline-info text-white" style="margin-left: 1%;"><a href="/user_login" class="navbar nav-item text-white" style="text-decoration: none;">{{.username}}</a></button> </a>
-   {{else}} <button type="button" class="btn btn-sm btn-outline-info text-white" style="margin-left: 1%;"><a href="/user_login" class="navbar nav-item text-white" style="text-decoration: none;">Login</a></button> </a>
-   {{end}}
-   {{if .username}} <button class="btn btn-dark"><a style="text-decoration: none;color: wheat;" href="/user_logout">Logout</a></button>
-   {{else}}{{end}}
-
-    
-  </nav> 
   <div class="navbelow pt-2 ps-2">Home : Rooms > Location > Room ID {{.roomid}}</div>
   <hr>
-  <!-- navbar end -->
 
-      
-
-        <!--
-        {{.roomname}}
-        {{.roomprice}}
-        {{.roomcategory}}
-        {{.roomid}} -->
         <div class="row ps-5">
             
                 <div class="col-8 cols-md-9 col-lg-8">
@@ -91,7 +87,7 @@
             </button>
           </div>
           </div>
-<!--  <div class="col-8 cols-md-9 col-lg-6"> -->
+
   
           <div class="col-4 cols-md-3 col-lg-4">
             <div class="card" style="width: 80%;overflow-x: hidden;">
@@ -101,7 +97,8 @@
                   <h6 class="card-subtitle mb-2 text-muted">Category : {{.roomcategory}}</h6>
                   <p class="card-text">1 Hall 2 Bedroom 1 Bathroom Balcony</p>
                   <h1><p class="card-text">Rs {{.roomprice}}</p></h1>
-                  <button type="button" class="btn btn-outline-warning"><a href="#" style="text-decoration: none;color: black;">Check-In Now</a></button>
+                  <button type="button" onclick="checkin('{{.roomid}}','{{.roomname}}','{{.roomprice}}')" class="btn btn-outline-success">Check-In Now</button>
+                  <button type="button" class="btn btn-outline-warning">Add to Wishlist</button>
                   
                 </div>
               </div>
@@ -115,12 +112,5 @@
 
      
 
-
-
-
-
-
-
-  
      </body>
      </html>

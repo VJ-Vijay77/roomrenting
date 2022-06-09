@@ -31,3 +31,10 @@ type Category struct {
 	ID int
 	Category_Name string
 }
+
+
+type Carts struct {
+	ID int
+	Room_Id int
+	User_Id int
+}

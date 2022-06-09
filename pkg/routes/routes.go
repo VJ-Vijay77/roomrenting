@@ -63,5 +63,9 @@ func InitRoutes(api *gin.Engine) {
 	api.GET("/user/room_search",controller.SearchRooms)
 	api.GET("/user/room_info/:ID",controller.RoomInfo)
 
+	//cart management
+	api.GET("/user/cart",controller.Cart)
+	api.GET("/user/cart/:RID",controller.PCart)
+
 
 }
