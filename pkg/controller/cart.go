@@ -30,7 +30,7 @@ func Cart(c *gin.Context) {
 	})
 }
 
-func PCart(c *gin.Context) {
+func AddToCart(c *gin.Context) {
 
 	ok := UserLogedCheck(c)
 	if !ok {
@@ -53,18 +53,18 @@ func PCart(c *gin.Context) {
 	var cart models.Carts
 	db.Raw("SELECT id FROM users WHERE email=?", userEmail).Scan(&user_ID)
 	var cartItems models.Carts
-	 db.Where("room_id=? AND user_id=?",RoomID,user_ID).Find(&cartItems)
-	if cartItems.Room_Id == RoomID && cartItems.User_Id==user_ID{
+	 db.Where("cartsroomid=? AND user_id=?",RoomID,user_ID).Find(&cartItems)
+	if cartItems.Cartsroomid == RoomID && cartItems.User_Id==user_ID{
 		var room = "sameroom"
 		k, _ := json.Marshal(room)
 		c.Writer.Header().Set("Content-Type", "application/json")
 		c.Writer.Write(k)
 		return
 	}
-	cart.Room_Id = RoomID
+	cart.Cartsroomid = RoomID
 	cart.User_Id = user_ID
 
-	db.Select("room_id", "user_id").Create(&cart)
+	db.Select("cartsroomid", "user_id").Create(&cart)
 	var note = "added"
 	k, _ := json.Marshal(note)
 	c.Writer.Header().Set("Content-Type", "application/json")
@@ -72,3 +72,14 @@ func PCart(c *gin.Context) {
 	
 
 }
+
+
+
+// func DeleteCart (c *gin.Context){
+// 	CID := c.Param("CID")
+// 	CartId,_ := strconv.Atoi(CID)
+// 	db := database.GetDb()
+// 	var cart models.Carts
+// 	db.Raw("")
+
+// }

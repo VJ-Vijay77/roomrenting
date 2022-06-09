@@ -34,8 +34,8 @@ type Category struct {
 
 
 type Carts struct {
-	ID int
-	Room_Id int
+	Cartsid int
+	Cartsroomid int
 	User_Id int
 }
 
