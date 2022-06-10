@@ -143,7 +143,8 @@ func WLAddToCart(c *gin.Context) {
 	cart.User_Id = user_ID
 
 	db.Select("cartsroomid", "user_id").Create(&cart)
-	
+	var wish models.Wishlists
+	db.Raw("DELETE FROM wishlists WHERE user_id=? and wishroomsid=?",user_ID,RoomID).Scan(&wish)
 	var note = "added"
 	k, _ := json.Marshal(note)
 	c.Writer.Header().Set("Content-Type", "application/json")
