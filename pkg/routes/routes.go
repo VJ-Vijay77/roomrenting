@@ -75,5 +75,7 @@ func InitRoutes(api *gin.Engine) {
 	api.GET("/user/wishlist/delete/:WID",controller.DeleteFromWishlist)
 	api.GET("/user/wishlist/cart/:RID",controller.WLAddToCart)
 
+	//payment gateway
+	api.GET("/user/payment/:TotalPrice/:UserID",controller.Payment)
 
 }

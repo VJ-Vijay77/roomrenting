@@ -36,11 +36,29 @@ func Cart(c *gin.Context) {
 	UserName := userinfos.First_Name
 	var cartitems []models.Cart_Infos
 	db.Raw("SELECT carts.cartsid,users.id,users.first_name,rooms.room_name,carts.cartsroomid,rooms.cover,rooms.room_price,rooms.category FROM carts INNER JOIN rooms ON rooms.id=carts.cartsroomid INNER JOIN users ON carts.user_id=users.id WHERE user_id=?", UserID).Scan(&cartitems)
+
+	//roomsid
+	
+
+	//total cart price
+	var totalprice []string
+	var convInt int
+	
+	var GrandTotal int
+
+	db.Raw("SELECT rooms.room_price FROM carts INNER JOIN users ON carts.user_id=users.id INNER JOIN rooms ON carts.cartsroomid=rooms.id  WHERE user_id=?",UserID).Scan(&totalprice)
+	for _,price := range totalprice{
+		convInt,_=strconv.Atoi(price)
+		GrandTotal+=convInt
+	}
+	fmt.Println(GrandTotal)
 	c.HTML(200, "cart.gohtml", gin.H{
 		"cart":     cartitems,
 		"username": UserName,
+		"userid":UserID,
 		"count":count,
 		"wcount":wishlistcount,
+		"total":GrandTotal,
 	})
 }
 
