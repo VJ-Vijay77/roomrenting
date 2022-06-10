@@ -19,3 +19,7 @@ func Payment(c *gin.Context) {
 		"roomnames": roomnames,
 	})
 }
+
+func PaymentConfirm(c *gin.Context) {
+	c.HTML(200,"paymentsuccess.gohtml",nil)
+}

@@ -82,10 +82,11 @@
                             <div class="row">
                                 <div class="col-8">
                                     <p class="h4 mb-0">Summary</p>
-                                    <p class="mb-0"><span class="fw-bold">Product:</span><span class="c-green">: Name of
-                                            product</span></p>
-                                    <p class="mb-0"><span class="fw-bold">Price:</span><span
-                                            class="c-green">:Rs 6777</span></p>
+                                    <p class="mb-0"><span class="fw-bold">Product:</span><span class="c-green"><ul>
+                                        {{range .roomnames}}<li>{{.}}</li>{{end}}
+                                    </ul></span></p>
+                                    <p class="mb-0"><span class="fw-bold">Total Price:</span>
+                                        <span>Rs<h3 class="text-danger"><strong>{{.total}}</strong></h3> </span></p>
                                     <p class="mb-0">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque
                                         nihil neque
                                         quisquam aut
@@ -127,7 +128,7 @@
 
                                     <div class="text-danger" style="font-size: 30px;" id="error"></div>
                                    
-                                    <form action="" id="form">
+                                    <form action="/user/payment/confirm" id="form" method="post">
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="form__div">
