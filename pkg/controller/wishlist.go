@@ -29,7 +29,7 @@ func Wishlish(c *gin.Context) {
 	db.Raw("SELECT first_name FROM users where email=?", user_ID).Scan(&userinfos)
 	UserName := userinfos.First_Name
 	var wishlistitems []models.Wishlist_Infos
-	db.Raw("SELECT wishlists.wishlistid,users.id,rooms.room_name,rooms.cover,rooms.room_price,rooms.category FROM wishlists INNER JOIN rooms ON rooms.id=wishlists.wishroomsid INNER JOIN users ON wishlists.user_id=users.id WHERE user_id=?", UserID).Scan(&wishlistitems)
+	db.Raw("SELECT wishlists.wishlistid,users.id,rooms.room_name,rooms.cover,rooms.room_price,rooms.category,wishlists.wishroomsid FROM wishlists INNER JOIN rooms ON rooms.id=wishlists.wishroomsid INNER JOIN users ON wishlists.user_id=users.id WHERE user_id=?", UserID).Scan(&wishlistitems)
 	c.HTML(200, "wishlist.gohtml", gin.H{
 		"wishlist":     wishlistitems,
 		"username": UserName,
@@ -90,12 +90,12 @@ func AddToWishlist(c *gin.Context) {
 }
 
 func DeleteFromWishlist(c *gin.Context) {
-	CID := c.Param("CID")
-	CartId, _ := strconv.Atoi(CID)
+	WID := c.Param("WID")
+	WishId, _ := strconv.Atoi(WID)
 	db := database.GetDb()
-	var cart models.Carts
-	db.Raw("DELETE FROM carts WHERE cartsid=?", CartId).Scan(&cart)
+	var wish models.Wishlists
+	db.Raw("DELETE FROM wishlists WHERE wishlistid=?", WishId).Scan(&wish)
 	time.Sleep(1 * time.Second)
-	c.Redirect(303, "/user/cart")
+	c.Redirect(303, "/user/wishlist")
 
 }
