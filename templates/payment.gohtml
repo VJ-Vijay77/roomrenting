@@ -12,8 +12,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
       crossorigin="anonymous"></script>
-     
-</head>
+    <!-- <script src="/static/address.js"></script> -->
+    </head>
 <body>
     <div class="container">
         <div class="row">
@@ -124,17 +124,20 @@
                                     <p class="mb-0">Give us your address just for a precaution to avoid future dilemmas and also as a safety measure. We dont give informations to any third party. We completely respect your privacy in informations.Thankyou. </p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <form action="" class="form">
+
+                                    <div class="text-danger" style="font-size: 30px;" id="error"></div>
+                                   
+                                    <form action="" id="form">
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="form__div">
-                                                    <input type="text" class="form-control" placeholder="First Name">
+                                                    <input type="text" id="firstname" class="form-control" placeholder="First Name">
                                                     <label for="" class="form__label">First Name</label>
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="form__div">
-                                                    <input type="text" class="form-control" placeholder="LastName">
+                                                    <input type="text" id="lastname" class="form-control" placeholder="LastName">
                                                     <label for="" class="form__label">Last Name</label>
                                                 </div>
                                             </div>
@@ -145,32 +148,37 @@
                                             </div>
                                             <div class="col-4">
                                                 <div class="form__div">
-                                                    <input type="text" class="form-control" id="housename" placeholder="Place">
+                                                    <input type="text" class="form-control" id="place" placeholder="Place">
                                                 </div>
                                             </div>
 
                                             <div class="col-4">
                                                 <div class="form__div">
-                                                    <input type="text" class="form-control" id="housename" placeholder="State">
+                                                    <input type="text" class="form-control" id="state" placeholder="State">
                                                 </div>
                                             </div>
 
                                             <div class="col-6">
                                                 <div class="form__div">
-                                                    <input type="number" class="form-control" placeholder=" ">
+                                                    <input type="text" id="pin" class="form-control" placeholder=" ">
                                                     <label for="" class="form__label">PIN</label>
                                                 </div>
                                             </div>
 
                                             <div class="col-6">
                                                 <div class="form__div">
-                                                    <input type="text" class="form-control" placeholder=" ">
+                                                    <input type="text" id="mobile" class="form-control" placeholder=" ">
                                                     <label for="" class="form__label">Mobile</label>
                                                 </div>
                                             </div>
                                             
                                            
                                         </div>
+                                        <div class="col-12">
+                
+                                            <button type="submit" class="btn w-100 btn-outline-primary btn-success text-white" style="font-weight: 600;">Check-In Now</button>
+                                        
+                                    </div>
                                     </form>
                                 </div>
                             </div>
@@ -178,13 +186,84 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12">
-                <div>
-                    <button type="submit" class="btn btn-primary">Check-In Now</button>
-                </div>
-            </div>
+            
         </div>
     </div>
 
+
+    <script>
+        const firstname = document.getElementById('firstname')
+const lastname = document.getElementById('lastname')
+const housename = document.getElementById('housename')
+const place = document.getElementById('place')
+const state = document.getElementById('state')
+const pin = document.getElementById('pin')
+const mobile = document.getElementById('mobile')
+const form = document.getElementById('form')
+const errorElement = document.getElementById('error')
+
+
+form.addEventListener('submit', (e) => {
+    let messages = []
+    //first name
+    if (firstname.value==='' || firstname.value== null){
+        messages.push('Name is required!')
+    }else if(firstname.value.length <= 2 ){
+        messages.push('Name must have 3 characters')
+    }else if (!/^[A-Za-z ]+$/.test(firstname.value)){
+        messages.push('No special characters allowed!')
+    }
+    
+    //last name
+  else  if (lastname.value==='' || lastname.value== null){
+        messages.push('Last Name is required!')
+    }
+
+    else if (!/^[A-Za-z ]+$/.test(lastname.value)){
+        messages.push('No special characters allowed!')
+   
+        //house name
+    }else if(housename.value==='' || housename.value== null){
+        messages.push('Name is required!')
+    }else if(housename.value.length <= 4 ){
+        messages.push('House Name must have 5 characters')
+    
+        //place
+    }else if(place.value==='' || place.value== null){
+        messages.push('Place is required!')
+    }else if(place.value.length <= 2 ){
+        messages.push('Place Name must have 3 characters')
+    }  else if (!/^[A-Za-z ]+$/.test(place.value)){
+        messages.push('No special characters allowed!')
+   //state
+    }else if(state.value==='' || state.value== null){
+        messages.push('State is required!')
+    }else if(state.value.length <= 2 ){
+        messages.push('State Name must have 3 characters')
+    }  else if (!/^[A-Za-z ]+$/.test(state.value)){
+        messages.push('No special characters allowed!')
+   
+          //pin
+    }else if(pin.value.length <= 5 || pin.value.length>=7 ){
+        messages.push('PIN must/only have 6 digits')
+    
+    
+   //mobile validation
+    }else if(mobile.value.length <= 9 || mobile.value.length>=11 ){
+        messages.push('mobile must/only have 10 digits')
+    }else if(!/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(mobile.value)){
+        messages.push('Enter valid Mobile number!')
+    }
+  
+    
+    
+
+    if (messages.length > 0) {
+        e.preventDefault()
+        errorElement.innerText = messages.join(', ')
+    }
+
+})
+    </script>
 </body>
 </html>
