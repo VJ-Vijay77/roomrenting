@@ -69,4 +69,10 @@ func InitRoutes(api *gin.Engine) {
 	api.GET("/user/cart/delete/:CID",controller.DeleteCart)
 
 
+	//wishlist management
+	api.GET("/user/wishlist",controller.Wishlish)
+	api.GET("/user/wishlist/:RID",controller.AddToWishlist)
+	api.GET("/user/wishlist/delete/:WID",controller.DeleteFromWishlist)
+
+
 }

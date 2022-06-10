@@ -51,3 +51,19 @@ type Cart_Infos struct {
 	
 
 }
+
+type Wishlists struct {
+	Wishlistid int
+	User_ID int
+	Wishroomsid int
+}
+
+type Wishlist_Infos struct {
+	Wishlistid int
+	Room_Name string
+	Room_Price string
+	Wishroomsid int
+	Cover string
+	Category string
+	User_Id int
+}

@@ -107,7 +107,7 @@
                   <p class="card-text">1 Hall 2 Bedroom 1 Bathroom Balcony</p>
                   <h1><p class="card-text">Rs {{.roomprice}}</p></h1>
                   <button type="button" onclick="checkin('{{.roomid}}','{{.roomname}}','{{.roomprice}}')" class="btn btn-outline-success">Check-In Now</button>
-                  <button type="button" class="btn btn-outline-warning">Add to Wishlist</button>
+                  <button type="button" onclick="wishlist('{{.roomid}}','{{.roomname}}')" class="btn btn-outline-warning">Add to Wishlist</button>
                   
                 </div>
               </div>

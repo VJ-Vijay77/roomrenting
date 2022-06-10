@@ -59,3 +59,63 @@
         
 
 }
+
+
+
+
+function wishlist(RID,RName) {
+
+  swal("Add to Wishlist?","Room Name:"+RName, {           
+    buttons: {
+      cancel: "Cancel",
+      
+      catch: {
+        text: "Add to Wishlist",
+        value: "catch",
+      },
+      
+    },
+  })
+  .then((value) => {
+    switch (value) {
+   
+      
+      case "catch":
+         //location.href="/user/cart/"+RID;
+          $.ajax({
+              
+              url: "/user/wishlist/"+RID,
+              method:"get", // serializes the form's elements.
+              success: function(k) {
+                  if (k=="login"){
+                      swal("Login First!", "You have to login first to checkout.You are redirecting to login page.", "warning");
+                      setTimeout(() => { location.href="/user_login";  }, 1500);
+                      
+                  }else if (k=="added"){
+                      swal("Added Successfully", "Added to Wishlist!.", "success");
+                      setTimeout(() => { location.href="/user/room_info/"+RID;  }, 1500);
+                  }else if (k=="sameroom"){
+                      swal("Already in Wishlist", "The item is already in wishlist", "error");
+                  }
+  
+  
+              }
+           
+             
+              
+          });
+                 
+        }
+      });
+          
+
+
+
+
+  // swal("Click on either the button or outside the modal.")
+  // .then((value) => {
+
+  //   swal(`The returned value is: ${value}`);
+  // });
+
+}
