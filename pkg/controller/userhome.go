@@ -27,12 +27,17 @@ func UserHome(c *gin.Context) {
 
 	var UserID int
 	db.Raw("SELECT id FROM users WHERE email=?", userID).Scan(&UserID)
+	//cart count
 	var count int
 	db.Raw("SELECT COUNT(user_id) FROM carts WHERE user_id=?",UserID).Scan(&count)
+	//wishlist count
+	var wishlistcount int
+	db.Raw("SELECT COUNT(user_id) FROM wishlists WHERE user_id=?",UserID).Scan(&wishlistcount)
 	
 	c.HTML(200, "userhome.gohtml", gin.H{
 		"data": userinfos,
 		"username":UserName,
 		"count":count,
+		"wcount":wishlistcount,
 	})
 }

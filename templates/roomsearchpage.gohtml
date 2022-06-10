@@ -54,14 +54,18 @@
      {{if .username}} <button class="btn btn-dark pe-4 me-4"><a style="text-decoration: none;color: wheat;" href="/user_logout">Logout</a></button>
      {{else}}{{end}} 
 
-     <a href="/user/wishlist" class="me-5" style="width: 7%;"> <img class="position-relative" src="/static/home/images/wishlist.png"
-      style="width: 38px"></a>
-
-     {{if ne .count 0}}  <a href="/user/cart" class="me-5" style="width: 7%;"> <img class="position-relative" src="/static/home/images/trolley.png"
-      style="width: 38px"><span class="position-absolute top-1 start-100 translate-middle badge rounded-pill bg-danger">
-        {{.count}} </a>{{else}}
-        <a href="/user/cart" class="me-5" style="width: 7%;"> <img class="position-relative" src="/static/home/images/trolley.png"
-          style="width: 38px"></a>{{end}}
+     
+    {{if ne .wcount 0}}<a href="/user/wishlist" class="pe-3"><img src="/static/home/images/wishlist.png" class="position-relative" style="max-width: 2rem;">
+      <span class="badge text-bg-primary position-absolute">{{.wcount}}</span>
+        </a>{{else}}<a href="/user/wishlist" class="pe-3"><img src="/static/home/images/wishlist.png" class="position-relative" style="max-width: 2rem;"></a>
+        {{end}}
+        
+        
+        {{if ne .count 0}}  <a href="/user/cart" class="pe-5 ps-3"><img src="/static/home/images/trolley.png" class="position-relative" style="max-width: 2.2rem;">
+          <span class="badge text-bg-danger position-absolute">{{.count}}</span>
+            </a>{{else}}
+            <a href="/user/cart" class="me-5" style="width: 7%;"> <img class="position-relative" src="/static/home/images/trolley.png"
+              style="width: 38px"></a>{{end}}
 
       
     </nav> 

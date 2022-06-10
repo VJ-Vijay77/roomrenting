@@ -27,14 +27,19 @@ func SearchRooms(c *gin.Context) {
 	
 	var UserID int
 	db.Raw("SELECT id FROM users WHERE email=?", userID).Scan(&UserID)
+	//cart count
 	var count int
 	db.Raw("SELECT COUNT(user_id) FROM carts WHERE user_id=?",UserID).Scan(&count)
+	//wishlist count
+	var wishlistcount int
+	db.Raw("SELECT COUNT(user_id) FROM wishlists WHERE user_id=?",UserID).Scan(&wishlistcount)
 	
 	
 	c.HTML(200, "roomsearchpage.gohtml", gin.H{
 		"rooms":    rooms,
 		"username": UserName,
 		"count":count,
+		"wcount":wishlistcount,
 	})
 }
 
@@ -57,7 +62,11 @@ func RoomInfo(c *gin.Context) {
 	db.Raw("SELECT id FROM users WHERE email=?", userID).Scan(&UserID)
 	var count int
 	db.Raw("SELECT COUNT(user_id) FROM carts WHERE user_id=?",UserID).Scan(&count)
+	//wishlist count
+	var wishlistcount int
+	db.Raw("SELECT COUNT(user_id) FROM wishlists WHERE user_id=?",UserID).Scan(&wishlistcount)
 	
+
 	
 	c.HTML(200, "roominfo.gohtml", gin.H{
 		 "roomname":     roominfo.Room_Name,
@@ -72,6 +81,7 @@ func RoomInfo(c *gin.Context) {
 		 "sub5":roominfo.Sub5,
 		"username":UserName,
 		"count":count,
+		"wcount":wishlistcount,
 		
 	})
 }

@@ -24,6 +24,13 @@ func Cart(c *gin.Context) {
 	var count int
 	db.Raw("SELECT COUNT(user_id) FROM carts WHERE user_id=?",UserID).Scan(&count)
 	
+	//wishlist count
+	var wishlistcount int
+	db.Raw("SELECT COUNT(user_id) FROM wishlists WHERE user_id=?",UserID).Scan(&wishlistcount)
+	
+
+
+
 	var userinfos models.Users
 	db.Raw("SELECT first_name FROM users where email=?", user_ID).Scan(&userinfos)
 	UserName := userinfos.First_Name
@@ -33,6 +40,7 @@ func Cart(c *gin.Context) {
 		"cart":     cartitems,
 		"username": UserName,
 		"count":count,
+		"wcount":wishlistcount,
 	})
 }
 
