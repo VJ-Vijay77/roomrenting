@@ -105,3 +105,48 @@ func DeleteFromWishlist(c *gin.Context) {
 	c.Redirect(303, "/user/wishlist")
 
 }
+
+
+func WLAddToCart(c *gin.Context) {
+
+	ok := UserLogedCheck(c)
+	if !ok {
+		var not = "login"
+		k, _ := json.Marshal(not)
+		c.Writer.Header().Set("Content-Type", "application/json")
+		c.Writer.Write(k)
+		return
+
+	}
+	db := database.GetDb()
+	session, _ := Store.Get(c.Request, "session")
+	userID := session.Values["userID"]
+	userEmail := fmt.Sprintf("%v", userID)
+
+	I := c.Param("RID")
+	RoomID, _ := strconv.Atoi(I)
+	var user_ID int
+	//  var roominfo models.Rooms
+	var cart models.Carts
+	db.Raw("SELECT id FROM users WHERE email=?", userEmail).Scan(&user_ID)
+	
+	var cartItems models.Carts
+	db.Where("cartsroomid=? AND user_id=?", RoomID, user_ID).Find(&cartItems)
+	if cartItems.Cartsroomid == RoomID && cartItems.User_Id == user_ID {
+		var room = "sameroom"
+		k, _ := json.Marshal(room)
+		c.Writer.Header().Set("Content-Type", "application/json")
+		c.Writer.Write(k)
+		return
+	}
+	cart.Cartsroomid = RoomID
+	cart.User_Id = user_ID
+
+	db.Select("cartsroomid", "user_id").Create(&cart)
+	
+	var note = "added"
+	k, _ := json.Marshal(note)
+	c.Writer.Header().Set("Content-Type", "application/json")
+	c.Writer.Write(k)
+
+}

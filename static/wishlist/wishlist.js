@@ -21,3 +21,56 @@ function removefromwishlist(WID) {
 
 
 }
+
+
+
+  
+function wishlistTocart(RID,RoomName) {
+
+           
+
+    swal("Do you want to add this item to cart?","Room Name:"+RoomName, {           
+buttons: {
+cancel: "Cancel",
+catch: {
+text: "Add to Cart",
+value: "catch",
+},
+
+},
+})
+.then((value) => {
+switch (value) {
+
+
+case "catch":
+//location.href="/user/cart/"+RID;
+$.ajax({
+    
+    url: "/user/wishlist/cart/"+RID,
+    method:"get", // serializes the form's elements.
+    success: function(k) {
+        if (k=="login"){
+            swal("Login First!", "You have to login first to checkout.You are redirecting to login page.", "warning");
+            setTimeout(() => { location.href="/user_login";  }, 1500);
+            
+        }else if (k=="added"){
+            swal("Added Successfully", "Added to Cart!.", "success");
+            setTimeout(() => { location.href="/user/wishlist"  }, 1500);
+        }else if (k=="sameroom"){
+            swal("Already in Cart", "The item is already in cart", "error");
+        }
+
+
+    }
+ 
+   
+    
+});
+    
+
+}
+});
+
+
+}
