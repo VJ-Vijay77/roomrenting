@@ -9,6 +9,11 @@ import (
 )
 
 func UserProfile(c *gin.Context) {
+	ok := UserLogedCheck(c)
+	if !ok {
+		c.Redirect(303,"/user_login")
+		return
+	}
 	db := database.GetDb()
 	session, _ := Store.Get(c.Request, "session")
 	useriD := session.Values["userID"]
@@ -61,6 +66,11 @@ func OrderHistory(c *gin.Context) {
 	var wishlistcount int
 	db.Raw("SELECT COUNT(user_id) FROM wishlists WHERE user_id=?", UserID).Scan(&wishlistcount)
 
+	var orderinfo []models.Orders
+	db.Where("user_id=?",UserID).Find(&orderinfo)
+
+	var roomids []models.Orderedrooms
+	db.Where("user_id=?",UserID).Find(&roomids)
 
 
 	c.HTML(200,"orderhistory.gohtml",gin.H{
@@ -68,6 +78,8 @@ func OrderHistory(c *gin.Context) {
 		"username":UserName,
 		"count":count,
 		"wcount":wishlistcount,
+		"orderinfo":orderinfo,
+		"roomid":roomids,
 		
 	})
 }

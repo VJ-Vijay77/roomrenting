@@ -106,31 +106,59 @@
 
 
    Order History
-
-   <table class="table">
+<div class="container-fluid">
+   <table class="table table-info table-hover">
     <thead>
       <tr>
-        <th scope="col">Order_Id</th>
-        <th scope="col">Username</th>
-        <th scope="col">Total</th>
-        <th scope="col">Room ID</th>
-        <th scope="col">Room Name</th>
-        <th scope="col">Payment Mode</th>
-        <th scope="col">Date-CheckIn</th>
+        <th scope="col" class="bg-danger text-white">Order_Id</th>
+        <th scope="col" class="bg-danger text-white">Username</th>
+        <th scope="col" class="bg-danger text-white">Total</th>
+        <th scope="col" class="bg-danger text-white">Room ID</th>
+        <th scope="col" class="bg-danger text-white">Room Name</th>
+        <th scope="col" class="bg-danger text-white">Payment Mode</th>
+        <th scope="col" class="bg-danger text-white">Date-CheckIn</th>
       </tr>
     </thead>
     <tbody>
+        {{range .orderinfo}}
       <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
+        <th scope="row">{{.Orderid}}</th>
+        <td>{{.Firstname}}</td>
+        <td>{{.Totalprice}}</td>
+        <td>On Below Table</td>
+        <td>{{.Roomnames}}</td>
+        <td>Payment At Office</td>
+        <td>--/--/----</td>
       </tr>
-    
+      {{end}}
     </tbody>
   </table>
+</div>
+
+  <!-- room id table -->
+  <div class="container pt-5">
+  <table class="table table-dark table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Order ID</th>
+        <th scope="col">User ID</th>
+        <th scope="col">RoomID</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{range .roomid}}
+        
+      <tr>
+        <th scope="row">1</th>
+        <td>{{.User_Id}}</td>
+        <td>{{.Roomid}}</td>
+        
+        
+      </tr>
+      {{end}}
+    </tbody>
+  </table>
+  </div>
+
     </body>
     </html>

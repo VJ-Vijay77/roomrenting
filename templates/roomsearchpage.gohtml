@@ -15,7 +15,7 @@
     }
     </style>
 </head>
-<body>
+<body style="overflow-x: hidden;">
     
    
 
@@ -110,14 +110,17 @@
 
 
     <!-- search rooms start -->
-   
+    
     <div class="row">
+      
+      
+     
       {{range .rooms}}
-     {{if eq .Status "available"}}
-      <div class="col-md-3">
-    <div class="container pt-5">
-  
-
+      <div class="col-4 col-md-4">
+        <div class="container pt-5">
+          
+          {{if eq .Status "available"}}
+         
               <div class="card mb-3">
                 <img src="{{.Cover}}" class="card-img-top" alt="...">
                 <!-- <img src="/static/searchpage/images/Room 1/cover.jpeg" class="card-img-top" alt="..."> -->
@@ -128,16 +131,17 @@
                   <a href="/user/room_info/{{.ID}}" class="btn btn-primary">Check-In Now</a>
                   <p class="card-text"><small class="text-muted bg-warning">{{.Status}}</small></p>
                 </div>
+                
               </div>
+             {{end}}
               
-
             </div>
-              {{end}}
-          </div>{{else}}
-          <h1>No Rooms Available</h1>
-          {{end}}
-            
+            </div>
+            {{end}}
           </div>
+          
+        
+           
          
             
 <!-- search rooms end -->

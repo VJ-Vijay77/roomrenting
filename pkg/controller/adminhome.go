@@ -110,8 +110,9 @@ func PAddRoom(c *gin.Context) {
 	addroom.Sub2 = SubPicPath2
 	addroom.Sub3 = SubPicPath3
 	addroom.Sub4 = SubPicPath4
+	addroom.Status="available"
 
-	db.Select("room_name", "room_price", "category", "cover", "sub1", "sub2", "sub3", "sub4", "sub5").Create(&addroom)
+	db.Select("room_name", "room_price", "category", "cover", "sub1", "sub2", "sub3", "sub4", "sub5","status").Create(&addroom)
 
 	ok = true
 	k, _ := json.Marshal(ok)

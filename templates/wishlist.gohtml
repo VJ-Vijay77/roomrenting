@@ -105,41 +105,40 @@
   <!-- navbar end -->
   <h1>Wishlist</h1>
   
-  <div class="container">
-  <div class="row">
-  {{range .wishlist}}
   
-    {{if .Room_Name}}
-      <div class="col-4">
-    <div class="card" style="width: 18rem;">
-      <img src="{{.Cover}}" class="card-img-top" alt="...">
-      {{if eq .Status "available"}}<div class="w-100 bg-success text-center text-white">{{.Status}}</div>
-      {{else}}<div class="w-100 bg-warning text-center text-white">{{.Status}}</div>{{end}}
-      <div class="card-body">
-        <p class="card-text">2 Bedroom 1 Bathroom 1 Hall Breezing Balcony.</p>
-        <p class="card-text">Room Name:{{.Room_Name}}</p>
-        <p class="card-text">Category:{{.Category}}</p>
-        <p class="card-text">Room ID:{{.Wishroomsid}} /-</p>
-        <p class="card-text">Rs {{.Room_Price}} /-</p>
-        <p class="card-text">Wishlist ID:{{.Wishlistid}} /-</p>
-        
-     {{if eq .Status "available"}}   <button type="button" class="btn btn-warning" onclick="wishlistTocart('{{.Wishroomsid}}','{{.Room_Name}}')">Move to cart</button>
-     {{else}}
-     <button type="button" class="btn btn-secondary" disabled>Move to Cart</button>
-
-     {{end}}
-
-        <button type="button" class="btn btn-danger" onclick="removefromwishlist('{{.Wishlistid}}')">Remove Item</button>
-
+  <div class="container">
+    <div class="row">
+    {{range .wishlist}}
+    
+     
+        <div class="col-4">
+      <div class="card" style="width: 18rem;">
+        <img src="{{.Cover}}" class="card-img-top" alt="...">
+        {{if eq .Status "available"}}<div class="w-100 bg-success text-center text-white">{{.Status}}</div>
+        {{else}}<div class="w-100 bg-warning text-center text-white">{{.Status}}</div>{{end}}
+        <div class="card-body">
+          <p class="card-text">2 Bedroom 1 Bathroom 1 Hall Breezing Balcony.</p>
+          <p class="card-text">Room Name:{{.Room_Name}}</p>
+          <p class="card-text">Category:{{.Category}}</p>
+          <p class="card-text">Room ID:{{.Wishroomsid}} /-</p>
+          <p class="card-text">Rs {{.Room_Price}} /-</p>
+          <p class="card-text">Wishlist ID:{{.Wishlistid}} /-</p>
+          
+       {{if eq .Status "available"}}   <button type="button" class="btn btn-warning" onclick="wishlistTocart('{{.Wishroomsid}}','{{.Room_Name}}')">Move to cart</button>
+       {{else}}
+       <button type="button" class="btn btn-secondary" disabled>Move to Cart</button> {{end}}
+  
+      
+  
+          <button type="button" class="btn btn-danger" onclick="removefromwishlist('{{.Wishlistid}}')">Remove Item</button>
+  
+        </div>
       </div>
     </div>
+    {{end}}
   </div>
-  {{end}}
-</div>
-</div>
-{{else}}
-<h2 class="text-center">Nothing in Wishlist</h2>
-{{end}}
+  </div>
+  
   
 </body>
 
