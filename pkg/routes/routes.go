@@ -80,4 +80,8 @@ func InitRoutes(api *gin.Engine) {
 	api.GET("/user/payment/:TotalPrice/:UserID",controller.Payment)
 	api.POST("/user/payment/confirm",controller.PaymentConfirm)
 	api.GET("/user/payment/success",controller.PaymentSuccess)
+
+	//user profile
+	api.GET("/user/profile",controller.UserProfile)
+
 }
