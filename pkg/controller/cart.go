@@ -51,7 +51,7 @@ func Cart(c *gin.Context) {
 		convInt,_=strconv.Atoi(price)
 		GrandTotal+=convInt
 	}
-	fmt.Println(GrandTotal)
+	
 	c.HTML(200, "cart.gohtml", gin.H{
 		"cart":     cartitems,
 		"username": UserName,

@@ -13,6 +13,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
     crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/d67b07a9d9.js" crossorigin="anonymous"></script>
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
 <style>
   .start-100 {
@@ -77,12 +78,28 @@
             <a href="/user/cart" class="me-5" style="width: 7%;"> <img class="position-relative" src="/static/home/images/trolley.png"
               style="width: 38px"></a>{{end}}
 
-    <!-- {{if ne .count 0}}  <a href="/user/cart" class="me-5" style="width: 7%;"> <img class="position-relative" src="/static/home/images/trolley.png"
-      style="width: 38px"><span class="position-absolute top-1 start-100 translate-middle badge rounded-pill bg-danger">
-        {{.count}} </a>{{else}}
-        <a href="/user/cart" class="me-5" style="width: 7%;"> <img class="position-relative" src="/static/home/images/trolley.png"
-          style="width: 38px"></a>{{end}} -->
     
+    
+           <!-- profile icon -->
+    <!-- <script src="https://kit.fontawesome.com/d67b07a9d9.js" crossorigin="anonymous"></script> -->
+
+    <div class="btn-group bg-dark me-4" role="group" aria-label="Button group with nested dropdown">
+      <button type="button" class="btn fa-solid fa-user-doctor" style="color: white;">{{.username}}</button>
+
+      <div class="btn-group dropstart" role="group">
+        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+          aria-expanded="false">
+
+        </button>
+        <ul class="dropdown-menu bg-dark " aria-labelledby="btnGroupDrop1">
+          <li><a class="dropdown-item text-white" href="/user/profile">Profile</a></li>
+          <li><a class="dropdown-item text-white" href="#">Orders</a></li>
+          <li><a class="dropdown-item text-white" href="#">Settings</a></li>
+          <li><a class="dropdown-item text-white" href="#">Log Out</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- profile icon ends -->
   </nav>
 
 
