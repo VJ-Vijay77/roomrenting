@@ -74,8 +74,8 @@
 
     <!-- category -->
   <div class="hstack gap-3">
-    <div class="border"><button class="btn btn-info" type="button"> Available Rooms </button></div>
-    <a href="/user/room_booked_search" class="border"><button class="btn" type="button"> Booked Rooms</button></a>
+    <a href="/user/room_search" class="border"><button class="btn" type="button"> Available Rooms </button></a>
+    <div class="border"><button class="btn btn-info" type="button"> Booked Rooms</button></div>
     
    </div>
    <hr>
@@ -92,20 +92,20 @@
    
     <div class="row">
       {{range .rooms}}
-     {{if eq .Status "available"}}
+     {{if eq .Status "booked"}}
       <div class="col-md-3">
     <div class="container pt-5">
   
 
-              <div class="card mb-3">
+              <div class="card mb-3 bg-secondary">
                 <img src="{{.Cover}}" class="card-img-top" alt="...">
                 <!-- <img src="/static/searchpage/images/Room 1/cover.jpeg" class="card-img-top" alt="..."> -->
                 <div class="card-body">
-                  <h5 class="card-title">Rs <strong>{{.Room_Price}}</strong> /-</h5>
-                  <p class="card-text">{{.Room_Name}}</p>
-                  <p class="card-text">1 Bedroom 2 Bathroom 1 Hall</p>
+                  <h5 class="card-title text-warning">Rs <strong>{{.Room_Price}}</strong> /-</h5>
+                  <p class="card-text text-white">{{.Room_Name}}</p>
+                  <p class="card-text text-white">1 Bedroom 2 Bathroom 1 Hall</p>
                   <a href="/user/room_info/{{.ID}}" class="btn btn-primary">Check-In Now</a>
-                  <p class="card-text"><small class="text-muted bg-warning">{{.Status}}</small></p>
+                  <p class="card-text"><small class="text-muted" style="font-weight: 600;color: red !important;background-color: aliceblue !important;">{{.Status}}</small></p>
                 </div>
               </div>
               
@@ -113,7 +113,7 @@
             </div>
               {{end}}
           </div>{{else}}
-          <h1>No Rooms Available</h1>
+          <h1>No Rooms Booked Yet</h1>
           {{end}}
             
           </div>

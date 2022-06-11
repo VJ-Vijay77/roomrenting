@@ -67,6 +67,7 @@ type Wishlist_Infos struct {
 	Cover string
 	Category string
 	User_Id int
+	Status string
 }
 
 type Orders struct{

@@ -106,7 +106,23 @@
           </div>
           </div>
 
-  
+          {{if eq .status "booked"}}
+          <div class="col-4 cols-md-3 col-lg-4">
+            <div class="card" style="width: 80%;overflow-x: hidden;">
+                <div class="card-body bg-secondary">
+                  
+                  <h5 class="card-title text-white">{{.roomname}} </h5>
+                  <h6 class="card-subtitle mb-2 text-muted text-white">Category : {{.roomcategory}}</h6>
+                  <p class="card-text text-white">1 Hall 2 Bedroom 1 Bathroom Balcony</p>
+                  <h1><p class="card-text text-white">Rs {{.roomprice}}</p></h1>
+                  <button type="button" onclick="booked()" class="btn btn-outline-danger btn-light" style="font-weight: 600;">Check-In Now</button>
+                  <button type="button" onclick="wishlist('{{.roomid}}','{{.roomname}}')" class="btn btn-outline-primary btn-light" style="font-weight: 600;">Add to Wishlist</button>
+                  <br><small class="text-muted bg-info">{{.status}}</small>
+                  
+                </div>
+              </div>
+          </div>
+          {{else}}
           <div class="col-4 cols-md-3 col-lg-4">
             <div class="card" style="width: 80%;overflow-x: hidden;">
                 <div class="card-body">
@@ -122,6 +138,8 @@
                 </div>
               </div>
           </div>
+
+          {{end}}
           
 
           

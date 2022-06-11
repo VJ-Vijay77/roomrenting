@@ -119,3 +119,8 @@ function wishlist(RID,RName) {
   // });
 
 }
+
+function booked(){
+
+  swal("Sorry!", "The Room is already booked!");
+}

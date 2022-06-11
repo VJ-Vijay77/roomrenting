@@ -43,6 +43,49 @@ func SearchRooms(c *gin.Context) {
 	})
 }
 
+
+func BookedSearchRooms(c *gin.Context) {
+	db := database.GetDb()
+
+	session, err := Store.Get(c.Request, "session")
+	if err !=nil {log.Println("Cannot get sessions!")}
+	useriD := session.Values["userID"]
+	userID := fmt.Sprintf("%s", useriD)
+	var userinfos models.Users
+
+	db.Raw("SELECT first_name FROM users where email=?", userID).Scan(&userinfos)
+
+	UserName := userinfos.First_Name
+	var rooms []models.Rooms
+	
+	db.Order("room_name").Find(&rooms)
+	
+	var UserID int
+	db.Raw("SELECT id FROM users WHERE email=?", userID).Scan(&UserID)
+	//cart count
+	var count int
+	db.Raw("SELECT COUNT(user_id) FROM carts WHERE user_id=?",UserID).Scan(&count)
+	//wishlist count
+	var wishlistcount int
+	db.Raw("SELECT COUNT(user_id) FROM wishlists WHERE user_id=?",UserID).Scan(&wishlistcount)
+	
+	
+	c.HTML(200, "bookedrooms.gohtml", gin.H{
+		"rooms":    rooms,
+		"username": UserName,
+		"count":count,
+		"wcount":wishlistcount,
+	})
+}
+
+
+
+
+
+
+
+
+
 func RoomInfo(c *gin.Context) {
 	db := database.GetDb()
 	ID := c.Param("ID")
