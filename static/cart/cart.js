@@ -23,7 +23,6 @@ function removecartitem(CID) {
 }
 
 function proceedtocheckout(totalprice,userID){
-   alert("total price:"+totalprice+"user id:"+userID)
   location.href="/user/payment/"+totalprice+"/"+userID
   
 }

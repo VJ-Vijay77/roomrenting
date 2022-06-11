@@ -78,5 +78,5 @@ func InitRoutes(api *gin.Engine) {
 	//payment gateway
 	api.GET("/user/payment/:TotalPrice/:UserID",controller.Payment)
 	api.POST("/user/payment/confirm",controller.PaymentConfirm)
-
+	api.GET("/user/payment/success",controller.PaymentSuccess)
 }

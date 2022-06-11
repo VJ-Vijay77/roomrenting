@@ -23,6 +23,7 @@ type Rooms struct{
 	Sub3 string
 	Sub4 string
 	Sub5 string
+	Status string
 }
 
 
@@ -66,4 +67,19 @@ type Wishlist_Infos struct {
 	Cover string
 	Category string
 	User_Id int
+}
+
+type Orders struct{
+	Orderid int
+	User_ID int
+	Firstname string
+	Lastname string
+	Housename string
+	Place string
+	State string
+	Mobile string
+	Totalprice string
+	Roomnames string
+	Accountholder string
+	
 }

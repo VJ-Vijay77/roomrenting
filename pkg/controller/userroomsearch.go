@@ -79,6 +79,7 @@ func RoomInfo(c *gin.Context) {
 		 "sub3":roominfo.Sub3,
 		 "sub4":roominfo.Sub4,
 		 "sub5":roominfo.Sub5,
+		 "status":roominfo.Status,
 		"username":UserName,
 		"count":count,
 		"wcount":wishlistcount,
