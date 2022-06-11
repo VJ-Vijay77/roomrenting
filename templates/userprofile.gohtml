@@ -22,7 +22,7 @@
 </head>
 
 
-<body style="overflow: hidden;">
+<body style="overflow-x: hidden;">
 
      <!-- navbar start -->
 
@@ -106,33 +106,48 @@
 
 
     <hr>
+    
        <div class="ps-5 ms-5 pt-5">
         <div class="row">
             <div class="col-3 col-md-3 col-lg-3">
                 <div class="card">
                     <img src="https://avatoon.me/wp-content/uploads/2021/09/Cartoon-Pic-Ideas-for-DP-Profile-01.png" class="card-img-top" alt="...">
                     <div class="card-body">
-                      <h5 class="card-title text-center">Vijay Dinesh</h5>
-                      <p class="card-text text-center">Go Developer | Brototype</p>
-                      <a href="#" class="btn btn-sm btn-primary ">Message</a>
-                      <a href="#" class="btn btn-sm btn-warning">Order History</a>
+                      <h5 class="card-title text-center">{{.username}} {{.lastname}}</h5>
+                      <p class="card-text text-center">Go Developer</p>
+                      <p class="card-text text-center">Email:{{.email}}</p>
+                      <p class="card-text text-center">Contact Mob:{{.mobile}}</p>
+                      <a href="#" class="btn btn-sm btn-primary d-flex justify-content-center">Message</a>
+                      <a href="/user/order_history" class="btn btn-sm btn-warning d-flex justify-content-center">Order History</a>
                     </div>
                   </div>
             </div>
-            <div class="col-9 col-md-9 col-lg-9">
+            <div class="col-9 col-md-9 col-lg-9 pe-5">
                 <div class="card">
                     <div class="card-header">
                      Details
                     </div>
                     <div class="card-body">
-                      <h5 class="card-title">Special title treatment</h5>
-                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                      <div class="row">
+                      <div class="col-6 col-md-6">
+                      <h5 class="card-title">Your Address</h5>
+                      <p class="card-text">Your First Name : {{.username}}</p>
+                      <p class="card-text">Your Last Name : {{.lastname}}</p>
+                      <p class="card-text">Your Email : {{.email}}</p>
+                      <p class="card-text">Your Mobile No : {{.mobile}}</p>
+                      </div>
+                      <div class="col-6 col-md-6">
+                        <h5 class="card-title">*** **** ****</h5>
+                        <p class="card-text">Occupation : Developer</p>
+                        <p class="card-text">Salary : 9-12 LPA</p>
+                        <p class="card-text">Experience : Fresher</p>
+                        <p class="card-text">Self Taught developer</p>
+                        </div>
+                      </div>
+                      <hr>
+                      <p class="card-title">Contact</p>
+                      <p class="card-text">Through Mobile : +91{{.mobile}} </p>
+                      <p class="card-text">Like Email? :{{.email}} </p>
                     </div>
                   </div>
             </div>
@@ -155,12 +170,12 @@
             <div class="col-4 col-md-4 col-lg-4">
                 <div class="card text-center">
                     <div class="card-header">
-                      Achievements
+                      Rooms
                     </div>
                     <div class="card-body">
                       <h5 class="card-title">Special title treatment</h5>
                       <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                      <a href="#" class="btn btn-success">Show Achievements</a>
+                      <a href="#" class="btn btn-success">See Checkings</a>
                     </div>
                     <div class="card-footer text-muted">
                       2 days ago
@@ -168,7 +183,7 @@
                   </div>
             </div>
     
-            <div class="col-4 col-md-4 col-lg-4">
+            <div class="col-4 col-md-4 col-lg-4 pe-5">
                 <ul class="list-group">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                       A list item
