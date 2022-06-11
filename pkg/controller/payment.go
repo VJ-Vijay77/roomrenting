@@ -49,6 +49,19 @@ func PaymentConfirm(c *gin.Context) {
 	var UserID int
 	db.Raw("SELECT id FROM users WHERE email=?", userID).Scan(&UserID)
 	
+	
+	var roomsids []models.Carts
+	db.Select("cartsroomid").Where("user_id=?",UserID).Find(&roomsids)
+	
+	
+	var idsofroom models.Orderedrooms
+	for _,val := range roomsids{
+		idsofroom.Roomid=val.Cartsroomid
+		idsofroom.User_Id=UserID
+		db.Select("roomid","user_id").Create(&idsofroom)
+	}
+	
+
 	FName := c.PostForm("firstnamef")
 	LName := c.PostForm("lastnamef")
 	HName := c.PostForm("housenamef")
@@ -69,10 +82,18 @@ func PaymentConfirm(c *gin.Context) {
 	orderdetails.Totalprice=Total
 	orderdetails.Roomnames=Allrooms
 	orderdetails.Accountholder=UserName
-	db.Select("user_id","firstname","lastname","housename","place","state","mobile","totalprice","roomnames","accountholder").Create(&orderdetails)
+	 db.Select("user_id","firstname","lastname","housename","place","state","mobile","totalprice","roomnames","accountholder").Create(&orderdetails)
 
+	 var deletefromcart models.Carts
+	db.Raw("DELETE FROM carts WHERE user_id=?",UserID).Scan(&deletefromcart)
 	
+	var updateroomstatus models.Rooms 
 	
+	for _,val := range roomsids{
+		
+		db.Raw("UPDATE rooms SET status='booked' WHERE id=?",val.Cartsroomid).Scan(&updateroomstatus)
+	}
+
 }
 
 func PaymentSuccess(c *gin.Context) {

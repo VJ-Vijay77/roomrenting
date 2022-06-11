@@ -83,3 +83,9 @@ type Orders struct{
 	Accountholder string
 	
 }
+
+type Orderedrooms struct{
+	ID int
+	Roomid int
+	User_Id int
+}
