@@ -110,7 +110,7 @@ function Frstname() {
                 }
         
         
-                function Editaddress(){
+                function Editaddress(ID){
     const housename = document.getElementById('housename')
     const place = document.getElementById('place')
     const mobile2 = document.getElementById('mobile2')
@@ -160,12 +160,43 @@ function Frstname() {
         if (messages.length > 0) {
             e.preventDefault()
             errorElement.innerText = messages.join(', ')
+        }else if (messages.length<=0){
+            e.preventDefault()
+            Checkaddress(ID)
         }
     
     })
                 }
+
+
+
         
-    
-    
+    function Checkaddress(ID){
+
+    swal({
+        title: "Are you sure the details entered is correct?",
+        text: "Press OK to confirm.",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+      
+            $.post('/user/edit_profile/editaddress/'+ID, $('#form5').serialize())
+      
+    //       var data = $('#form5').serialize();
+    //   $.post('/user/edit_profile/editaddress/'+ID, data);
+      swal("Updated Successfully", "We respect your privacy in sensitive informations.", "success");
+      setTimeout(() => { location.href="/user/edit_profile";  }, 1700);
+          
+      
+      
+          
+        }
+      });
+      }
+      
+
     
     

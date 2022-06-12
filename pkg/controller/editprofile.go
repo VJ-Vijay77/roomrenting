@@ -73,5 +73,15 @@ func EditProfileEmail(c *gin.Context) {
 }
 
 func EditProfileAddress(c *gin.Context) {
+	uID := c.Param("ID")
+	// db := database.GetDb()
+	HouseName := c.PostForm("housenamef")
+	Place := c.PostForm("placef")
+	Mobile := c.PostForm("mobile2f")
+	State := c.PostForm("statef")
+	PIN := c.PostForm("pinf")
+
+	fmt.Println(uID,HouseName,Place,Mobile,State,PIN)
+
 
 }
