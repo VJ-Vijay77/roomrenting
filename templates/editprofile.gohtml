@@ -14,10 +14,17 @@
     crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/d67b07a9d9.js" crossorigin="anonymous"></script>
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+    <script src="/static/editprofile/editprofile.js"></script>
 <style>
+      body{
+        background-image: url(https://i.pinimg.com/736x/2c/08/92/2c08922bb4664c79d4d157cb87c723d6.jpg);
+        object-fit: cover;
+      }
+
   .start-100 {
     left: 97% !important;
 }
+
 </style>
 </head>
 
@@ -103,11 +110,146 @@
       <!-- profile icon ends -->
   </nav>
   <!-- navbar end -->
-  <h1>Edit</h1>
+ 
+  <!-- forms -->
+
+  <hr>
+  <div class="container">
+  <div class="row" style="background-color: rgb(198, 194, 218);">
+    <div class="col-12">
+
+  <!-- <div class="container"> -->
+  <div class="row">
+
+<div class="col-6">
+  <div id="error" style="color: red;font-size: larger;"></div>
+
+  <form id="form1" method="post">
+  <label for="firstname">First Name</label>
+    <input type="text" id="firstname" name="firstnamef" placeholder="First Name" aria-label="First name" class="form-control">
+    <button type="submit" onclick="Frstname();" class="btn btn-info btn-outline-success  text-white" style="font-weight: 600;">Update</button>
+  </form>
+  </div>
+
+ <div class="col-6 ">
+  <div id="error2" style="color: red;font-size: larger;"></div>
+
+
+  <form id="form2" method="post">
+    <label for="lastname">Last Name</label>
+    
+    <input type="text" id="lastname" name="lastname" placeholder="Last Name" aria-label="Last name" class="form-control">
+    <button type="submit" onclick="Lstname();" class="btn btn-info btn-outline-success  text-white" style="font-weight: 600;">Update</button>
+  </form>
+  </div>
+  <div class="col-6">
+    <div id="error3" style="color: red;font-size: larger;"></div>
+
+
+  <form id="form3" method="post">
+
+    <label for="mobile">Mobile</label>
+      <input type="text" id="mobile" name="mobilef" placeholder="10-Digit Mobile" aria-label="First name" class="form-control">
+      <button type="submit" onclick="Mobile();" class="btn btn-info btn-outline-success  text-white" style="font-weight: 600;">Update</button>
+  </form>
+    </div>
+  <div class="col-12 pt-3 pb-3">
+    <div id="error4" style="color: red;font-size: larger;"></div>
+
+  
+    <form id="form4" method="post">
+    <div class="input-group flex-nowrap">
+      <span class="input-group-text" id="addon-wrapping">Email@</span>
+      
+      <input type="text" id="email" name="emailf" class="form-control" placeholder="Eg : vijaydinesh77vj@vj.co" aria-label="Username" aria-describedby="addon-wrapping">
+  <button type="submit" onclick="Email();" class="btn btn-info btn-outline-success  text-white" style="font-weight: 600;">Update</button>
+      </form>
+    
+    </div>
+  </div>
+  </div> 
+
+  <!-- </div> -->
+
+</div>
+</div>
+<hr>
+<div class="row mt-4" style="background-color: rgb(198, 194, 218);">
+ 
+  <div class="card-header mb-1 text-white text-center" style="background-color: rgb(16, 201, 238); font-weight: 600;">
+    Add or Edit Address
+  </div>
+
+  <div class="card text-center">
+    <div class="card-header">
+      <ul class="nav nav-tabs card-header-tabs">
+        <li class="nav-item">
+          <a class="nav-link active fw-bold" aria-current="true" href="#">Edit Current Address</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-black" href="#">Add Address 2</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-black" href="#">Add Address 3</a>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body">
+
+      <h5 class="card-title">Edit Address</h5>
+    <div id="error5" style="color: red;font-size: larger;"></div>
+
+      <p class="card-text">
+<div class="row">
+        <div class="col-4">
+          
+  <form id="form5" method="post">
+
+          <label for="housename">House Name</label>
+          <input type="text" id="housename" name="housenamef" placeholder="House Name" aria-label="First name" class="form-control">     
+        </div>
+        <div class="col-4">
+          <label for="place">Place</label>
+          <input type="text" id="place" name="placef" placeholder="Place Name" aria-label="First name" class="form-control">     
+        </div>
+        <div class="col-4">
+          <label for="mobile2">Mobile 2</label>
+          <input type="text" id="mobile2" name="mobile2f" placeholder="Mobile 2" aria-label="First name" class="form-control">     
+        </div>
+
+        <div class="col-4">
+          <label for="state">State</label>
+          <input type="text" id="state" name="statef" placeholder="State" aria-label="First name" class="form-control">     
+        </div>
+
+        <div class="col-4">
+          <label for="pin"> PIN</label>
+          <input type="text" id="pin" name="pinf" placeholder="6-Digit PIN" aria-label="First name" class="form-control">     
+        </div>
+
+       
+      <button type="submit" onclick="Editaddress();" class="btn btn-info text-white fw-semibold mt-3">Update Address</button>
+
+      </form>
+        <!--row ends below  -->
+      </div>
+       
+    </div>
+
+      </p>
+    
+    </div>
+  </div>
 
 
 
+  <!-- row div below -->
+</div>
 
+</div>
+
+
+<!-- forms end -->
 
 </body>
 </html>
