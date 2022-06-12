@@ -91,3 +91,22 @@ type Orderedrooms struct{
 	User_Id int
 }
 
+type Useraddress struct{
+	User_Id int
+	Housename string
+	Place string
+	Mobile string
+	State string
+	PIN int
+}
+
+type Addresstwo struct{
+	User_Id int
+	Housename string
+	Place string
+	Mobile string
+	State string
+	PIN int
+}
+
+
