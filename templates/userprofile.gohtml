@@ -54,38 +54,36 @@
 
 
 
-    {{if not .username}} <button type="button" class="btn btn-sm btn-outline-warning text-white"><a href="/user_signup"
-        class="navbar nav-item text-white" style="text-decoration: none;">SignUp</a></button> {{end}}
-
-    {{if .username}} <button type="button" class="btn btn-sm btn-outline-info text-white me-2"
-      style="margin-left: 1%;"><a href="/user_login" class="navbar nav-item text-white"
-        style="text-decoration: none;">{{.username}}</a></button> </a>
-    {{else}} <button type="button" class="btn btn-sm btn-outline-info text-white me-4" style="margin-left: 1%;"><a
-        href="/user_login" class="navbar nav-item text-white" style="text-decoration: none;">Login</a></button> </a>
-    {{end}}
-    {{if .username}} <button class="btn btn-dark pe-4 me-4"><a style="text-decoration: none;color: wheat;"
-        href="/user_logout">Logout</a></button>
-    {{else}}{{end}}
-
     
-    {{if ne .wcount 0}}<a href="/user/wishlist" class="pe-3"><img src="/static/home/images/wishlist.png" class="position-relative" style="max-width: 2rem;">
-        <span class="badge text-bg-primary position-absolute">{{.wcount}}</span>
-          </a>{{else}}<a href="/user/wishlist" class="pe-3"><img src="/static/home/images/wishlist.png" class="position-relative" style="max-width: 2rem;"></a>
+
+    {{if ne .wcount 0}}<a href="/user/wishlist" class="pe-3"><img src="/static/home/images/wishlist.png"
+      class="position-relative" style="max-width: 2rem;">
+    <span class="badge text-bg-primary position-absolute">{{.wcount}}</span>
+  </a>{{else}}<a href="/user/wishlist" class="pe-3"><img src="/static/home/images/wishlist.png"
+      class="position-relative" style="max-width: 2rem;"></a>
+  {{end}}
+
+
+  {{if ne .count 0}} <a href="/user/cart" class="pe-5 ps-3"><img src="/static/home/images/trolley.png"
+      class="position-relative" style="max-width: 2.2rem;">
+    <span class="badge text-bg-danger position-absolute">{{.count}}</span>
+  </a>{{else}}
+  <a href="/user/cart" class="me-5" style="width: 7%;"> <img class="position-relative"
+      src="/static/home/images/trolley.png" style="width: 38px"></a>{{end}}
+
+
+      {{if not .username}} <button type="button" class="btn btn-sm btn-outline-warning text-white"><a href="/user_signup"
+        class="navbar nav-item text-white" style="text-decoration: none;">SignUp</a></button> 
+        <button type="button" class="btn btn-sm btn-outline-info text-white me-4" style="margin-left: 1%;"><a
+          href="/user_login" class="navbar nav-item text-white" style="text-decoration: none;">Login</a></button> </a>
           {{end}}
-          
-          
-          {{if ne .count 0}}  <a href="/user/cart" class="pe-5 ps-3"><img src="/static/home/images/trolley.png" class="position-relative" style="max-width: 2.2rem;">
-            <span class="badge text-bg-danger position-absolute">{{.count}}</span>
-              </a>{{else}}
-              <a href="/user/cart" class="me-5" style="width: 7%;"> <img class="position-relative" src="/static/home/images/trolley.png"
-                style="width: 38px"></a>{{end}}
-    
 
                  <!-- profile icon -->
     <!-- <script src="https://kit.fontawesome.com/d67b07a9d9.js" crossorigin="anonymous"></script> -->
 
     <div class="btn-group bg-dark me-4" role="group" aria-label="Button group with nested dropdown">
-        <button type="button" class="btn fa-solid fa-user-doctor" style="color: white;">{{.username}}</button>
+      {{if .username}}    <button type="button" class="btn" style="color: white; font-family: 'Courier New', Courier, monospace;font-weight: 600;">{{.username}}</button>
+      {{else}}<button type="button" class="btn" style="color: white; font-family: 'Courier New', Courier, monospace;font-weight: 600;">Guest</button>{{end}}
   
         <div class="btn-group dropstart" role="group">
           <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
@@ -96,7 +94,8 @@
             <li><a class="dropdown-item text-white" href="/user/profile">Profile</a></li>
             <li><a class="dropdown-item text-white" href="#">Orders</a></li>
             <li><a class="dropdown-item text-white" href="#">Settings</a></li>
-            <li><a class="dropdown-item text-white" href="/user_logout">Log Out</a></li>
+            {{if .username}}    <li><a class="dropdown-item text-white" href="/user_logout">Log Out</a></li>{{else}}
+          <li><a class="dropdown-item text-white" href="/user_login">Sign In</a></li>{{end}}
           </ul>
         </div>
       </div>
