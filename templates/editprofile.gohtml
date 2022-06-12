@@ -124,7 +124,7 @@
 <div class="col-6">
   <div id="error" style="color: red;font-size: larger;"></div>
 
-  <form id="form1" method="post">
+  <form id="form1" method="post" action="/user/edit_profile/firstname/{{.ID}}">
   <label for="firstname">First Name</label>
     <input type="text" id="firstname" name="firstnamef" placeholder="First Name" aria-label="First name" class="form-control">
     <button type="submit" onclick="Frstname();" class="btn btn-info btn-outline-success  text-white" style="font-weight: 600;">Update</button>
@@ -135,7 +135,7 @@
   <div id="error2" style="color: red;font-size: larger;"></div>
 
 
-  <form id="form2" method="post">
+  <form id="form2" method="post" action="/user/edit_profile/lastname">
     <label for="lastname">Last Name</label>
     
     <input type="text" id="lastname" name="lastname" placeholder="Last Name" aria-label="Last name" class="form-control">
@@ -146,7 +146,7 @@
     <div id="error3" style="color: red;font-size: larger;"></div>
 
 
-  <form id="form3" method="post">
+  <form id="form3" method="post" action="/user/edit_profile/mobile">
 
     <label for="mobile">Mobile</label>
       <input type="text" id="mobile" name="mobilef" placeholder="10-Digit Mobile" aria-label="First name" class="form-control">
@@ -157,7 +157,7 @@
     <div id="error4" style="color: red;font-size: larger;"></div>
 
   
-    <form id="form4" method="post">
+    <form id="form4" method="post" action="/user/edit_profile/email">
     <div class="input-group flex-nowrap">
       <span class="input-group-text" id="addon-wrapping">Email@</span>
       
@@ -203,7 +203,7 @@
 <div class="row">
         <div class="col-4">
           
-  <form id="form5" method="post">
+  <form id="form5" method="post" action="/user/edit_profile/editaddress">
 
           <label for="housename">House Name</label>
           <input type="text" id="housename" name="housenamef" placeholder="House Name" aria-label="First name" class="form-control">     

@@ -122,5 +122,6 @@ func EditProfile(c *gin.Context) {
 		"username":UserName,
 		"count":count,
 		"wcount":wishlistcount,
+		"ID":UserID,
 	})
 }

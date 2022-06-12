@@ -86,6 +86,13 @@ func InitRoutes(api *gin.Engine) {
 	api.GET("/user/order_history",controller.OrderHistory)
 	api.GET("/user/edit_profile",controller.EditProfile)
 
+	//user edit profile
+	api.POST("/user/edit_profile/firstname/:ID",controller.EditProfileFirstName)
+	api.POST("/user/edit_profile/lastname/:ID",controller.EditProfileLastName)
+	api.POST("/user/edit_profile/mobile/:ID",controller.EditProfileMobile)
+	api.POST("/user/edit_profile/email/:ID",controller.EditProfileEmail)
+	api.POST("/user/edit_profile/editaddress/:ID",controller.EditProfileAddress)
+
 
 
 }
