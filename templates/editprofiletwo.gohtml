@@ -180,10 +180,10 @@
     <div class="card-header">
       <ul class="nav nav-tabs card-header-tabs">
         <li class="nav-item">
-          <a class="nav-link active fw-bold" aria-current="true" href="#">Edit Current Address</a>
+          <a class="nav-link fw-bold" aria-current="true" href="/user/edit_profile">Edit Current Address</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-black" href="/user/edit_profile_two">Add Address 2</a>
+          <a class="nav-link active text-black" href="#">Add Address 2</a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-black" href="#">Add Address 3</a>
@@ -193,13 +193,13 @@
     <div class="card-body">
 
       <h5 class="card-title">Edit Address</h5>
-    <div id="error5" style="color: red;font-size: larger;"></div>
+    <div id="error6" style="color: red;font-size: larger;"></div>
 
       <p class="card-text">
 <div class="row">
         <div class="col-4">
           
-  <form id="form5" method="post">
+  <form id="form6" method="post">
 
           <label for="housename">House Name</label>
           <input type="text" id="housename" name="housenamef" placeholder="House Name" aria-label="First name" class="form-control">     
@@ -224,7 +224,7 @@
         </div>
 
        
-      <button type="submit" onclick="Editaddress('{{.ID}}')" class="btn btn-info text-white fw-semibold mt-3">Update Address</button>
+      <button type="submit" onclick="Editaddresstwo('{{.ID}}')" class="btn btn-danger text-white fw-semibold mt-3">Update Address</button>
 
       </form>
         <!--row ends below  -->

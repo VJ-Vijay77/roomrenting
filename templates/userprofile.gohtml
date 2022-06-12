@@ -136,26 +136,41 @@
                     <div class="card-body">
                       <div class="row">
                       <div class="col-6 col-md-6">
-                      <h5 class="card-title">Your Address</h5>
-                      <p class="card-text">Your First Name : {{.username}}</p>
-                      <p class="card-text">Your Last Name : {{.lastname}}</p>
-                      <p class="card-text">Your Email : {{.email}}</p>
-                      <p class="card-text">Your Mobile No : {{.mobile}}</p>
+                      <h5 class="card-title text-bg-primary">Your Address</h5>
+                      <p class="card-text"><strong class="font-monospace">Your First Name</strong> : {{.username}}</p>
+                      <p class="card-text"><strong class="font-monospace">Your Last Name</strong> : {{.lastname}}</p>
+                      <p class="card-text"><strong class="font-monospace">Your Email</strong> : {{.email}}</p>
+                      <p class="card-text"><strong class="font-monospace">Your Mobile No</strong> : {{.mobile}}</p>
                       </div>
                       <div class="col-6 col-md-6">
                         <h5 class="card-title">*** **** ****</h5>
-                        <p class="card-text">Occupation : Developer</p>
-                        <p class="card-text">Salary : 9-12 LPA</p>
-                        <p class="card-text">Experience : Fresher</p>
-                        <p class="card-text">Self Taught developer</p>
+                        <p class="card-text"><strong class="font-monospace">Occupation</strong> : Developer</p>
+                        <p class="card-text"><strong class="font-monospace">Salary</strong> : 9-12 LPA</p>
+                        <p class="card-text"><strong class="font-monospace">Experience</strong> : Fresher</p>
+                        <p class="card-text"><strong class="font-monospace">Self Taught developer</strong></p>
                         </div>
                       </div>
                       <hr>
-                      <p class="card-title">Contact</p>
-                      <p class="card-text">Through Mobile : +91{{.mobile}} </p>
-                      <p class="card-text">Like Email? :{{.email}} </p>
+                      <div class="row">
+                      <div class="col-6 col-md-6">{{$info:= .address}}
+                      <p class="card-title text-bg-warning">Personal Information</p>
+                      <p class="card-text"><strong class="font-monospace">House Name</strong> :{{$info.Housename}}  </p>
+                      <p class="card-text"><strong class="font-monospace">Place</strong> :{{$info.Place}}  </p>
+                      <p class="card-text"><strong class="font-monospace">State</strong> :{{$info.State}}  </p>
+                      
+                    </div>
+                      <div class="col-6 col-md-6">
+                      <p class="card-text"><strong class="font-monospace">PIN</strong> :{{$info.PIN}}  </p>
+                      <p class="card-text"><strong class="font-monospace">Connect through Mobile</strong> : +91{{.mobile}} </p>
+                      <p class="card-text"><strong class="font-monospace">Contact me via Email</strong> :{{.email}} </p>
                     </div>
                   </div>
+                    </div>
+                    <hr style="height:3px;border-width:0;background-color:rgb(61, 11, 224)">
+                    <hr style="height:3px;border-width:0;background-color:rgb(0, 0, 0)">
+                    
+                  </div>
+                  <hr>
             </div>
         </div>
         <hr>

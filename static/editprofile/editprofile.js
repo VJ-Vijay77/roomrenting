@@ -197,4 +197,92 @@ function Frstname() {
       
 
     
+
+      //edit address two
+
+      function Editaddresstwo(ID){
+        const housename = document.getElementById('housename')
+        const place = document.getElementById('place')
+        const mobile2 = document.getElementById('mobile2')
+        const PIN = document.getElementById('pin')
+        const state = document.getElementById('state')
+        const form = document.getElementById('form6')
+        const errorElement = document.getElementById('error6')
+        var regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
+        
+        form.addEventListener('submit', (e) => {
+            let messages = []
+            //first name
+            if (housename.value==='' || housename.value== null){
+                messages.push('House Name is required!')
+            }else if(housename.value.length <= 2 ){
+                messages.push('Houes Name must have atleast 3 characters')
+            }else if (!/^[A-Za-z ]+$/.test(housename.value)){
+                messages.push('No special characters allowed!')
+            }
+           else if (place.value==='' || place.value== null){
+                messages.push('place is required!')
+            }else if(place.value.length <= 2 ){
+                messages.push('place must have 3 characters')
+            }else if (!/^[A-Za-z ]+$/.test(place.value)){
+                messages.push('No special characters allowed!')
+            
+           //mobile validation
+            }else if(mobile2.value.length <= 9 || mobile2.value.length>=11 ){
+                messages.push('mobile must/only have 10 digits')
+            }else if(!/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(mobile2.value)){
+                messages.push('Enter valid Mobile number!')
+            }
+            else if (state.value==='' || state.value== null){
+                messages.push('state is required!')
+            }else if(state.value.length <= 2 ){
+                messages.push('state must have 3 characters')
+            }else if (!/^[A-Za-z ]+$/.test(state.value)){
+                messages.push('No special characters allowed!')
+            
+            }else if(PIN.value.length <= 5 || PIN.value.length>=7 ){
+                messages.push('PIN only have 6 digits')
+            }else if(!/^\(?([0-9]{2})\)?[-. ]?([0-9]{2})[-. ]?([0-9]{2})$/.test(PIN.value)){
+                messages.push('Enter valid PIN number!')
+            }
+            
+        
+            if (messages.length > 0) {
+                e.preventDefault()
+                errorElement.innerText = messages.join(', ')
+            }else if (messages.length<=0){
+                e.preventDefault()
+                Checkaddresstwo(ID)
+            }
+        
+        })
+                    }
+    
+    
+    
+            
+        function Checkaddresstwo(ID){
+    
+        swal({
+            title: "Are you sure the details entered is correct?",
+            text: "Press OK to confirm.",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+          
+                $.post('/user/edit_profile/editaddresstwo/'+ID, $('#form6').serialize())
+          
+        setTimeout(() => {swal("Updated Successfully", "We respect your privacy in sensitive informations.", "success"); },1000);
+          setTimeout(() => { location.href="/user/edit_profile_two";  }, 3000);
+              
+          
+          
+              
+            }
+          });
+          }
+          
     
