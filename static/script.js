@@ -27,7 +27,7 @@ form.addEventListener('submit', (e) => {
         messages.push('No special characters allowed!')
    
         //email
-    }else if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)){
+    }else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)){
         messages.push('Enter valid email address!')
     }else  if (email.value==='' || email.value== null){
         messages.push('Email is required!')
