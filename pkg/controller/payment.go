@@ -9,17 +9,25 @@ import (
 )
 
 func Payment(c *gin.Context) {
+	db := database.GetDb()
 	//checking session
 	ok := UserLogedCheck(c)
 	if !ok {
 		c.HTML(200, "userhome.gohtml", nil)
 		return
 	}
+	session, _ := Store.Get(c.Request, "session")
+	useriD := session.Values["userID"]
+	userID := fmt.Sprintf("%s", useriD)
+	var userinfos models.Users
+
+	db.Raw("SELECT first_name FROM users where email=?", userID).Scan(&userinfos)
+	UserName := userinfos.First_Name
 
 	TotalPrice := c.Param("TotalPrice")
 	UserID := c.Param("UserID")
 
-	db := database.GetDb()
+	
 	//taking order details
 	var roomnames []string
 	db.Raw("SELECT rooms.room_name FROM carts INNER JOIN rooms ON rooms.id=carts.cartsroomid WHERE carts.user_id=?", UserID).Scan(&roomnames)
@@ -33,6 +41,7 @@ func Payment(c *gin.Context) {
 		"total":     TotalPrice,
 		"roomnames": roomnames,
 		"allrooms":sendinginfo,
+		"username":UserName,
 	})
 }
 

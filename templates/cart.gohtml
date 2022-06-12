@@ -89,11 +89,11 @@
 
         </button>
         <ul class="dropdown-menu bg-dark " aria-labelledby="btnGroupDrop1">
-          <li><a class="dropdown-item text-white" href="/user/profile">Profile</a></li>
-          <li><a class="dropdown-item text-white" href="#">Orders</a></li>
-          <li><a class="dropdown-item text-white" href="#">Settings</a></li>
-          {{if .username}}    <li><a class="dropdown-item text-white" href="/user_logout">Log Out</a></li>{{else}}
-          <li><a class="dropdown-item text-white" href="/user_login">Sign In</a></li>{{end}}
+          <li><a class="dropdown-item text-white" href="/user/profile"><div class="fa-solid fa-user"></div>  Profile</a></li>
+          <li><a class="dropdown-item text-white" href="#"><div class="fa-brands fa-first-order"></div>Orders</a></li>
+          <li><a class="dropdown-item text-white" href="/user/settings"><div class="fa-solid fa-gear"></div> Settings</a></li>
+      {{if .username}}    <li><a class="dropdown-item text-white" href="/user_logout"><div class="fa-solid fa-right-from-bracket"></div> Log Out</a></li>{{else}}
+      <li><a class="dropdown-item text-white" href="/user_login"> <div class="fa-solid fa-arrow-right-to-bracket"></div> Sign In</a></li>{{end}}
         </ul>
       </div>
     </div>

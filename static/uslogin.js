@@ -10,7 +10,7 @@ form.addEventListener('submit', (e) => {
     //email
     if (email.value==='' || email.value==null){
         messages.push('Email cannot be empty!')
-    }else if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)){
+    }else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)){
         messages.push('Enter valid email address!')
    
         //password

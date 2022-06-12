@@ -22,7 +22,7 @@
 </head>
 
 
-<body style="overflow-x: hidden;">
+<body style="overflow-x: hidden;padding-bottom: 50px;">
 
      <!-- navbar start -->
 
@@ -91,11 +91,11 @@
   
           </button>
           <ul class="dropdown-menu bg-dark " aria-labelledby="btnGroupDrop1">
-            <li><a class="dropdown-item text-white" href="/user/profile">Profile</a></li>
-            <li><a class="dropdown-item text-white" href="#">Orders</a></li>
-            <li><a class="dropdown-item text-white" href="#">Settings</a></li>
-            {{if .username}}    <li><a class="dropdown-item text-white" href="/user_logout">Log Out</a></li>{{else}}
-          <li><a class="dropdown-item text-white" href="/user_login">Sign In</a></li>{{end}}
+            <li><a class="dropdown-item text-white" href="/user/profile"><div class="fa-solid fa-user"></div>  Profile</a></li>
+            <li><a class="dropdown-item text-white" href="#"><div class="fa-brands fa-first-order"></div>Orders</a></li>
+            <li><a class="dropdown-item text-white" href="/user/settings"><div class="fa-solid fa-gear"></div> Settings</a></li>
+        {{if .username}}    <li><a class="dropdown-item text-white" href="/user_logout"><div class="fa-solid fa-right-from-bracket"></div> Log Out</a></li>{{else}}
+        <li><a class="dropdown-item text-white" href="/user_login"> <div class="fa-solid fa-arrow-right-to-bracket"></div> Sign In</a></li>{{end}}
           </ul>
         </div>
       </div>
@@ -106,21 +106,22 @@
 <div>
   
   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <h2 class="text-center font-monospace pe-5">User Profile</h2>
+    <h2 class="text-center font-monospace fw-bold pe-5">User Profile</h2>
     <a href="/user/edit_profile" class="btn btn-warning me-md-2" type="button">Edit Profile</a>
     <a href="/user_logout" class="btn btn-danger me-3" type="button">Logout</a>
   </div>
   </div>
     <hr>
     
-       <div class="ps-5 ms-5 pt-5">
+       <div class="ps-5 ms-5 pt-2">
         <div class="row">
             <div class="col-3 col-md-3 col-lg-3">
                 <div class="card">
                     <img src="https://avatoon.me/wp-content/uploads/2021/09/Cartoon-Pic-Ideas-for-DP-Profile-01.png" class="card-img-top" alt="...">
                     <div class="card-body">
-                      <h5 class="card-title text-center">{{.username}} {{.lastname}}</h5>
-                      <p class="card-text text-center">Go Developer</p>
+                      <h5 class="card-title text-center fw-bold">{{.username}} {{.lastname}}</h5>
+                      <hr>
+                      <p class="card-text text-center">Self Taught Developer</p>
                       <p class="card-text text-center">Email:{{.email}}</p>
                       <p class="card-text text-center">Contact Mob:{{.mobile}}</p>
                       <a href="#" class="btn btn-sm btn-primary d-flex justify-content-center">Message</a>

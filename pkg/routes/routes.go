@@ -2,6 +2,7 @@ package routes
 
 import (
 	"github.com/VJ-Vijay77/r4room/pkg/controller"
+	"github.com/VJ-Vijay77/r4room/pkg/controllertwo"
 	"github.com/gin-gonic/gin"
 )
 
@@ -95,6 +96,9 @@ func InitRoutes(api *gin.Engine) {
 	api.POST("/user/edit_profile/editaddress/:ID",controller.EditProfileAddress)
 	api.POST("/user/edit_profile/editaddresstwo/:ID",controller.AddressTwo)
 
-
+	//settings
+	api.GET("/user/settings",controllertwo.Settings)
+	api.GET("/user/settings/change_password",controllertwo.ChangePassword)
+	api.POST("/user/settings/change_password/:ID",controllertwo.PChangePassword)
 
 }
