@@ -84,5 +84,8 @@ func InitRoutes(api *gin.Engine) {
 	//user profile
 	api.GET("/user/profile",controller.UserProfile)
 	api.GET("/user/order_history",controller.OrderHistory)
+	api.GET("/user/edit_profile",controller.EditProfile)
+
+
 
 }
