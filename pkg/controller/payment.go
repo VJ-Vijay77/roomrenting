@@ -2,6 +2,7 @@ package controller
 
 import (
 	"fmt"
+	"strconv"
 
 	"github.com/VJ-Vijay77/r4room/pkg/database"
 	"github.com/VJ-Vijay77/r4room/pkg/models"
@@ -21,8 +22,9 @@ func Payment(c *gin.Context) {
 	userID := fmt.Sprintf("%s", useriD)
 	var userinfos models.Users
 
-	db.Raw("SELECT first_name FROM users where email=?", userID).Scan(&userinfos)
+	db.Raw("SELECT id,first_name FROM users where email=?", userID).Scan(&userinfos)
 	UserName := userinfos.First_Name
+	IDofUser := userinfos.ID
 
 	TotalPrice := c.Param("TotalPrice")
 	UserID := c.Param("UserID")
@@ -35,14 +37,20 @@ func Payment(c *gin.Context) {
 	for i:= range roomnames {
 		sendinginfo += roomnames[i]
 	}
-	
 
+	//parsing address of the user
+	var address []models.Useraddress
+	db.Where("user_id=?",UserID).Find(&address)
+	
+	
 
 	c.HTML(200, "payment.gohtml", gin.H{
 		"total":     TotalPrice,
 		"roomnames": roomnames,
 		"allrooms":sendinginfo,
 		"username":UserName,
+		"address" :address,
+		"uid":IDofUser,
 	})
 }
 
@@ -136,4 +144,60 @@ func PaymentSuccess(c *gin.Context) {
 		"count":count,
 		"wcount":wishlistcount,
 	})
+}
+
+
+func PaymentAddressPick(c *gin.Context){
+	db := database.GetDb()
+		//checking session
+		ok := UserLogedCheck(c)
+		if !ok {
+			c.HTML(200, "userhome.gohtml", nil)
+			return
+		}
+		session, _ := Store.Get(c.Request, "session")
+		useriD := session.Values["userID"]
+		userID := fmt.Sprintf("%s", useriD)
+		var userinfos models.Users
+	
+		db.Raw("SELECT id,first_name,last_name FROM users where email=?", userID).Scan(&userinfos)
+		UserName := userinfos.First_Name
+		LastName :=userinfos.Last_Name
+		IDofuser := userinfos.ID
+		TotalPrice := c.Param("TotalPrice")
+		UserID := c.Param("UserID")
+		UID,_ := strconv.Atoi(UserID)
+		
+		//taking order details
+		var roomnames []string
+		db.Raw("SELECT rooms.room_name FROM carts INNER JOIN rooms ON rooms.id=carts.cartsroomid WHERE carts.user_id=?", UID).Scan(&roomnames)
+		var sendinginfo string
+		for i:= range roomnames {
+			sendinginfo += roomnames[i]
+		}
+
+			//parsing address of the user
+	var address []models.Useraddress
+	db.Where("user_id=?",UID).Find(&address)
+	
+	
+
+
+	addressID := c.Request.FormValue("radioaddress")
+	AID,_ := strconv.Atoi(addressID)
+	var addresspick models.Useraddress
+	db.Where("adrid=?",AID).Find(&addresspick)
+	
+
+	 c.HTML(200,"paymentaddressfill.gohtml",gin.H{
+		"total":     TotalPrice,
+		"roomnames": roomnames,
+		"allrooms":sendinginfo,
+		"username":UserName,
+		"lastname":LastName,
+		"address" :address,
+		"adr":addresspick,
+		"uid":IDofuser,
+	
+	 })
 }

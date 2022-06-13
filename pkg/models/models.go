@@ -93,6 +93,7 @@ type Orderedrooms struct{
 }
 
 type Useraddress struct{
+	Adrid int
 	User_Id int
 	Housename string
 	Place string
@@ -100,6 +101,7 @@ type Useraddress struct{
 	State string
 	PIN int
 	Main string
+
 }
 
 

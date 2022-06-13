@@ -36,8 +36,7 @@
               </div>
               <hr>
               {{end}}
-              <a href="/user/edit_profile" type="button" class="btn btn-primary btn-outline-success">+ Add Address </a>
-            
+            <a href="/user/edit_profile" type="button" class="btn btn-primary btn-outline-success">+ Add Address </a>
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Save changes</button>
@@ -161,47 +160,47 @@
                                 <div class="col-lg-7">
 
                                     <!-- Button trigger modal -->
-                                 <div>   <button type="button" class="btn btn-primary bg-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                        Choose Address
+                                 <div >   <button type="button" class="btn btn-primary bg-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                       Choose Address
                                       </button></div>
   
                                   
                                     <div class="text-danger" style="font-size: 30px;" id="error"></div>
-                                   
+                                   {{$a := .adr}}
                                     <form id="form" method="POST">
                                         <div class="row pt-3">
                                             <div class="col-6">
                                                 <div class="form__div">
-                                                    <input name="firstnamef" type="text" id="firstname" class="form-control" placeholder="First Name">
+                                                    <input value="{{.username}}" name="firstnamef" type="text" id="firstname" class="form-control" placeholder="First Name">
                                                     <label for="" class="form__label">First Name</label>
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="form__div">
-                                                    <input name="lastnamef" type="text" id="lastname" class="form-control" placeholder="LastName">
+                                                    <input value="{{.lastname}}" name="lastnamef" type="text" id="lastname" class="form-control" placeholder="LastName">
                                                     <label for="" class="form__label">Last Name</label>
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="form__div">
-                                                    <input name="housenamef" type="text" class="form-control" id="housename" placeholder="Houes Name">
+                                                    <input value="{{$a.Housename}}" name="housenamef" type="text" class="form-control" id="housename" placeholder="Houes Name">
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="form__div">
-                                                    <input name="placef" type="text" class="form-control" id="place" placeholder="Place">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-6">
-                                                <div class="form__div">
-                                                    <input name="statef" type="text" class="form-control" id="state" placeholder="State">
+                                                    <input value="{{$a.Place}}" name="placef" type="text" class="form-control" id="place" placeholder="Place">
                                                 </div>
                                             </div>
 
                                             <div class="col-6">
                                                 <div class="form__div">
-                                                    <input name="mobilef" type="text" id="mobile" class="form-control" placeholder="10-Digit Mobile ">
+                                                    <input value="{{$a.State}}" name="statef" type="text" class="form-control" id="state" placeholder="State">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <div class="form__div">
+                                                    <input value="{{$a.Mobile}}" name="mobilef" type="text" id="mobile" class="form-control" placeholder="10-Digit Mobile ">
                                                     
                                                 </div>
                                             </div>
