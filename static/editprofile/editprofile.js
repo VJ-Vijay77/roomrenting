@@ -275,8 +275,8 @@ function Frstname() {
           
                 $.post('/user/edit_profile/editaddresstwo/'+ID, $('#form6').serialize())
           
-        setTimeout(() => {swal("Updated Successfully", "We respect your privacy in sensitive informations.", "success"); },1000);
-          setTimeout(() => { location.href="/user/edit_profile_two";  }, 3000);
+        // setTimeout(() => {swal("Updated Successfully", "We respect your privacy in sensitive informations.", "success"); },1000);
+        //   setTimeout(() => { location.href="/user/edit_profile_two";  }, 3000);
               
           
           

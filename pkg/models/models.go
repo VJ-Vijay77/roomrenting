@@ -99,16 +99,9 @@ type Useraddress struct{
 	Mobile string
 	State string
 	PIN int
+	Main string
 }
 
-type Addresstwo struct{
-	User_Id int
-	Housename string
-	Place string
-	Mobile string
-	State string
-	PIN int
-}
 
 
 type BookingDetails struct{

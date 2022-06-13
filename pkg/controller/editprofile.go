@@ -98,14 +98,15 @@ func EditProfileAddress(c *gin.Context) {
 
 
 	}else{
-		
+		var main = "true"
 		userid.User_Id=Id
 		userid.Housename=HouseName
 		userid.Place=Place
 		userid.Mobile=Mobile
 		userid.State=State
 		userid.PIN=PIN
-		db.Select("user_id","housename","place","mobile","state","pin").Create(&userid)
+		userid.Main=main
+		db.Select("user_id","housename","place","mobile","state","pin","main").Create(&userid)
 	}
 
 
@@ -125,25 +126,27 @@ func AddressTwo (c *gin.Context) {
 
 
 	
-	db.AutoMigrate(&models.Addresstwo{})
-	var userid models.Addresstwo
-	db.Raw("SELECT user_id FROM addresstwos WHERE user_id=?",Id).Scan(&userid)
-	if userid.User_Id == Id {
-		db.Raw("UPDATE addresstwos SET housename=? WHERE user_id=?",HouseName,Id).Scan(&userid)
-		db.Raw("UPDATE addresstwos SET place=? WHERE user_id=?",Place,Id).Scan(&userid)
-		db.Raw("UPDATE addresstwos SET mobile=? WHERE user_id=?",Mobile,Id).Scan(&userid)
-		db.Raw("UPDATE addresstwos SET state=? WHERE user_id=?",State,Id).Scan(&userid)
-		db.Raw("UPDATE addresstwos SET pin=? WHERE user_id=?",PIN,Id).Scan(&userid)
+	
+	var ua models.Useraddress
+	db.Raw("SELECT user_id FROM useraddresses WHERE user_id=?",Id).Scan(&ua)
 
+		if ua.Housename==HouseName && ua.Mobile==Mobile && ua.PIN==PIN && ua.Place==Place &&ua.State==State {
+			dialog.Alert("Same address already exists! Choose another!")
+			c.Redirect(303,"/user/edit_profile_two")
+			return
+		}
 
-	}else{
+	// }else{
+		var useraddressupdate models.Useraddress
+		useraddressupdate.User_Id=Id
+		useraddressupdate.Housename=HouseName
+		useraddressupdate.Place=Place
+		useraddressupdate.Mobile=Mobile
+		useraddressupdate.State=State
+		useraddressupdate.PIN=PIN
+		db.Select("user_id","housename","place","mobile","state","pin").Create(&useraddressupdate)
 		
-		userid.User_Id=Id
-		userid.Housename=HouseName
-		userid.Place=Place
-		userid.Mobile=Mobile
-		userid.State=State
-		userid.PIN=PIN
-		db.Select("user_id","housename","place","mobile","state","pin").Create(&userid)
+		dialog.Alert("Address added successfully!")
+		c.Redirect(303,"/user/edit_profile_two")
 	}
-}
+

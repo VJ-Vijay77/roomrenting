@@ -35,7 +35,8 @@ func UserProfile(c *gin.Context) {
 
 	//user address
 	var addressofuser models.Useraddress
-	db.Where("user_id=?",UserID).Find(&addressofuser)
+	var main = "true"
+	db.Where("user_id=? AND main=?",UserID,main).Find(&addressofuser)
 	
 	c.HTML(200, "userprofile.gohtml", gin.H{
 		"data": userinfos,

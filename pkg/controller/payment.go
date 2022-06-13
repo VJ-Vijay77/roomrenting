@@ -35,6 +35,7 @@ func Payment(c *gin.Context) {
 	for i:= range roomnames {
 		sendinginfo += roomnames[i]
 	}
+	
 
 
 	c.HTML(200, "payment.gohtml", gin.H{
