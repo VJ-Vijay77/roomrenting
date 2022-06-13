@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"github.com/VJ-Vijay77/r4room/pkg/admincontroller"
 	"github.com/VJ-Vijay77/r4room/pkg/controller"
 	"github.com/VJ-Vijay77/r4room/pkg/controllertwo"
 	"github.com/gin-gonic/gin"
@@ -106,4 +107,7 @@ func InitRoutes(api *gin.Engine) {
 	api.GET("/user/checkings",controllertwo.CheckingsList)
 	api.GET("/user/rooms/checkedout/:RID/:UID",controllertwo.CheckingOut)
 
+	//admin list bookings
+	api.GET("/admin/list_bookings",admincontroller.ListBookings)
+	
 }

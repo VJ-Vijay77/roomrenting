@@ -120,3 +120,12 @@ type BookingDetails struct{
 	Category string
 	Room_Price string
 }
+
+type ListBookings struct{
+	Orderid int
+	Roomid int
+	User_Id int
+	Totalprice string
+	Status string
+}
+

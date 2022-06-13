@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Bookings</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+</head>
+<body>
+
+<h1 class="font-monospace text-center pt-3">Bookings List</h1>
+    <div class="ps-2 pe-2 pt-3">
+    
+    <table class="table table-dark table-hover table-bordered table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Order ID </th>
+            <th scope="col">Room ID</th>
+            <th scope="col">User ID</th>
+            <th scope="col">Price</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+            {{range .bookings}}
+          <tr>
+            <td>{{.Orderid}}</td>
+            <td>{{.Roomid}}</td>
+            <td>{{.User_Id}}</td>
+            <td>{{.Totalprice}}</td>
+            <td>{{.Status}} </td>
+          </tr>
+         {{end}}
+        </tbody>
+      </table>
+
+    </div>
+</body>
+</html>
