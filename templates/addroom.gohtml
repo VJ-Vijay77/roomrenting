@@ -46,16 +46,16 @@
         </div>
 <!-- pic path end -->
         
-          <div class="col-md-6">
+          <!-- <div class="col-md-6">
             <label for="inputroomcategory" class="form-label">Room Category</label>
             <input type="text" name="roomcategory" class="form-control" id="inputroomcategory">
-          </div>
+          </div> -->
          
           <div class="col-md-6">
             <label for="roomcategory" class="form-label">Category</label>
             <select class="form-select" name="roomcategory"  id="roomcategory">
               <option selected disabled value="">Choose a Category</option>
-              {{range .category}}<option value="">{{.Category_Name}}</option>{{end}}
+              {{range .category}}<option value="{{.Category_Name}}">{{.Category_Name}}</option>{{end}}
             </select>
             </div>
        
