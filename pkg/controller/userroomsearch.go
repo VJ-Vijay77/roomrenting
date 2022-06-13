@@ -22,8 +22,8 @@ func SearchRooms(c *gin.Context) {
 
 	UserName := userinfos.First_Name
 	var rooms []models.Rooms
-	
-	db.Order("room_name").Find(&rooms)
+	var status = "available"
+	db.Where("status=?",status).Find(&rooms)
 	
 	var UserID int
 	db.Raw("SELECT id FROM users WHERE email=?", userID).Scan(&UserID)
@@ -57,8 +57,8 @@ func BookedSearchRooms(c *gin.Context) {
 
 	UserName := userinfos.First_Name
 	var rooms []models.Rooms
-	
-	db.Order("room_name").Find(&rooms)
+	var status = "booked"
+	db.Where("status=?",status).Find(&rooms)
 	
 	var UserID int
 	db.Raw("SELECT id FROM users WHERE email=?", userID).Scan(&UserID)

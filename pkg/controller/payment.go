@@ -62,13 +62,14 @@ func PaymentConfirm(c *gin.Context) {
 	var roomsids []models.Carts
 	db.Select("cartsroomid").Where("user_id=?",UserID).Find(&roomsids)
 	
+	var status = "checkedin"
 	
 	var idsofroom models.Orderedrooms
 	for _,val := range roomsids{
 		idsofroom.Roomid=val.Cartsroomid
 		idsofroom.User_Id=UserID
-		idsofroom.Status="checkedin"
-		db.Select("roomid","user_id").Create(&idsofroom)
+		idsofroom.Status=status
+		db.Select("roomid","user_id","status").Create(&idsofroom)
 	}
 	
 
