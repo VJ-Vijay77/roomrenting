@@ -5,11 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>List Bookings</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
-    crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 </head>
 <body>
 
@@ -33,12 +33,62 @@
             <td>{{.Roomid}}</td>
             <td>{{.User_Id}}</td>
             <td>{{.Totalprice}}</td>
-            <td>{{.Status}} </td>
+            <td>{{.Status}} {{if eq .Status "checkedin"}}
+                <div class="btn-group">
+                    <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                     
+                    </button>
+                    <ul class="dropdown-menu bg-black">
+                      <li><button class="dropdown-item text-danger"  onclick="checkoutimmediately('{{.Roomid}}','{{.Orderid}}')">Check Out Immediately</button></li>
+                      <li><a class="dropdown-item text-warning" href="#">User Details</a></li>
+                      <li><a class="dropdown-item text-warning" href="#">Checked In Date</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item text-warning" href="#">Payment Info</a></li>
+                    </ul>
+                  </div>
+                  {{end}}
+
+            </td>
           </tr>
          {{end}}
         </tbody>
       </table>
 
     </div>
+
+
+    <script>
+        function checkoutimmediately(RID,OID) {
+            swal({
+  title: "Are you sure you want to check him out?",
+  text: "Once Checked out, he/she will be vacated immediately.",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+
+
+$.ajax({
+    type: "GET",
+    url: "/admin/list_bookings/checkout/"+RID+"/"+OID,
+    success: function(ok){
+        if (ok=="true"){
+            swal("Action Done", "Successfull", "success");
+            setTimeout(() => { location.href="/admin/list_bookings";  }, 1300);
+            
+        }else{
+            swal("ERROR", "Some error occured", "error");
+        }
+    }
+});
+
+  
+  
+} 
+});
+        }
+    </script>
 </body>
 </html>

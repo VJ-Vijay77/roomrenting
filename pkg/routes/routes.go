@@ -109,5 +109,6 @@ func InitRoutes(api *gin.Engine) {
 
 	//admin list bookings
 	api.GET("/admin/list_bookings",admincontroller.ListBookings)
+	api.GET("/admin/list_bookings/checkout/:RID/:OID",admincontroller.CheckoutBookings)
 	
 }
