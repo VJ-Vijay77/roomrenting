@@ -112,7 +112,7 @@
 
 
     <!-- search rooms start -->
-   
+   {{if .rooms}}
     <div class="row">
       {{range .rooms}}
      
@@ -140,6 +140,7 @@
           {{end}}
             
           </div>
+         {{else}}<h3 class="text-center"> No rooms in booked status</h3>{{end}}
          
             
 <!-- search rooms end -->

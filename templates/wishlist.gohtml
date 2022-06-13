@@ -102,7 +102,8 @@
 
   </nav>
   <!-- navbar end -->
-  <h1>Wishlist</h1>
+  <hr>
+  {{if .wishlist}}
   
   
   <div class="container">
@@ -137,7 +138,9 @@
     {{end}}
   </div>
   </div>
-  
+  {{else}}
+  <h3 class="text-center">Nothing in Wishlist</h3>
+  {{end}}
   
 </body>
 
