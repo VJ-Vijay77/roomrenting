@@ -104,6 +104,6 @@ func InitRoutes(api *gin.Engine) {
 
 	//user room checkings
 	api.GET("/user/checkings",controllertwo.CheckingsList)
-	api.GET("/user/rooms/checkedout/:RID",controllertwo.CheckingOut)
+	api.GET("/user/rooms/checkedout/:RID/:UID",controllertwo.CheckingOut)
 
 }

@@ -2,6 +2,8 @@ package controllertwo
 
 import (
 	"fmt"
+	"strconv"
+	"time"
 
 	"github.com/VJ-Vijay77/r4room/pkg/database"
 	"github.com/VJ-Vijay77/r4room/pkg/models"
@@ -38,7 +40,7 @@ db.Raw("SELECT user_id,rooms.id,rooms.room_name,orderedrooms.status,rooms.cover,
 		"username": UserName,
 		"count":    count,
 		"wcount":   wishlistcount,
-		"ID":UserID,
+		"UID":UserID,
 		"bookings":bookings,
 	})
 }
@@ -46,5 +48,19 @@ db.Raw("SELECT user_id,rooms.id,rooms.room_name,orderedrooms.status,rooms.cover,
 
 
 func CheckingOut(c *gin.Context){
-	
+	RoomId := c.Param("RID")
+	RID,_ := strconv.Atoi(RoomId)
+	userId := c.Param("UID")
+	UID,_ := strconv.Atoi(userId)
+	db := database.GetDb()
+
+	var roomupdations models.Orderedrooms
+	db.Raw("UPDATE orderedrooms SET status='checkedout' WHERE roomid=? AND user_id=?",RID,UID).Scan(&roomupdations)
+
+	var roomstatus models.Rooms
+	db.Raw("UPDATE rooms SET status='available' WHERE id=?",RID).Scan(&roomstatus)
+
+	time.Sleep(2 *time.Second)
+
+	c.Redirect(303,"/user/checkings")
 }

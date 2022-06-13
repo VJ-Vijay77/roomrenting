@@ -67,6 +67,7 @@ func PaymentConfirm(c *gin.Context) {
 	for _,val := range roomsids{
 		idsofroom.Roomid=val.Cartsroomid
 		idsofroom.User_Id=UserID
+		idsofroom.Status="checkedin"
 		db.Select("roomid","user_id").Create(&idsofroom)
 	}
 	

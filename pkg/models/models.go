@@ -89,6 +89,7 @@ type Orderedrooms struct{
 	ID int
 	Roomid int
 	User_Id int
+	Status string
 }
 
 type Useraddress struct{
