@@ -10,6 +10,7 @@ func InitRoutes(api *gin.Engine) {
 	//loading gohtml files from templates directory
 	api.LoadHTMLGlob("templates/*.gohtml")
 	
+	
 	//loading static files like css or js
 	api.Static("static/","./static")
 
@@ -100,5 +101,9 @@ func InitRoutes(api *gin.Engine) {
 	api.GET("/user/settings",controllertwo.Settings)
 	api.GET("/user/settings/change_password",controllertwo.ChangePassword)
 	api.POST("/user/settings/change_password/:ID",controllertwo.PChangePassword)
+
+	//user room checkings
+	api.GET("/user/checkings",controllertwo.CheckingsList)
+	api.GET("/user/rooms/checkedout/:RID",controllertwo.CheckingOut)
 
 }

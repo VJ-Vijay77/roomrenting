@@ -110,3 +110,12 @@ type Addresstwo struct{
 }
 
 
+type BookingDetails struct{
+	User_Id int
+	Id int
+	Room_Name string
+	Status string
+	Cover string
+	Category string
+	Room_Price string
+}
