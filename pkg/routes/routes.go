@@ -9,7 +9,7 @@ import (
 
 func InitRoutes(api *gin.Engine) {
 	//loading gohtml files from templates directory
-	api.LoadHTMLGlob("templates/*.gohtml")
+	api.LoadHTMLGlob("templates/**/*.gohtml")
 	
 	
 	//loading static files like css or js

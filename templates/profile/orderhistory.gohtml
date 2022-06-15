@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Order History</title>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/d67b07a9d9.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+<style>
+  .start-100 {
+    left: 97% !important;
+}
+</style>
+</head>
+
+
+<body style="overflow-x: hidden;">
+
+  <!-- navbar start -->
+{{template "navbar/navbar.gohtml" .}}
+<!-- navbar ends -->
+
+
+   Order History
+<div class="container-fluid">
+   <table class="table table-info table-hover">
+    <thead>
+      <tr>
+        <th scope="col" class="bg-danger text-white">Order_Id</th>
+        <th scope="col" class="bg-danger text-white">Username</th>
+        <th scope="col" class="bg-danger text-white">Total</th>
+        <th scope="col" class="bg-danger text-white">Room ID</th>
+        <th scope="col" class="bg-danger text-white">Room Name</th>
+        <th scope="col" class="bg-danger text-white">Payment Mode</th>
+        <th scope="col" class="bg-danger text-white">Date-CheckIn</th>
+      </tr>
+    </thead>
+    <tbody>
+        {{range .orderinfo}}
+      <tr>
+        <th scope="row">{{.Orderid}}</th>
+        <td>{{.Firstname}}</td>
+        <td>{{.Totalprice}}</td>
+        <td>On Below Table</td>
+        <td>{{.Roomnames}}</td>
+        <td>Payment At Office</td>
+        <td>--/--/----</td>
+      </tr>
+      {{end}}
+    </tbody>
+  </table>
+</div>
+
+  <!-- room id table -->
+  <div class="container pt-5">
+  <table class="table table-dark table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Order ID</th>
+        <th scope="col">User ID</th>
+        <th scope="col">RoomID</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{range .roomid}}
+        
+      <tr>
+        <th scope="row">1</th>
+        <td>{{.User_Id}}</td>
+        <td>{{.Roomid}}</td>
+        
+        
+      </tr>
+      {{end}}
+    </tbody>
+  </table>
+  </div>
+
+    </body>
+    </html>

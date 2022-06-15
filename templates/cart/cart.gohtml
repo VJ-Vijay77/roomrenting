@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart</title>
+  <script src="/static/cart/cart.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/d67b07a9d9.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+<style>
+  .start-100 {
+    left: 97% !important;
+}
+</style>
+</head>
+
+<body>
+
+ <!-- navbar start -->
+ {{template "navbar/navbar.gohtml" .}}
+ <!-- navbar ends -->
+
+
+ <hr>
+
+   {{if .total}}
+   <table class="table table-info table-hover table-striped-columns">
+    <thead>
+      <tr>
+        <th scope="col">Room ID</th>
+        <th scope="col">Room</th>
+        <th scope="col">Category</th>
+        <th scope="col">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{range .cart}}
+      <tr>
+        <th scope="row">{{.Cartsroomid}}</th>
+        <td>
+          <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="{{.Cover}}" class="img-fluid rounded-start" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{.Room_Name}}</h5>
+                  <p class="card-text">3 Bedroom 2 Bathroom 1 Hall Balcony with breezing wind</p>
+                  <p class="card-text"><small class="text-muted">Available at kochi</small></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-danger" onclick="removecartitem('{{.Cartsid}}')">Remove Item</button>
+        </td>
+        <td>{{.Category}}</td>
+        <td>{{.Room_Price}}</td>
+      </tr>
+     {{end}}
+    </tbody>
+  </table>
+ 
+  <div class="row">
+    <div class="col-7 col-md-8 col-lg-8">
+    <h2 class="text-center">Total </h2>
+    </div>
+    <div class="col-5 col-md-4 col-lg-4 ">
+     <h3 class="text-danger text-center">Rs {{.total}} /-</h3>
+     
+    </div>
+    <div class="text-center">
+    <button type="button" onclick="proceedtocheckout('{{.total}}','{{.userid}}')" class="btn btn-outline-success btn-warning w-75" style="font-size: 2rem;">Proceed to Checkout</button>
+  </div>
+  </div>
+  {{else}}
+  <h2 class="text-center">Nothing in Cart</h2>
+  {{end}}
+
+</body>
+
+</html>

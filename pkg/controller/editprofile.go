@@ -14,7 +14,7 @@ import (
 func EditProfileFirstName(c *gin.Context) {
 	db := database.GetDb()
 
-	firstname := c.PostForm("firstnamef")
+	 firstname := c.PostForm("firstnamef")
 	userID := c.Param("ID")
 	var firstnameupdation models.Users
 	db.Raw("UPDATE users SET first_name=? WHERE id=?", firstname, userID).Scan(&firstnameupdation)

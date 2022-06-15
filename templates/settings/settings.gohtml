@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings</title>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/d67b07a9d9.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+<style>
+  .start-100 {
+    left: 97% !important;
+}
+body{
+    background-image: url(https://images.unsplash.com/photo-1481277542470-605612bd2d61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1106&q=80);
+    background-size: cover;
+}
+</style>
+</head>
+
+
+<body style="overflow-x: hidden;padding-bottom: 50px;">
+
+     
+ <!-- navbar start -->
+ {{template "navbar/navbar.gohtml" .}}
+ <!-- navbar ends -->
+
+
+  <div class="containe">
+  <div class="container p-5">
+  <div class="d-grid gap-2 ps-5 pe-5">
+    <button class="btn btn-light btn-outline-dark" type="button"><a class="text-decoration-none fw-bold" href="/user/settings/change_password" style="color: inherit;"> Change Password</a></button>
+    <button class="btn btn-light btn-outline-dark" type="button"><a class="text-decoration-none fw-bold" href="/user/edit_profile" style="color: inherit;">Edit Profile</a></button>
+    <button class="btn btn-light btn-outline-dark" type="button"><a class="text-decoration-none fw-bold" href="#" style="color: inherit;">Help</a></button>
+    <button class="btn btn-light btn-outline-dark" type="button"><a class="text-decoration-none fw-bold" href="/user/order_history" style="color: inherit;">Order Details</a></button>
+    <button class="btn btn-light btn-outline-dark" type="button"><a class="text-decoration-none fw-bold" href="/user_logout" style="color: inherit;">Sign Out</a></button>
+  </div>
+</div>
+</div>
+</body>
+</html>

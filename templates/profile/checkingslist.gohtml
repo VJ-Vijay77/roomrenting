@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Room Stats</title>
+  <!-- <script src="/static/wishlist/wishlist.js"></script> -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+    <!-- <script src="https://kit.fontawesome.com/d67b07a9d9.js" crossorigin="anonymous"></script> -->
+<style>
+  .start-100 {
+    left: 97% !important;
+}
+</style>
+</head>
+
+<body>
+  
+   <!-- navbar start -->
+{{template "navbar/navbar.gohtml" .}}
+<!-- navbar ends -->
+
+
+<div class="container">
+    <div class="row">
+    {{$userid := .UID}}
+   {{range .bookings}}
+     
+        <div class="col-4">
+      <div class="card" style="width: 18rem;">
+        <img src="{{.Cover}}" class="card-img-top" alt="...">
+   {{if eq .Status "checkedout"}}     <div class="w-100 bg-danger text-center text-white">{{.Status}}</div>{{else}}
+   <div class="w-100 bg-primary text-center text-white">{{.Status}}</div>   {{end}}
+   <div class="card-body">
+          <p class="card-text">2 Bedroom 1 Bathroom 1 Hall Breezing Balcony.</p>
+          <p class="card-text">Room Name:{{.Room_Name}}</p>
+          <p class="card-text">Category:{{.Category}}</p>
+          <p class="card-text">Room ID:{{.Id}}</p>
+          <p class="card-text">Rs {{.Room_Price}} /-</p>
+         
+          {{if eq .Status "checkedin"}}        <button type="button" onclick="checkout('{{.Id}}','{{$userid}}')" class="btn btn-danger" >Check-Out</button>{{end}}
+            {{if eq .Status "checkedout"}}     <button type="button" class="btn btn-success" onclick="checkin('{{.Id}}')" >Check-In-Again</button>{{end}}
+        </div>
+      </div>
+    </div>
+   {{end}}
+  </div>
+  </div>
+  
+
+
+  <script>
+    function checkout(RID,UID){
+        swal({
+  title: "Are you sure you want to checkout?",
+  text: "Once Checked-Out, you have to vacate from the room if you checkout!",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+    
+    location.href="/user/rooms/checkedout/"+RID+"/"+UID;
+
+   swal("Checked-Out Successfully", "Room has been vacated officially", "success");
+
+
+  } 
+
+
+
+});
+
+    }
+
+
+    function checkin(RID) {
+        location.href='/user/room_info/'+RID;
+    }
+  </script>
+</body>
+</html>
