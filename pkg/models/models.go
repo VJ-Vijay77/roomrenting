@@ -1,5 +1,7 @@
 package models
 
+import "gorm.io/gorm"
+
 //model representing the table in database
 type Users struct{
 	ID uint 
@@ -124,3 +126,10 @@ type ListBookings struct{
 	Status string
 }
 
+ type Razorpaydetails struct{
+	gorm.Model
+	User_Id int
+	Payid string
+	Orderid string
+	Signature string
+ }
