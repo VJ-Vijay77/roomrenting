@@ -1,13 +1,35 @@
 // function sleep(ms) {
 //     return new Promise(resolve => setTimeout(resolve, ms));
 // }
+
+
+
+function date(Roomprice){
+  let startdate = document.getElementById("startdate").value
+  let endate = document.getElementById("endate").value
+  const t = new Date(startdate);
+  const r = new Date(endate);
+
+  let dif = Math.abs(r-t)
+  const days = Math.ceil(dif / (1000 * 60 * 60 * 24)); 
+  document.getElementById("price").innerHTML='Rs '+days*Roomprice
+ 
+}
          
          
          function checkin(RID,RName,Price) {
+          let startdate = document.getElementById("startdate").value
+  let endate = document.getElementById("endate").value
+ 
+  const t = new Date(startdate);
+  const r = new Date(endate);
+
+  let dif = Math.abs(r-t)
+  const days = Math.ceil(dif / (1000 * 60 * 60 * 24)); 
 
            
 
-            swal("Room Name:"+RName+"\nRoom Price:"+Price+"/-","Room Id:"+RID+"\n1 Bedroom 2 Bathroom 1 Hall", {           
+            swal("Room Name:"+RName+"\nRoom Price:"+Price*days+"/-","Room Id:"+RID+"\n1 Bedroom 2 Bathroom 1 Hall", {           
   buttons: {
     cancel: "Cancel",
     catch: {
@@ -24,8 +46,10 @@
     case "catch":
        //location.href="/user/cart/"+RID;
         $.ajax({
+          
+
             
-            url: "/user/cart/"+RID,
+            url: "/user/cart/"+RID+"/"+days+"/"+startdate+"/"+endate,
             method:"get", // serializes the form's elements.
             success: function(k) {
                 if (k=="login"){

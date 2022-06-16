@@ -33,7 +33,8 @@
             <td>{{.Roomid}}</td>
             <td>{{.User_Id}}</td>
             <td>{{.Totalprice}}</td>
-            <td>{{.Status}} {{if eq .Status "checkedin"}}
+            <td>{{.Status}}
+               {{if eq .Status "checkedin"}}
                 <div class="btn-group">
                     <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                      

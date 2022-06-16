@@ -38,7 +38,9 @@
         <th scope="col">Room ID</th>
         <th scope="col">Room</th>
         <th scope="col">Category</th>
-        <th scope="col">Price</th>
+        <th scope="col">Price/day</th>
+        <th scope="col">Total days</th>
+        <th scope="col">Total Cost</th>
       </tr>
     </thead>
     <tbody>
@@ -64,6 +66,8 @@
         </td>
         <td>{{.Category}}</td>
         <td>{{.Room_Price}}</td>
+        <td>{{.Days}}</td>
+        <td>{{.Total}}</td>
       </tr>
      {{end}}
     </tbody>

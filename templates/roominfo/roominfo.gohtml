@@ -82,7 +82,11 @@
                   <h5 class="card-title">{{.roomname}} </h5>
                   <h6 class="card-subtitle mb-2 text-muted">Category : {{.roomcategory}}</h6>
                   <p class="card-text">1 Hall 2 Bedroom 1 Bathroom Balcony</p>
-                  <h1><p class="card-text">Rs {{.roomprice}}</p></h1>
+                  <label for="startdate">Date</label><br>
+                  <input class="text-success rounded-3" type="date" id="startdate" value="{{.cdate}}"><br> TO <br>
+                  <input class="text-success rounded-3" type="date" value="{{.ndate}}" id="endate" oninput="date('{{.roomprice}}')">
+
+                  <h1><p id="price" class="card-text">Rs {{.roomprice}}</p></h1>
                   <button type="button" onclick="checkin('{{.roomid}}','{{.roomname}}','{{.roomprice}}')" class="btn btn-outline-success btn-warning" style="font-weight: 600;">Check-In Now</button>
                   <button type="button" onclick="wishlist('{{.roomid}}','{{.roomname}}')" class="btn btn-outline-danger btn-light" style="font-weight: 600;">Add to Wishlist</button>
                   <br><small class="text-muted bg-info">{{.status}}</small>

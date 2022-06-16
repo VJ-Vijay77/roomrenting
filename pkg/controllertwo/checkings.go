@@ -33,7 +33,7 @@ func CheckingsList(c *gin.Context) {
 	
 db.Raw("SELECT user_id,rooms.id,rooms.room_name,orderedrooms.status,rooms.cover,rooms.category,rooms.room_price FROM orderedrooms INNER JOIN rooms ON rooms.id=orderedrooms.roomid WHERE user_id=?",UserID).Scan(&bookings)
 	
-		
+	
 	
 	c.HTML(200, "checkingslist.gohtml", gin.H{
 		"data":     userinfos,

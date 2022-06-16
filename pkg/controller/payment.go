@@ -111,7 +111,7 @@ func PaymentConfirm(c *gin.Context) {
 		db.Raw("UPDATE rooms SET status='booked' WHERE id=?", val.Cartsroomid).Scan(&updateroomstatus)
 	}
 
-	db.Raw("SELECT orderid FROM orders where user_id=? AND ")
+	//db.Raw("SELECT orderid FROM orders where user_id=? AND ")
 
 }
 
