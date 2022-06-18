@@ -22,8 +22,11 @@ function removecartitem(CID) {
 
 }
 
-function proceedtocheckout(totalprice,userID){
-  location.href="/user/payment/"+totalprice+"/"+userID
+function proceedtocheckout(RID,Total,Startdate,Endate){
+  const UID = document.getElementById("userids")
+  const userid = UID.innerHTML
+  
+  location.href="/user/payment/"+Total+"/"+userid+"/"+RID+"/"+Startdate+"/"+Endate
   
 }
 

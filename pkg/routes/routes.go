@@ -80,10 +80,10 @@ func InitRoutes(api *gin.Engine) {
 	api.GET("/user/wishlist/cart/:RID",controller.WLAddToCart)
 
 	//payment gateway
-	api.GET("/user/payment/:TotalPrice/:UserID",controller.Payment)
-	api.POST("/user/payment/addresspick/:TotalPrice/:UserID",controller.PaymentAddressPick)
+	api.GET("/user/payment/:TotalPrice/:UserID/:Roomid/:Startdate/:Endate",controller.Payment)
+	api.POST("/user/payment/addresspick/:TotalPrice/:UserID/:Roomid/:Startdate/:Endate",controller.PaymentAddressPick)
 	//payment at office
-	api.POST("/user/payment/confirm",controller.PaymentConfirm)
+	api.POST("/user/payment/confirm/:start/:end",controller.PaymentConfirm)
 	api.GET("/user/payment/success",controller.PaymentSuccess)
 	//payment Rozor pay
 	api.GET("/user/payment/razorpay/:total/:uid",controller.RazorPay)

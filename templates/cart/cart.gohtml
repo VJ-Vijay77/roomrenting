@@ -28,7 +28,7 @@
  {{template "navbar/navbar.gohtml" .}}
  <!-- navbar ends -->
 
-
+<div id="userids">{{.userid}}</div>
  <hr>
 
    {{if .total}}
@@ -63,16 +63,26 @@
             </div>
           </div>
           <button type="button" class="btn btn-danger" onclick="removecartitem('{{.Cartsid}}')">Remove Item</button>
+         
+            <button type="button" onclick="proceedtocheckout('{{.Cartsroomid}}','{{.Total}}','{{.Startdate}}','{{.Endate}}')" class="btn btn-outline-success btn-warning w-50">Proceed to Checkout</button>
+       
         </td>
         <td>{{.Category}}</td>
         <td>{{.Room_Price}}</td>
-        <td>{{.Days}}</td>
+        <td><div>{{.Startdate}}</div><br>-to-<br><div id="endate">{{.Endate}}</div><br>={{.Days}}</td>
         <td>{{.Total}}</td>
+
+      
       </tr>
+     
      {{end}}
     </tbody>
   </table>
  
+  <!-- <div class="text-center">
+    <button type="button" onclick="proceedtocheckout('{{.total}}','{{.userid}}')" class="btn btn-outline-success btn-warning w-75" style="font-size: 2rem;">Proceed to Checkout</button>
+  </div> -->
+
   <div class="row">
     <div class="col-7 col-md-8 col-lg-8">
     <h2 class="text-center">Total </h2>
@@ -81,9 +91,7 @@
      <h3 class="text-danger text-center">Rs {{.total}} /-</h3>
      
     </div>
-    <div class="text-center">
-    <button type="button" onclick="proceedtocheckout('{{.total}}','{{.userid}}')" class="btn btn-outline-success btn-warning w-75" style="font-size: 2rem;">Proceed to Checkout</button>
-  </div>
+   
   </div>
   {{else}}
   <h2 class="text-center">Nothing in Cart</h2>

@@ -52,6 +52,9 @@ type Cart_Infos struct {
 	User_Name   string
 	Days        int
 	Total       int
+	Startdate   string
+	Endate      string
+	
 }
 
 type Wishlists struct {
@@ -83,6 +86,8 @@ type Orders struct {
 	Totalprice    string
 	Roomnames     string
 	Accountholder string
+	Checkindate string
+	Checkoutdate string
 }
 
 type Orderedrooms struct {
@@ -90,8 +95,8 @@ type Orderedrooms struct {
 	Roomid  int
 	User_Id int
 	Status  string
-	Startdate string
-	Endate string
+	Checkindate string
+	Checkoutdate string
 }
 
 type Useraddress struct {
@@ -133,4 +138,11 @@ type Razorpaydetails struct {
 type TotalPrice struct {
 	Total string
 	Days  int
+}
+
+type Dates struct{
+	User_Id int
+	Cartsroomid int
+	Startdate string
+	Endate string
 }

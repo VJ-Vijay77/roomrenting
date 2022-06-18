@@ -30,10 +30,14 @@ func Payment(c *gin.Context) {
 
 	TotalPrice := c.Param("TotalPrice")
 	UserID := c.Param("UserID")
+	Roomid := c.Param("Roomid")
+	Startdate := c.Param("Startdate")
+	Endate := c.Param("Endate")
 
+	Usersid, _ := strconv.Atoi(UserID)
 	//taking order details
 	var roomnames []string
-	db.Raw("SELECT rooms.room_name FROM carts INNER JOIN rooms ON rooms.id=carts.cartsroomid WHERE carts.user_id=?", UserID).Scan(&roomnames)
+	db.Raw("SELECT rooms.room_name FROM carts INNER JOIN rooms ON rooms.id=carts.cartsroomid WHERE carts.user_id=?", Usersid).Scan(&roomnames)
 	var sendinginfo string
 	for i := range roomnames {
 		sendinginfo += roomnames[i]
@@ -50,8 +54,13 @@ func Payment(c *gin.Context) {
 		"username":  UserName,
 		"address":   address,
 		"uid":       IDofUser,
+		"startdate": Startdate,
+		"endate":    Endate,
+		"roomid":    Roomid,
 	})
 }
+
+
 
 func PaymentConfirm(c *gin.Context) {
 	db := database.GetDb()
@@ -69,17 +78,14 @@ func PaymentConfirm(c *gin.Context) {
 	var roomsids []models.Carts
 	db.Select("cartsroomid").Where("user_id=?", UserID).Find(&roomsids)
 
-	var status = "checkedin"
+	
 
-	var idsofroom models.Orderedrooms
-	for _, val := range roomsids {
-		idsofroom.Roomid = val.Cartsroomid
-		idsofroom.User_Id = UserID
-		idsofroom.Status = status
-		db.Select("roomid", "user_id", "status").Create(&idsofroom)
-	}
-
-	FName := c.PostForm("firstnamef")
+	
+	start := c.Param("start")
+	end := c.Param("end")
+	
+	//fmt.Println(start,end)
+	 FName := c.PostForm("firstnamef")	
 	LName := c.PostForm("lastnamef")
 	HName := c.PostForm("housenamef")
 	Place := c.PostForm("placef")
@@ -87,6 +93,22 @@ func PaymentConfirm(c *gin.Context) {
 	Mobile := c.PostForm("mobilef")
 	Total := c.PostForm("totalprice")
 	Allrooms := c.PostForm("allroomnames")
+
+
+	var status = "checkedin"
+
+	var idsofroom models.Orderedrooms
+	for _, val := range roomsids {
+		idsofroom.Roomid = val.Cartsroomid
+		idsofroom.User_Id = UserID
+		idsofroom.Status = status
+		idsofroom.Checkindate = start
+		idsofroom.Checkoutdate = end
+		db.Select("roomid", "user_id", "status","checkindate","checkoutdate").Create(&idsofroom)
+	}
+	
+
+
 
 	var orderdetails models.Orders
 	orderdetails.User_ID = UserID
@@ -99,7 +121,9 @@ func PaymentConfirm(c *gin.Context) {
 	orderdetails.Totalprice = Total
 	orderdetails.Roomnames = Allrooms
 	orderdetails.Accountholder = UserName
-	db.Select("user_id", "firstname", "lastname", "housename", "place", "state", "mobile", "totalprice", "roomnames", "accountholder").Create(&orderdetails)
+	orderdetails.Checkindate = start 
+	orderdetails.Checkoutdate = end 
+	db.Select("user_id", "firstname", "lastname", "housename", "place", "state", "mobile", "totalprice", "roomnames", "accountholder","checkindate","checkoutdate").Create(&orderdetails)
 
 	var deletefromcart models.Carts
 	db.Raw("DELETE FROM carts WHERE user_id=?", UserID).Scan(&deletefromcart)
@@ -110,8 +134,6 @@ func PaymentConfirm(c *gin.Context) {
 
 		db.Raw("UPDATE rooms SET status='booked' WHERE id=?", val.Cartsroomid).Scan(&updateroomstatus)
 	}
-
-	//db.Raw("SELECT orderid FROM orders where user_id=? AND ")
 
 }
 
@@ -159,8 +181,14 @@ func PaymentAddressPick(c *gin.Context) {
 	UserName := userinfos.First_Name
 	LastName := userinfos.Last_Name
 	IDofuser := userinfos.ID
+
 	TotalPrice := c.Param("TotalPrice")
 	UserID := c.Param("UserID")
+	Roomid := c.Param("Roomid")
+	Startdate := c.Param("Startdate")
+	Endate := c.Param("Endate")
+	//fmt.Println("hiii")
+	fmt.Println(TotalPrice,UserID,Roomid,Startdate,Endate)
 	UID, _ := strconv.Atoi(UserID)
 
 	//taking order details
@@ -189,6 +217,9 @@ func PaymentAddressPick(c *gin.Context) {
 		"address":   address,
 		"adr":       addresspick,
 		"uid":       IDofuser,
+		"startdate": Startdate,
+		"endate":    Endate,
+		"roomid":    Roomid,
 	})
 }
 

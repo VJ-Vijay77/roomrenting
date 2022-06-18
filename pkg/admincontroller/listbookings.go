@@ -2,7 +2,6 @@ package admincontroller
 
 import (
 	"encoding/json"
-	"fmt"
 	"strconv"
 
 	"github.com/VJ-Vijay77/r4room/pkg/database"
@@ -15,12 +14,11 @@ func ListBookings(c *gin.Context) {
 
 	var bookings []models.ListBookings
 	db.Raw("SELECT orders.orderid,orderedrooms.roomid,orders.user_id,orders.totalprice,orderedrooms.status FROM orders INNER JOIN orderedrooms ON orders.orderid=orderedrooms.id").Scan(&bookings)
-	
-	
-	fmt.Println(bookings)
+
 	c.HTML(200, "listbookings.gohtml", gin.H{
 		"bookings": bookings,
 	})
+	
 }
 
 func CheckoutBookings(c *gin.Context) {

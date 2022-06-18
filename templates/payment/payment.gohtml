@@ -25,7 +25,7 @@
           <h5 class="modal-title" id="exampleModalLabel">Choose Address</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="/user/payment/addresspick/{{.total}}/{{.uid}}" method="post">
+        <form action="/user/payment/addresspick/{{.total}}/{{.uid}}/{{.roomid}}/{{.startdate}}/{{.endate}}" method="post">
         <div class="modal-body">
           
            {{range .address}} <div class="form-check">
@@ -118,6 +118,7 @@
                                     <p class="h4 mb-0">Summary</p>
                                     <p class="mb-0"><span class="fw-bold">Product:</span><span class="c-green"><ul>
                                         {{range .roomnames}}<li>{{.}}</li>{{end}}
+                                        <li>Roomid : {{.roomid}}<br><strong>From</strong> {{.startdate}} <strong>To</strong> {{.endate}}</li>
                                     </ul></span></p>
                                     <p class="mb-0"><span class="fw-bold">Total Price:</span>
                                         <span>Rs<h3 class="text-danger"><strong>{{.total}}</strong></h3> </span></p>
@@ -149,8 +150,11 @@
                             <div class="row">
                                 <div class="col-lg-5 mb-lg-0 mb-3">
                                     <p class="h4 mb-0">Summary</p>
-                                    <p class="mb-0"><span class="fw-bold">Items:</span><span class="c-green">: <ul>
+                                    <p class="mb-0"><span class="fw-bold">Items:</span><span class="c-green">:
+                                         <ul>
                                         {{range .roomnames}}<li>{{.}}</li>{{end}}
+                                        <li>Roomid : {{.roomid}}<br><strong>From</strong> {{.startdate}} <strong>To</strong> {{.endate}}</li>
+                                       
                                     </ul></span>
                                     </p>
                                     <p class="mb-0">
@@ -234,7 +238,7 @@
                                         </div>
                                         <div class="col-12">
                 
-                                            <button type="submit" class="btn w-100 btn-outline-primary btn-success text-white" style="font-weight: 600;">Check-In Now</button>
+                                            <button type="submit" onclick="checkinnow('{{.startdate}}','{{.endate}}')" class="btn w-100 btn-outline-primary btn-success text-white" style="font-weight: 600;">Check-In Now</button>
                                         
                                     </div>
                                     </form>
@@ -250,6 +254,7 @@
 
 
     <script>
+        function checkinnow(startdate,endate){
        const firstname = document.getElementById('firstname')
 const lastname = document.getElementById('lastname')
 const housename = document.getElementById('housename')
@@ -307,12 +312,13 @@ e.preventDefault()
 errorElement.innerText = messages.join(', ')
 }else{
     e.preventDefault()
-    success()
+    success(startdate,endate)
 }
 
 })
+        }
 
-function success(){
+function success(startdate,endate){
 
 
     swal({
@@ -328,7 +334,7 @@ function success(){
 
 
     var data = $('form').serialize();
-$.post('/user/payment/confirm', data);
+    $.post('/user/payment/confirm/'+startdate+'/'+endate, data);
 swal("Check-In Sucessful", "Read our terms and conditions carefully to know about cancellation policies", "success");
 setTimeout(() => { location.href="/user/payment/success";  }, 1700);
     
