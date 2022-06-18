@@ -49,10 +49,11 @@
           <p class="card-text">Room ID:{{.Wishroomsid}} /-</p>
           <p class="card-text">Rs {{.Room_Price}} /-</p>
           <p class="card-text">Wishlist ID:{{.Wishlistid}} /-</p>
-          
-       {{if eq .Status "available"}}   <button type="button" class="btn btn-warning" onclick="wishlistTocart('{{.Wishroomsid}}','{{.Room_Name}}')">Move to cart</button>
+         
+
+       {{if eq .Status "available"}}   <button type="button" class="btn btn-warning" onclick="wishlistTocart('{{.Wishroomsid}}','{{.Room_Name}}')">Book Now</button>
        {{else}}
-       <button type="button" class="btn btn-secondary" disabled>Move to Cart</button> {{end}}
+       <button type="button" class="btn btn-secondary" disabled>Book Now</button> {{end}}
   
       
   

@@ -118,34 +118,34 @@ func WLAddToCart(c *gin.Context) {
 		return
 
 	}
-	db := database.GetDb()
-	session, _ := Store.Get(c.Request, "session")
-	userID := session.Values["userID"]
-	userEmail := fmt.Sprintf("%v", userID)
+	// db := database.GetDb()
+	// session, _ := Store.Get(c.Request, "session")
+	// userID := session.Values["userID"]
+	// userEmail := fmt.Sprintf("%v", userID)
 
-	I := c.Param("RID")
-	RoomID, _ := strconv.Atoi(I)
-	var user_ID int
-	//  var roominfo models.Rooms
-	var cart models.Carts
-	db.Raw("SELECT id FROM users WHERE email=?", userEmail).Scan(&user_ID)
+	// I := c.Param("RID")
+	// RoomID, _ := strconv.Atoi(I)
+	// var user_ID int
+	// //  var roominfo models.Rooms
+	// var cart models.Carts
+	// db.Raw("SELECT id FROM users WHERE email=?", userEmail).Scan(&user_ID)
 	
-	var cartItems models.Carts
-	db.Where("cartsroomid=? AND user_id=?", RoomID, user_ID).Find(&cartItems)
-	if cartItems.Cartsroomid == RoomID && cartItems.User_Id == user_ID {
-		var room = "sameroom"
-		k, _ := json.Marshal(room)
-		c.Writer.Header().Set("Content-Type", "application/json")
-		c.Writer.Write(k)
-		return
-	}
-	cart.Cartsroomid = RoomID
-	cart.User_Id = user_ID
+	// var cartItems models.Carts
+	// db.Where("cartsroomid=? AND user_id=?", RoomID, user_ID).Find(&cartItems)
+	// if cartItems.Cartsroomid == RoomID && cartItems.User_Id == user_ID {
+	// 	var room = "sameroom"
+	// 	k, _ := json.Marshal(room)
+	// 	c.Writer.Header().Set("Content-Type", "application/json")
+	// 	c.Writer.Write(k)
+	// 	return
+	// }
+	// cart.Cartsroomid = RoomID
+	// cart.User_Id = user_ID
 
-	db.Select("cartsroomid", "user_id").Create(&cart)
-	var wish models.Wishlists
-	db.Raw("DELETE FROM wishlists WHERE user_id=? and wishroomsid=?",user_ID,RoomID).Scan(&wish)
-	var note = "added"
+	// db.Select("cartsroomid", "user_id").Create(&cart)
+	// var wish models.Wishlists
+	// db.Raw("DELETE FROM wishlists WHERE user_id=? and wishroomsid=?",user_ID,RoomID).Scan(&wish)
+	 var note = "fine"
 	k, _ := json.Marshal(note)
 	c.Writer.Header().Set("Content-Type", "application/json")
 	c.Writer.Write(k)
