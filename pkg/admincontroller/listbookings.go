@@ -3,6 +3,7 @@ package admincontroller
 import (
 	"encoding/json"
 	"strconv"
+	"time"
 
 	"github.com/VJ-Vijay77/r4room/pkg/database"
 	"github.com/VJ-Vijay77/r4room/pkg/models"
@@ -18,7 +19,7 @@ func ListBookings(c *gin.Context) {
 	c.HTML(200, "listbookings.gohtml", gin.H{
 		"bookings": bookings,
 	})
-	
+
 }
 
 func CheckoutBookings(c *gin.Context) {
@@ -41,4 +42,29 @@ func CheckoutBookings(c *gin.Context) {
 	c.Writer.Header().Set("Content-Type", "application/json")
 	c.Writer.Write(k)
 
+}
+
+func SalesReport(c *gin.Context) {
+	db := database.GetDb()
+	current := time.Now().Format("2006-01-02")
+
+	var dailysales []models.Orders
+	db.Where("checkindate=?", current).Find(&dailysales)
+
+	var totaldailybookings int64
+	db.Raw("SELECT orderid FROM orders WHERE checkindate=?", current).Count(&totaldailybookings)
+
+	var TotalRevenue int64
+	db.Raw("SELECT SUM(totalprice) FROM orders WHERE checkindate=?", current).Scan(&TotalRevenue)
+	
+	var perc float64 = float64(TotalRevenue) / 100000 * 100
+
+	dailypercentage := (int64(perc))
+	c.HTML(200, "sales.gohtml", gin.H{
+		"dsales":    dailysales,
+		"dtotal":    totaldailybookings,
+		"drevenue":  TotalRevenue,
+		"dailyperc": dailypercentage,
+		 
+	})
 }

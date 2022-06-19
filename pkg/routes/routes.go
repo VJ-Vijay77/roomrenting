@@ -20,7 +20,7 @@ func InitRoutes(api *gin.Engine) {
 	//index router
 	api.GET("/",controller.Index)
 
-	//Get methods
+	//login Get methods
 	api.GET("/user_login", controller.UserLogin)
 	api.GET("/login_with_otp", controller.UserOtpLogin)
 	api.GET("/validate_otp", controller.ValidateOtp)
@@ -29,7 +29,7 @@ func InitRoutes(api *gin.Engine) {
 	api.GET("/admin_login",controller.AdminLogin)
 	api.GET("/admin_home",controller.AdminHome)
 	
-	//Post methods
+	//login Post methods
 	api.POST("/user_login", controller.PUserLogin)
 	api.POST("/login_with_otp", controller.PUserOtpLogin)
 	api.POST("/validate_otp", controller.PValidateOtp)
@@ -118,6 +118,9 @@ func InitRoutes(api *gin.Engine) {
 	//admin list bookings
 	api.GET("/admin/list_bookings",admincontroller.ListBookings)
 	api.GET("/admin/list_bookings/checkout/:RID/:OID",admincontroller.CheckoutBookings)
-	
+
+	//Admin sales report
+	api.GET("/admin/salesreport",admincontroller.SalesReport)
+
 	
 }

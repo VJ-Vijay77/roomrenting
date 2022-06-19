@@ -93,7 +93,7 @@ func PaymentConfirm(c *gin.Context) {
 	Mobile := c.PostForm("mobilef")
 	Total := c.PostForm("totalprice")
 	Allrooms := c.PostForm("allroomnames")
-
+	total,_ := strconv.Atoi(Total) 
 
 	var status = "checkedin"
 
@@ -118,7 +118,7 @@ func PaymentConfirm(c *gin.Context) {
 	orderdetails.Place = Place
 	orderdetails.State = State
 	orderdetails.Mobile = Mobile
-	orderdetails.Totalprice = Total
+	orderdetails.Totalprice = total
 	orderdetails.Roomnames = Allrooms
 	orderdetails.Accountholder = UserName
 	orderdetails.Checkindate = start 
@@ -292,9 +292,9 @@ func RazorPaySuccess(c *gin.Context) {
 	Total := c.Param("total")
 
 	totalint,_ := strconv.Atoi(Total)
-	newtotal := totalint/100
+	GrandTotal := totalint/100
 
-	Grandtotal := strconv.Itoa(newtotal)
+	
 
 	db := database.GetDb()
 	session, _ := Store.Get(c.Request, "session")
@@ -355,7 +355,7 @@ func RazorPaySuccess(c *gin.Context) {
 	orderdetails.Place = adress.Place
 	orderdetails.State = adress.State
 	orderdetails.Mobile = adress.Mobile
-	orderdetails.Totalprice = Grandtotal
+	orderdetails.Totalprice = GrandTotal
 	orderdetails.Roomnames = sendinginfo
 	orderdetails.Accountholder = username
 	orderdetails.Checkindate = Startdate

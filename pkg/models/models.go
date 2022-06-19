@@ -83,7 +83,7 @@ type Orders struct {
 	Place         string
 	State         string
 	Mobile        string
-	Totalprice    string
+	Totalprice    int
 	Roomnames     string
 	Accountholder string
 	Checkindate string
