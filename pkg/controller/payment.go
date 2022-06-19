@@ -232,6 +232,8 @@ func RazorPay(c *gin.Context) {
 	}
 	Total := c.Param("total")
 	Userid := c.Param("uid")
+	Startdate := c.Param("start")
+	Endate := c.Param("end")
 	UID, _ := strconv.Atoi(Userid)
 	Grandtotal := Total + "00"
 	total, _ := strconv.Atoi(Grandtotal)
@@ -274,6 +276,8 @@ func RazorPay(c *gin.Context) {
 		"email":    userinfos.Email,
 		"mobile":   userinfos.Mobile,
 		"address":  address,
+		"start":Startdate,
+		"end":Endate,
 	})
 
 }
@@ -283,6 +287,14 @@ func RazorPaySuccess(c *gin.Context) {
 	PayId := c.Param("rpid")
 	OrderId := c.Param("roid")
 	Signature := c.Param("rsign")
+	Startdate := c.Param("start")
+	Endate := c.Param("end")
+	Total := c.Param("total")
+
+	totalint,_ := strconv.Atoi(Total)
+	newtotal := totalint/100
+
+	Grandtotal := strconv.Itoa(newtotal)
 
 	db := database.GetDb()
 	session, _ := Store.Get(c.Request, "session")
@@ -307,7 +319,9 @@ func RazorPaySuccess(c *gin.Context) {
 		idsofroom.Roomid = val.Cartsroomid
 		idsofroom.User_Id = UserID
 		idsofroom.Status = status
-		db.Select("roomid", "user_id", "status").Create(&idsofroom)
+		idsofroom.Checkindate = Startdate
+		idsofroom.Checkoutdate = Endate
+		db.Select("roomid", "user_id", "status","checkindate","checkoutdate").Create(&idsofroom)
 	}
 
 	var roomnames []string
@@ -318,18 +332,18 @@ func RazorPaySuccess(c *gin.Context) {
 	}
 
 	//total cart price
-	var totalprice []string
-	var convInt int
+	// var totalprice []string
+	// var convInt int
 
-	var GrandTotal int
+	// var GrandTotal int
 
-	db.Raw("SELECT rooms.room_price FROM carts INNER JOIN users ON carts.user_id=users.id INNER JOIN rooms ON carts.cartsroomid=rooms.id  WHERE user_id=?", UserID).Scan(&totalprice)
-	for _, price := range totalprice {
-		convInt, _ = strconv.Atoi(price)
-		GrandTotal += convInt
-	}
+	// db.Raw("SELECT rooms.room_price FROM carts INNER JOIN users ON carts.user_id=users.id INNER JOIN rooms ON carts.cartsroomid=rooms.id  WHERE user_id=?", UserID).Scan(&totalprice)
+	// for _, price := range totalprice {
+	// 	convInt, _ = strconv.Atoi(price)
+	// 	GrandTotal += convInt
+	// }
 
-	GrndTotal := strconv.Itoa(GrandTotal)
+	// GrndTotal := strconv.Itoa(GrandTotal)
 
 	var orderdetails models.Orders
 	var adress models.Useraddress
@@ -341,11 +355,13 @@ func RazorPaySuccess(c *gin.Context) {
 	orderdetails.Place = adress.Place
 	orderdetails.State = adress.State
 	orderdetails.Mobile = adress.Mobile
-	orderdetails.Totalprice = GrndTotal
+	orderdetails.Totalprice = Grandtotal
 	orderdetails.Roomnames = sendinginfo
 	orderdetails.Accountholder = username
+	orderdetails.Checkindate = Startdate
+	orderdetails.Checkoutdate = Endate
 
-	db.Select("user_id", "firstname", "lastname", "housename", "place", "state", "mobile", "totalprice", "roomnames", "accountholder").Create(&orderdetails)
+	db.Select("user_id", "firstname", "lastname", "housename", "place", "state", "mobile", "totalprice", "roomnames", "accountholder","checkindate","checkoutdate").Create(&orderdetails)
 
 	var deletefromcart models.Carts
 	db.Raw("DELETE FROM carts WHERE user_id=?", UserID).Scan(&deletefromcart)

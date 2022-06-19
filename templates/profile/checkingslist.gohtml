@@ -36,7 +36,7 @@
      
         <div class="col-4">
       <div class="card" style="width: 18rem;">
-        <img src="{{.Cover}}" class="card-img-top" alt="...">
+        <img src="/public/{{.Cover}}" class="card-img-top" alt="...">
    {{if eq .Status "checkedout"}}     <div class="w-100 bg-danger text-center text-white">{{.Status}}</div>{{else}}
    <div class="w-100 bg-primary text-center text-white">{{.Status}}</div>   {{end}}
    <div class="card-body">

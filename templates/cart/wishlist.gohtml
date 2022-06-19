@@ -39,7 +39,7 @@
      
         <div class="col-12 col-md-4">
       <div class="card" style="width: 18rem;">
-        <img src="{{.Cover}}" class="card-img-top" alt="...">
+        <img src="/public/{{.Cover}}" class="card-img-top" alt="...">
         {{if eq .Status "available"}}<div class="w-100 bg-success text-center text-white">{{.Status}}</div>
         {{else}}<div class="w-100 bg-warning text-center text-white">{{.Status}}</div>{{end}}
         <div class="card-body">

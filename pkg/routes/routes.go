@@ -11,6 +11,7 @@ func InitRoutes(api *gin.Engine) {
 	//loading gohtml files from templates directory
 	api.LoadHTMLGlob("templates/**/*.gohtml")
 	
+	//loading images for rooms
 	api.Static("public/", "./public")
 	
 	//loading static files like css or js
@@ -87,8 +88,8 @@ func InitRoutes(api *gin.Engine) {
 	api.POST("/user/payment/confirm/:start/:end",controller.PaymentConfirm)
 	api.GET("/user/payment/success",controller.PaymentSuccess)
 	//payment Rozor pay
-	api.GET("/user/payment/razorpay/:total/:uid",controller.RazorPay)
-	api.GET("/user/payment/razorypaysuccess/:rpid/:roid/:rsign",controller.RazorPaySuccess)
+	api.GET("/user/payment/razorpay/:total/:uid/:start/:end",controller.RazorPay)
+	api.GET("/user/payment/razorypaysuccess/:rpid/:roid/:rsign/:start/:end/:total",controller.RazorPaySuccess)
 
 
 	//user profile
