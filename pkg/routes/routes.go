@@ -11,6 +11,7 @@ func InitRoutes(api *gin.Engine) {
 	//loading gohtml files from templates directory
 	api.LoadHTMLGlob("templates/**/*.gohtml")
 	
+	api.Static("public/", "./public")
 	
 	//loading static files like css or js
 	api.Static("static/","./static")
@@ -116,5 +117,6 @@ func InitRoutes(api *gin.Engine) {
 	//admin list bookings
 	api.GET("/admin/list_bookings",admincontroller.ListBookings)
 	api.GET("/admin/list_bookings/checkout/:RID/:OID",admincontroller.CheckoutBookings)
+	
 	
 }

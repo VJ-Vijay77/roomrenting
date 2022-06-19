@@ -14,7 +14,7 @@
     <h1>Add room here</h1>
 
     <div class="container">
-    <form class="row g-3" id="form" method="post" action="/admin/add_room">
+    <form class="row g-3" id="form" method="post" action="/admin/add_room" enctype="multipart/form-data">
         <div class="col-md-6">
           <label for="inputRoom4" class="form-label">Room Name</label>
           <input type="text" name="roomname" class="form-control" required id="inputRoom4">
@@ -28,21 +28,21 @@
         <!-- pic path -->
         <div class="col-md-6">
           <label for="inputroompath" class="form-label">Room CoverPic Path</label>
-          <input type="text" name="roompicpath" class="form-control" required id="inputroompath">
+          <input type="file" id="roompicpath" name="roompicpath" class="form-control" required id="inputroompath">
         </div>
         <div class="col-md-3">
           <label for="inputroompath1" class="form-label">Room SubPic1 Path</label>
-          <input type="text" name="roompicpath1" class="form-control" required id="inputroompath1">
+          <input type="file" id="roompicpath1" name="roompicpath1" class="form-control" required id="inputroompath1">
         </div> <div class="col-md-3">
           <label for="inputroompath2" class="form-label">Room subPic2 Path</label>
-          <input type="text" name="roompicpath2" class="form-control" required id="inputroompath2">
+          <input type="file" id="roompicpath2" name="roompicpath2" class="form-control" required id="inputroompath2">
         </div> <div class="col-md-3">
           <label for="inputroompath3" class="form-label">Room subPic3 Path</label>
-          <input type="text" name="roompicpath3" class="form-control" required id="inputroompath3">
+          <input type="file" id="roompicpath3" name="roompicpath3" class="form-control" required id="inputroompath3">
         </div>
         <div class="col-md-3">
           <label for="inputroompath4" class="form-label">Room subPic4 Path</label>
-          <input type="text" name="roompicpath4" class="form-control" required id="inputroompath4">
+          <input type="file" id="roompicpath4" name="roompicpath4" class="form-control" required id="inputroompath4">
         </div>
 <!-- pic path end -->
         
@@ -85,14 +85,16 @@
 
 e.preventDefault(); // avoid to execute the actual submit of the form.
 
-var form = $(this);
-var actionUrl = form.attr('/admin/add_room');
+let formdata = new FormData(this);
+//var form = $(this);
+var actionUrl = '/admin/add_room'
 
 $.ajax({
     type: 'POST',
     url: actionUrl,
-    data: form.serialize(), // serializes the form's elements.
-    success: function(k) {
+   // data: form.serialize(), // serializes the form's elements.
+   data:formdata, 
+   success: function(k) {
  
       if (k==true){
         swal("Successfully Added!", "You Added a room", "success");
@@ -102,7 +104,10 @@ $.ajax({
      // alert(JSON.stringify(k));
        
    
-    }
+    },
+    cache:false,
+    contentType: false,
+    processData: false
 });
 
 });

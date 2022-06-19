@@ -2,11 +2,13 @@ package controller
 
 import (
 	"encoding/json"
+	"path/filepath"
 	"time"
 
 	"github.com/VJ-Vijay77/r4room/pkg/database"
 	"github.com/VJ-Vijay77/r4room/pkg/models"
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 )
 
 //rendering admin homepage
@@ -82,14 +84,39 @@ func PAddRoom(c *gin.Context) {
 	// 	return
 	// }
 	db := database.GetDb()
+
 	RoomName := c.PostForm("roomname")
-	CoverPicPath := c.PostForm("roompicpath")
+	// CoverPicPath := c.PostForm("roompicpath")
+	CoverPicPath, _ := c.FormFile("roompicpath")
+	extension := filepath.Ext(CoverPicPath.Filename)
+	Cover := uuid.New().String() + extension
+	c.SaveUploadedFile(CoverPicPath, "./public/"+Cover)
+
 	RoomPrice := c.PostForm("roomprice")
 	RoomCategory := c.PostForm("roomcategory")
-	SubPicPath1 := c.PostForm("roompicpath1")
-	SubPicPath2 := c.PostForm("roompicpath2")
-	SubPicPath3 := c.PostForm("roompicpath3")
-	SubPicPath4 := c.PostForm("roompicpath4")
+	SubPicPath1, _ := c.FormFile("roompicpath1")
+	extension = filepath.Ext(SubPicPath1.Filename)
+	SubPic1 := uuid.New().String() + extension
+	c.SaveUploadedFile(SubPicPath1, "./public/"+SubPic1)
+	// SubPicPath1 := c.PostForm("roompicpath1")
+	SubPicPath2, _ := c.FormFile("roompicpath2")
+	extension = filepath.Ext(SubPicPath2.Filename)
+	SubPic2 := uuid.New().String() + extension
+	c.SaveUploadedFile(SubPicPath2, "./public/"+SubPic2)
+
+	// SubPicPath2 := c.PostForm("roompicpath2")
+	SubPicPath3, _ := c.FormFile("roompicpath3")
+	extension = filepath.Ext(SubPicPath3.Filename)
+	SubPic3 := uuid.New().String() + extension
+	c.SaveUploadedFile(SubPicPath3, "./public/"+SubPic3)
+
+	// SubPicPath3 := c.PostForm("roompicpath3")
+	SubPicPath4, _ := c.FormFile("roompicpath4")
+	extension = filepath.Ext(SubPicPath4.Filename)
+	SubPic4 := uuid.New().String() + extension
+	c.SaveUploadedFile(SubPicPath4, "./public/"+SubPic4)
+
+	// SubPicPath4 := c.PostForm("roompicpath4")
 
 	var addroom models.Rooms
 	db.Raw("SELECT room_name FROM rooms WHERE room_name=?", RoomName).Scan(&addroom)
@@ -105,11 +132,11 @@ func PAddRoom(c *gin.Context) {
 	addroom.Room_Name = RoomName
 	addroom.Room_Price = RoomPrice
 	addroom.Category = RoomCategory
-	addroom.Cover = CoverPicPath
-	addroom.Sub1 = SubPicPath1
-	addroom.Sub2 = SubPicPath2
-	addroom.Sub3 = SubPicPath3
-	addroom.Sub4 = SubPicPath4
+	addroom.Cover = Cover
+	addroom.Sub1 = SubPic1
+	addroom.Sub2 = SubPic2
+	addroom.Sub3 = SubPic3
+	addroom.Sub4 = SubPic4
 	addroom.Status = "available"
 
 	db.Select("room_name", "room_price", "category", "cover", "sub1", "sub2", "sub3", "sub4", "sub5", "status").Create(&addroom)
