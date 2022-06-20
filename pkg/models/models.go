@@ -85,6 +85,7 @@ type Orders struct {
 	Mobile        string
 	Totalprice    int
 	Roomnames     string
+	Paymentmethod string
 	Accountholder string
 	Checkindate string
 	Checkoutdate string

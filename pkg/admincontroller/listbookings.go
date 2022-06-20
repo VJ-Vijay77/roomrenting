@@ -64,50 +64,30 @@ func SalesReport(c *gin.Context) {
 	//total percentage of daily target
 	var perc float64 = float64(TotalRevenue) / 50000 * 100
 	dailypercentage := (int64(perc))
+	// daily ends *** **** **** **** ends
 
-	//weekly stats
-	var weeklydates []models.Orders
-	db.Raw("SELECT firstname,checkindate,place,totalprice,roomnames FROM orders").Scan(&weeklydates)
-
-	layout := "2006-01-02"
-	var weeks time.Time
-	var weekdates []time.Time
-
-	for _, i := range weeklydates {
-		weeks, _ = time.Parse(layout, i.Checkindate)
-		weekdates = append(weekdates, weeks)
-	}
+	//weekly stats starts
+	
 
 	timed := time.Now()
 	time2 := timed.AddDate(0, 0, -7)
-	weektimestart := timed.Format("02-01-2006")
-	todaytime := time2.Format("02-01-2006")
-	var sevendate time.Time
-	var sevendaysdate []string
-	for _, i := range weekdates {
-		if i.After(time2) {
-			sevendate = i
-			sevendaysdate = append(sevendaysdate, sevendate.Format("2006-01-02"))
-		}
-	}
-	var wrevenue int
-	var weeklybookedcount int
-	var weekly models.Orders
-	var weeklyd []models.Orders
-	for _, o := range sevendaysdate {
-		db.Where("checkindate=?", o).Find(&weekly)
-		weeklyd = append(weeklyd, weekly)
-		weeklybookedcount += 1
-	}
+	weektimestart := timed.Format("2006-01-02")
+	todaytime := time2.Format("2006-01-02")
+	
+	var weekdata []models.Orders
+	db.Where("checkindate > ?",todaytime).Find(&weekdata)
+		var wcount int64
+	db.Model(&models.Orders{}).Where("checkindate > ?", todaytime).Count(&wcount)
 
-	for _,i := range weeklyd{
+
+	var wrevenue int
+	for _, i := range weekdata{
 		wrevenue += i.Totalprice
 	}
-	
-	var floatperc float32 = float32(wrevenue)/400000*100
+
+	var floatperc float32 = float32(wrevenue) / 400000 * 100
 	weeklypercentage := (int64(floatperc))
-
-
+	//weekly stats ends here ***** **** ****** ***//
 
 	c.HTML(200, "sales.gohtml", gin.H{
 		"dsales":    dailysales,
@@ -115,11 +95,40 @@ func SalesReport(c *gin.Context) {
 		"drevenue":  TotalRevenue,
 		"dailyperc": dailypercentage,
 
-		"wstart":weektimestart,
-		"wend":todaytime,
-		"weeklycount":   weeklybookedcount,
-		"weeklydetails": weeklyd,
-		"wtotal" : wrevenue,
-		"wperc" : weeklypercentage,
+		"wstart":        weektimestart,
+		"wend":          todaytime,
+		"weeklycount":   wcount,
+		"weeklydetails": weekdata,
+		"wtotal":        wrevenue,
+		"wperc":         weeklypercentage,
 	})
+}
+
+func SalesReportMonthly(c *gin.Context) {
+	db := database.GetDb()
+
+	k := "2022-05-31"
+	var junedetails []models.Orders
+	var junecount int64
+	db.Where("checkindate > ?", k).Find(&junedetails)
+	db.Model(&models.Orders{}).Where("checkindate > ?", k).Count(&junecount)
+
+	var monthlytotal int
+	for _, i := range junedetails {
+		monthlytotal += i.Totalprice
+	}
+
+	var floatperc float32 = float32(monthlytotal) / 1000000 * 100
+	monthlypercentage := (int64(floatperc))
+
+	c.HTML(200, "monthlysales.gohtml", gin.H{
+		"junecount":   junecount,
+		"juneperc":    monthlypercentage,
+		"junedetails": junedetails,
+		"junetotal":   monthlytotal,
+	})
+}
+
+func SalesReportYearly(c *gin.Context) {
+	c.HTML(200, "yearlysales.gohtml", gin.H{})
 }

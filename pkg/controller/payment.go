@@ -108,7 +108,7 @@ func PaymentConfirm(c *gin.Context) {
 	}
 	
 
-
+	var paymode string = "Payment At Office"
 
 	var orderdetails models.Orders
 	orderdetails.User_ID = UserID
@@ -119,11 +119,12 @@ func PaymentConfirm(c *gin.Context) {
 	orderdetails.State = State
 	orderdetails.Mobile = Mobile
 	orderdetails.Totalprice = total
+	orderdetails.Paymentmethod = paymode
 	orderdetails.Roomnames = Allrooms
 	orderdetails.Accountholder = UserName
 	orderdetails.Checkindate = start 
 	orderdetails.Checkoutdate = end 
-	db.Select("user_id", "firstname", "lastname", "housename", "place", "state", "mobile", "totalprice", "roomnames", "accountholder","checkindate","checkoutdate").Create(&orderdetails)
+	db.Select("user_id", "firstname", "lastname", "housename", "place", "state", "mobile", "totalprice","paymentmethod","roomnames", "accountholder","checkindate","checkoutdate").Create(&orderdetails)
 
 	var deletefromcart models.Carts
 	db.Raw("DELETE FROM carts WHERE user_id=?", UserID).Scan(&deletefromcart)
@@ -344,7 +345,7 @@ func RazorPaySuccess(c *gin.Context) {
 	// }
 
 	// GrndTotal := strconv.Itoa(GrandTotal)
-
+		var paymode string = "Razor Pay"
 	var orderdetails models.Orders
 	var adress models.Useraddress
 	db.Where("user_id=? AND main='true'", UserID).Find(&adress)
@@ -356,12 +357,13 @@ func RazorPaySuccess(c *gin.Context) {
 	orderdetails.State = adress.State
 	orderdetails.Mobile = adress.Mobile
 	orderdetails.Totalprice = GrandTotal
+	orderdetails.Paymentmethod = paymode
 	orderdetails.Roomnames = sendinginfo
 	orderdetails.Accountholder = username
 	orderdetails.Checkindate = Startdate
 	orderdetails.Checkoutdate = Endate
 
-	db.Select("user_id", "firstname", "lastname", "housename", "place", "state", "mobile", "totalprice", "roomnames", "accountholder","checkindate","checkoutdate").Create(&orderdetails)
+	db.Select("user_id", "firstname", "lastname", "housename", "place", "state", "mobile", "totalprice","paymentmethod","roomnames", "accountholder","checkindate","checkoutdate").Create(&orderdetails)
 
 	var deletefromcart models.Carts
 	db.Raw("DELETE FROM carts WHERE user_id=?", UserID).Scan(&deletefromcart)
