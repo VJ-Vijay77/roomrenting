@@ -113,7 +113,65 @@
                   </div>
                   <div class="collapse" id="collapseWidthExample5" style="">
                     <div class="card card-body" style="width: 100%;">
+                     
                       <h2>May</h2>
+                      <div class="row">
+                        <div class="col-md-6 mb-5">
+                          Total Bookings : {{.maycount}}<br>
+                          Total Revenue Generated : Rs {{.maytotal}}<br>
+                        </div>
+                          <div class="col-md-6 mb-5">
+                         
+                          Target for the month : 10,00,000<br>
+                          Total Achieved / Target : {{.mayperc}}%
+                          
+                        </div>
+                      </div>
+                     <div class="col-md-12"><h2>Bookings Details</h2></div>
+                      <div class="col-md-12 mt-1">
+
+        <table class="table table-bordered border-5 border-dark">
+          <thead>
+            <tr>
+              <th scope="col">Order Id</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">House Name</th>
+              <th scope="col">Place</th>
+              <th scope="col">Room Name</th>
+              <th scope="col">Total Price</th>
+              <th scope="col">Payment Method</th>
+              <th scope="col">Checkin Date</th>
+              <th scope="col">Checkout Date</th>
+
+            </tr>
+          </thead>
+          <tbody class="table-group-divider">
+            {{range .maydetails}}
+            <tr>
+              <th scope="row">{{.Orderid}}</th>
+              <td>{{.Firstname}}</td>
+              <td>{{.Lastname}}</td>
+              <td>{{.Housename}}</td>
+              <td>{{.Place}}</td>
+              <td>{{.Roomnames}}</td>
+              <td>{{.Totalprice}}</td>
+              <td>{{.Paymentmethod}}</td>
+              <td>{{.Checkindate}}</td>
+              <td>{{.Checkoutdate}}</td>
+            </tr>
+            {{end}}
+            <tr>
+              <td colspan="6" class="text-danger">TOTAL</td>
+              <td class="bg-secondary text-white">Rs {{.junetotal}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+                      </div>
+
+
+
                     </div>
                   </div>
                   <div class="collapse" id="collapseWidthExample6" style="">

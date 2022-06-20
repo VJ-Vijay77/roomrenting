@@ -15,13 +15,87 @@
   <style>
     body {
       background-image: url(https://kiguru.com/wp-content/uploads/2017/05/rsz_ifrsbackground-transparent.png);
-
+      
     }
   </style>
 </head>
 
 <body>
 
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 mb-5 mt-3 d-flex justify-content-center">
+        <h1 class="fw-bold">Yealy Reports - 2022</h1>
+      </div>
+      <div class="col-md-6">
+        <div class="card w-100">
+          <div class="card-body">
+            <h3 class="card-title">Total Bookings : <p class="text-primary fw-semibold" style="display: inline;">{{.yearcount}}</p></h3>
+            <h3 class="card-title">Total Revenue Generated : <p class="text-success fw-semibold" style="display: inline;">{{.yeartotal}}</p> </h3>
+          </div>
+        </div>
+        
+      </div>
+
+      <div class="col-md-6">
+        <div class="card w-100">
+          <div class="card-body">
+            <h3 class="card-title"><p class="text-danger fw-semibold" style="display: inline;">Total Target : Rs 1cr</p></h3>
+            <h3 class="card-title">Total Achieved Percentage : <p class="text-warning fw-semibold" style="display: inline;">{{.yearperc}}%</p></h3>
+          </div>
+        </div>
+        
+      </div>
+      <div class="col-md-12 mt-5 d-flex justify-content-center">
+        <h3 class="fw-semibold">Detailed Report</h3>
+      </div>
+      <hr>
+      <div class="col-md-12">
+
+        <table class="table table-hover table-info table-striped table-bordered border-5 border-dark">
+          <thead>
+            <tr>
+              <th scope="col">Order Id</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">House Name</th>
+              <th scope="col">Place</th>
+              <th scope="col">Room Name</th>
+              <th scope="col">Total Price</th>
+              <th scope="col">Payment Method</th>
+              <th scope="col">Checkin Date</th>
+              <th scope="col">Checkout Date</th>
+
+            </tr>
+          </thead>
+          <tbody class="table-group-divider">
+            {{range .yeardetails}}
+            <tr>
+              <th scope="row">{{.Orderid}}</th>
+              <td>{{.Firstname}}</td>
+              <td>{{.Lastname}}</td>
+              <td>{{.Housename}}</td>
+              <td>{{.Place}}</td>
+              <td>{{.Roomnames}}</td>
+              <td>{{.Totalprice}}</td>
+              <td>{{.Paymentmethod}}</td>
+              <td>{{.Checkindate}}</td>
+              <td>{{.Checkoutdate}}</td>
+            </tr>
+            {{end}}
+            <tr>
+              <td colspan="6" class="text-danger">TOTAL</td>
+              <td class="bg-secondary text-white">Rs {{.yeartotal}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+
+
+
+      </div>
+    </div>
+  </div>
     
     </body>
 </html>

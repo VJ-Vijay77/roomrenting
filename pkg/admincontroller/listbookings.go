@@ -107,6 +107,7 @@ func SalesReport(c *gin.Context) {
 func SalesReportMonthly(c *gin.Context) {
 	db := database.GetDb()
 
+	// june stats here
 	k := "2022-05-31"
 	var junedetails []models.Orders
 	var junecount int64
@@ -120,15 +121,61 @@ func SalesReportMonthly(c *gin.Context) {
 
 	var floatperc float32 = float32(monthlytotal) / 1000000 * 100
 	monthlypercentage := (int64(floatperc))
+	//june stats end
 
+	//may stats starts here
+	may := "2022-05-01"
+	mayend := "2022-05-31"
+	var maydetails []models.Orders
+	var maycount int64
+	db.Where("checkindate BETWEEN ? AND ?",may,mayend).Find(&maydetails)
+	db.Model(&models.Orders{}).Where("checkindate BETWEEN ? AND ?",may,mayend).Count(&maycount)
+
+	var maytotal int
+	for _, i := range maydetails {
+		maytotal += i.Totalprice
+	}
+
+	var mayperc float32 = float32(maytotal) / 1000000 * 100
+	maypercentage := (int64(mayperc))
+	// may end here
 	c.HTML(200, "monthlysales.gohtml", gin.H{
+		// june
 		"junecount":   junecount,
 		"juneperc":    monthlypercentage,
 		"junedetails": junedetails,
 		"junetotal":   monthlytotal,
+		// may
+		"maycount":   maycount,
+		"mayperc":    maypercentage,
+		"maydetails": maydetails,
+		"maytotal":   maytotal,
+
 	})
 }
 
 func SalesReportYearly(c *gin.Context) {
-	c.HTML(200, "yearlysales.gohtml", gin.H{})
+	db := database.GetDb()
+	yearstart := "2022-01-01"
+	yearend := "2022-12-31"
+
+	var yearlydetails []models.Orders
+	var yearlycount int64
+	db.Where("checkindate BETWEEN ? AND ?",yearstart,yearend).Find(&yearlydetails)
+	db.Model(&models.Orders{}).Where("checkindate BETWEEN ? AND ?",yearstart,yearend).Count(&yearlycount)
+
+	var yearlytotal int
+	for _, i := range yearlydetails {
+		yearlytotal += i.Totalprice
+	}
+
+	var yearlyperc float32 = float32(yearlytotal) / 10000000 * 100
+	yearlypercentage := (int64(yearlyperc))
+
+	c.HTML(200, "yearlysales.gohtml", gin.H{
+		"yearcount":   yearlycount,
+		"yearperc":    yearlypercentage,
+		"yeardetails": yearlydetails,
+		"yeartotal":   yearlytotal,
+	})
 }
