@@ -71,6 +71,14 @@ func InitRoutes(api *gin.Engine) {
 	api.GET("/user/room_booked_search",controller.BookedSearchRooms)
 	api.GET("/user/room_info/:ID",controller.RoomInfo)
 
+	//filters
+	api.GET("/user/filter/singleroom",controllertwo.SingleRoomFilter)
+	api.GET("/user/filter/avsingleroom",controllertwo.AVSingleRoomFilter)
+	api.GET("/user/filter/bksingleroom",controllertwo.BKSingleRoomFilter)
+	api.GET("/user/filter/doubleroom",controllertwo.DoubleRoomFilter)
+	api.GET("/user/filter/avdoubleroom",controllertwo.AVDoubleRoomFilter)
+	api.GET("/user/filter/bkdoubleroom",controllertwo.BKDoubleRoomFilter)
+
 	//cart management
 	api.GET("/user/cart",controller.Cart)
 	api.GET("/user/cart/:RID/:Days/:Startdate/:Endate",controller.AddToCart)
