@@ -8,9 +8,11 @@
     <link rel="stylesheet" href="/static/searchpage/css/searchpage.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+   <script src="/static/allrooms/allrooms.js"></script>
     <script src="https://kit.fontawesome.com/d67b07a9d9.js" crossorigin="anonymous"></script>
-  <script src="/static/allrooms/allrooms.js"></script>
-  <style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+   
+   <style>
       .start-100 {
         left: 97% !important;
     }
@@ -29,8 +31,8 @@
     <div class="col-md-10">
     <div class="hstack gap-3">
       <a href="/user/all_room_search" class="btn btn-outline-secondary btn-sm"> All Rooms </a>
-      <button class="btn btn-dark btn-sm"> Available Rooms </button>
-      <a href="/user/room_booked_search" class="btn btn-sm btn-outline-secondary"> Booked Rooms</a>
+      <a href="/user/room_search" class="btn btn-outline-secondary btn-sm"> Available Rooms </a>
+      <a href="/user/room_booked_search" class="btn btn-dark  btn-sm"> Booked Rooms</a>
       
      </div>
     
@@ -42,8 +44,8 @@
        Sort By
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-        <li><a class="dropdown-item " href="/user/filter/avsingleroom">Single Rooms</a></li>
-        <li><a class="dropdown-item " href="/user/filter/avdoubleroom">Double Rooms</a></li>
+        <li><a class="dropdown-item " href="/user/filter/bksingleroom">Single Rooms</a></li>
+        <li><a class="dropdown-item " href="/user/filter/bkdoubleroom">Double Rooms</a></li>
         <li><a class="dropdown-item " href="">4 BHK</a></li>
       </ul>
     </div>
@@ -72,7 +74,8 @@
 
           <div class="col-md-12">Choose By Date</div>
           <div class="col-md-12">
-            Available from<br> <input type="date" value="{{.cdate}}" min="{{.cdate}}" id="sdate" oninput="isavailable()"><br> </div>
+            Available from<br> <input type="date" value="{{.cdate}}" min="{{.cdate}}" id="sdate" oninput="isavailable()"><br>
+          </div>
           <div class="col-md-12">
             Choose By Price
           </div>
@@ -81,13 +84,13 @@
 <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRange3">
           </div>
           <div class="col-md-3">
-            <a href="/user/filter/avabovefive" class="btn btn-secondary btn-outline-dark text-white btn-sm">Above 5k</a>
+            <a href="/user/filter/bkabovefive" class="btn btn-primary btn-outline-dark text-white btn-sm">Above 5k</a>
           </div>
           <div class="col-md-3">
-            <a href="/user/filter/avaboveseven" class="btn btn-secondary btn-outline-dark text-white btn-sm">Above 7k</a>
+            <a href="/user/filter/bkaboveseven" class="btn btn-secondary btn-outline-dark text-white btn-sm">Above 7k</a>
           </div>
           <div class="col-md-3">
-            <a href="/user/filter/avbelowfive" class="btn btn-secondary btn-outline-dark text-white btn-sm">Below 5k</a>
+            <a href="/user/filter/bkbelowfive" class="btn btn-secondary btn-outline-dark text-white btn-sm">Below 5k</a>
           </div>
          
           <hr>
@@ -103,12 +106,16 @@
         <div class="container pt-5">
           
          
-         
-              <div class="card mb-3">
+         {{if eq .Status "booked"}}
+              <div class="card mb-3 bg-secondary">
+                {{else}}
+                <div class="card mb-3"> {{end}}
+
                 <!-- <img src="/public/{{.Cover}}" class="card-img-top" alt="..."> -->
                
 
-
+                {{if eq .Status "booked"}}
+                {{end}}
                 <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
                   <div class="carousel-inner">
                     <div class="carousel-item active">
@@ -134,13 +141,20 @@
 
 
 
-
-                <div class="card-body">
+                {{if eq .Status "booked"}}
+                <div class="card-body text-white">{{else}}
+                    <div class="card-body">{{end}}
                   <h5 class="card-title">Rs <strong>{{.Room_Price}}</strong> /-</h5>
                   <p class="card-text">{{.Room_Name}}</p>
                   <p class="card-text">1 Bedroom 2 Bathroom 1 Hall</p>
                   <a href="/user/room_info/{{.ID}}" class="btn btn-primary">Check-In Now</a>
+              
+                  {{if eq .Status "booked"}}    
+                <p class="text-muted bg-danger" style="color: white !important;">Available from {{.Checkoutdate}}</p>
+                 
+                 {{else}}
                   <p class="card-text"><small class="text-muted bg-warning">{{.Status}}</small></p>
+                        {{end}}
                 </div>
                 
               </div>

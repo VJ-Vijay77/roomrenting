@@ -83,6 +83,13 @@ func InitRoutes(api *gin.Engine) {
 	api.GET("/user/filter/abovefive",controllertwo.AboveFive)
 	api.GET("/user/filter/aboveseven",controllertwo.AboveSeven)
 	api.GET("/user/filter/belowfive",controllertwo.BelowFive)
+	api.GET("/user/filter/avabovefive",controllertwo.AVAboveFive)
+	api.GET("/user/filter/avaboveseven",controllertwo.AVAboveSeven)
+	api.GET("/user/filter/avbelowfive",controllertwo.AVBelowFive)
+	api.GET("/user/filter/bkabovefive",controllertwo.BKAboveFive)
+	api.GET("/user/filter/bkaboveseven",controllertwo.BKAboveSeven)
+	api.GET("/user/filter/bkbelowfive",controllertwo.BKBelowFive)
+
 
 	//cart management
 	api.GET("/user/cart",controller.Cart)
