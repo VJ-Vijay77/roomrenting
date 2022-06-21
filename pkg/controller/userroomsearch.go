@@ -37,11 +37,14 @@ func AvailableSearchRooms(c *gin.Context) {
 	var wishlistcount int
 	db.Raw("SELECT COUNT(user_id) FROM wishlists WHERE user_id=?", UserID).Scan(&wishlistcount)
 
+	currentTime := time.Now()
+	cdate := currentTime.Format("2006-01-02")
 	c.HTML(200, "roomsearchpage.gohtml", gin.H{
 		"rooms":    rooms,
 		"username": UserName,
 		"count":    count,
 		"wcount":   wishlistcount,
+		"cdate" :cdate,
 	})
 }
 
@@ -72,11 +75,15 @@ func BookedSearchRooms(c *gin.Context) {
 	var wishlistcount int
 	db.Raw("SELECT COUNT(user_id) FROM wishlists WHERE user_id=?", UserID).Scan(&wishlistcount)
 
+
+	currentTime := time.Now()
+	cdate := currentTime.Format("2006-01-02")
 	c.HTML(200, "bookedrooms.gohtml", gin.H{
 		"rooms":    rooms,
 		"username": UserName,
 		"count":    count,
 		"wcount":   wishlistcount,
+		"cdate":cdate,
 	})
 }
 
@@ -202,6 +209,6 @@ func DateFilter(c *gin.Context) {
 		"wcount":   wishlistcount,
 		"rooms":    daterooms,
 		"cdate":date,
-	})
+ 	})
 
 }

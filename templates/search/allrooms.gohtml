@@ -30,7 +30,7 @@
   <div class="row mt-1 ms-2">
     <div class="col-md-10">
     <div class="hstack gap-3">
-      <button class="btn btn-dark btn-sm"> All Rooms </button>
+      <a href="/user/all_room_search" class="btn btn-dark btn-sm"> All Rooms </a>
       <a href="/user/room_search" class="btn btn-outline-secondary btn-sm"> Available Rooms </a>
       <a href="/user/room_booked_search" class="btn btn-sm btn-outline-secondary"> Booked Rooms</a>
       
@@ -74,7 +74,7 @@
 
           <div class="col-md-12">Choose By Date</div>
           <div class="col-md-12">
-            Available from<br> <input type="date" value="{{.cdate}}" id="sdate" oninput="isavailable()"><br>
+            Available from<br> <input type="date" value="{{.cdate}}" min="{{.cdate}}" id="sdate" oninput="isavailable()"><br>
           </div>
           <div class="col-md-12">
             Choose By Price
