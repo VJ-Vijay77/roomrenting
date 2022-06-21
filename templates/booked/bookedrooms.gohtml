@@ -13,6 +13,9 @@
       .start-100 {
         left: 97% !important;
     }
+    body{
+      overflow-x: hidden;
+    }
     </style>
 </head>
 <body>
@@ -23,16 +26,73 @@
 
 
 
-    <!-- category -->
+<div class="row mt-1 ms-2">
+  <div class="col-md-10">
   <div class="hstack gap-3">
-    <a href="/user/room_search" class="border"><button class="btn" type="button"> Available Rooms </button></a>
-    <div class="border"><button class="btn btn-info" type="button"> Booked Rooms</button></div>
+    <a href="/user/all_room_search" class="btn btn-outline-secondary btn-sm"> All Rooms </a>
+    <a href="/user/room_search" class="btn btn-outline-secondary btn-sm"> Available Rooms </a>
+    <button class="btn btn-sm btn-dark"> Booked Rooms</button>
     
    </div>
-   <hr>
+  
+
+</div>
+<div class="col-md-2">
+  <div class="dropdown">
+    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+     Sort By
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+      <li><a class="dropdown-item " href="">Single Rooms</a></li>
+      <li><a class="dropdown-item " href="">Double Rooms</a></li>
+      <li><a class="dropdown-item " href="">4 BHK</a></li>
+    </ul>
+  </div>
+</div>
+</div> 
+<hr>
+ 
 
 
 
+<div class="row ms-1">
+
+ 
+  <div class="col-md-3 d-flex justify-content-center">
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Filter</h3> <hr>
+      </div>
+
+      <div class="col-md-12">Choose By Date</div>
+      <div class="col-md-12">
+        Start Date<br> <input type="date"><br>
+        End Date<br> <input type="date"><hr>
+      </div>
+      <div class="col-md-12">
+        Choose By Price
+      </div>
+      <div class="col-md-12">
+        <label for="customRange3" class="form-label">Price range : Rs 7500/-</label>
+<input type="range" class="form-range" min="0" max="5" step="0.5" id="customRange3">
+      </div>
+      <div class="col-md-3">
+        <a href="" class="btn btn-secondary btn-outline-dark text-white btn-sm">Above 5k</a>
+      </div>
+      <div class="col-md-3">
+        <a href="" class="btn btn-secondary btn-outline-dark text-white btn-sm">Above 7k</a>
+      </div>
+      <div class="col-md-3">
+        <a href="" class="btn btn-secondary btn-outline-dark text-white btn-sm">Below 5k</a>
+      </div>
+     
+      <hr>
+    </div>
+    
+    
+  
+   
+  </div>
 
 
 
@@ -41,7 +101,7 @@
 
     <!-- search rooms start -->
    {{if .rooms}}
-    <div class="row">
+    
       {{range .rooms}}
      
       <div class="col-md-3">
@@ -49,8 +109,27 @@
   
 
               <div class="card mb-3 bg-secondary">
-                <img src="/public/{{.Cover}}" class="card-img-top" alt="...">
-                <!-- <img src="/static/searchpage/images/Room 1/cover.jpeg" class="card-img-top" alt="..."> -->
+               
+               
+
+
+                <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <img src="/public/{{.Cover}}" class="d-block w-100" alt="pic1">
+                    </div>
+                    <div class="carousel-item">
+                      <img src="/public/{{.Sub1}}" class="d-block w-100" alt="pic2">
+                    </div>
+                    <div class="carousel-item">
+                      <img src="/public/{{.Sub3}}" class="d-block w-100" alt="puic3">
+                    </div>
+                  </div>
+                </div>
+
+
+
+
                 <div class="card-body">
                   <h5 class="card-title text-warning">Rs <strong>{{.Room_Price}}</strong> /-</h5>
                   <p class="card-text text-white">{{.Room_Name}}</p>
