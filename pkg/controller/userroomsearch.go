@@ -10,7 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func SearchRooms(c *gin.Context) {
+func AvailableSearchRooms(c *gin.Context) {
 	db := database.GetDb()
 
 	session, err := Store.Get(c.Request, "session")
@@ -105,7 +105,7 @@ func RoomInfo(c *gin.Context) {
 
 	currentTime := time.Now()
 	cdate := currentTime.Format("2006-01-02")
-	cdate2 := currentTime.AddDate(0,0,1)
+	cdate2 := currentTime.AddDate(0, 0, 1)
 	nextday := cdate2.Format("2006-01-02")
 
 	c.HTML(200, "roominfo.gohtml", gin.H{
@@ -123,11 +123,10 @@ func RoomInfo(c *gin.Context) {
 		"username":     UserName,
 		"count":        count,
 		"wcount":       wishlistcount,
-		"cdate":cdate,
-		"ndate":nextday,
+		"cdate":        cdate,
+		"ndate":        nextday,
 	})
 }
-
 
 func AllSearchRooms(c *gin.Context) {
 
@@ -148,7 +147,6 @@ func AllSearchRooms(c *gin.Context) {
 	var allrooms []models.Rooms
 	db.Find(&allrooms)
 
-
 	var UserID int
 	db.Raw("SELECT id FROM users WHERE email=?", userID).Scan(&UserID)
 	//cart count
@@ -161,12 +159,49 @@ func AllSearchRooms(c *gin.Context) {
 	currentTime := time.Now()
 	cdate := currentTime.Format("2006-01-02")
 
-
-	c.HTML(200,"allrooms.gohtml",gin.H{
+	c.HTML(200, "allrooms.gohtml", gin.H{
 		"username": UserName,
 		"count":    count,
 		"wcount":   wishlistcount,
-		"rooms" : allrooms,
-		"cdate":cdate,
+		"rooms":    allrooms,
+		"cdate":    cdate,
 	})
+}
+
+func DateFilter(c *gin.Context) {
+	db := database.GetDb()
+	session, err := Store.Get(c.Request, "session")
+	if err != nil {
+		log.Println("Cannot get sessions!")
+	}
+	useriD := session.Values["userID"]
+	userID := fmt.Sprintf("%s", useriD)
+	var userinfos models.Users
+
+	db.Raw("SELECT first_name FROM users where email=?", userID).Scan(&userinfos)
+	UserName := userinfos.First_Name
+
+	date := c.Param("start")
+
+	a := "available"
+	var daterooms []models.Rooms
+	db.Where("status=? OR checkoutdate < ?", a, date).Find(&daterooms)
+
+	var UserID int
+	db.Raw("SELECT id FROM users WHERE email=?", userID).Scan(&UserID)
+	//cart count
+	var count int
+	db.Raw("SELECT COUNT(user_id) FROM carts WHERE user_id=?", UserID).Scan(&count)
+	//wishlist count
+	var wishlistcount int
+	db.Raw("SELECT COUNT(user_id) FROM wishlists WHERE user_id=?", UserID).Scan(&wishlistcount)
+
+	c.HTML(200, "datefilter.gohtml", gin.H{
+		"username": UserName,
+		"count":    count,
+		"wcount":   wishlistcount,
+		"rooms":    daterooms,
+		"cdate":date,
+	})
+
 }

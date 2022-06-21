@@ -65,8 +65,9 @@ func InitRoutes(api *gin.Engine) {
 
 
 	//room searching and info pages
-	api.GET("/user/room_search",controller.SearchRooms)
+	api.GET("/user/room_search",controller.AvailableSearchRooms)
 	api.GET("/user/all_room_search",controller.AllSearchRooms)
+	api.GET("/user/all_room_search/filter/:start",controller.DateFilter)
 	api.GET("/user/room_booked_search",controller.BookedSearchRooms)
 	api.GET("/user/room_info/:ID",controller.RoomInfo)
 
