@@ -60,6 +60,8 @@ func CheckingOut(c *gin.Context){
 	var roomstatus models.Rooms
 	db.Raw("UPDATE rooms SET status='available' WHERE id=?",RID).Scan(&roomstatus)
 
+	var availablenow models.Rooms
+	db.Raw("UPDATE rooms SET checkoutdate='availablenow' WHERE id=?",RID).Scan(&availablenow)
 	time.Sleep(2 *time.Second)
 
 	c.Redirect(303,"/user/checkings")

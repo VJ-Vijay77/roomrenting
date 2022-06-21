@@ -37,6 +37,9 @@ func CheckoutBookings(c *gin.Context) {
 	var orderedupdation models.Orderedrooms
 	db.Raw("UPDATE orderedrooms SET status='checkedout' WHERE id=?", OID).Scan(&orderedupdation)
 
+	var availablenow models.Rooms
+	db.Raw("UPDATE rooms SET checkoutdate='availablenow' WHERE id=?",RID).Scan(&availablenow)
+
 	ok = "true"
 	k, _ := json.Marshal(ok)
 	c.Writer.Header().Set("Content-Type", "application/json")

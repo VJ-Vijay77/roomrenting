@@ -126,6 +126,11 @@ func PaymentConfirm(c *gin.Context) {
 	orderdetails.Checkoutdate = end 
 	db.Select("user_id", "firstname", "lastname", "housename", "place", "state", "mobile", "totalprice","paymentmethod","roomnames", "accountholder","checkindate","checkoutdate").Create(&orderdetails)
 
+	
+
+	var checkoutdate models.Rooms
+	db.Raw("UPDATE rooms SET checkoutdate=? WHERE room_name=?",end,Allrooms).Scan(&checkoutdate)
+
 	var deletefromcart models.Carts
 	db.Raw("DELETE FROM carts WHERE user_id=?", UserID).Scan(&deletefromcart)
 
@@ -364,6 +369,10 @@ func RazorPaySuccess(c *gin.Context) {
 	orderdetails.Checkoutdate = Endate
 
 	db.Select("user_id", "firstname", "lastname", "housename", "place", "state", "mobile", "totalprice","paymentmethod","roomnames", "accountholder","checkindate","checkoutdate").Create(&orderdetails)
+
+	var checkoutdate models.Rooms
+	db.Raw("UPDATE rooms SET checkoutdate=? WHERE room_name=?",Endate,sendinginfo).Scan(&checkoutdate)
+
 
 	var deletefromcart models.Carts
 	db.Raw("DELETE FROM carts WHERE user_id=?", UserID).Scan(&deletefromcart)

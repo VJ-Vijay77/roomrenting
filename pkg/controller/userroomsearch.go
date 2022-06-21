@@ -158,12 +158,15 @@ func AllSearchRooms(c *gin.Context) {
 	var wishlistcount int
 	db.Raw("SELECT COUNT(user_id) FROM wishlists WHERE user_id=?", UserID).Scan(&wishlistcount)
 
-	
+	currentTime := time.Now()
+	cdate := currentTime.Format("2006-01-02")
+
 
 	c.HTML(200,"allrooms.gohtml",gin.H{
 		"username": UserName,
 		"count":    count,
 		"wcount":   wishlistcount,
 		"rooms" : allrooms,
+		"cdate":cdate,
 	})
 }

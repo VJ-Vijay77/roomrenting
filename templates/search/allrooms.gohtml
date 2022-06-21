@@ -8,7 +8,10 @@
     <link rel="stylesheet" href="/static/searchpage/css/searchpage.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+   <script src="/static/allrooms/allrooms.js"></script>
     <script src="https://kit.fontawesome.com/d67b07a9d9.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+   
    <style>
       .start-100 {
         left: 97% !important;
@@ -71,8 +74,7 @@
 
           <div class="col-md-12">Choose By Date</div>
           <div class="col-md-12">
-            Start Date<br> <input type="date"><br>
-            End Date<br> <input type="date"><hr>
+            Available from<br> <input type="date" value="{{.cdate}}" id="sdate" oninput="isavailable()"><br>
           </div>
           <div class="col-md-12">
             Choose By Price
@@ -148,7 +150,7 @@
                   <a href="/user/room_info/{{.ID}}" class="btn btn-primary">Check-In Now</a>
               
                   {{if eq .Status "booked"}}    
-                <p class="text-muted bg-danger" style="color: white !important;">Available from 31-01-2022</p>
+                <p class="text-muted bg-danger" style="color: white !important;">Available from {{.Checkoutdate}}</p>
                  
                  {{else}}
                   <p class="card-text"><small class="text-muted bg-warning">{{.Status}}</small></p>
