@@ -80,9 +80,9 @@
             Choose By Price
           </div>
           <div class="col-md-12">
-            <label for="customRange3" class="form-label">Price range : Rs 7500/-</label>
-<input type="range" class="form-range" min="0" max="5" step="0.5" id="customRange3">
-          </div>
+            <label for="customRange3" class="form-label" id="rangeid">Price range :Below Rs 5k /-</label>
+            <input type="range" class="form-range" min="0" max="2" step="1" value="0" id="customRange3" onchange="avrange()">
+            </div>
           <div class="col-md-3">
             <a href="/user/filter/avabovefive" class="btn btn-secondary btn-outline-dark text-white btn-sm">Above 5k</a>
           </div>
