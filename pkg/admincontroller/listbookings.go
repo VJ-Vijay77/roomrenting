@@ -182,3 +182,4 @@ func SalesReportYearly(c *gin.Context) {
 		"yeartotal":   yearlytotal,
 	})
 }
+

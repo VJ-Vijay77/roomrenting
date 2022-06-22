@@ -26,6 +26,9 @@ type Rooms struct {
 	Status     string
 	Checkoutdate string
 	Description string
+	Offers string
+	Value int
+	Discountprice int
 }
 
 type Category struct {

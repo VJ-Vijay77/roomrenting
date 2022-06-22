@@ -146,5 +146,8 @@ func InitRoutes(api *gin.Engine) {
 	api.GET("/admin/salesreport/monthly",admincontroller.SalesReportMonthly)
 	api.GET("/admin/salesreport/yearly",admincontroller.SalesReportYearly)
 
-	
+	//offers
+	api.GET("/admin/offers",admincontroller.Offers)
+	api.POST("/admin/offers/update",admincontroller.CategoryOffers)
+	api.GET("/admin/offers/stop/:name",admincontroller.StopOffers)
 }

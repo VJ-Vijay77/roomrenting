@@ -166,6 +166,15 @@ func AllSearchRooms(c *gin.Context) {
 	currentTime := time.Now()
 	cdate := currentTime.Format("2006-01-02")
 
+	for _,i := range allrooms{
+		if i.Offers == "true"{
+			i.Discountprice = i.Room_Price * (100-i.Value)/100
+			db.Raw("UPDATE rooms SET discountprice=? WHERE id=?",i.Discountprice,i.ID).Scan(allrooms)
+
+		}
+	}
+
+
 	c.HTML(200, "allrooms.gohtml", gin.H{
 		"username": UserName,
 		"count":    count,
