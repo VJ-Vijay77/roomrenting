@@ -58,7 +58,11 @@
               {{range .category}}<option value="{{.Category_Name}}">{{.Category_Name}}</option>{{end}}
             </select>
             </div>
-       
+            
+            <div class="col-md-12">
+              <label for="description" class="form-label">Description</label>
+              <input type="text" placeholder="write in minimum 20 words" name="description" class="form-control" required id="description">
+            </div>
         
         <div class="col-12">
           <button type="submit" class="btn btn-primary">Add Room</button>

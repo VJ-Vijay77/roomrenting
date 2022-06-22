@@ -25,6 +25,7 @@ type Rooms struct {
 	Sub5       string
 	Status     string
 	Checkoutdate string
+	Description string
 }
 
 type Category struct {

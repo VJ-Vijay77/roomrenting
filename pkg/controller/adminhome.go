@@ -94,6 +94,7 @@ func PAddRoom(c *gin.Context) {
 
 	RoomPrice := c.PostForm("roomprice")
 	RoomCategory := c.PostForm("roomcategory")
+	RoomDescription := c.PostForm("description")
 	SubPicPath1, _ := c.FormFile("roompicpath1")
 	extension = filepath.Ext(SubPicPath1.Filename)
 	SubPic1 := uuid.New().String() + extension
@@ -138,8 +139,9 @@ func PAddRoom(c *gin.Context) {
 	addroom.Sub3 = SubPic3
 	addroom.Sub4 = SubPic4
 	addroom.Status = "available"
+	addroom.Description = RoomDescription
 
-	db.Select("room_name", "room_price", "category", "cover", "sub1", "sub2", "sub3", "sub4", "sub5", "status").Create(&addroom)
+	db.Select("room_name", "room_price", "category", "cover", "sub1", "sub2", "sub3", "sub4", "sub5", "status","description").Create(&addroom)
 
 	ok = true
 	k, _ := json.Marshal(ok)

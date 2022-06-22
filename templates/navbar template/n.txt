@@ -1,0 +1,65 @@
+{{range .rooms}}
+      <div class="col-6 col-md-3 ">
+        <div class="container pt-5">
+          
+         
+         {{if eq .Status "booked"}}
+              <div class="card mb-3 bg-secondary">
+                {{else}}
+                <div class="card mb-3"> {{end}}
+
+                <!-- <img src="/public/{{.Cover}}" class="card-img-top" alt="..."> -->
+               
+
+                <!-- {{if eq .Status "booked"}}
+                {{end}} -->
+                <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <img src="/public/{{.Cover}}" class="d-block w-100" alt="pic1" style="max-height: 12rem; min-height: 12rem;">
+                    </div>
+                    <div class="carousel-item">
+                      <img src="/public/{{.Sub1}}" class="d-block w-100" alt="pic2" style="max-height: 12rem;min-height: 12rem;">
+                    </div>
+                    <div class="carousel-item">
+                      <img src="/public/{{.Sub3}}" class="d-block w-100" alt="puic3" style="max-height: 12rem;min-height: 12rem;">
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                {{if eq .Status "booked"}}
+                <div class="card-body text-white">{{else}}
+                    <div class="card-body">{{end}}
+                  <h5 class="card-title">Rs <strong>{{.Room_Price}}</strong> /-</h5>
+                  <p class="card-text">{{.Room_Name}}</p>
+                  <p class="card-text">{{.Category}}</p>
+                  <p class="card-text">{{.Description}}</p>
+                  <a href="/user/room_info/{{.ID}}" class="btn btn-primary">Check-In Now</a>
+              
+                  {{if eq .Status "booked"}}    
+                <p class="text-muted bg-danger" style="color: white !important;">Available from {{.Checkoutdate}}</p>
+                 
+                 {{else}}
+                  <p class="card-text"><small class="text-muted bg-warning">{{.Status}}</small></p>
+                        {{end}}
+                </div>
+                
+              </div>
+            
+              
+            </div>
+            </div>
+            {{end}}
+          </div>
+      </div>

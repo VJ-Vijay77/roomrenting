@@ -100,57 +100,9 @@
        
       </div>
      
-      {{range .rooms}}
-      <div class="col-6 col-md-3 ">
-        <div class="container pt-5">
-          
-         
-         
-              <div class="card mb-3">
-                <!-- <img src="/public/{{.Cover}}" class="card-img-top" alt="..."> -->
-               
+      {{template "navbar/card.gohtml" .}}
 
 
-                <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-                  <div class="carousel-inner">
-                    <div class="carousel-item active">
-                      <img src="/public/{{.Cover}}" class="d-block w-100" alt="pic1" style="max-height: 12rem; min-height: 12rem;">
-                    </div>
-                    <div class="carousel-item">
-                      <img src="/public/{{.Sub1}}" class="d-block w-100" alt="pic2" style="max-height: 12rem; min-height: 12rem;">
-                    </div>
-                    <div class="carousel-item">
-                      <img src="/public/{{.Sub3}}" class="d-block w-100" alt="pic3" style="max-height: 12rem; min-height: 12rem;">
-                    </div>
-                  </div>
-                </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-                <div class="card-body">
-                  <h5 class="card-title">Rs <strong>{{.Room_Price}}</strong> /-</h5>
-                  <p class="card-text">{{.Room_Name}}</p>
-                  <p class="card-text">1 Bedroom 2 Bathroom 1 Hall</p>
-                  <a href="/user/room_info/{{.ID}}" class="btn btn-primary">Check-In Now</a>
-                  <p class="card-text"><small class="text-muted bg-warning">{{.Status}}</small></p>
-                </div>
-                
-              </div>
-            
-              
-            </div>
-            </div>
-            {{end}}
           </div>
           
         
