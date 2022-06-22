@@ -3,6 +3,7 @@ package controller
 import (
 	"encoding/json"
 	"path/filepath"
+	"strconv"
 	"time"
 
 	"github.com/VJ-Vijay77/r4room/pkg/database"
@@ -93,6 +94,7 @@ func PAddRoom(c *gin.Context) {
 	c.SaveUploadedFile(CoverPicPath, "./public/"+Cover)
 
 	RoomPrice := c.PostForm("roomprice")
+	RoomCost ,_ := strconv.Atoi(RoomPrice)
 	RoomCategory := c.PostForm("roomcategory")
 	RoomDescription := c.PostForm("description")
 	SubPicPath1, _ := c.FormFile("roompicpath1")
@@ -131,7 +133,7 @@ func PAddRoom(c *gin.Context) {
 	}
 
 	addroom.Room_Name = RoomName
-	addroom.Room_Price = RoomPrice
+	addroom.Room_Price = RoomCost
 	addroom.Category = RoomCategory
 	addroom.Cover = Cover
 	addroom.Sub1 = SubPic1

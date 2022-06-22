@@ -15,7 +15,7 @@ type Users struct {
 type Rooms struct {
 	ID         int
 	Room_Name  string
-	Room_Price string
+	Room_Price int
 	Category   string
 	Cover      string
 	Sub1       string
