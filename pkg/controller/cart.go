@@ -119,7 +119,18 @@ func AddToCart(c *gin.Context) {
 
 
 	var price string
+	var rooms []models.Rooms
+	db.Find(&rooms)
+	for _,i := range rooms {
+		if i.ID == RoomID  {
+			if i.Offers == "true"{
+	db.Raw("SELECT discountprice FROM rooms WHERE id=?",RoomID).Scan(&price)
+			}else{
 	db.Raw("SELECT room_price FROM rooms WHERE id=?",RoomID).Scan(&price)
+
+			}
+		
+	}}
 	Price,_ := strconv.Atoi(price)
 
 	Total := Price*Day

@@ -23,6 +23,7 @@ function removecartitem(CID) {
 }
 
 function proceedtocheckout(RID,Total,Startdate,Endate){
+  
   const UID = document.getElementById("userids")
   const userid = UID.innerHTML
   

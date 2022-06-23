@@ -29,8 +29,14 @@
 <!-- navbar ends -->
 
 
-<div class="container">
-    <div class="row">
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Order History</h1>
+    </div>
+    <hr>
+  </div>
+    <!-- <div class="row">
     {{$userid := .UID}}
    {{range .bookings}}
      
@@ -52,6 +58,53 @@
       </div>
     </div>
    {{end}}
+  </div> -->
+
+
+
+  <div class="row">
+    {{range .bookings}}
+    <div class="col-md-4">{{.Id}}</div>
+
+    <div class="col-md-8">
+
+  <div class="card mb-3" style="max-width: 580px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="/public/{{.Cover}}" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{.Room_Name}}</h5>
+          
+          {{if eq .Offers "true"}}
+          <h5 class="card-title"> <strike class="text-warning">Rs {{.Room_Price}} /-</strike> </h5>
+          
+          <h5 class="card-title">Rs <strong>{{.Discountprice}}</strong> /-</h5>
+          {{else}}
+          <h5 class="card-title">Rs <strong>{{.Room_Price}}</strong> /-</h5>
+          
+          {{end}}
+         
+
+          <p class="card-text">{{.Description}}</p>
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                   
+          {{if eq .Status "checkedin"}}        <button type="button" onclick="checkout('{{.Id}}','{{$userid}}')" class="btn btn-danger" >Check-Out</button>
+          <button type="button" onclick="cancel('{{.Id}}','{{$userid}}','{{.Discountprice}}')" class="btn btn-warning"> Cancel </button>
+          {{end}}
+
+            {{if eq .Status "checkedout"}}     <button type="button" class="btn btn-success" onclick="checkin('{{.Id}}')" >Check-In-Again</button>{{end}}
+       
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+  <hr>
+{{end}}
+
   </div>
   </div>
   
@@ -85,6 +138,30 @@
 
     function checkin(RID) {
         location.href='/user/room_info/'+RID;
+    }
+
+
+    function cancel(RID,UID,Total){
+      
+      
+        swal({
+  title: "Are you sure you want to Cancel?",
+  text: "Once Cancel, you have to vacate from the room if you checkout!",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+    
+     location.href="/user/rooms/cancel/"+RID+"/"+UID+"/"+Total;
+
+  //  swal("Checked-Out Successfully", "Room has been vacated officially", "success");
+
+
+  } 
+});
+    
     }
   </script>
 </body>

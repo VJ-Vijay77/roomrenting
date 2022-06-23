@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cancel Refund</title>
+  
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+   <script src="https://kit.fontawesome.com/d67b07a9d9.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+<style>
+  .start-100 {
+    left: 97% !important;
+}
+</style>
+</head>
+
+<body>
+
+ <!-- navbar start -->
+ {{template "navbar/navbar.gohtml" .}}
+<!-- navbar ends -->
+
+
+<!-- modal start -->
+<!-- Button trigger modal -->
+<div class="container mt-5 d-flex justify-content-center">
+<button type="button" class="btn fw-bold w-75 btn-dark btn-outline-primary text-white" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Choose Refund Method
+  </button>
+</div>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Choose Refund Method</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+            <form action="/user/refund/{{.rid}}/{{.uid}}/{{.refund}}" method="post">
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" id="flexRadioDefault1" name="radioaddress" value="wallet" checked>
+                <label class="form-check-label" for="flexRadioDefault1">
+                    <i class="fa-solid fa-wallet"></i>  Wallet<br>
+                    <p style="font-size: 15px;">NOTE : You will only get 50% of Total money as refund.Click on Refund to Confirm</p>
+                  <p style="font-size: 14px;">Total Cost :<i class="fa-solid fa-indian-rupee-sign"></i> {{.total}}/-</p>  
+                  <p style="color: green;">Refund :<i class="fa-solid fa-indian-rupee-sign"></i> {{.refund}}/-</p>  
+                </label>
+<hr>
+                <input class="form-check-input" type="radio" id="flexRadioDefault1" name="radioaddress" value="Wallet" disabled>
+                <label class="form-check-label" for="flexRadioDefault1">
+                    <i class="fa-solid fa-building-columns"></i>  Bank Account
+                </label>
+                <hr>
+                <input class="form-check-input" type="radio" id="flexRadioDefault1" name="radioaddress" value="Wallet" disabled>
+                <label class="form-check-label" for="flexRadioDefault1">
+                    <i class="fa-solid fa-credit-card"></i>  Paytm Wallet
+                </label>
+
+              </div>
+
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          
+          <button type="submit" class="btn btn-secondary w-50">Refund</button>
+        </div>
+    </form>
+    
+      </div>
+    </div>
+  </div>
+  
+  
+<!-- modal ends -->
+
+ </body>
+ </html>

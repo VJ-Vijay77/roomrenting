@@ -28,7 +28,7 @@
  {{template "navbar/navbar.gohtml" .}}
  <!-- navbar ends -->
 
-<div id="userids">{{.userid}}</div>
+<div id="userids" class="visually-hidden">{{.userid}}</div>
  <hr>
 
    {{if .total}}
@@ -38,9 +38,9 @@
         <th scope="col">Room ID</th>
         <th scope="col">Room</th>
         <th scope="col">Category</th>
-        <th scope="col">Price/day</th>
+        <th scope="col">Original Price/day</th>
         <th scope="col">Total days</th>
-        <th scope="col">Total Cost</th>
+        <th scope="col">Total After Offers</th>
       </tr>
     </thead>
     <tbody>
@@ -68,9 +68,9 @@
        
         </td>
         <td>{{.Category}}</td>
-        <td>{{.Room_Price}}</td>
-        <td><div>{{.Startdate}}</div><br>-to-<br><div id="endate">{{.Endate}}</div><br>={{.Days}}</td>
-        <td>{{.Total}}</td>
+        <td>Rs {{.Room_Price}} /-</td>
+        <td><div style="font-size: smaller;">{{.Startdate}}</div>-to-<div id="endate" style="font-size: smaller;">{{.Endate}}</div><br> = {{.Days}} Days</td>
+        <td><s class="text-danger">Rs {{.Room_Price}} /-</s><br>Rs {{.Total}} /-</td>
 
       
       </tr>

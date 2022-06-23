@@ -119,6 +119,7 @@ func InitRoutes(api *gin.Engine) {
 	api.GET("/user/order_history",controller.OrderHistory)
 	api.GET("/user/edit_profile",controller.EditProfile)
 	api.GET("/user/edit_profile_two",controller.EditProfileTwo)
+	api.GET("/user/profile/wallet",controllertwo.Wallet)
 
 	//user edit profile
 	api.POST("/user/edit_profile/firstname/:ID",controller.EditProfileFirstName)
@@ -136,7 +137,8 @@ func InitRoutes(api *gin.Engine) {
 	//user room checkings
 	api.GET("/user/checkings",controllertwo.CheckingsList)
 	api.GET("/user/rooms/checkedout/:RID/:UID",controllertwo.CheckingOut)
-
+	api.GET("/user/rooms/cancel/:RID/:UID/:Total",controllertwo.Cancel)
+	api.POST("/user/refund/:RID/:UID/:Total",controllertwo.Refund)
 	//admin list bookings
 	api.GET("/admin/list_bookings",admincontroller.ListBookings)
 	api.GET("/admin/list_bookings/checkout/:RID/:OID",admincontroller.CheckoutBookings)
@@ -150,4 +152,9 @@ func InitRoutes(api *gin.Engine) {
 	api.GET("/admin/offers",admincontroller.Offers)
 	api.POST("/admin/offers/update",admincontroller.CategoryOffers)
 	api.GET("/admin/offers/stop/:name",admincontroller.StopOffers)
+
+	//refund routes
+	api.GET("/user/refund/success",controllertwo.RSuccess)
+
+
 }

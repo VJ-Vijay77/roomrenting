@@ -124,6 +124,10 @@ type BookingDetails struct {
 	Cover      string
 	Category   string
 	Room_Price string
+	Offers string
+	Value int
+	Discountprice int
+	Description string
 }
 
 type ListBookings struct {
@@ -153,3 +157,7 @@ type Dates struct{
 	Endate string
 }
 
+type Wallets struct{
+	User_Id int
+	Balance int
+}
