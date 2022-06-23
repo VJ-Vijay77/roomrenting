@@ -103,49 +103,8 @@
     <!-- search rooms start -->
    {{if .rooms}}
     
-      {{range .rooms}}
-     
-      <div class="col-md-3">
-    <div class="container pt-5">
-  
-
-              <div class="card mb-3 bg-secondary">
-               
-               
-
-
-                <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-                  <div class="carousel-inner">
-                    <div class="carousel-item active">
-                      <img src="/public/{{.Cover}}" class="d-block w-100" alt="pic1">
-                    </div>
-                    <div class="carousel-item">
-                      <img src="/public/{{.Sub1}}" class="d-block w-100" alt="pic2">
-                    </div>
-                    <div class="carousel-item">
-                      <img src="/public/{{.Sub3}}" class="d-block w-100" alt="puic3">
-                    </div>
-                  </div>
-                </div>
-
-
-
-
-                <div class="card-body">
-                  <h5 class="card-title text-warning">Rs <strong>{{.Room_Price}}</strong> /-</h5>
-                  <p class="card-text text-white">{{.Room_Name}}</p>
-                  <p class="card-text text-white">1 Bedroom 2 Bathroom 1 Hall</p>
-                  <a href="/user/room_info/{{.ID}}" class="btn btn-primary">Check-In Now</a>
-                  <p class="card-text"><small class="text-muted" style="font-weight: 600;color: red !important;background-color: aliceblue !important;">{{.Status}}</small></p>
-                </div>
-              </div>
-              
-
-            </div>
-              
-          </div>
-        
-          {{end}}
+   {{template "navbar/card.gohtml" .}}
+      
             
           </div>
          {{else}}<h3 class="text-center"> No rooms in booked status</h3>{{end}}
