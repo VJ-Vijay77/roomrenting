@@ -37,7 +37,7 @@
       <tr>
         <th scope="col">Room ID</th>
         <th scope="col">Room</th>
-        <th scope="col">Category</th>
+        
         <th scope="col">Original Price/day</th>
         <th scope="col">Total days</th>
         <th scope="col">Total After Offers</th>
@@ -57,20 +57,23 @@
                 <div class="card-body">
                   <h5 class="card-title">{{.Room_Name}}</h5>
                   <p class="card-text">3 Bedroom 2 Bathroom 1 Hall Balcony with breezing wind</p>
+                  <p class="card-text">Category:{{.Category}}</p>
                   <p class="card-text"><small class="text-muted">Available at kochi</small></p>
                 </div>
               </div>
             </div>
           </div>
+          <div class="v text-muted" style="font-size: 13px;">  <i class="fa-solid fa-wallet" style="color: rgb(250, 71, 6);"></i> Deduct From Wallet in Payment Gateway<br><br></div>
           <button type="button" class="btn btn-danger" onclick="removecartitem('{{.Cartsid}}')">Remove Item</button>
          
             <button type="button" onclick="proceedtocheckout('{{.Cartsroomid}}','{{.Total}}','{{.Startdate}}','{{.Endate}}')" class="btn btn-outline-success btn-warning w-50">Proceed to Checkout</button>
-       
+         
         </td>
-        <td>{{.Category}}</td>
-        <td>Rs {{.Room_Price}} /-</td>
+      
+        <td><s class="text-danger">Rs {{.Room_Price}} /-</s><br>
+        Rs {{.Discountprice}} /-</td>
         <td><div style="font-size: smaller;">{{.Startdate}}</div>-to-<div id="endate" style="font-size: smaller;">{{.Endate}}</div><br> = {{.Days}} Days</td>
-        <td><s class="text-danger">Rs {{.Room_Price}} /-</s><br>Rs {{.Total}} /-</td>
+        <td><br>Rs {{.Total}} /-</td>
 
       
       </tr>

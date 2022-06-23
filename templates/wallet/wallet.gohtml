@@ -16,51 +16,31 @@
     </style>
 </head>
 <body>
+
+    <!-- navbar start -->
+{{template "navbar/navbar.gohtml" .}}
+<!-- navbar ends -->
+
+
+
     <div class="row mt-5">
+      
         <div class="col-md-12 mt-5">
             <div class="container mt-5 d-flex justify-content-center">
                 <div class="v" style="width: 50%;">
-               <h1><button type="button" class="btn w-75 btn-dark fw-bold">Wallet</button></h1> 
-               <h1><button type="button" class="btn w-75 btn-secondary fw-bold">Balance : Rs 0.00</button></h1> 
-            </div>
-            </div>
-        </div>
-
-
-        <div class="col-md-12 mt-5 d-flex justify-content-center">
-            <h1>Transaction History</h1>
-        </div>
-
-        <div class="col-md-12">
-
-
-        <div class="container">
-            
-            <!-- table starts here -->
-            <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
+                    
+               <h1>
                  
-                </tbody>
-              </table>
-            <!-- table ends here -->
-              </div>
-
-
+                <button type="button" class="btn w-75 btn-dark fw-bold">Wallet</button></h1> 
+               <h1><button type="button" class="btn w-75 btn-secondary fw-bold">Balance : Rs {{.bal}}</button></h1> 
+            </div>
+            </div>
         </div>
+
+
+        
+
+       
     </div>
 
 </body>

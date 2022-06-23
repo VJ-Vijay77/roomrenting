@@ -59,6 +59,7 @@ type Cart_Infos struct {
 	Total       int
 	Startdate   string
 	Endate      string
+	Discountprice int
 	
 }
 

@@ -5,6 +5,7 @@
 
 
 function date(Roomprice){
+ 
   let startdate = document.getElementById("startdate").value
   let endate = document.getElementById("endate").value
   const t = new Date(startdate);
