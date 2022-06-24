@@ -153,6 +153,7 @@ func InitRoutes(api *gin.Engine) {
 	api.POST("/admin/offers/update",admincontroller.CategoryOffers)
 	api.GET("/admin/offers/stop/:name",admincontroller.StopOffers)
 	api.GET("/admin/coupons",admincontroller.Coupons)
+	api.POST("/admin/coupons",admincontroller.PCoupons)
 
 
 	//refund routes

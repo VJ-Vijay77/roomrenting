@@ -163,3 +163,11 @@ type Wallets struct{
 	User_Id int
 	Balance int
 }
+
+type Coupons struct{
+	Id int
+	Code string
+	Value int
+	Category string
+	Status string
+}

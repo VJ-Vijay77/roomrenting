@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cancel Refund</title>
-  
+  <title>Coupons & Link</title>
+  <link rel="stylesheet" href="/static/coupon/coupon.css">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
@@ -15,74 +15,103 @@
       crossorigin="anonymous"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
    <script src="https://kit.fontawesome.com/d67b07a9d9.js" crossorigin="anonymous"></script>
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
-<style>
-  .start-100 {
-    left: 97% !important;
-}
-</style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 </head>
 
-<body style="overflow-x: hidden;">
+<body style="background-image: url(/public/body.jpg);">
+
+    
    <div class="container m-5">
-    <div class="row">
+   
+    <div class="row mt-5">
         <div class="col-md-12 d-flex justify-content-center">
+           
             <h1>Coupons & Links</h1>
         </div>
         <div class="row">
             <div class="col-md-12">
             <!-- table starts here -->
             <div class="table-responsive">
-
+                
             <table class="table mt-3">
                 <thead>
                   <tr>
                     
                     <th scope="col">Choose Category</th>
-                    <th scope="col">Coupon value</th>
+                    <th scope="col">Coupon Code</th>
                     <th scope="col">Coupon Value</th>
-                    <th scope="col">Apply</th>
+                  
                     
                   </tr>
                 </thead>
                 <tbody>
-                    <form action="#" method="post">
+                    
                   <tr>
                    
                     <td>
 
-                       
-            <select class="form-select" name="roomcategory"  id="roomcategory">
+                        <form action="/admin/coupons" method="post">       
+            <select class="form-select" name="roomcategory"  id="roomcategory" required>
               <option selected disabled value="">Choose a Category</option>
               {{range .category}}<option value="{{.Category_Name}}">{{.Category_Name}}</option>{{end}}
             </select>
 
                     </td>
                     <td>
-                        <input type="text" name="couponcode" id="couponcode" placeholder="Example: OFF25%">
+                        <input class="rounded-3" type="text" name="couponcode" id="couponcodes" placeholder="Example: OFF25%" style="height: 40px;" required>
                     </td>
                     <td>
-                        <input type="text" name="couponvalue" id="couponvalue" placeholder="Example:25">
+                        <input class="rounded-3" type="number" name="couponvalue" id="couponvalues" placeholder="Example:25" style="height: 40px;" required>
                         
                     </td>
-                    <td>
-                        <button type="submit" class="btn btn-sm btn-danger">AddCoupon</button>
-                    </td>
+                   
                  
+        
                   </tr>
-                </form>
+                
                 </tbody>
               </table>
             <!-- tabel ends here -->
+            <div class="d d-flex justify-content-center">
+                <button type="submit" class="btn btn-danger">Add Coupon</button>
+
+            </div>
+        </form>
             </div>
         </div>
         </div>
     </div>
-
+<hr>
+<hr>
+<div class="row">
+    <div class="col-md-12 mt-3 d-flex justify-content-center">
+        <h1 class="currcoupon">Current Coupons</h1>
+    </div>
+</div>
     <div class="row">
-        <div class="col-md-12">
-            
-        </div>
+        
+
+           
+          {{range .coup}}
+          <div class="col-md-6">
+            <!-- jk -->
+            <div class='coupon_box'>
+                <div class='body'>
+                     <h4 class='title'> Summer Sale </h4>
+                     
+                  <h2 class='how_much'> <b> {{.Value}}% </b> </h2>
+                    <h3> OFF </h3>
+                </div>
+                
+                <button class='btn btn-light fw-bold' style="color: grey;"> {{.Code}} </button>
+              </div>
+            <!-- k -->
+          </div>
+              {{end}}
+
+
+        
     </div>
 
 
