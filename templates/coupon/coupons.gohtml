@@ -19,15 +19,15 @@
 
 </head>
 
-<body style="background-image: url(/public/body.jpg);">
+<body >
 
     
    <div class="container m-5">
    
-    <div class="row mt-5">
+    <div class="row">
         <div class="col-md-12 d-flex justify-content-center">
            
-            <h1>Coupons & Links</h1>
+            <h1 class="currcoupons">Coupons & Links</h1>
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -85,26 +85,50 @@
 <hr>
 <hr>
 <div class="row">
-    <div class="col-md-12 mt-3 d-flex justify-content-center">
+    <div class="col-md-12 mt-1 d-flex justify-content-center">
         <h1 class="currcoupon">Current Coupons</h1>
     </div>
+
 </div>
+<div class="w-100 bg-success text-white d-flex justify-content-center rounded-2" id="notice" style="font-size: 2rem;"></div>
+
     <div class="row">
         
 
            
           {{range .coup}}
-          <div class="col-md-6">
+          <div class="col-md-4">
             <!-- jk -->
             <div class='coupon_box'>
+             {{if eq .Status "true"}}
                 <div class='body'>
+                  {{else}}
+                <div class='body bg-secondary'>
+                  {{end}}
                      <h4 class='title'> Summer Sale </h4>
+                     <h6 class='title'> {{.Category}} </h6>
                      
-                  <h2 class='how_much'> <b> {{.Value}}% </b> </h2>
+                  <h2 class="how_much"> <b> {{.Value}}% </b> </h2>
                     <h3> OFF </h3>
+                  <!-- overlay starts here -->
+                  <div class="cs-menu">
+                    {{if eq .Status "true"}}   <div class="item d-flex align-items-center justify-content-center" onclick="deletec('{{.Id}}')" title="Delete Coupon"><i class="fa-solid fa-trash-can-arrow-up"></i></div>
+                    <div class="item d-flex align-items-center justify-content-center" onclick="inactive('{{.Id}}')" title="Deactivate Coupon"><i class="fa-solid fa-ban"></i></div>
+                   {{else}}
+                   <div class="item d-flex align-items-center justify-content-center" onclick="deletec('{{.Id}}')" title="Delete Coupon"><i class="fa-solid fa-trash-can-arrow-up"></i></div>
+                   <div class="item d-flex align-items-center justify-content-center" onclick="active('{{.Id}}')" title="Activate Coupon"><i class="fa-solid fa-check"></i></div>
+                  
+                   {{end}}
+
+                  </div>
+                  <!-- overlay ends here -->
                 </div>
-                
+               {{if eq .Status "true"}} <div class="status bg-warning mt-1 w-100 rounded-3 fw-bold">Active</div>
+               {{else}}
+               <div class="status bg-dark mt-1 w-100 rounded-3">InActive</div>
+               {{end}}
                 <button class='btn btn-light fw-bold' style="color: grey;"> {{.Code}} </button>
+            
               </div>
             <!-- k -->
           </div>
@@ -116,5 +140,139 @@
 
 
    </div>
+
+   <script>
+    function deletec(id){
+      
+      swal({
+  title: "Are you sure?",
+  text: "Once deleted, you will not be able to recover this coupon again!",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+   
+
+
+    $.ajax({
+      url:'/admin/deletecoupons/'+id,
+      method:'get',
+      success: function(k){
+        if (k == "true"){
+
+       
+         
+document.getElementById("notice").innerHTML = "Successfully Deleted"; 
+setTimeout(() => {
+  const box = document.getElementById('notice');
+
+  // 👇️ hides element (still takes up space on page)
+  box.style.visibility = 'hidden';
+  location.href='/admin/coupons';
+}, 1500);
+
+
+
+        }else{
+          
+        }
+      }
+    })
+  } 
+});
+
+
+    }
+
+
+    function inactive(id){
+
+      swal("Are you Sure you want to make this coupon inactive?", {
+  buttons: {
+    cancel: "Cancel",
+    catch: {
+      text: "YES!",
+      value: "catch",
+    },
+    
+  },
+})
+.then((value) => {
+  switch (value) {
+ 
+    
+ 
+    case "catch":
+    $.ajax({
+      url:"/admin/inactivecoupons/"+id,
+      method:'get',
+      success : function(k){
+        if (k== "true"){
+      swal("Successfull", "Coupon deactivated!", "success");
+      setTimeout(() => {
+        location.href='/admin/coupons'
+  }, 1300);
+        }
+      }
+    })
+
+  
+
+    
+  }
+});
+
+
+
+    }
+
+
+
+
+
+
+    function active(id){
+
+swal("Are you Sure you want to make this coupon active?", {
+buttons: {
+cancel: "Cancel",
+catch: {
+text: "YES!",
+value: "catch",
+},
+
+},
+})
+.then((value) => {
+switch (value) {
+
+
+
+case "catch":
+$.ajax({
+url:"/admin/activecoupons/"+id,
+method:'get',
+success : function(k){
+  if (k== "true"){
+swal("Successfull", "Coupon Activated!", "success");
+setTimeout(() => {
+  location.href='/admin/coupons'
+}, 1300);
+  }
+}
+})
+
+
+
+
+}
+});
+
+
+
+}
+   </script>
 </body>
 </html>

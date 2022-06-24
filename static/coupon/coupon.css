@@ -7,7 +7,14 @@
     align-items: center;
     background-image: url(http://7-themes.com/data_images/out/8/6794212-free-simple-backgrounds.jpg);
 } */
-
+body{
+ background-image: url(/public/body.jpg);
+ background-size: cover;
+ overflow-x: hidden;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
 
 .coupon_box{
     background: #FF416C;
@@ -56,17 +63,55 @@
       position: relative;
     }
     .body::before{
-      content: '25';
+      content: 'R4R';
       position: absolute;
       color: rgba(255,255,255,0.15);
       top: 0%;
-      left: 5%;
+      left: -14%;
       font-size: 150px;
       font-weight: bold;
     }
     
 .currcoupon{
+  position: relative;
     color: grey;
     font-weight: 600;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.currcoupons{
+  
+    color: rgb(93, 91, 91);
+    font-weight: 600;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+
+
+
+.cs-menu {
+  position: absolute;
+  top: 35%;
+  right:-5%;
+
+}
+
+.cs-menu .item {
+  margin: 0 0 0 auto;
+  border: 1px solid red;
+  width: 40px;
+  height: 40px;
+  background: #000000;
+  transition: width .5s;
+ 
+}
+
+.cs-menu .item:hover {
+  width: 100px;
+  
+}
+
+
+
+.custom-tooltip {
+  --bs-tooltip-bg: var(--bs-primary);
 }
