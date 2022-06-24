@@ -47,6 +47,10 @@ func Payment(c *gin.Context) {
 	var address []models.Useraddress
 	db.Where("user_id=?", UserID).Find(&address)
 
+	//taking wallet balance
+	var wallet models.Wallets
+	db.Select("balance").Where("user_id=?",Usersid).Find(&wallet)
+
 	c.HTML(200, "payment.gohtml", gin.H{
 		"total":     TotalPrice,
 		"roomnames": roomnames,
@@ -57,6 +61,7 @@ func Payment(c *gin.Context) {
 		"startdate": Startdate,
 		"endate":    Endate,
 		"roomid":    Roomid,
+		"wbal":wallet.Balance,
 	})
 }
 

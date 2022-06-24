@@ -12,6 +12,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
       crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/d67b07a9d9.js" crossorigin="anonymous"></script>
+
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- <script src="/static/address.js"></script> -->
     </head>
@@ -120,8 +122,12 @@
                                         {{range .roomnames}}<li>{{.}}</li>{{end}}
                                         <li>Roomid : {{.roomid}}<br><strong>From</strong> {{.startdate}} <strong>To</strong> {{.endate}}</li>
                                     </ul></span></p>
+                                    <p>
+                                       <input type="checkbox" name="wallet" id="wallet" onchange="wallet('{{.wbal}}','{{.total}}')">
+                                       <button class="btn btn-info btn-outline-success text-white" > <label for="wallet" style="color: rgb(255, 255, 255);font-weight: 600;" > <i class="fa-solid fa-wallet" style="color: blue;" ></i> Deduct from wallet Rs {{.wbal}}</label></button>
+                                        </p>
                                     <p class="mb-0"><span class="fw-bold">Total Price:</span>
-                                        <span>Rs<h3 class="text-danger"><strong>{{.total}}</strong></h3> </span></p>
+                                        <span>Rs<h3 class="text-danger"><strong id="raztotal">{{.total}}</strong></h3> </span></p>
                                     <p class="mb-0">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque
                                         nihil neque
                                         quisquam aut
@@ -129,7 +135,7 @@
                                         quis,
                                         iste harum ipsum hic, nemo qui!</p>
                                 </div>
-                                <a href="/user/payment/razorpay/{{.total}}/{{.uid}}/{{.startdate}}/{{.endate}}" type="button" class="btn btn-warning btn-outline-primary">Pay Now</a>
+                                <button onclick="payment('{{.total}}','{{.uid}}','{{.startdate}}','{{.endate}}','{{.wbal}}')" type="button"  class="btn btn-warning btn-outline-primary">Pay Now</button>
                             </div>
                         </div>
                     </div>
@@ -345,6 +351,34 @@ setTimeout(() => { location.href="/user/payment/success";  }, 1700);
 });
 }
 
+function wallet (bal,total){
+    if($("#wallet").prop('checked') == true){
+        const newtotal = total - bal
+        $("#raztotal").text(newtotal)
+        
+}else{
+    $("#raztotal").text(total)
+    
+    
+}
+
+}
+
+function payment(total,uid,start,end,bal){
+    // /user/payment/razorpay/{{.total}}/{{.uid}}/{{.startdate}}/{{.endate}}"
+    console.log(total,uid,start,end,bal)
+    if($("#wallet").prop('checked') == true){
+       
+    const wtotal = total-bal
+    location.href='/user/payment/razorpay/'+wtotal+'/'+uid+'/'+start+'/'+end;
+        
+        
+}else{
+    location.href='/user/payment/razorpay/'+total+'/'+uid+'/'+start+'/'+end;
+
+    }
+
+}
 
 
     </script>
