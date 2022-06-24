@@ -95,6 +95,7 @@ type Orders struct {
 	Accountholder string
 	Checkindate string
 	Checkoutdate string
+	Wallet int
 }
 
 type Orderedrooms struct {

@@ -39,7 +39,7 @@ func UserProfile(c *gin.Context) {
 	db.Where("user_id=? AND main=?",UserID,main).Find(&addressofuser)
 	
 	var wallet models.Wallets
-	db.Select("balance").Find(&wallet)
+	db.Select("balance").Where("user_id=?",UserID).Find(&wallet)
 
 	c.HTML(200, "userprofile.gohtml", gin.H{
 		"data": userinfos,

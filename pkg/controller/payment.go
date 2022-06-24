@@ -9,6 +9,7 @@ import (
 	"github.com/VJ-Vijay77/r4room/pkg/models"
 	"github.com/gin-gonic/gin"
 	razorpay "github.com/razorpay/razorpay-go"
+	
 )
 
 func Payment(c *gin.Context) {
@@ -88,7 +89,22 @@ func PaymentConfirm(c *gin.Context) {
 	
 	start := c.Param("start")
 	end := c.Param("end")
+	wallet := c.Param("wallet")
+	wtotal := c.Param("total")
 	
+	var Wallbal int 
+	var zero int= 0
+	var walbalets models.Wallets
+	if wallet == "0"{
+		Wallbal = 0
+	}else{
+		k,_ := strconv.Atoi(wallet)
+		Wallbal = k
+		db.Raw("UPDATE wallets SET balance=? WHERE user_id=?",zero,UserID).Scan(&walbalets)
+	}
+
+
+
 	//fmt.Println(start,end)
 	 FName := c.PostForm("firstnamef")	
 	LName := c.PostForm("lastnamef")
@@ -96,9 +112,9 @@ func PaymentConfirm(c *gin.Context) {
 	Place := c.PostForm("placef")
 	State := c.PostForm("statef")
 	Mobile := c.PostForm("mobilef")
-	Total := c.PostForm("totalprice")
+	// Total := c.PostForm("totalprice")
 	Allrooms := c.PostForm("allroomnames")
-	total,_ := strconv.Atoi(Total) 
+	total,_ := strconv.Atoi(wtotal) 
 
 	var status = "checkedin"
 
@@ -129,7 +145,8 @@ func PaymentConfirm(c *gin.Context) {
 	orderdetails.Accountholder = UserName
 	orderdetails.Checkindate = start 
 	orderdetails.Checkoutdate = end 
-	db.Select("user_id", "firstname", "lastname", "housename", "place", "state", "mobile", "totalprice","paymentmethod","roomnames", "accountholder","checkindate","checkoutdate").Create(&orderdetails)
+	orderdetails.Wallet = Wallbal
+	db.Select("user_id", "firstname", "lastname", "housename", "place", "state", "mobile", "totalprice","paymentmethod","roomnames", "accountholder","checkindate","checkoutdate","wallet").Create(&orderdetails)
 
 	
 
@@ -219,6 +236,10 @@ func PaymentAddressPick(c *gin.Context) {
 	var addresspick models.Useraddress
 	db.Where("adrid=?", AID).Find(&addresspick)
 
+	//taking wallet balance
+	var wallet models.Wallets
+	db.Select("balance").Where("user_id=?",UID).Find(&wallet)
+
 	c.HTML(200, "paymentaddressfill.gohtml", gin.H{
 		"total":     TotalPrice,
 		"roomnames": roomnames,
@@ -231,6 +252,7 @@ func PaymentAddressPick(c *gin.Context) {
 		"startdate": Startdate,
 		"endate":    Endate,
 		"roomid":    Roomid,
+		"wbal":wallet.Balance,
 	})
 }
 
@@ -248,6 +270,7 @@ func RazorPay(c *gin.Context) {
 	UID, _ := strconv.Atoi(Userid)
 	Grandtotal := Total + "00"
 	total, _ := strconv.Atoi(Grandtotal)
+	Wallet := c.Param("wallet")
 
 	var userinfos models.Users
 	db.Where("id=?", UID).Find(&userinfos)
@@ -289,24 +312,12 @@ func RazorPay(c *gin.Context) {
 		"address":  address,
 		"start":Startdate,
 		"end":Endate,
+		"wallet":Wallet,
 	})
 
 }
 
 func RazorPaySuccess(c *gin.Context) {
-
-	PayId := c.Param("rpid")
-	OrderId := c.Param("roid")
-	Signature := c.Param("rsign")
-	Startdate := c.Param("start")
-	Endate := c.Param("end")
-	Total := c.Param("total")
-
-	totalint,_ := strconv.Atoi(Total)
-	GrandTotal := totalint/100
-
-	
-
 	db := database.GetDb()
 	session, _ := Store.Get(c.Request, "session")
 	useriD := session.Values["userID"]
@@ -320,6 +331,33 @@ func RazorPaySuccess(c *gin.Context) {
 	var UserID int
 	db.Raw("SELECT id FROM users WHERE email=?", userID).Scan(&UserID)
 
+
+	PayId := c.Param("rpid")
+	OrderId := c.Param("roid")
+	Signature := c.Param("rsign")
+	Startdate := c.Param("start")
+	Endate := c.Param("end")
+	Total := c.Param("total")
+	Wallet := c.Param("wallet")
+	var Wallbal int 
+	var zero int= 0
+	var walbalets models.Wallets
+	if Wallet == "0"{
+		Wallbal = 0
+	}else{
+		k,_ := strconv.Atoi(Wallet)
+		Wallbal = k
+		db.Raw("UPDATE wallets SET balance=? WHERE user_id=?",zero,UserID).Scan(&walbalets)
+	}
+
+
+	totalint,_ := strconv.Atoi(Total)
+	GrandTotal := totalint/100
+
+	
+
+	
+	
 	var roomsids []models.Carts
 	db.Select("cartsroomid").Where("user_id=?", UserID).Find(&roomsids)
 
@@ -341,20 +379,8 @@ func RazorPaySuccess(c *gin.Context) {
 	for i := range roomnames {
 		sendinginfo += roomnames[i]
 	}
+	
 
-	//total cart price
-	// var totalprice []string
-	// var convInt int
-
-	// var GrandTotal int
-
-	// db.Raw("SELECT rooms.room_price FROM carts INNER JOIN users ON carts.user_id=users.id INNER JOIN rooms ON carts.cartsroomid=rooms.id  WHERE user_id=?", UserID).Scan(&totalprice)
-	// for _, price := range totalprice {
-	// 	convInt, _ = strconv.Atoi(price)
-	// 	GrandTotal += convInt
-	// }
-
-	// GrndTotal := strconv.Itoa(GrandTotal)
 		var paymode string = "Razor Pay"
 	var orderdetails models.Orders
 	var adress models.Useraddress
@@ -372,8 +398,9 @@ func RazorPaySuccess(c *gin.Context) {
 	orderdetails.Accountholder = username
 	orderdetails.Checkindate = Startdate
 	orderdetails.Checkoutdate = Endate
+	orderdetails.Wallet = Wallbal
 
-	db.Select("user_id", "firstname", "lastname", "housename", "place", "state", "mobile", "totalprice","paymentmethod","roomnames", "accountholder","checkindate","checkoutdate").Create(&orderdetails)
+	db.Select("user_id", "firstname", "lastname", "housename", "place", "state", "mobile", "totalprice","paymentmethod","roomnames", "accountholder","checkindate","checkoutdate","wallet").Create(&orderdetails)
 
 	var checkoutdate models.Rooms
 	db.Raw("UPDATE rooms SET checkoutdate=? WHERE room_name=?",Endate,sendinginfo).Scan(&checkoutdate)
@@ -397,6 +424,7 @@ func RazorPaySuccess(c *gin.Context) {
 	razor.Signature = Signature
 	db.Select("user_id", "payid", "orderid", "signature").Create(&razor)
 
+	
 	c.Redirect(303, "/user/payment/success")
 
 }
