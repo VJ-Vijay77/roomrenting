@@ -36,13 +36,16 @@ func Payment(c *gin.Context) {
 	Endate := c.Param("Endate")
 	RID,_ := strconv.Atoi(Roomid) 
 	Usersid, _ := strconv.Atoi(UserID)
+	
+	
 	//taking order details
-	var roomnames []string
-	db.Raw("SELECT rooms.room_name FROM carts INNER JOIN rooms ON rooms.id=carts.cartsroomid WHERE carts.user_id=?", Usersid).Scan(&roomnames)
-	var sendinginfo string
-	for i := range roomnames {
-		sendinginfo += roomnames[i]
-	}
+	var roomnames string
+	// db.Raw("SELECT rooms.room_name FROM carts INNER JOIN rooms ON rooms.id=carts.cartsroomid WHERE carts.user_id=?", Usersid).Scan(&roomnames)
+	// var sendinginfo string
+	// for i := range roomnames {
+	// 	sendinginfo += roomnames[i]
+	// }
+	db.Raw("SELECT room_name FROM rooms WHERE id=?",RID).Scan(&roomnames)
 
 
 	//parsing address of the user
@@ -64,7 +67,7 @@ func Payment(c *gin.Context) {
 	c.HTML(200, "payment.gohtml", gin.H{
 		"total":     TotalPrice,
 		"roomnames": roomnames,
-		"allrooms":  sendinginfo,
+		"allrooms":  roomnames,
 		"username":  UserName,
 		"address":   address,
 		"uid":       IDofUser,
@@ -123,7 +126,8 @@ func PaymentConfirm(c *gin.Context) {
 	Place := c.PostForm("placef")
 	State := c.PostForm("statef")
 	Mobile := c.PostForm("mobilef")
-	// Total := c.PostForm("totalprice")
+	Roomid := c.PostForm("roomid")
+	RID,_ := strconv.Atoi(Roomid)
 	Allrooms := c.PostForm("allroomnames")
 	total,_ := strconv.Atoi(wtotal) 
 
@@ -165,7 +169,7 @@ func PaymentConfirm(c *gin.Context) {
 	db.Raw("UPDATE rooms SET checkoutdate=? WHERE room_name=?",end,Allrooms).Scan(&checkoutdate)
 
 	var deletefromcart models.Carts
-	db.Raw("DELETE FROM carts WHERE user_id=?", UserID).Scan(&deletefromcart)
+	db.Raw("DELETE FROM carts WHERE cartsroomid =?", RID).Scan(&deletefromcart)
 
 	var updateroomstatus models.Rooms
 
@@ -226,17 +230,19 @@ func PaymentAddressPick(c *gin.Context) {
 	Roomid := c.Param("Roomid")
 	Startdate := c.Param("Startdate")
 	Endate := c.Param("Endate")
-	//fmt.Println("hiii")
-	fmt.Println(TotalPrice,UserID,Roomid,Startdate,Endate)
+	RID,_ := strconv.Atoi(Roomid) 
+	
 	UID, _ := strconv.Atoi(UserID)
 
 	//taking order details
-	var roomnames []string
-	db.Raw("SELECT rooms.room_name FROM carts INNER JOIN rooms ON rooms.id=carts.cartsroomid WHERE carts.user_id=?", UID).Scan(&roomnames)
-	var sendinginfo string
-	for i := range roomnames {
-		sendinginfo += roomnames[i]
-	}
+	var roomnames string
+	// db.Raw("SELECT rooms.room_name FROM carts INNER JOIN rooms ON rooms.id=carts.cartsroomid WHERE carts.user_id=?", UID).Scan(&roomnames)
+	// var sendinginfo string
+	// for i := range roomnames {
+	// 	sendinginfo += roomnames[i]
+	// }
+	db.Raw("SELECT room_name FROM rooms WHERE id=?",RID).Scan(&roomnames)
+
 
 	//parsing address of the user
 	var address []models.Useraddress
@@ -251,10 +257,18 @@ func PaymentAddressPick(c *gin.Context) {
 	var wallet models.Wallets
 	db.Select("balance").Where("user_id=?",UID).Find(&wallet)
 
+	//getting category of room
+	var category string
+	db.Raw("SELECT category FROM rooms WHERE id=?",RID).Scan(&category)
+
+	//gettting coupons
+	var coupons []models.Coupons
+	db.Find(&coupons)
+
 	c.HTML(200, "paymentaddressfill.gohtml", gin.H{
 		"total":     TotalPrice,
 		"roomnames": roomnames,
-		"allrooms":  sendinginfo,
+		"allrooms":  roomnames,
 		"username":  UserName,
 		"lastname":  LastName,
 		"address":   address,
@@ -264,6 +278,8 @@ func PaymentAddressPick(c *gin.Context) {
 		"endate":    Endate,
 		"roomid":    Roomid,
 		"wbal":wallet.Balance,
+		"coupon":coupons,
+		"category":category,
 	})
 }
 
