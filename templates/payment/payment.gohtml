@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,48 +9,102 @@
     <link rel="stylesheet" href="/static/payment/payment.css">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
-      crossorigin="anonymous"></script>
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/d67b07a9d9.js" crossorigin="anonymous"></script>
 
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- <script src="/static/address.js"></script> -->
-    </head>
+</head>
+
 <body>
- 
-   <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Choose Address</h5>
+          <h5 class="modal-title fw-bold" id="exampleModalLabel">SELECT COUPON</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="/user/payment/addresspick/{{.total}}/{{.uid}}/{{.roomid}}/{{.startdate}}/{{.endate}}" method="post">
         <div class="modal-body">
-          
-           {{range .address}} <div class="form-check">
-                <input class="form-check-input" type="radio" name="radioaddress" id="{{.Adrid}}" value="{{.Adrid}}">
-                <label class="form-check-label" for="flexRadioDefault1">
-                 {{.Adrid}}-{{.Housename}} || {{.Place}} || {{.Mobile}}
-                </label>
-              </div>
-              <hr>
-              {{end}}
-              <a href="/user/edit_profile" type="button" class="btn btn-primary btn-outline-success">+ Add Address </a>
+            {{$cat := .category}}
+            <div class="row">
+          {{range .coupon}}
+                <div class="col-md-6">
+        {{if eq .Category $cat}}
+          <div class="card text-bg-dark mb-3" style="max-width: 21rem; max-height: 12rem;">
+            {{else}}
+            <div class="card text-bg-secondary mb-3" style="max-width: 21rem; max-height: 12rem;">
+
+            {{end}}
+            <div class="card-header text-center">Category:{{.Category}}</div>
+            <div class="card-body">
+              <h5 class="card-title fw-bold text-center">{{.Code}}</h5>
+              <p class="card-text text-center">Discount Value {{.Value}}%</p>
+        {{if eq .Category $cat}}
+              <p class="card-text btn btn-sm btn-outline-info d-flex justify-content-center" onclick="applycoupon('{{.Id}}','{{.Value}}')" data-bs-dismiss="modal" aria-label="Close">Apply Now</p>
+            {{else}}
+            <p class="card-text d-flex justify-content-center">Not Available</p>
+
+            {{end}}
+            </div>
+          </div>
             
+
+            </div>
+            {{end}}
+            </div>
+
         </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Save changes</button>
-        </div>
-        </form>
+       
       </div>
     </div>
   </div>
   
-      <!-- modal end -->
+
+
+
+
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Choose Address</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="/user/payment/addresspick/{{.total}}/{{.uid}}/{{.roomid}}/{{.startdate}}/{{.endate}}"
+                    method="post">
+                    <div class="modal-body">
+
+                        {{range .address}} <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radioaddress" id="{{.Adrid}}"
+                                value="{{.Adrid}}">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                {{.Adrid}}-{{.Housename}} || {{.Place}} || {{.Mobile}}
+                            </label>
+                        </div>
+                        <hr>
+                        {{end}}
+                        <a href="/user/edit_profile" type="button" class="btn btn-primary btn-outline-success">+ Add
+                            Address </a>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal end -->
 
     <div class="container">
         <div class="row">
@@ -118,16 +173,25 @@
                             <div class="row">
                                 <div class="col-8">
                                     <p class="h4 mb-0">Summary</p>
-                                    <p class="mb-0"><span class="fw-bold">Product:</span><span class="c-green"><ul>
-                                        {{range .roomnames}}<li>{{.}}</li>{{end}}
-                                        <li>Roomid : {{.roomid}}<br><strong>From</strong> {{.startdate}} <strong>To</strong> {{.endate}}</li>
-                                    </ul></span></p>
+                                    <p class="mb-0"><span class="fw-bold">Product:</span><span class="c-green">
+                                            <ul>
+                                                {{range .roomnames}}<li>{{.}}</li>{{end}}
+                                                <li>Roomid : {{.roomid}}<br><strong>From</strong> {{.startdate}}
+                                                    <strong>To</strong> {{.endate}}</li>
+                                            </ul>
+                                        </span></p>
                                     <p>
-                                       <input type="checkbox" name="wallet" id="wallet" onchange="wallet('{{.wbal}}','{{.total}}')">
-                                       <button class="btn btn-info btn-outline-success text-white" > <label for="wallet" style="color: rgb(255, 255, 255);font-weight: 600;" > <i class="fa-solid fa-wallet" style="color: blue;" ></i> Deduct from wallet Rs {{.wbal}}</label></button>
-                                        </p>
+                                        <input type="checkbox" name="wallet" id="wallet"
+                                            onchange="wallet('{{.wbal}}','{{.total}}')">
+                                        <button class="btn btn-info btn-outline-success text-white"> <label for="wallet"
+                                                style="color: rgb(255, 255, 255);font-weight: 600;"> <i
+                                                    class="fa-solid fa-wallet" style="color: blue;"></i> Deduct from
+                                                wallet Rs {{.wbal}}</label></button>
+                                    </p>
                                     <p class="mb-0"><span class="fw-bold">Total Price:</span>
-                                        <span>Rs<h3 class="text-danger"><strong id="raztotal">{{.total}}</strong></h3> </span></p>
+                                        <span>Rs<h3 class="text-danger"><strong id="raztotal">{{.total}}</strong></h3>
+                                        </span>
+                                    </p>
                                     <p class="mb-0">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque
                                         nihil neque
                                         quisquam aut
@@ -135,7 +199,9 @@
                                         quis,
                                         iste harum ipsum hic, nemo qui!</p>
                                 </div>
-                                <button onclick="payment('{{.total}}','{{.uid}}','{{.startdate}}','{{.endate}}','{{.wbal}}')" type="button"  class="btn btn-warning btn-outline-primary">Pay Now</button>
+                                <button
+                                    onclick="payment('{{.total}}','{{.uid}}','{{.startdate}}','{{.endate}}','{{.wbal}}')"
+                                    type="button" class="btn btn-warning btn-outline-primary">Pay Now</button>
                             </div>
                         </div>
                     </div>
@@ -157,73 +223,102 @@
                                 <div class="col-lg-5 mb-lg-0 mb-3">
                                     <p class="h4 mb-0">Summary</p>
                                     <p class="mb-0"><span class="fw-bold">Items:</span><span class="c-green">:
-                                         <ul>
-                                        {{range .roomnames}}<li>{{.}}</li>{{end}}
-                                        <li>Roomid : {{.roomid}}<br><strong>From</strong> {{.startdate}} <strong>To</strong> {{.endate}}</li>
-                                       
-                                    </ul></span>
+                                            <ul>
+                                                {{range .roomnames}}<li>{{.}}</li>{{end}}
+                                                <li>Roomid : {{.roomid}}<br><strong>From</strong> {{.startdate}}
+                                                    <strong>To</strong> {{.endate}}</li>
+
+                                            </ul>
+                                        </span>
                                     </p>
                                     <p>
-                                        <input type="checkbox" name="wallets" id="wallets" onchange="wallets('{{.wbal}}','{{.total}}')">
-                                        <button class="btn btn-info btn-outline-success text-white" > <label for="wallets" style="color: rgb(255, 255, 255);font-weight: 600;" > <i class="fa-solid fa-wallet" style="color: blue;" ></i> Deduct from wallet Rs {{.wbal}}</label></button>
-                                         </p>
+                                        <input type="checkbox" name="wallets" id="wallets"
+                                            onchange="wallets('{{.wbal}}','{{.total}}')">
+                                        <button class="btn btn-info btn-outline-success text-white"> <label
+                                                for="wallets" style="color: rgb(255, 255, 255);font-weight: 600;"> <i
+                                                    class="fa-solid fa-wallet" style="color: blue;"></i> Deduct from
+                                                wallet Rs {{.wbal}}</label></button>
+                                    </p>
+
+                                    <p>
+                                        <div class="coupon">
+                                            <button id="buttons" type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                                              Apply Coupon
+                                              </button>
+                                              
+                                        </div>
+                                    <div id="cpn" style="color: green;font-size: small;"></div>
+
+                                    </p>
+
                                     <p class="mb-0">
                                         <span class="fw-bold">Total Price:</span>
-                                        <span>Rs<h3 class="text-danger"><strong id="paototal">{{.total}}</strong></h3> </span>
+                                        <span>Rs<h3 class="text-danger"><strong id="paototal">{{.total}}</strong></h3>
+                                        </span>
                                     </p>
-                                    <p class="mb-0">Give us your address just for a precaution to avoid future dilemmas and also as a safety measure. We dont give informations to any third party. We completely respect your privacy in informations.Thankyou. </p>
+                                    <p class="mb-0">Give us your address just for a precaution to avoid future
+                                        dilemmas.Thankyou. </p>
                                 </div>
                                 <div class="col-lg-7">
 
                                     <!-- Button trigger modal -->
-                                 <div>   <button type="button" class="btn btn-primary bg-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                        Choose Address
-                                      </button></div>
-  
-                                  
+
+                                    <div> <button type="button" class="btn btn-primary bg-info" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal">
+                                            Choose Address
+                                        </button></div>
+
+
                                     <div class="text-danger" style="font-size: 30px;" id="error"></div>
-                                   
+
                                     <form id="form" method="POST">
                                         <div class="row pt-3">
                                             <div class="col-6">
                                                 <div class="form__div">
-                                                    <input name="firstnamef" type="text" id="firstname" class="form-control" placeholder="First Name">
+                                                    <input name="firstnamef" type="text" id="firstname"
+                                                        class="form-control" placeholder="First Name">
                                                     <label for="" class="form__label">First Name</label>
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="form__div">
-                                                    <input name="lastnamef" type="text" id="lastname" class="form-control" placeholder="LastName">
+                                                    <input name="lastnamef" type="text" id="lastname"
+                                                        class="form-control" placeholder="LastName">
                                                     <label for="" class="form__label">Last Name</label>
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="form__div">
-                                                    <input name="housenamef" type="text" class="form-control" id="housename" placeholder="Houes Name">
+                                                    <input name="housenamef" type="text" class="form-control"
+                                                        id="housename" placeholder="Houes Name">
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="form__div">
-                                                    <input name="placef" type="text" class="form-control" id="place" placeholder="Place">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-6">
-                                                <div class="form__div">
-                                                    <input name="statef" type="text" class="form-control" id="state" placeholder="State">
+                                                    <input name="placef" type="text" class="form-control" id="place"
+                                                        placeholder="Place">
                                                 </div>
                                             </div>
 
                                             <div class="col-6">
                                                 <div class="form__div">
-                                                    <input name="mobilef" type="text" id="mobile" class="form-control" placeholder="10-Digit Mobile ">
-                                                    
+                                                    <input name="statef" type="text" class="form-control" id="state"
+                                                        placeholder="State">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <div class="form__div">
+                                                    <input name="mobilef" type="text" id="mobile" class="form-control"
+                                                        placeholder="10-Digit Mobile ">
+
                                                 </div>
                                             </div>
                                             <div class="col-3">
                                                 <div class="form__div">
                                                     <label for="totalpriceid">Total</label>
-                                                    <input name="totalprice" type="text" id="totalpriceid" class="form-control" value="{{.total}}" readonly>
+                                                    <input name="totalprice" type="text" id="totalpriceid"
+                                                        class="form-control" value="{{.total}}" readonly>
                                                 </div>
                                             </div>
 
@@ -233,24 +328,29 @@
                                             <div class="col-3">
                                                 <div class="form__div">
                                                     <label for="rooms">Rooms</label>
-                                                    <input name="roomnames" type="text" id="rooms" class="form-control" value="{{.}}" readonly>
+                                                    <input name="roomnames" type="text" id="rooms" class="form-control"
+                                                        value="{{.}}" readonly>
                                                 </div>
                                             </div>
                                             {{end}}
                                             <div class="col-6">
                                                 <div class="form__div">
                                                     <label for="allrooms">AllRooms</label>
-                                                    <input name="allroomnames" type="text" id="allrooms" class="form-control" value="{{.allrooms}}" readonly>
+                                                    <input name="allroomnames" type="text" id="allrooms"
+                                                        class="form-control" value="{{.allrooms}}" readonly>
                                                 </div>
                                             </div>
-                                            
-                                           
+
+
                                         </div>
                                         <div class="col-12">
-                
-                                            <button type="submit" onclick="checkinnow('{{.startdate}}','{{.endate}}','{{.wbal}}','{{.total}}')" class="btn w-100 btn-outline-primary btn-success text-white" style="font-weight: 600;">Check-In Now</button>
-                                        
-                                    </div>
+
+                                            <button type="submit"
+                                                onclick="checkinnow('{{.startdate}}','{{.endate}}','{{.wbal}}','{{.total}}')"
+                                                class="btn w-100 btn-outline-primary btn-success text-white"
+                                                style="font-weight: 600;">Check-In Now</button>
+
+                                        </div>
                                     </form>
                                 </div>
                             </div>
@@ -258,169 +358,199 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
 
 
     <script>
-        function checkinnow(startdate,endate,wallet,total){
-        
-const firstname = document.getElementById('firstname')
-const lastname = document.getElementById('lastname')
-const housename = document.getElementById('housename')
-const place = document.getElementById('place')
-const state = document.getElementById('state')
-const mobile = document.getElementById('mobile')
-const form = document.getElementById('form')
-const errorElement = document.getElementById('error')
+        function checkinnow(startdate, endate, wallet, total) {
 
-form.addEventListener('submit', (e) => {
-let messages = []
-//first name
-if (firstname.value==='' || firstname.value== null){
-messages.push('Name is required!')
-}else if(firstname.value.length <= 2 ){
-messages.push('Name must have 3 characters')
-}else if (!/^[A-Za-z ]+$/.test(firstname.value)){
-messages.push('No special characters allowed!')
-}
-//last name
-else if (lastname.value==='' || lastname.value== null){
-messages.push('Last Name is required!')
-}
+            const firstname = document.getElementById('firstname')
+            const lastname = document.getElementById('lastname')
+            const housename = document.getElementById('housename')
+            const place = document.getElementById('place')
+            const state = document.getElementById('state')
+            const mobile = document.getElementById('mobile')
+            const form = document.getElementById('form')
+            const errorElement = document.getElementById('error')
 
-else if (!/^[A-Za-z ]+$/.test(lastname.value)){
-messages.push('No special characters allowed!')
-//house name
-}else if(housename.value==='' || housename.value== null){
-messages.push('Name is required!')
-}else if(housename.value.length <= 4 ){
-messages.push('House Name must have 5 characters')
-//place
-}else if(place.value==='' || place.value== null){
-messages.push('Place is required!')
-}else if(place.value.length <= 2 ){
-messages.push('Place Name must have 3 characters')
-} else if (!/^[A-Za-z ]+$/.test(place.value)){
-messages.push('No special characters allowed!')
-//state
-}else if(state.value==='' || state.value== null){
-messages.push('State is required!')
-}else if(state.value.length <= 2 ){
-messages.push('State Name must have 3 characters')
-} else if (!/^[A-Za-z ]+$/.test(state.value)){
-messages.push('No special characters allowed!')
-//mobile validation
-}else if(mobile.value.length <= 9 || mobile.value.length>=11 ){
-messages.push('mobile must/only have 10 digits')
-}else if(!/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(mobile.value)){
-messages.push('Enter valid Mobile number!')
-}
+            form.addEventListener('submit', (e) => {
+                let messages = []
+                //first name
+                if (firstname.value === '' || firstname.value == null) {
+                    messages.push('Name is required!')
+                } else if (firstname.value.length <= 2) {
+                    messages.push('Name must have 3 characters')
+                } else if (!/^[A-Za-z ]+$/.test(firstname.value)) {
+                    messages.push('No special characters allowed!')
+                }
+                //last name
+                else if (lastname.value === '' || lastname.value == null) {
+                    messages.push('Last Name is required!')
+                }
 
-if (messages.length > 0) {
-e.preventDefault()
-errorElement.innerText = messages.join(', ')
-}else{
-    e.preventDefault()
-    success(startdate,endate,wallet,total)
-}
+                else if (!/^[A-Za-z ]+$/.test(lastname.value)) {
+                    messages.push('No special characters allowed!')
+                    //house name
+                } else if (housename.value === '' || housename.value == null) {
+                    messages.push('Name is required!')
+                } else if (housename.value.length <= 4) {
+                    messages.push('House Name must have 5 characters')
+                    //place
+                } else if (place.value === '' || place.value == null) {
+                    messages.push('Place is required!')
+                } else if (place.value.length <= 2) {
+                    messages.push('Place Name must have 3 characters')
+                } else if (!/^[A-Za-z ]+$/.test(place.value)) {
+                    messages.push('No special characters allowed!')
+                    //state
+                } else if (state.value === '' || state.value == null) {
+                    messages.push('State is required!')
+                } else if (state.value.length <= 2) {
+                    messages.push('State Name must have 3 characters')
+                } else if (!/^[A-Za-z ]+$/.test(state.value)) {
+                    messages.push('No special characters allowed!')
+                    //mobile validation
+                } else if (mobile.value.length <= 9 || mobile.value.length >= 11) {
+                    messages.push('mobile must/only have 10 digits')
+                } else if (!/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(mobile.value)) {
+                    messages.push('Enter valid Mobile number!')
+                }
 
-})
+                if (messages.length > 0) {
+                    e.preventDefault()
+                    errorElement.innerText = messages.join(', ')
+                } else {
+                    e.preventDefault()
+                    success(startdate, endate, wallet, total)
+                }
+
+            })
         }
 
-function success(startdate,endate,wallet,total){
+        function success(startdate, endate, wallet, total) {
 
 
-    swal({
-  title: "Are you sure you want to check-In?",
-  text: "Room cancellation policies are only avilable within 5 hours of booking.",
-  icon: "warning",
-  buttons: true,
-  dangerMode: true,
-})
-.then((willDelete) => {
-  if (willDelete) {
+            swal({
+                title: "Are you sure you want to check-In?",
+                text: "Room cancellation policies are only avilable within 5 hours of booking.",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
 
 
 
-    if($("#wallets").prop('checked') == true){
-       
-       const wtotal = total-wallet
+                        if ($("#wallets").prop('checked') == true) {
+
+                            const wtotal = total - wallet
+
+                            
+
+
+                            var data = $('form').serialize();
+                            $.post('/user/payment/confirm/' + startdate + '/' + endate + '/' + wallet + '/' + wtotal, data);
+                            swal("Check-In Sucessful", "Read our terms and conditions carefully to know about cancellation policies", "success");
+                            setTimeout(() => { location.href = "/user/payment/success"; }, 1700);
+
+
+
+                        } else {
+                            const wall = "0"
+
+
+                            var data = $('form').serialize();
+                            $.post('/user/payment/confirm/' + startdate + '/' + endate + '/' + wall + '/' + total, data);
+                            swal("Check-In Sucessful", "Read our terms and conditions carefully to know about cancellation policies", "success");
+                            setTimeout(() => { location.href = "/user/payment/success"; }, 1700);
+
+
+                        }
+
+
+                    }
+                });
+        }
+
+        function wallet(bal, total) {
+
+            if ($("#wallet").prop('checked') == true) {
+
+                const newtotal = total - bal
+
+                $("#raztotal").text(newtotal)
+
+            } else {
+                $("#raztotal").text(total)
+
+
+            }
+
+        }
+
+        function payment(total, uid, start, end, bal) {
+            // /user/payment/razorpay/{{.total}}/{{.uid}}/{{.startdate}}/{{.endate}}"
+
+            if ($("#wallet").prop('checked') == true) {
+
+                const wtotal = total - bal
+                location.href = '/user/payment/razorpay/' + wtotal + '/' + uid + '/' + start + '/' + end + '/' + bal;
+
+
+            } else {
+                const wall = "0"
+                location.href = '/user/payment/razorpay/' + total + '/' + uid + '/' + start + '/' + end + '/' + wall;
+
+            }
+
+        }
+
+
+
+        function wallets(bal, total) {
+            if ($("#wallets").prop('checked') == true) {
+                const button = document.getElementById("buttons")
+           button.disabled = true
+                const newtotal = total - bal
+                $("#paototal").text(newtotal)
+
+
+            document.getElementById("cpn").innerHTML="You can either choose Wallet Or Coupons!"      
+
+
+            } else {
+                $("#paototal").text(total)
+                const button = document.getElementById("buttons")
+           button.disabled = false
+            document.getElementById("cpn").innerHTML=""      
+
+
+            }
+
+        }
+
+
+        function applycoupon(id,value){
+             
+            
+            const total = document.getElementById("paototal").innerText
            
-
-       var data = $('form').serialize();
-    $.post('/user/payment/confirm/'+startdate+'/'+endate+'/'+wallet+'/'+wtotal, data);
-swal("Check-In Sucessful", "Read our terms and conditions carefully to know about cancellation policies", "success");
-setTimeout(() => { location.href="/user/payment/success";  }, 1700);
-    
-
+            const newt = total * (100-value)/100  
+            const rnew = Math.round(newt)
+            document.getElementById("paototal").innerHTML=rnew      
+            document.getElementById("cpn").innerHTML="Coupon Applied "+value+"%"      
+           const button = document.getElementById("buttons")
+           button.disabled = true
            
-   }else{
-       const wall = "0"
-   
-
-       var data = $('form').serialize();
-    $.post('/user/payment/confirm/'+startdate+'/'+endate+'/'+wall+'/'+total, data);
-swal("Check-In Sucessful", "Read our terms and conditions carefully to know about cancellation policies", "success");
-setTimeout(() => { location.href="/user/payment/success";  }, 1700);
-    
-
-       }
-
-    
-  }
-});
-}
-
-function wallet (bal,total){
-    
-    if($("#wallet").prop('checked') == true){
-        
-        const newtotal = total - bal
-        
-        $("#raztotal").text(newtotal)
-        
-}else{
-    $("#raztotal").text(total)
-    
-    
-}
-
-}
-
-function payment(total,uid,start,end,bal){
-    // /user/payment/razorpay/{{.total}}/{{.uid}}/{{.startdate}}/{{.endate}}"
-    
-    if($("#wallet").prop('checked') == true){
-       
-    const wtotal = total-bal
-    location.href='/user/payment/razorpay/'+wtotal+'/'+uid+'/'+start+'/'+end+'/'+bal;
-        
-        
-}else{
-    const wall = "0"
-    location.href='/user/payment/razorpay/'+total+'/'+uid+'/'+start+'/'+end+'/'+wall;
-
-    }
-
-}
-
-
-
-function wallets (bal,total){
-    if($("#wallets").prop('checked') == true){
-        const newtotal = total - bal
-        $("#paototal").text(newtotal)
-        
-}else{
-    $("#paototal").text(total)
-    
-    
-}
-
-}
+           const wallet = document.getElementById("wallets")
+            wallet.disabled = true
+           
+        }
 
     </script>
 </body>
+
 </html>

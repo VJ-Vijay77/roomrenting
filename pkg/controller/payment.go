@@ -34,7 +34,7 @@ func Payment(c *gin.Context) {
 	Roomid := c.Param("Roomid")
 	Startdate := c.Param("Startdate")
 	Endate := c.Param("Endate")
-
+	RID,_ := strconv.Atoi(Roomid) 
 	Usersid, _ := strconv.Atoi(UserID)
 	//taking order details
 	var roomnames []string
@@ -44,6 +44,7 @@ func Payment(c *gin.Context) {
 		sendinginfo += roomnames[i]
 	}
 
+
 	//parsing address of the user
 	var address []models.Useraddress
 	db.Where("user_id=?", UserID).Find(&address)
@@ -51,6 +52,14 @@ func Payment(c *gin.Context) {
 	//taking wallet balance
 	var wallet models.Wallets
 	db.Select("balance").Where("user_id=?",Usersid).Find(&wallet)
+
+	//getting category of room
+	var category string
+	db.Raw("SELECT category FROM rooms WHERE id=?",RID).Scan(&category)
+
+	//gettting coupons
+	var coupons []models.Coupons
+	db.Find(&coupons)
 
 	c.HTML(200, "payment.gohtml", gin.H{
 		"total":     TotalPrice,
@@ -63,6 +72,8 @@ func Payment(c *gin.Context) {
 		"endate":    Endate,
 		"roomid":    Roomid,
 		"wbal":wallet.Balance,
+		"coupon":coupons,
+		"category":category,
 	})
 }
 
