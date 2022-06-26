@@ -4,7 +4,7 @@
 
 
 
-function date(Roomprice){
+function date(Roomprice,save,Oroomprice){
  
   let startdate = document.getElementById("startdate").value
   let endate = document.getElementById("endate").value
@@ -14,7 +14,15 @@ function date(Roomprice){
   let dif = Math.abs(r-t)
   const days = Math.ceil(dif / (1000 * 60 * 60 * 24)); 
   document.getElementById("price").innerHTML='Rs '+days*Roomprice
+  
  
+  
+  document.getElementById("savingprice").innerHTML= days*save
+  
+  // const roomcost = document.getElementById("roomorginalprice").innerText
+  
+   document.getElementById("roomorginalprice").innerHTML=" "+days*Oroomprice+" "
+
 }
          
          

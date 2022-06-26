@@ -95,12 +95,12 @@
                   <h6 class="card-subtitle mb-2 text-muted">Category : {{.roomcategory}}</h6>
                   <p class="card-text">1 Hall 2 Bedroom 1 Bathroom Balcony</p>
                   <label for="startdate">Date</label><br>
-                  <input class="text-success rounded-3" type="date" id="startdate" value="{{.cdate}}"><br> TO <br>
-                  <input class="text-success rounded-3" type="date" value="{{.ndate}}" id="endate" oninput="date('{{.discount}}')">
+                  <input class="text-success rounded-3" type="date" id="startdate" value="{{.cdate}}" min="{{.cdate}}"><br> TO <br>
+                  <input class="text-success rounded-3" type="date" value="{{.ndate}}" id="endate" oninput="date('{{.discount}}','{{.save}}','{{.roomprice}}')" min="{{.ndate}}">
 
                   <h1>{{if eq .Offers "true"}}
-                    <p class="card-text text-danger"><strike>Rs {{.roomprice}} /-</strike></p></h1>
-                   <h5><p class="card-text text-bg-primary">{{.off}}% You save {{.save}}</p></h5>
+                    <p class="card-text text-danger">Rs<strike id="roomorginalprice"> {{.roomprice}} </strike>/-</p></h1>
+                   <h5><p class="card-text text-bg-primary" style="display: inline;">{{.off}}% You save Rs <p class="text-bg-primary" style="display: inline;" id="savingprice">{{.save}}</p></p></h5>
 
                    <h1> <p class="card-text text-success" id="price">Rs {{.discount}} /-</p></h1>
                    <button type="button" onclick="checkin('{{.roomid}}','{{.roomname}}','{{.discount}}')" class="btn btn-outline-success btn-warning" style="font-weight: 600;">Check-In Now</button>
