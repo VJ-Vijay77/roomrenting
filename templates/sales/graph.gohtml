@@ -13,7 +13,7 @@
         crossorigin="anonymous"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </head>
 
 <body>
@@ -29,6 +29,12 @@
                 <h1 class="text-white text-bg-dark">Monthly Revenue Generation Graph</h1>
 
                 <div id="myChart" style="width:100%;height: 50rem;"></div>
+
+            </div>
+
+
+            <div class="col-md-12 bg-secondary mt-5 pb-3 mb-4">
+                <div id="chartContainer" style="height: 40rem; width: 100%;"></div>
 
             </div>
 
@@ -77,6 +83,41 @@ var options = {
 var chart = new google.visualization.BarChart(document.getElementById('myChart'));
   chart.draw(data, options);
 }
+
+
+// third chart from here
+window.onload = function() {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	theme: "light2", // "light1", "light2", "dark1", "dark2"
+	exportEnabled: true,
+	animationEnabled: true,
+	title: {
+		text: "Yearly Revenue Generation"
+	},
+	data: [{
+		type: "pie",
+		startAngle: 25,
+		toolTipContent: "<b>{label}</b>: {y}%",
+		showInLegend: "true",
+		legendText: "{label}",
+		indexLabelFontSize: 16,
+		indexLabel: "{label} - {y}%",
+		dataPoints: [
+			{ y: 93, label: "2022" },
+			{ y: 2, label: " 2021" },
+			{ y: 1, label: "2020" },
+			{ y: 1, label: "2019" },
+			{ y: 1, label: "2018" },
+			{ y: 1, label: "2017" },
+			{ y: 1, label: "2016" }
+		]
+	}]
+});
+chart.render();
+
+}
+
     </script>
 </body>
 

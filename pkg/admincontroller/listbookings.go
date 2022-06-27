@@ -291,6 +291,22 @@ func SalesReportGraph(c *gin.Context) {
 		maytotal += i.Totalprice
 	}
 
+
+	//yearly graph report
+	yearstart := "2022-01-01"
+	yearend := "2022-12-31"
+
+	var yearlydetails []models.Orders
+	var yearlycount int64
+	db.Where("checkindate BETWEEN ? AND ?", yearstart, yearend).Find(&yearlydetails)
+	db.Model(&models.Orders{}).Where("checkindate BETWEEN ? AND ?", yearstart, yearend).Count(&yearlycount)
+
+	var yearlytotal int
+	for _, i := range yearlydetails {
+		yearlytotal += i.Totalprice
+	}
+
+
 	c.HTML(200, "graph.gohtml", gin.H{
 		"first":  first,
 		"fday":days1,
@@ -311,6 +327,6 @@ func SalesReportGraph(c *gin.Context) {
 		"seday":days7,
 		"june":monthlytotal,
 		"may":maytotal,
-
+		"2022":yearlytotal,
 	})
 }
