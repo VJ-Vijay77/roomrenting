@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Report</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+</head>
+
+<body>
+  
+    <div class="container pt-5">
+        <div class="row">
+            <div class="col-md-12 col-12 pb-3 bg-secondary">
+                <h1 class="text-white text-bg-dark">Weekly Revenue (Last Week)</h1>
+                <div id="myPlot" style="width:100%;"></div>
+            </div>
+            
+            <div class="col-md-12 bg-secondary mt-5 pb-3">
+                <h1 class="text-white text-bg-dark">Monthly Revenue Generation Graph</h1>
+
+                <div id="myChart" style="width:100%;height: 50rem;"></div>
+
+            </div>
+
+        </div>
+    </div>
+    <script>
+
+        
+var xArray = ["{{.fday}}", "{{.sday}}", "{{.tday}}", "{{.foday}}", "{{.fifday}}","{{.sixday}}","{{.seday}}"];
+var yArray = ['{{.first}}', '{{.second}}', '{{.third}}', '{{.fourth}}', '{{.five}}','{{.six}}','{{.seven}}'];
+
+var data = [{
+  x: xArray,
+  y: yArray,
+  type: "bar"  }];
+var layout = {title:"Day by day collection from last week"};
+
+Plotly.newPlot("myPlot", data, layout);
+
+// charts differentiated here
+
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+function drawChart() {
+var data = google.visualization.arrayToDataTable([
+  ['Contry', 'Revenue'],
+  ['Jan',150000],
+  ['Feb',290000],
+  ['Mar',300000],
+  ['Apr',200000],
+  ['May','{{.may}}'],
+  ['Jun','{{.june}}'],
+  ['Jul',0],
+  ['Aug',0],
+  ['Sep',0],
+  ['Oct',15],
+  ['Nov',15],
+  ['Dec',15],
+]);
+
+var options = {
+  title:'Monthly Revenue'
+};
+
+var chart = new google.visualization.BarChart(document.getElementById('myChart'));
+  chart.draw(data, options);
+}
+    </script>
+</body>
+
+</html>

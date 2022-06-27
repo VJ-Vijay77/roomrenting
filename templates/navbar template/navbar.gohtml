@@ -35,16 +35,21 @@
       class="position-relative" style="max-width: 2rem;">
     <span class="badge text-bg-primary position-absolute">{{.wcount}}</span>
   </a>{{else}}<a href="/user/wishlist" class="pe-3"><img src="/static/home/images/wishlist.png"
-      class="position-relative" style="max-width: 2rem;"></a>
+      class="position-relative" style="max-width: 2rem;">
+      <span class="badge text-bg-primary position-absolute">0</span>
+    </a>
   {{end}}
 
 
   {{if ne .count 0}} <a href="/user/cart" class="pe-5 ps-3"><img src="/static/home/images/trolley.png"
       class="position-relative" style="max-width: 2.2rem;">
-    <span class="badge text-bg-danger position-absolute">{{.count}}</span>
+    <span class="badge text-bg-danger position-absolute" id="cartcount">{{.count}}</span>
   </a>{{else}}
-  <a href="/user/cart" class="me-5" style="width: 7%;"> <img class="position-relative"
-      src="/static/home/images/trolley.png" style="width: 38px"></a>{{end}}
+  <a href="/user/cart" class="pe-5 ps-3"><img src="/static/home/images/trolley.png"
+    class="position-relative" style="max-width: 2.2rem;">
+  <span class="badge text-bg-danger position-absolute" id="cartcount">0</span>
+</a>
+    {{end}}
 
 
       {{if not .username}} <button type="button" class="btn btn-sm btn-outline-warning text-white"><a href="/user_signup"
