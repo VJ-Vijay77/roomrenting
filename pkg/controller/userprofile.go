@@ -41,6 +41,12 @@ func UserProfile(c *gin.Context) {
 	var wallet models.Wallets
 	db.Select("balance").Where("user_id=?",UserID).Find(&wallet)
 
+	var profilepic string
+	db.Raw("SELECT pic FROM profilepics WHERE user_id=?",UserID).Scan(&profilepic)
+
+	if profilepic == ""{
+		profilepic = "default.png"
+	}
 	c.HTML(200, "userprofile.gohtml", gin.H{
 		"data": userinfos,
 		"username":UserName,
@@ -51,6 +57,7 @@ func UserProfile(c *gin.Context) {
 		"mobile":MobileOfUser,
 		"address":addressofuser,
 		"bal":wallet.Balance,
+		"pic":profilepic,
 	})
 }
 

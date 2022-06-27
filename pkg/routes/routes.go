@@ -120,6 +120,7 @@ func InitRoutes(api *gin.Engine) {
 	api.GET("/user/edit_profile",controller.EditProfile)
 	api.GET("/user/edit_profile_two",controller.EditProfileTwo)
 	api.GET("/user/profile/wallet",controllertwo.Wallet)
+	api.POST("/user/profile/profilepic",controllertwo.ProfilePic)
 
 	//user edit profile
 	api.POST("/user/edit_profile/firstname/:ID",controller.EditProfileFirstName)

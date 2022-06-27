@@ -171,3 +171,8 @@ type Coupons struct{
 	Category string
 	Status string
 }
+
+type Profilepics struct{
+	User_Id int
+	Pic string
+}

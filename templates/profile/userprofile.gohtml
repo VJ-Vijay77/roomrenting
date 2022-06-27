@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>User Profile</title>
+  <link rel="stylesheet" href="/static/profile/profile.css">
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
@@ -13,10 +14,13 @@
     integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
     crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/d67b07a9d9.js" crossorigin="anonymous"></script>
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <style>
   .start-100 {
     left: 97% !important;
+}
+#prof:hover{
+  background-color: rgb(94, 173, 94) !important;
 }
 </style>
 </head>
@@ -39,12 +43,21 @@
   </div>
     <hr>
     
-       <div class="ps-5 ms-5 pt-2">
+       <div class="ps-5 ms-5 pt-2" id="propicarea">
         <div class="row">
             <div class="col-3 col-md-3 col-lg-3">
+              <form id="form" method="post" accept="/user/profile/profilepic">
                 <div class="card">
-                    <img src="https://avatoon.me/wp-content/uploads/2021/09/Cartoon-Pic-Ideas-for-DP-Profile-01.png" class="card-img-top" alt="...">
-                    <div class="card-body">
+                  <!-- <img src="https://avatoon.me/wp-content/uploads/2021/09/Cartoon-Pic-Ideas-for-DP-Profile-01.png" class="card-img-top" alt="..."> -->
+                
+                  
+                  <img id="imagediv" src="/public/profile/{{.pic}}" class="card-img-top" alt="..." style="max-height: 246px; min-height: 246px;">
+                  <input name="pfpic" type="file" id="propic" hidden>  
+                  <label id="labelpic" for="propic" class="text-bg-secondary text-center text-white" id="prof">Choose Profile Picture <i class="fa-solid fa-camera"></i></label>
+                  <button id="propicbutton" type="submit" class="btn btn-sm btn-warning btn-outline-dark" >Upload after choosing pic</button>
+                  </form>
+                  <div id="notif" class="text-danger d-flex justify-content-center fw-bold"></div>
+                  <div class="card-body">
                       <h5 class="card-title text-center fw-bold">{{.username}} {{.lastname}}</h5>
                       <hr>
                       <p class="card-text text-center">Self Taught Developer</p>
@@ -163,5 +176,54 @@
         </div>
     
        </div>
+
+       <script>
+       $("#form").submit(function(e) {
+
+e.preventDefault(); // avoid to execute the actual submit of the form.
+
+let formdata = new FormData(this);
+//var form = $(this);
+var actionUrl = '/user/profile/profilepic'
+const div = document.getElementById("notif")
+
+$.ajax({
+    type: 'POST',
+    url: actionUrl,
+   // data: form.serialize(), // serializes the form's elements.
+   data:formdata, 
+   success: function(k) {
+ 
+      if (k == "nil"){
+        // setTimeout(() => { }, 2000);
+          document.getElementById("notif").innerHTML="Choose a valid Picture"
+         
+      }else if(k == "updated"){
+        document.getElementById("notif").innerHTML="Pic Updated"
+         
+        setTimeout(() => {
+            div.style.visibility = "hidden";
+            location.href='/user/profile'
+          }, 1000);
+
+      }else if (k == "added"){
+        document.getElementById("notif").innerHTML="Pic Added"
+        setTimeout(() => {
+            div.style.visibility = "hidden";
+            location.href='/user/profile'
+
+          }, 1000);
+      }
+       
+   
+    },
+    cache:false,
+    contentType: false,
+    processData: false
+});
+
+});
+
+         </script>
     </body>
     </html>
