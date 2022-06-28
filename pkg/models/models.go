@@ -176,3 +176,19 @@ type Profilepics struct{
 	User_Id int
 	Pic string
 }
+
+type Checkings struct {
+	User_Id       int
+	Firstname     string
+	Totalprice    int
+	Roomnames     string
+	Paymentmethod string
+	Checkindate string
+	Id int
+	Room_Name string
+	Category string
+	Cover string
+	Status string
+	
+	
+}

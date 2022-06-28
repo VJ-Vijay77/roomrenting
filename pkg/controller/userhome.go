@@ -2,6 +2,7 @@ package controller
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/VJ-Vijay77/r4room/pkg/database"
 	"github.com/VJ-Vijay77/r4room/pkg/models"
@@ -10,11 +11,11 @@ import (
 
 //User home page
 func UserHome(c *gin.Context) {
-
+		
 	//checking session
 	ok := UserLogedCheck(c)
 	if !ok {
-		c.HTML(200,"userhome.gohtml",nil)
+		c.HTML(200, "userhome.gohtml", nil)
 		return
 	}
 	db := database.GetDb()
@@ -29,15 +30,32 @@ func UserHome(c *gin.Context) {
 	db.Raw("SELECT id FROM users WHERE email=?", userID).Scan(&UserID)
 	//cart count
 	var count int
-	db.Raw("SELECT COUNT(user_id) FROM carts WHERE user_id=?",UserID).Scan(&count)
+	db.Raw("SELECT COUNT(user_id) FROM carts WHERE user_id=?", UserID).Scan(&count)
 	//wishlist count
 	var wishlistcount int
-	db.Raw("SELECT COUNT(user_id) FROM wishlists WHERE user_id=?",UserID).Scan(&wishlistcount)
+	db.Raw("SELECT COUNT(user_id) FROM wishlists WHERE user_id=?", UserID).Scan(&wishlistcount)
+
+	var rooms []models.Rooms
+	db.Find(&rooms)
+
+	time := time.Now().Format("2006-01-02")
+	var roomsupdation models.Rooms
+	var orderedupdation models.Orderedrooms
+	var availablenow models.Rooms
+	var a = "checkedin"
+	for _,i := range rooms{
+		if i.Checkoutdate < time{
+	db.Raw("UPDATE rooms SET status='available' WHERE id=?", i.ID).Scan(&roomsupdation)
+	db.Raw("UPDATE orderedrooms SET status='checkedout' WHERE roomid=? AND status=?", i.ID,a).Scan(&orderedupdation)
+	db.Raw("UPDATE rooms SET checkoutdate='availablenow' WHERE id=?", i.ID).Scan(&availablenow)
+    			
+		}
+	}
 	
 	c.HTML(200, "userhome.gohtml", gin.H{
-		"data": userinfos,
-		"username":UserName,
-		"count":count,
-		"wcount":wishlistcount,
+		"data":     userinfos,
+		"username": UserName,
+		"count":    count,
+		"wcount":   wishlistcount,
 	})
 }

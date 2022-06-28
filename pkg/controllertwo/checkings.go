@@ -29,11 +29,13 @@ func CheckingsList(c *gin.Context) {
 	var wishlistcount int
 	db.Raw("SELECT COUNT(user_id) FROM wishlists WHERE user_id=?", UserID).Scan(&wishlistcount)
 
-	var bookings []models.BookingDetails
+	// var bookings []models.BookingDetails
 	
-db.Raw("SELECT user_id,rooms.id,rooms.room_name,orderedrooms.status,rooms.cover,rooms.category,rooms.room_price,rooms.offers,rooms.value,rooms.discountprice,rooms.description FROM orderedrooms INNER JOIN rooms ON rooms.id=orderedrooms.roomid WHERE user_id=?",UserID).Scan(&bookings)
+// db.Raw("SELECT user_id,rooms.id,rooms.room_name,orderedrooms.status,rooms.cover,rooms.category,rooms.room_price,rooms.offers,rooms.value,rooms.discountprice,rooms.description FROM orderedrooms INNER JOIN rooms ON rooms.id=orderedrooms.roomid WHERE user_id=?",UserID).Scan(&bookings)
+	var bookings []models.Checkings
+	db.Raw("SELECT orders.user_id,orders.firstname,orders.totalprice,orders.checkindate,orders.paymentmethod,orders.roomnames,rooms.id,rooms.room_name,rooms.category,rooms.cover,orderedrooms.status FROM orders INNER JOIN rooms ON rooms.room_name = orders.roomnames INNER JOIN orderedrooms ON orderedrooms.id=orders.orderid WHERE orders.user_id=?",UserID).Scan(&bookings)
 	
-	
+
 	
 	c.HTML(200, "checkingslist.gohtml", gin.H{
 		"data":     userinfos,
@@ -117,13 +119,13 @@ func Refund(c *gin.Context){
 	UID,_ := strconv.Atoi(userId)
 	Price := c.Param("Total")
 	Total,_ := strconv.Atoi(Price)
-	  fmt.Println(db,RID,UID,Total)
+	  fmt.Println(RID,UID,Total)
 	db.AutoMigrate(&models.Wallets{})
 	var wallet []models.Wallets
 	db.Find(&wallet)
 
 	var newallet models.Wallets
-	var check bool
+	var check = false
 	for _,i := range wallet{
 		if i.User_Id == UID{
 			check = true
@@ -145,10 +147,10 @@ func Refund(c *gin.Context){
 		db.Select("user_id","balance").Create(&create)
 	}
 
-
+	stt := "checkedin"
 	var roomupdations models.Orderedrooms
-	db.Raw("UPDATE orderedrooms SET status='checkedout' WHERE roomid=? AND user_id=?",RID,UID).Scan(&roomupdations)
-
+	db.Raw("UPDATE orderedrooms SET status='checkedout' WHERE roomid=? AND user_id=? AND status=?",RID,UID,stt).Scan(&roomupdations)
+	fmt.Println(RID,UID)
 	var roomstatus models.Rooms
 	db.Raw("UPDATE rooms SET status='available' WHERE id=?",RID).Scan(&roomstatus)
 

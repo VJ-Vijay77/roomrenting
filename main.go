@@ -6,8 +6,6 @@ import (
 	"github.com/VJ-Vijay77/r4room/pkg/routes"
 )
 
-
-
 func main() {
 	//getting gin engine
 	Engine := gingonic.GinInit()
@@ -17,7 +15,8 @@ func main() {
 
 	//activating routes
 	routes.InitRoutes(Engine)
-	
+
 	//starting the port
 	Engine.Run()
+
 }

@@ -36,74 +36,52 @@
     </div>
     <hr>
   </div>
-    <!-- <div class="row">
-    {{$userid := .UID}}
-   {{range .bookings}}
-     
-        <div class="col-4">
-      <div class="card" style="width: 18rem;">
-        <img src="/public/{{.Cover}}" class="card-img-top" alt="...">
-   {{if eq .Status "checkedout"}}     <div class="w-100 bg-danger text-center text-white">{{.Status}}</div>{{else}}
-   <div class="w-100 bg-primary text-center text-white">{{.Status}}</div>   {{end}}
-   <div class="card-body">
-          <p class="card-text">2 Bedroom 1 Bathroom 1 Hall Breezing Balcony.</p>
-          <p class="card-text">Room Name:{{.Room_Name}}</p>
-          <p class="card-text">Category:{{.Category}}</p>
-          <p class="card-text">Room ID:{{.Id}}</p>
-          <p class="card-text">Rs {{.Room_Price}} /-</p>
-         
-          {{if eq .Status "checkedin"}}        <button type="button" onclick="checkout('{{.Id}}','{{$userid}}')" class="btn btn-danger" >Check-Out</button>{{end}}
-            {{if eq .Status "checkedout"}}     <button type="button" class="btn btn-success" onclick="checkin('{{.Id}}')" >Check-In-Again</button>{{end}}
-        </div>
-      </div>
-    </div>
-   {{end}}
-  </div> -->
-
-
-
+   
+  
   <div class="row">
-    {{range .bookings}}
-    <div class="col-md-4">{{.Id}}</div>
 
-    <div class="col-md-8">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Room ID</th>
+          <th scope="col">User Name</th>
+          <th scope="col">Room Name</th>
+          <th scope="col">Category</th>
+          <th scope="col">Total Price</th>
+          <th scope="col">Payment Method</th>
+          <th scope="col">Checkin Date</th>
+          <th scope="col">Status</th>
+          <th scope="col">Action</th>
 
-  <div class="card mb-3" style="max-width: 580px;">
-    <div class="row g-0">
-      <div class="col-md-4">
-        <img src="/public/{{.Cover}}" class="img-fluid rounded-start" alt="...">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">{{.Room_Name}}</h5>
-          
-          {{if eq .Offers "true"}}
-          <h5 class="card-title"> <strike class="text-warning">Rs {{.Room_Price}} /-</strike> </h5>
-          
-          <h5 class="card-title">Rs <strong>{{.Discountprice}}</strong> /-</h5>
-          {{else}}
-          <h5 class="card-title">Rs <strong>{{.Room_Price}}</strong> /-</h5>
-          
-          {{end}}
+        </tr>
+      </thead>
+      <tbody>
+        {{range .bookings}}
+        <tr>
+          <th scope="row">{{.Id}}</th>
+          <td>{{.Firstname}}</td>
+          <td>{{.Room_Name}}
+            <button class="btn btn-sm btn-success" onclick="checkin('{{.Id}}')">info</button>
+          </td>
+          <td>{{.Category}}</td>
+          <td>{{.Totalprice}}</td>
+          <td>{{.Paymentmethod}} </td>
+          <td>{{.Checkindate}}</td>
+          <td>{{.Status}}</td>
          
-
-          <p class="card-text">{{.Description}}</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                   
-          {{if eq .Status "checkedin"}}        <button type="button" onclick="checkout('{{.Id}}','{{$userid}}')" class="btn btn-danger" >Check-Out</button>
-          <button type="button" onclick="cancel('{{.Id}}','{{$userid}}','{{.Discountprice}}')" class="btn btn-warning"> Cancel </button>
+          <td>
+          {{if eq .Status "checkedin"}}
+            <button class="btn btn-danger" onclick="cancel('{{.Id}}','{{.User_Id}}','{{.Totalprice}}')">Cancel Order</button>
+          {{else}}
+          <div class="can text-muted" style="font-size: 15px;"> Cancellation not Available</div>
           {{end}}
-
-            {{if eq .Status "checkedout"}}     <button type="button" class="btn btn-success" onclick="checkin('{{.Id}}')" >Check-In-Again</button>{{end}}
+          </td>
+        </tr>
+        {{end}}
        
-        </div>
-      </div>
-    </div>
-  </div>
-
-  </div>
-  <hr>
-{{end}}
+      </tbody>
+    </table>
+    
 
   </div>
   </div>
