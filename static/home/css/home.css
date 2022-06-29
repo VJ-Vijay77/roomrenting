@@ -1,23 +1,64 @@
-
-
-body{
+body {
     width: 100%;
     overflow-x: hidden;
+
 }
 
-.searchforroom1{
+.searchforroom1 {
 
     margin-top: 3%;
-    
+
 }
 
 
-.trythis{
+.trythis {
     transition: transform .2s;
 }
 
-.trythis:hover{
-    -ms-transform: scale(1.5); /* IE 9 */
-    -webkit-transform: scale(1.5); /* Safari 3-8 */
-    transform: scale(1.06); 
+.trythis:hover {
+    -ms-transform: scale(1.5);
+    /* IE 9 */
+    -webkit-transform: scale(1.5);
+    /* Safari 3-8 */
+    transform: scale(1.06);
 }
+
+.exploreourcities {
+    font-size: 34px;
+    line-height: 38px;
+    font-weight: 400;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.explorecities {
+    font-weight: 400;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+
+.placename {
+    font-size: 20px;
+    line-height: 36px;
+    font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.topwritings{
+    background-color: rgb(38, 34, 34);
+    font-family: 'Allerta Stencil';
+    letter-spacing: 2px;
+    display: flex;
+    justify-content: center;
+
+}
+
+@media only screen and (max-width: 619px) {
+    .topwritings {
+        background-color: rgb(38, 34, 34);
+        font-family: 'Allerta Stencil';
+        letter-spacing: 1px;
+        font-size: smaller;
+        display: flex;
+        justify-content: center;
+    }
+  }
