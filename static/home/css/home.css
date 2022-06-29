@@ -62,3 +62,123 @@ body {
         justify-content: center;
     }
   }
+
+ 
+  .shadowcard{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    height: 20rem;
+}
+.adwriting{
+    letter-spacing: 1px;
+    word-spacing: 2px;
+}
+  
+.adroom{
+    font-weight: 700;
+    font-family: 'Courier New';
+}
+
+@media only screen and (max-width: 1402px) {
+    .adwriting {
+        font-size: smaller;
+    }
+}
+@media only screen and (max-width: 1200px) {
+    .adwriting {
+        display: none;
+    }
+}
+@media only screen and (max-width: 770px) {
+    .adimage {
+        width: 10rem !important;
+    }
+    .adcat{
+        font-size: medium;
+    }
+    .addroom{
+        font-size: smaller;
+    }
+}
+
+
+.adimage {
+    transition: transform .2s;
+}
+
+.adimage:hover{
+    -ms-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.06);
+} 
+
+.inbutton1{
+    visibility: hidden;
+}
+
+.hoverimg1:hover .inbutton1{
+    
+    visibility: visible !important;
+}
+
+.inbutton2{
+    visibility: hidden;
+}
+
+.hoverimg2:hover .inbutton2{
+    
+    visibility: visible !important;
+}
+
+.inbutton3{
+    visibility: hidden;
+}
+
+.hoverimg3:hover .inbutton3{
+    
+    visibility: visible !important;
+}
+
+.inbutton4{
+    visibility: hidden;
+}
+
+.hoverimg4:hover .inbutton4{
+    
+    visibility: visible !important;
+}
+
+.inbutton5{
+    visibility: hidden;
+}
+
+.hoverimg5:hover .inbutton5{
+    
+    visibility: visible !important;
+}
+
+.inbutton6{
+    visibility: hidden;
+}
+
+.hoverimg6:hover .inbutton6{
+    
+    visibility: visible !important;
+}
+
+.inbutton7{
+    visibility: hidden;
+}
+
+.hoverimg7:hover .inbutton7{
+    
+    visibility: visible !important;
+}
+
+.inbutton8{
+    visibility: hidden;
+}
+
+.hoverimg8:hover .inbutton8{
+    
+    visibility: visible !important;
+}
