@@ -182,3 +182,130 @@ body {
     
     visibility: visible !important;
 }
+
+.picone{
+    transition: transform .3s;
+}
+
+.picone:hover{
+    -ms-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.06);
+}
+
+.picone1{
+    transition: transform .3s;
+}
+
+.picone1:hover{
+    -ms-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.06);
+}
+
+.picone2{
+    transition: transform .3s;
+}
+
+.picone2:hover{
+    -ms-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.06);
+}
+
+.picone3{
+    transition: transform .3s;
+}
+
+.picone3:hover{
+    -ms-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.06);
+}
+
+.picone4{
+    transition: transform .3s;
+}
+
+.picone4:hover{
+    -ms-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.06);
+}
+
+.picone5{
+    transition: transform .3s;
+}
+
+.picone5:hover{
+    -ms-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.06);
+}
+
+
+.picone6{
+    transition: transform .3s;
+}
+
+.picone6:hover{
+    -ms-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.06);
+}
+
+
+.picone7{
+    transition: transform .3s;
+}
+
+.picone7:hover{
+    -ms-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.06);
+}
+
+.picone8{
+    transition: transform .3s;
+}
+
+.picone8:hover{
+    -ms-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.06);
+}
+
+.coluone{
+    position: relative;
+}
+.colutwo{
+    position: relative;
+}
+
+.landlord{
+    position: absolute;
+
+    top: 6%;
+    position: absolute;
+    left: 8%;
+    color: white;
+    font-weight: 900;
+    letter-spacing: 2px;
+    word-spacing: 4px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.landwriting{
+    position: absolute;
+    color: white;
+    top: 14%;
+    position: absolute;
+    left: 8%;
+}
+
+.landmore{
+    position: absolute;
+    top: 85%;
+    position: absolute;
+    left: 8%;
+}

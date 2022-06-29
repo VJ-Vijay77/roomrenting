@@ -54,11 +54,9 @@
     <div class="d-flex justify-content-end">
   
         <!-- wishlist starts -->
-    {{if ne .wcount 0}}<a href="/user/wishlist" class="pe-3"><img src="/static/home/images/wishlist.png"
-      class="position-relative" style="max-width: 2rem;">
+    {{if ne .wcount 0}}<a href="/user/wishlist" class="pe-3 pt-1"><i class="fa-solid fa-heart" style="color: white; font-size: 1.8rem;"></i>
     <span class="badge text-bg-primary position-absolute">{{.wcount}}</span>
-  </a>{{else}}<a href="/user/wishlist" class="pe-3"><img src="/static/home/images/wishlist.png"
-      class="position-relative" style="max-width: 2rem;">
+  </a>{{else}}<a href="/user/wishlist" class="pe-3 pt-1"><i class="fa-solid fa-heart" style="color: white; font-size: 1.8rem;"></i>
       <span class="badge text-bg-primary position-absolute">0</span>
     </a>
   {{end}}
@@ -67,12 +65,10 @@
 
 
 <!-- cart start here -->
-  {{if ne .count 0}} <a href="/user/cart" class="pe-5 ps-3"><img src="/static/home/images/trolley.png"
-      class="position-relative" style="max-width: 2.2rem;">
+  {{if ne .count 0}} <a href="/user/cart" class="pe-5 ps-3 pt-1"><i class="fa-solid fa-cart-arrow-down" style="color: white; font-size: 1.8rem;"></i>
     <span class="badge text-bg-danger position-absolute" id="cartcount">{{.count}}</span>
   </a>{{else}}
-  <a href="/user/cart" class="pe-5 ps-3"><img src="/static/home/images/trolley.png"
-    class="position-relative" style="max-width: 2.2rem;">
+  <a href="/user/cart" class="pe-5 ps-3 pt-1"><i class="fa-solid fa-cart-arrow-down" style="color: white; font-size: 1.8rem;"></i>
   <span class="badge text-bg-danger position-absolute" id="cartcount">0</span>
 </a>
     {{end}}
