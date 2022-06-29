@@ -8,6 +8,7 @@
 
   <link rel="stylesheet" href="/static/home/css/home.css">
   <title>R4Rooms | Home</title>
+  <link rel="shortcut icon" type="image/jpg" href="https://img.freepik.com/free-vector/botanical-capital-letter-r-vector_53876-127456.jpg?t=st=1656493393~exp=1656493993~hmac=3ebab72a0193cd83e596e9f9737a05bb2c960b3f1aa0284c30c955166027cc26&w=740"/>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
@@ -26,14 +27,15 @@
 
 <body>
 
-   <!-- navbar start -->
+  <!-- navbar start -->
 {{template "navbar/navbar.gohtml" .}}
 <!-- navbar ends -->
 
 
   <!-- carousel start -->
 
-  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+  <div id="carouselExampleIndicators" class="carousel slide mb-5" data-bs-ride="true">
+    
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
         aria-current="true" aria-label="Slide 1"></button>
@@ -43,13 +45,14 @@
         aria-label="Slide 3"></button>
     </div>
     <div class="carousel-inner">
+      
       <div class="carousel-item active">
         <img class="d-block w-100"
-          src="https://spa-homepage.uniplaces.com/_next/image?url=https://images.prismic.io/spa-homepage/9c74993a-b22e-44dc-9339-363348aa0471_A055B747-DC98-4836-B68B-4ECCCB06FDDE_1_201_a.jpeg?auto=compress,format&w=1920&q=70"
+          src="https://spa-homepage.uniplaces.com/_next/image?url=https://images.prismic.io/spa-homepage/2e10ca9c-6bc4-41c4-b57a-337e3ab483b7_milan1.jpeg?auto=compress,format&w=1920&q=70"
           alt="First slide" style="height: 80vh;object-fit: cover;">
         <div class="carousel-caption d-none d-md-block">
-          <h5>Your Final Destination</h5>
-          <p>Get your first bookings with bundle of offers.</p>
+          <h2 class="fw-bold">Your Final Destination</h2>
+          <p class="fw-bold">Get your first bookings with bundle of offers.</p>
         </div>
 
       </div>
@@ -58,8 +61,8 @@
           src="https://spa-homepage.uniplaces.com/_next/image?url=https://images.prismic.io/spa-homepage/e1b2cf49-4a9a-472d-89d1-b6de38874edc_offer_pt_porto_264035_1.jpg?auto=compress,format&w=1920&q=70"
           alt="Second slide" style="height: 80vh;object-fit: cover;">
         <div class="carousel-caption d-none d-md-block">
-          <h5>Your Final Destination</h5>
-          <p>Get your first bookings with bundle of offers.</p>
+          <h2 class="fw-bold">Find and search your room now R4Rooms</h2>
+          <p class="fw-bold">Why other place when you have the ultimate option to choose anything you want.</p>
         </div>
       </div>
       <div class="carousel-item">
@@ -67,8 +70,8 @@
           src="https://spa-homepage.uniplaces.com/_next/image?url=https://images.prismic.io/spa-homepage/bc91d65a-a238-4c11-b8c4-3147e2604f13_offer_pt_porto_252585_5.jpg?auto=compress,format&w=1920&q=70"
           alt="Third slide" style="height: 80vh;object-fit: cover;">
         <div class="carousel-caption d-none d-md-block">
-          <h5>Your Final Destination</h5>
-          <p>Get your first bookings with bundle of offers.</p>
+          <h2 class="fw-bold">The Best Places in the Globe</h2>
+          <p class="fw-bold">Find your best place in R4Rooms.</p>
         </div>
       </div>
 
@@ -87,11 +90,64 @@
 
   <!-- carousel end -->
 
+<div class="container">
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="font-monospace fw-bold">Explore Our Cities</h2>
+    <h5 class="font-monospace">Discover cosy homes, stunning flats to great rooms across the globe.</h5>
+  </div>
+</div>
+</div>
 
+<!-- cards section -->
+<div class="container">
+  <div class="row">
+    <div class="col-6 col-md-3">
+      <div class="row">
+        <div class="col-md-12 trythis">
+          <img src="public/home/kerala.jpg" class="img-thumbnail rounded-4" alt="Kerala" style="height: 15rem;width: 15rem;">
+        </div>
+        <div class="col-md-12">Kerala</div>
+        <div class="col-md-12 text-muted">Experience Kerala in over 100+ private rooms, flats and studios for rent today.</div>
+      </div>
+    </div>
 
+    <div class="col-6 col-md-3">
+      <div class="row">
+        <div class="col-md-12 trythis">
+          <img src="public/home/banglore.jpg" class="img-thumbnail rounded-4" alt="Banglore" style="height: 15rem;width: 15rem;">
+        </div>
+        <div class="col-md-12">Banglore</div>
+        <div class="col-md-12 text-muted">Experience Banglore and search for over 2724 properties.</div>
 
+      </div>
+    </div>
 
+    <div class="col-6 col-md-3">
+      <div class="row">
+        <div class="col-md-12 trythis">
+          <img src="public/home/chennai.jpg" class="img-thumbnail rounded-4" alt="Chennai" style="height: 15rem;width: 15rem;">
+        </div>
+        <div class="col-md-12">Chennai</div>
+        <div class="col-md-12 text-muted">Experience Chennai in over 4420 private rooms, flats and studios for rent today.</div>
 
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3">
+      <div class="row">
+        <div class="col-md-12 trythis">
+          <img src="public/home/mumbai.jpg" class="img-thumbnail rounded-4" alt="Mumbai" style="height: 15rem;width: 15rem;">
+        </div>
+        <div class="col-md-12">Mumbai</div>
+        <div class="col-md-12 text-muted">Experience Mumbai in over 2835 private rooms, flats and studios for rent today.
+          </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- card section ends here -->
 
 
 

@@ -1,36 +1,59 @@
 {{define "navbar/navbar.gohtml"}}
 <!-- navbar start -->
 
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top" style="background-color: rgb(0, 0, 0) !important;">
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top" style="background-color: rgb(0, 0, 0) !important;">
     <div class="container-fluid">
       <a class="navbar-brand ps-3" href="/user_home">
         <img src="/static/home/images/R4Rooms.png" width="130" height="45" alt="LOGO">
+      
       </a>
-    </div>
-    <div class="container">
-      <!-- <form class="form-inline my-2 my-lg-0" method="post"> -->
-      <input class="form-control mr-sm-2" type="search" placeholder="Search Your Location..." aria-label="Search">
-      <a href="/user/all_room_search" style="text-decoration: none;"> <button class="btn btn-outline-success my-2 my-sm-0"
-          type="submit">Search</button></a>
-      <!-- </form> -->
-    </div>
 
-    <div class="dropdown me-4">
-      <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
-        aria-expanded="false">
-        EN
+      <button class="navbar-toggler"  toggleable="lg" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
       </button>
-      <ul class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton1">
-        <li><a class="dropdown-item bg-dark text-white" href="#">French</a></li>
-        <li><a class="dropdown-item bg-dark text-white" href="#">Hindi</a></li>
-        <li><a class="dropdown-item bg-dark text-white" href="#">Tamil</a></li>
-      </ul>
+      
     </div>
+    <!-- <div class="container">
+      <div class="row">
+        <div class="col-md-9">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search Your Location..." aria-label="Search">
+        </div>
+        <div class="col-md-3">
+          <a href="/user/all_room_search" style="text-decoration: none;"> <button class="btn btn-outline-success my-2 my-sm-0"
+            type="button">Search</button></a>
+        </div>
+         
+        </div>
+      
+    </div> -->
+      
+    
+
+   
+
+    
 
 
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">  
 
+
+          <!-- <div class="dropdown me-4">
+            <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              EN
+            </button>
+            <ul class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item bg-dark text-white" href="#">French</a></li>
+              <li><a class="dropdown-item bg-dark text-white" href="#">Hindi</a></li>
+              <li><a class="dropdown-item bg-dark text-white" href="#">Tamil</a></li>
+            </ul>
+          </div> -->
+
+     
+
+    <div class="d-flex justify-content-end">
   
-
+        <!-- wishlist starts -->
     {{if ne .wcount 0}}<a href="/user/wishlist" class="pe-3"><img src="/static/home/images/wishlist.png"
       class="position-relative" style="max-width: 2rem;">
     <span class="badge text-bg-primary position-absolute">{{.wcount}}</span>
@@ -40,7 +63,10 @@
     </a>
   {{end}}
 
+<!-- wishlist ends -->
 
+
+<!-- cart start here -->
   {{if ne .count 0}} <a href="/user/cart" class="pe-5 ps-3"><img src="/static/home/images/trolley.png"
       class="position-relative" style="max-width: 2.2rem;">
     <span class="badge text-bg-danger position-absolute" id="cartcount">{{.count}}</span>
@@ -50,6 +76,9 @@
   <span class="badge text-bg-danger position-absolute" id="cartcount">0</span>
 </a>
     {{end}}
+    <!-- cart ends here -->
+
+ 
 
 
       {{if not .username}} <button type="button" class="btn btn-sm btn-outline-warning text-white"><a href="/user_signup"
@@ -62,17 +91,22 @@
     <!-- <script src="https://kit.fontawesome.com/d67b07a9d9.js" crossorigin="anonymous"></script> -->
 
     <div class="btn-group bg-dark me-4" role="group" aria-label="Button group with nested dropdown">
-      {{if .username}}    <button type="button" class="btn" style="color: white; font-family: 'Courier New', Courier, monospace;font-weight: 600;">{{.username}}</button>
-      {{else}}<button type="button" class="btn" style="color: white; font-family: 'Courier New', Courier, monospace;font-weight: 600;">Guest</button>{{end}}
+      <!-- {{if .username}}    <button type="button" class="btn" style="color: white; font-family: 'Courier New', Courier, monospace;font-weight: 600;">{{.username}}</button>
+      {{else}}<button type="button" class="btn" style="color: white; font-family: 'Courier New', Courier, monospace;font-weight: 600;">Guest</button>{{end}} -->
 
-      <div class="btn-group dropstart" role="group">
+      <div class="btn-group dropdown" role="group">
+        <div class="profileicon me-3">
+        {{if .username}}    <button type="button" class="btn" style="color: white; font-family: 'Courier New', Courier, monospace;font-weight: 600;">{{.username}}</button>
+        {{else}}<button type="button" class="btn" style="color: white; font-family: 'Courier New', Courier, monospace;font-weight: 600;">Guest</button>{{end}}
+      </div>
+
         <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
           aria-expanded="false">
 
         </button>
         <ul class="dropdown-menu bg-dark " aria-labelledby="btnGroupDrop1">
           <li><a class="dropdown-item text-white" href="/user/profile"><div class="fa-solid fa-user"></div>  Profile</a></li>
-          <li><a class="dropdown-item text-white" href="/user/order_history"><div class="fa-brands fa-first-order"></div>Orders</a></li>
+          <li><a class="dropdown-item text-white" href="/user/order_history"><div class="fa-brands fa-first-order"></div> Orders</a></li>
           <li><a class="dropdown-item text-white" href="/user/settings"><div class="fa-solid fa-gear"></div> Settings</a></li>
       {{if .username}}    <li><a class="dropdown-item text-white" href="/user_logout"><div class="fa-solid fa-right-from-bracket"></div> Log Out</a></li>{{else}}
       <li><a class="dropdown-item text-white" href="/user_login"> <div class="fa-solid fa-arrow-right-to-bracket"></div> Sign In</a></li>{{end}}
@@ -80,6 +114,16 @@
       </div>
     </div>
     <!-- profile icon ends -->
+
+    
+
+
+
+
+
+  </div>
+  <!-- toggle items -->
+  </div>
 
   </nav>
   <!-- navbar end -->
