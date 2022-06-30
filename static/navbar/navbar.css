@@ -1,0 +1,14 @@
+.intoggleform{
+    display: none !important;
+ }
+ 
+ @media only screen and (max-width: 992px) {
+     .searchsection {
+         display: none !important;
+         
+     }
+     .intoggleform{
+         display: inline !important;
+        
+     }
+ }
