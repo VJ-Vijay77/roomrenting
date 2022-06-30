@@ -12,3 +12,59 @@
         
      }
  }
+
+
+ @media only screen and (min-width: 1600px) {
+ .navimages{
+    max-height: 19rem !important;
+    min-height: 19rem !important;
+ }
+ }
+
+
+
+ @media only screen and (max-width: 650px) {
+    .categoryoftheroom{
+        display: none;
+    }
+    .descriptionoftheroom{
+        display: none;
+    }
+    }
+
+ .cardcolor{
+    background-color: rgb(2,16,26) !important;
+ }
+
+ .mutedtextcolor{
+    margin-top: 3px;
+    color: green !important;
+    font-size: smaller;
+ }
+ @media only screen and (min-width: 1250px) {
+ .filterinfo{
+    height: 27rem !important;
+ }
+}
+
+@media only screen and (min-width: 767px) {
+    .filterinfo{
+       height: 23rem !important;
+    }
+   }
+   
+
+ .pricebuttonsof3{
+    display: inline-flex;
+    
+ }
+ .filterinfo{
+    background-image: url(https://i.pinimg.com/564x/8c/28/7d/8c287df0b7f5299731d92a1d7efac458.jpg);
+ }
+
+ .theroomcards{
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+ .thebookedroomcards{
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+ }

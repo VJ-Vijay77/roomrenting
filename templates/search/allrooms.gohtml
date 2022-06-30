@@ -20,7 +20,7 @@
     }
     </style>
 </head>
-<body style="overflow-x: hidden;">
+<body style="overflow-x: hidden;background-image: url(/public/bodybg/4853433.jpg);">
     
    
  <!-- navbar start -->
@@ -69,37 +69,45 @@
     <div class="row ms-1">
       
       <div class="col-md-3 d-flex justify-content-center">
-        <div class="row">
+        <div class="row filterinfo mt-5 mb-5">
           <div class="col-md-12">
             <h3>Filter</h3> <hr>
-          </div>
+          <!-- </div>
 
-          <div class="col-md-12">Choose By Date</div>
-          <div class="col-md-12">
-            Available from<br> <input type="date" value="{{.cdate}}" min="{{.cdate}}" id="sdate" oninput="isavailable()"><br>
-          </div>
-          <div class="col-md-12">
-            Choose By Price
-          </div>
-          <div class="col-md-12">
-            <label for="customRange3" class="form-label" id="rangeid">Price range : Rs 7500/-</label>
+          <div class="col-md-12 fw-bold"> -->
+            <p class="text-secondary" style="font-size: large;">Choose By Date<br></p> 
+
+          <!-- </div> -->
+          <!-- <div class="col-md-12"> -->
+           <p class="fw-bold">Available from </p> <input type="date" value="{{.cdate}}" min="{{.cdate}}" id="sdate" oninput="isavailable()"><br>
+          <!-- </div>
+          
+        
+
+          <div class="col-md-12"> -->
+           <p class="fw-bold mt-3">Choose By Price</p> 
+          <!-- </div>
+          <div class="col-md-12"> -->
+            <label for="customRange3" class="form-label fw-bold" id="rangeid">Price range : Rs 7500/-</label>
           
 
             <input type="range" class="form-range" min="0" max="2" step="1" id="customRange3" onchange="range()">
            
 
           </div>
-          <div class="col-md-3">
-            <a href="/user/filter/abovefive" class="btn btn-secondary btn-outline-dark text-white btn-sm">Above 5k</a>
+          <div class="pricebuttonsof3">
+          <div class="col-md-3 me-1">
+            <a href="/user/filter/abovefive" class="btn btn-secondary border-0 btn-outline-dark text-white btn-sm">Above 5k</a>
+          </div>
+          <div class="col-md-3 me-1">
+            <a href="/user/filter/aboveseven" class="btn btn-secondary border-0 btn-outline-dark text-white btn-sm">Above 7k</a>
           </div>
           <div class="col-md-3">
-            <a href="/user/filter/aboveseven" class="btn btn-secondary btn-outline-dark text-white btn-sm">Above 7k</a>
+            <a href="/user/filter/belowfive" class="btn btn-secondary border-0 btn-outline-dark text-white btn-sm">Below 5k</a>
           </div>
-          <div class="col-md-3">
-            <a href="/user/filter/belowfive" class="btn btn-secondary btn-outline-dark text-white btn-sm">Below 5k</a>
-          </div>
+        </div>
          
-          <hr>
+          
         </div>
         
         
