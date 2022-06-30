@@ -81,6 +81,7 @@ body {
 
 
 
+
 .adwriting{
     letter-spacing: 1px;
     word-spacing: 2px;
@@ -401,3 +402,17 @@ body {
     list-style-type: none;
 }
 
+.intoggleform{
+   display: none !important;
+}
+
+@media only screen and (max-width: 992px) {
+    .searchsection {
+        display: none !important;
+        
+    }
+    .intoggleform{
+        display: inline !important;
+       
+    }
+}

@@ -26,9 +26,15 @@
         </div>
       
     </div> -->
-      
-    
+   
+    <div class="container-fluid searchsection">
+      <form class="d-flex justify-content-start" role="search">
+        <input class="form-control me-2" type="search" placeholder="Start your Search here" aria-label="Search">
+        <button class="btn btn-outline-light" type="submit">Search</button>
+      </form>
+    </div>
 
+   
    
 
     
@@ -36,6 +42,7 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">  
 
+    
 
           <!-- <div class="dropdown me-4">
             <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
@@ -49,10 +56,13 @@
             </ul>
           </div> -->
 
-     
+        
 
     <div class="d-flex justify-content-end">
+      <button class="btn btn-sm btn-outline-light me-5 intoggleform" type="button">Find All Rooms</button>
   
+
+
         <!-- wishlist starts -->
     {{if ne .wcount 0}}<a href="/user/wishlist" class="pe-3 pt-1"><i class="fa-solid fa-heart" style="color: white; font-size: 1.8rem;"></i>
     <span class="badge text-bg-primary position-absolute">{{.wcount}}</span>
