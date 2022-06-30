@@ -309,3 +309,75 @@ body {
     position: absolute;
     left: 8%;
 }
+
+
+.ambass{
+    position: absolute;
+
+    top: 6%;
+    position: absolute;
+    left: 8%;
+    color: white;
+    font-weight: 900;
+    letter-spacing: 2px;
+    word-spacing: 4px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.ambasswriting{
+    position: absolute;
+    color: white;
+    top: 26%;
+    position: absolute;
+    left: 8%;
+}
+
+.ambmore{
+    position: absolute;
+    top: 85%;
+    position: absolute;
+    left: 8%;
+}
+
+.india{
+    position: relative;
+}
+.underline{
+    width: 69px;
+    height: 5px;
+    background-color: darkblue;
+    position: absolute;
+    top: 101%;
+}
+
+.europe{
+    color: grey;
+}
+.arabic{
+    color: grey;
+}
+.footerconn{
+    background-color: rgb(172, 66, 182);
+    height: 3rem;
+    display: flex;
+    align-items: center;
+
+}
+.conn{
+    margin-top: 1rem !important;
+    display: inline;
+    color: white;
+    font-weight: 600;
+    font-size: large;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.fb{
+    color: white;
+    font-size: 1rem;
+    margin-right: 1rem;
+}
+
+.footerleft{
+    
+}
