@@ -1,156 +1,439 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>R4Rooms | SearchRooms</title>
-    <link rel="stylesheet" href="/static/navbar/navbar.css">
-
-    <script src="/static/roominfo/roominfo.js"></script>
-    <link rel="stylesheet" href="/static/roominfo/roominfo.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="https://kit.fontawesome.com/d67b07a9d9.js" crossorigin="anonymous"></script>
-    <style>
-      .start-100 {
-        left: 97% !important;
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>R4Rooms | SearchRooms</title>
+  <link rel="stylesheet" href="/static/navbar/navbar.css">
+  
+  <script src="/static/roominfo/roominfo.js"></script>
+  <link rel="stylesheet" href="/static/roominfo/roominfo.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://kit.fontawesome.com/d67b07a9d9.js" crossorigin="anonymous"></script>
+  <style>
+    .start-100 {
+      left: 97% !important;
     }
-    </style>
-  </head>
-<body style="overflow-x: hidden;">
-    
-   
- <!-- navbar start -->
- {{template "navbar/navbar.gohtml" .}}
- <!-- navbar ends -->
+  </style>
+</head>
 
-  <div class="navbelow pt-2 ps-2">Home : Rooms > Location > Room ID {{.roomid}}</div>
+<body>
+
+
+  <!-- navbar start -->
+  {{template "navbar/navbar.gohtml" .}}
+  <!-- navbar ends -->
+
+
+
+  <div class="container">
+  <div class="navbelow pt-2 ">R4Rooms : Home : Rooms > Search > Location > Room > Room ID {{.roomid}}</div>
+  </div>
   <hr>
 
-        <div class="row ps-5">
-            
-          <!-- carousel starts here -->
-          
 
-                <div class=" col-md-7">
-                  <div class="container bg-dark imagecontainer">
-                    <div class="R4Roomwriting">R4Rooms</div>
+  <div class="container">
+    <!-- the main container starts from here up -->
+  <div class="row ps-5">
+    <!-- carousel starts here -->
+
+
+    <div class=" col-md-7">
+      <div class="container bg-dark imagecontainer">
+        <div class="R4Roomwriting">R4Rooms</div>
         <div id="carouselExampleControls" class="carousel slide roomcard" data-bs-ride="carousel">
-            <div class="carousel-inner">
-              
-              <div class="carousel-item active">
-                <img src="/public/{{.cover}}" class="d-block w-100 roominfoimages" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src="/public/{{.sub1}}" class="d-block w-100 roominfoimages" alt="...">
-              </div>
-              
-              <div class="carousel-item">
-                <img src="/public/{{.sub2}}" class="d-block w-100 roominfoimages" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src="/public/{{.sub3}}" class="d-block w-100 roominfoimages" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src="/public/{{.sub4}}" class="d-block w-100 roominfoimages" alt="...">
-              </div>
+          <div class="carousel-inner">
 
+            <div class="carousel-item active">
+              <img src="/public/{{.cover}}" class="d-block w-100 roominfoimages" alt="...">
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
+            <div class="carousel-item">
+              <img src="/public/{{.sub1}}" class="d-block w-100 roominfoimages" alt="...">
+            </div>
+
+            <div class="carousel-item">
+              <img src="/public/{{.sub2}}" class="d-block w-100 roominfoimages" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="/public/{{.sub3}}" class="d-block w-100 roominfoimages" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="/public/{{.sub4}}" class="d-block w-100 roominfoimages" alt="...">
+            </div>
+
           </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
 
-                  </div>
-          </div>
-          <!-- carousel ends here -->
+      </div>
+    </div>
+    <!-- carousel ends here -->
 
-          {{if eq .status "booked"}}
+    {{if eq .status "booked"}}
 
-          <div class="col-md-5">
-            <div class="card roompricediv" style="width: 80%;overflow-x: hidden;">
-                <div class="card-body bg-secondary">
+    <div class="col-md-5">
+      <div class="card roompricediv" style="width: 80%;overflow-x: hidden;">
+        <div class="card-body bg-secondary">
 
-                  <h5 class="card-title theroomname"> <p class="theroomname1" style="display: inline;">Room Name :</p> {{.roomname}} </h5>
+          <h5 class="card-title theroomname">
+            <p class="theroomname1" style="display: inline;">Room Name :</p> {{.roomname}}
+          </h5>
 
-                  <h6 class="card-subtitle mb-2 theroomcategory">Category : <p class="theroomcategory1"> {{.roomcategory}}</p></h6>
-
-
-                  <br><label for="startdate" class="startdateofroom">SELECT DATE</label><br>
-                  <input class="text-success rounded-3" type="date" id="startdate" value="{{.cdate}}" min="{{.cdate}}" disabled> 
-                  <br><p class="text-white fw-bold" style="display: inline;">TO</p> <br>
-                  <input disabled class="text-success rounded-3 mb-2" type="date" value="{{.ndate}}" id="endate" oninput="date('{{.discount}}','{{.save}}','{{.roomprice}}')" min="{{.ndate}}">
+          <h6 class="card-subtitle mb-2 theroomcategory">Category : <p class="theroomcategory1"> {{.roomcategory}}</p>
+          </h6>
 
 
-                  <!-- <p class="card-text text-white">1 Hall 2 Bedroom 1 Bathroom Balcony</p> -->
-                  <h1>{{if eq .Offers "true"}}
-                    <p class="card-text text-warning"><strike>Rs {{.roomprice}} /-</strike></p></h1>
-                   <h5><p class="card-text text-bg-primary" style="display: inline;font-size: smaller;">{{.off}}% You save Rs <p class="text-bg-primary" style="display: inline;font-size: smaller;" id="savingprice">{{.save}}</p></p></h5>
+          <br><label for="startdate" class="startdateofroom">SELECT DATE</label><br>
+          <input class="text-success rounded-3" type="date" id="startdate" value="{{.cdate}}" min="{{.cdate}}" disabled>
+          <br>
+          <p class="text-white fw-bold" style="display: inline;">TO</p> <br>
+          <input disabled class="text-success rounded-3 mb-2" type="date" value="{{.ndate}}" id="endate"
+            oninput="date('{{.discount}}','{{.save}}','{{.roomprice}}')" min="{{.ndate}}">
 
-                  <h1>  <p class="card-text text-white">Rs {{.discount}} /-</p></h1>
-                    {{else}}
-                  <h1> <p class="card-text text-white">Rs {{.roomprice}} /-</p>
-                    {{end}}</h1>
-                  <button type="button" onclick="booked()" class="btn btn-outline-secondary border-0 btn-light" style="font-weight: 600;">Check-In Now</button>
-                  <button type="button" onclick="wishlist('{{.roomid}}','{{.roomname}}')" class="btn btn-outline-secondary btn-light border-0" style="font-weight: 600;">Add to Wishlist</button>
-                  <br><small class="text-white bg-danger">{{.status}}</small>
-                  
-                </div>
-              </div>
-          </div>
-          <!-- <div class="col-md-2"></div> -->
+
+          <!-- <p class="card-text text-white">1 Hall 2 Bedroom 1 Bathroom Balcony</p> -->
+          <h3>{{if eq .Offers "true"}}
+            <p class="card-text text-warning"><strike>Rs {{.roomprice}} /-</strike></p>
+          </h3>
+          <h5>
+            <p class="card-text text-bg-primary" style="display: inline;font-size: smaller;">{{.off}}% You save Rs
+            <p class="text-bg-primary" style="display: inline;font-size: smaller;" id="savingprice">{{.save}}</p>
+            </p>
+          </h5>
+
+          <h3>
+            <p class="card-text text-white fw-bold">Rs {{.discount}} /-</p>
+          </h3>
           {{else}}
+          <h3>
+            <p class="card-text text-white fw-bold">Rs {{.roomprice}} /-</p>
+            {{end}}
+          </h3>
+          <button type="button" onclick="booked()" class="btn btn-outline-secondary border-0 btn-light"
+            style="font-weight: 600;">Check-In Now</button>
+          <button type="button" onclick="wishlist('{{.roomid}}','{{.roomname}}')"
+            class="btn btn-outline-secondary btn-light border-0" style="font-weight: 600;">Add to Wishlist</button>
+          <br><small class="text-white bg-danger">{{.status}}</small>
+          &nbsp; <small class="text-white bg-success">Available from {{.checkout}}</small>
 
-          <div class="col-md-5 ">
-            <div class="card roompricediv" style="width: 80%;overflow-x: hidden;">
-                <div class="card-body">
-                  
-                  <h5 class="card-title theroomname"> <p class="theroomname1" style="display: inline;">Room Name :</p> {{.roomname}} </h5>
-                  <h6 class="card-subtitle mb-2 theroomcategory">Category : <p class="theroomcategory1"> {{.roomcategory}}</p></h6>
-                  
-                  <br><label for="startdate" class="startdateofroom">SELECT DATE</label><br>
-                  <input class="text-success rounded-3" type="date" id="startdate" value="{{.cdate}}" min="{{.cdate}}"> 
-                  <br><p class="text-white fw-bold" style="display: inline;">TO</p> <br>
-                  <input class="text-success rounded-3 mb-2" type="date" value="{{.ndate}}" id="endate" oninput="date('{{.discount}}','{{.save}}','{{.roomprice}}')" min="{{.ndate}}">
+        </div>
+      </div>
+    </div>
+    <!-- <div class="col-md-2"></div> -->
+    {{else}}
 
-                  <h1>{{if eq .Offers "true"}}
-                   <p class="card-text text-danger">Rs<strike id="roomorginalprice"> {{.roomprice}} </strike>/-</p></h1>
-                   <h5><p class="card-text text-bg-primary fw-bold" style="display: inline;font-size: smaller;">{{.off}}% You save Rs <p class="text-bg-primary fw-bold" style="display: inline;font-size: smaller;" id="savingprice">{{.save}}</p></p></h5>
+    <div class="col-md-5">
+      <div class="card roompricediv" style="width: 70%;overflow-x: hidden;">
+        <div class="card-body">
 
-                   <h1> <p class="card-text text-white fw-bold" id="price">Rs {{.discount}} /-</p></h1>
-                   <button type="button" onclick="checkin('{{.roomid}}','{{.roomname}}','{{.discount}}')" class="btn btn-outline-success btn-warning border-0 text-white" style="font-weight: 600;">Check-In Now</button>
-                   <button type="button" onclick="wishlist('{{.roomid}}','{{.roomname}}')" class="btn btn-outline-danger btn-info border-0 text-white" style="font-weight: 600;">Add to Wishlist</button>
-                  
-                   {{else}}
-                  <h1>  <p class="card-text text-white" id="price">Rs {{.roomprice}} /-</p>
-                   </h1>
-                  <button type="button" onclick="checkin('{{.roomid}}','{{.roomname}}','{{.roomprice}}')" class="btn btn-outline-success border-0 btn-warning" style="font-weight: 600;">Check-In Now</button>
-                  <button type="button" onclick="wishlist('{{.roomid}}','{{.roomname}}')" class="btn btn-outline-danger border-0 btn-info" style="font-weight: 600;">Add to Wishlist</button>
-                  {{end}}
-                  <br><small class="text-white bg-success">{{.status}}</small>
-                  
-                </div>
-              </div>
-          </div>
-          <!-- <div class="col-md-2"></div> -->
+          <h5 class="card-title theroomname">
+            <p class="theroomname1" style="display: inline;">Room Name :</p> {{.roomname}}
+          </h5>
+          <h6 class="card-subtitle mb-2 theroomcategory">Category : <p class="theroomcategory1"> {{.roomcategory}}</p>
+          </h6>
 
+          <br><label for="startdate" class="startdateofroom">SELECT DATE</label><br>
+          <input class="text-success rounded-3" type="date" id="startdate" value="{{.cdate}}" min="{{.cdate}}">
+          <br>
+          <p class="text-white fw-bold" style="display: inline;">TO</p> <br>
+          <input class="text-success rounded-3 mb-2" type="date" value="{{.ndate}}" id="endate"
+            oninput="date('{{.discount}}','{{.save}}','{{.roomprice}}')" min="{{.ndate}}">
+
+          <h3>{{if eq .Offers "true"}}
+            <p class="card-text text-danger">Rs<strike id="roomorginalprice"> {{.roomprice}} </strike>/-</p>
+          </h3>
+          <h5>
+            <p class="card-text text-bg-primary fw-bold" style="display: inline;font-size: smaller;">{{.off}}% You save
+              Rs
+            <p class="text-bg-primary fw-bold" style="display: inline;font-size: smaller;" id="savingprice">{{.save}}
+            </p>
+            </p>
+          </h5>
+
+          <h3>
+            <p class="card-text text-white fw-bold" id="price">Rs {{.discount}} /-</p>
+          </h3>
+          <button type="button" onclick="checkin('{{.roomid}}','{{.roomname}}','{{.discount}}')"
+            class="btn btn-outline-success btn-warning border-0 text-white" style="font-weight: 600;">Check-In
+            Now</button>
+          <button type="button" onclick="wishlist('{{.roomid}}','{{.roomname}}')"
+            class="btn btn-outline-danger btn-info border-0 text-white" style="font-weight: 600;">Add to
+            Wishlist</button>
+
+          {{else}}
+          <h3>
+            <p class="card-text text-white" id="price">Rs {{.roomprice}} /-</p>
+          </h3>
+          <button type="button" onclick="checkin('{{.roomid}}','{{.roomname}}','{{.roomprice}}')"
+            class="btn btn-outline-success border-0 btn-warning" style="font-weight: 600;">Check-In Now</button>
+          <button type="button" onclick="wishlist('{{.roomid}}','{{.roomname}}')"
+            class="btn btn-outline-danger border-0 btn-info" style="font-weight: 600;">Add to Wishlist</button>
           {{end}}
+          <br>
+          <small class="text-white bg-success">{{.status}}</small>
+
+        </div>
+      </div>
+    </div>
+    <!-- <div class="col-md-2"></div> -->
+
+    {{end}}
+
+
+
+  </div>
+  <!-- first row ends here -->
+
+
+  <!-- second row starts here -->
+
+  <div class="row mt-3">
+
+    <div class="col-md-7">
+      <div class="container ms-5">
+        <div class="row thesubpicscolor">
+          <div class="col-md-3  mt-1 mb-1">
+            <img src="/public/{{.sub1}}" alt="" class="subimagesection">
           
+          </div>
+          <div class="col-md-3  mt-1 mb-1">
+            <img src="/public/{{.sub2}}" alt="" class="subimagesection">
+
+          </div>
+          <div class="col-md-3  mt-1 mb-1">
+            <img src="/public/{{.sub3}}" alt="" class="subimagesection">
+
+          </div>
+          <div class="col-md-3  mt-1 mb-1 thelastimagediv">
+            <img src="/public/{{.sub4}}" alt="" class="subimagesection">
+            
+          </div>
+       
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="col-md-3 thelocationdiv">
+     <p class="fw-bold">Location</p> 
+     <p>Kolkata
+      <br>
+      Near National Park
+     </p>
+    </div>
+    
+
+    <div class="col-md-12 mt-2 descrsection">
+     
+      <p class="fw-bold descrsection2">Description</p>
+      <p>{{.desc}}</p>
+   
+  </div>
+
+
+  </div>
+  <!-- second row ends here -->
+
+
+  <!-- third row starts here -->
+  <div class="row">
+
+
+    <div class="col-md-12 thedetailstab">
+
+
+      <div class="row">
+
+        <div class="col-md-12">
+      <p class="fw-bold descrsection2">Details</p>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-6 mb-1">
+              Type
+            </div>
+            <div class="col-md-6 mb-1 thedetail">
+              Houses & Villas
+            </div>
+
+
+            <div class="col-md-6 mb-1">
+              Bathrooms
+            </div>
+            <div class="col-md-6 mb-1 thedetail">
+              2
+            </div>
+
+            <div class="col-md-6 mb-1">
+              Listed By
+            </div>
+            <div class="col-md-6 mb-1 thedetail">
+             Owner
+            </div>
+
+
+            <div class="col-md-6 mb-1">
+              Car Parking
+            </div>
+            <div class="col-md-6 mb-1 thedetail">
+             0
+            </div>
+          </div>
 
           
         </div>
-        
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-6 mb-1">
+              Bedrooms
+            </div>
+            <div class="col-md-6 mb-1 thedetail">
+              2
+            </div>
 
+            <div class="col-md-6 mb-1">
+              Furnishment
+            </div>
+            <div class="col-md-6 mb-1 thedetail">
+              Fully Furnished
+            </div>
 
+            <div class="col-md-6 mb-1">
+              Bachelors allowed
+            </div>
+            <div class="col-md-6 mb-1 thedetail">
+              Yes
+            </div>
+
+            <div class="col-md-6 mb-1">
+              Total Floors
+            </div>
+            <div class="col-md-6 mb-1 thedetail">
+              1
+            </div>
+          </div>
+        </div>
      
 
-     </body>
-     </html>
+      </div>
+
+<hr>
+    </div>
+
+    
+  </div>
+  <!-- third row ends here -->
+
+
+
+  <!-- fourth row starts here -->
+<div class="row mt-4">
+  <div class="col-md-12 theadsectionis1">
+    <p class="fw-bold relatedad">Related Ads</p>
+  </div>
+  <div class="col-md-12 theadsectionis">
+   <div class="row">
+    <div class="col-md-3 mt-2 mb-2">
+
+      <div class="card theadcards imagesofcard" style="width: 15rem;">
+     <a href=""> <img src="https://images.unsplash.com/photo-1560448205-4d9b3e6bb6db?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fHJvb218ZW58MHx8MHx8&w=1000&q=80" class="card-img-top" alt="...">
+     </a>  
+        <div class="card-body">
+          <h3 class="card-title fw-bold">Rs 6000</h3>
+          <p class="card-text">1 Bd 1 Hl 2Br 1k</p>
+          <p class="card-text text-muted">Good room with all facilites available</p>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="col-md-3 mt-2 mb-2">
+
+      <div class="card theadcards imagesofcard" style="width: 15rem;">
+        <a href=""> <img src="https://images.unsplash.com/flagged/photo-1573168710865-2e4c680d921a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGJlZCUyMHJvb218ZW58MHx8MHx8&w=1000&q=80" class="card-img-top" alt="..."></a>
+        <div class="card-body">
+          <h3 class="card-title fw-bold">Rs 7600</h3>
+          <p class="card-text">1 Bd 1 Hl 2Br 1k</p>
+          <p class="card-text text-muted">Good room with all facilites available</p>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="col-md-3 mt-2 mb-2">
+
+      <div class="card theadcards imagesofcard" style="width: 15rem;">
+        <a href=""> <img src="https://images.unsplash.com/photo-1574873215043-44119461cb3b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" class="card-img-top" alt="..."></a>
+        <div class="card-body">
+          <h3 class="card-title fw-bold">Rs 7879</h3>
+          <p class="card-text">1 Bd 1 Hl 2Br 1k</p>
+          <p class="card-text text-muted">Good room with all facilites available</p>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="col-md-3 mt-2 mb-2">
+
+      <div class="card theadcards imagesofcard" style="width: 15rem;">
+        <a href=""> <img src="https://images.unsplash.com/photo-1565184099246-7c2dfcbf5811?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDZ8fHxlbnwwfHx8fA%3D%3D&w=1000&q=80" class="card-img-top" alt="..."></a>
+        <div class="card-body">
+          <h3 class="card-title fw-bold">Rs 5900</h3>
+          <p class="card-text">1 Bd 1 Hl 2Br 1k</p>
+          <p class="card-text text-muted">Good room with all facilites available</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+
+
+
+   </div>
+  </div>
+</div>
+
+
+
+  <!-- fourth row ends here -->
+
+
+
+
+ 
+
+</div>
+<!-- the main container ends here -->
+
+
+ <!-- footer -->
+ {{template "navbar/footer.gohtml" .}}
+
+ <!-- footer ends here -->
+
+</body>
+
+</html>

@@ -127,6 +127,8 @@ func RoomInfo(c *gin.Context) {
 		"sub4":         roominfo.Sub4,
 		"sub5":         roominfo.Sub5,
 		"status":       roominfo.Status,
+		"checkout":     roominfo.Checkoutdate,
+		"desc":			roominfo.Description,
 		"Offers":roominfo.Offers,
 		"off":roominfo.Value,
 		"save":roominfo.Room_Price - roominfo.Discountprice,
