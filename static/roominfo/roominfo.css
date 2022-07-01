@@ -1,0 +1,67 @@
+.roominfoimages{
+    height: 27rem !important;
+    width: 27rem !important;
+}
+
+.roomcard{
+    
+    margin-left: 20% !important;
+    margin-right: 20% !important;
+}
+
+.imagecontainer{
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
+}
+
+.R4Roomwriting{
+    
+    top: 92%;
+    color: white;
+    position: absolute;
+    left: 3%;
+    font-weight: 900;
+    font-size: 1.3rem;
+}
+
+.roompricediv{
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    background-color: rgb(2,36,60) !important;
+}
+
+.theroomname{
+    
+    letter-spacing: 2px;
+    font-weight: 700;
+    color: white !important;
+    font-size: 1.5rem;
+    font-family: Arial 'narrow';
+}
+.theroomname1{
+    
+    letter-spacing: 2px;
+    font-weight: 400;
+    color: white !important;
+    font-size: 1.2rem;
+    font-family: Arial 'narrow';
+}
+
+.theroomcategory{
+    color: white !important;
+
+}
+
+.theroomcategory1{
+    display: inline;
+    background-color: rgb(14, 109, 85);
+
+}
+.startdateofroom{
+    color: white !important;
+    font-weight: 600;
+}
+
+.thepricediv{
+    margin-top: 1px;
+}

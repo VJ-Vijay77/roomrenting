@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/static/navbar/navbar.css">
 
     <script src="/static/roominfo/roominfo.js"></script>
-    <link rel="stylesheet" href="/static/searchpage/css/searchpage.css">
+    <link rel="stylesheet" href="/static/roominfo/roominfo.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -32,26 +32,30 @@
 
         <div class="row ps-5">
             
-                <div class="col-8 cols-md-9 col-lg-8">
+          <!-- carousel starts here -->
+          
 
-        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class=" col-md-7">
+                  <div class="container bg-dark imagecontainer">
+                    <div class="R4Roomwriting">R4Rooms</div>
+        <div id="carouselExampleControls" class="carousel slide roomcard" data-bs-ride="carousel">
             <div class="carousel-inner">
               
               <div class="carousel-item active">
-                <img src="/public/{{.cover}}" class="d-block w-100" alt="...">
+                <img src="/public/{{.cover}}" class="d-block w-100 roominfoimages" alt="...">
               </div>
               <div class="carousel-item">
-                <img src="/public/{{.sub1}}" class="d-block w-100" alt="...">
+                <img src="/public/{{.sub1}}" class="d-block w-100 roominfoimages" alt="...">
               </div>
               
               <div class="carousel-item">
-                <img src="/public/{{.sub2}}" class="d-block w-100" alt="...">
+                <img src="/public/{{.sub2}}" class="d-block w-100 roominfoimages" alt="...">
               </div>
               <div class="carousel-item">
-                <img src="/public/{{.sub3}}" class="d-block w-100" alt="...">
+                <img src="/public/{{.sub3}}" class="d-block w-100 roominfoimages" alt="...">
               </div>
               <div class="carousel-item">
-                <img src="/public/{{.sub4}}" class="d-block w-100" alt="...">
+                <img src="/public/{{.sub4}}" class="d-block w-100 roominfoimages" alt="...">
               </div>
 
             </div>
@@ -64,61 +68,79 @@
               <span class="visually-hidden">Next</span>
             </button>
           </div>
+
+                  </div>
           </div>
+          <!-- carousel ends here -->
 
           {{if eq .status "booked"}}
-          <div class="col-4 cols-md-3 col-lg-4">
-            <div class="card" style="width: 80%;overflow-x: hidden;">
+
+          <div class="col-md-5">
+            <div class="card roompricediv" style="width: 80%;overflow-x: hidden;">
                 <div class="card-body bg-secondary">
 
-                  <h5 class="card-title text-white">{{.roomname}} </h5>
-                  <h6 class="card-subtitle mb-2 text-muted text-white">Category : {{.roomcategory}}</h6>
-                  <p class="card-text text-white">1 Hall 2 Bedroom 1 Bathroom Balcony</p>
+                  <h5 class="card-title theroomname"> <p class="theroomname1" style="display: inline;">Room Name :</p> {{.roomname}} </h5>
+
+                  <h6 class="card-subtitle mb-2 theroomcategory">Category : <p class="theroomcategory1"> {{.roomcategory}}</p></h6>
+
+
+                  <br><label for="startdate" class="startdateofroom">SELECT DATE</label><br>
+                  <input class="text-success rounded-3" type="date" id="startdate" value="{{.cdate}}" min="{{.cdate}}" disabled> 
+                  <br><p class="text-white fw-bold" style="display: inline;">TO</p> <br>
+                  <input disabled class="text-success rounded-3 mb-2" type="date" value="{{.ndate}}" id="endate" oninput="date('{{.discount}}','{{.save}}','{{.roomprice}}')" min="{{.ndate}}">
+
+
+                  <!-- <p class="card-text text-white">1 Hall 2 Bedroom 1 Bathroom Balcony</p> -->
                   <h1>{{if eq .Offers "true"}}
                     <p class="card-text text-warning"><strike>Rs {{.roomprice}} /-</strike></p></h1>
+                   <h5><p class="card-text text-bg-primary" style="display: inline;font-size: smaller;">{{.off}}% You save Rs <p class="text-bg-primary" style="display: inline;font-size: smaller;" id="savingprice">{{.save}}</p></p></h5>
 
                   <h1>  <p class="card-text text-white">Rs {{.discount}} /-</p></h1>
                     {{else}}
                   <h1> <p class="card-text text-white">Rs {{.roomprice}} /-</p>
                     {{end}}</h1>
-                  <button type="button" onclick="booked()" class="btn btn-outline-danger btn-light" style="font-weight: 600;">Check-In Now</button>
-                  <button type="button" onclick="wishlist('{{.roomid}}','{{.roomname}}')" class="btn btn-outline-primary btn-light" style="font-weight: 600;">Add to Wishlist</button>
-                  <br><small class="text-muted bg-info">{{.status}}</small>
+                  <button type="button" onclick="booked()" class="btn btn-outline-secondary border-0 btn-light" style="font-weight: 600;">Check-In Now</button>
+                  <button type="button" onclick="wishlist('{{.roomid}}','{{.roomname}}')" class="btn btn-outline-secondary btn-light border-0" style="font-weight: 600;">Add to Wishlist</button>
+                  <br><small class="text-white bg-danger">{{.status}}</small>
                   
                 </div>
               </div>
           </div>
+          <!-- <div class="col-md-2"></div> -->
           {{else}}
-          <div class="col-4 cols-md-3 col-lg-4">
-            <div class="card" style="width: 80%;overflow-x: hidden;">
+
+          <div class="col-md-5 ">
+            <div class="card roompricediv" style="width: 80%;overflow-x: hidden;">
                 <div class="card-body">
                   
-                  <h5 class="card-title">{{.roomname}} </h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Category : {{.roomcategory}}</h6>
-                  <p class="card-text">1 Hall 2 Bedroom 1 Bathroom Balcony</p>
-                  <label for="startdate">Date</label><br>
-                  <input class="text-success rounded-3" type="date" id="startdate" value="{{.cdate}}" min="{{.cdate}}"><br> TO <br>
-                  <input class="text-success rounded-3" type="date" value="{{.ndate}}" id="endate" oninput="date('{{.discount}}','{{.save}}','{{.roomprice}}')" min="{{.ndate}}">
+                  <h5 class="card-title theroomname"> <p class="theroomname1" style="display: inline;">Room Name :</p> {{.roomname}} </h5>
+                  <h6 class="card-subtitle mb-2 theroomcategory">Category : <p class="theroomcategory1"> {{.roomcategory}}</p></h6>
+                  
+                  <br><label for="startdate" class="startdateofroom">SELECT DATE</label><br>
+                  <input class="text-success rounded-3" type="date" id="startdate" value="{{.cdate}}" min="{{.cdate}}"> 
+                  <br><p class="text-white fw-bold" style="display: inline;">TO</p> <br>
+                  <input class="text-success rounded-3 mb-2" type="date" value="{{.ndate}}" id="endate" oninput="date('{{.discount}}','{{.save}}','{{.roomprice}}')" min="{{.ndate}}">
 
                   <h1>{{if eq .Offers "true"}}
-                    <p class="card-text text-danger">Rs<strike id="roomorginalprice"> {{.roomprice}} </strike>/-</p></h1>
-                   <h5><p class="card-text text-bg-primary" style="display: inline;">{{.off}}% You save Rs <p class="text-bg-primary" style="display: inline;" id="savingprice">{{.save}}</p></p></h5>
+                   <p class="card-text text-danger">Rs<strike id="roomorginalprice"> {{.roomprice}} </strike>/-</p></h1>
+                   <h5><p class="card-text text-bg-primary fw-bold" style="display: inline;font-size: smaller;">{{.off}}% You save Rs <p class="text-bg-primary fw-bold" style="display: inline;font-size: smaller;" id="savingprice">{{.save}}</p></p></h5>
 
-                   <h1> <p class="card-text text-success" id="price">Rs {{.discount}} /-</p></h1>
-                   <button type="button" onclick="checkin('{{.roomid}}','{{.roomname}}','{{.discount}}')" class="btn btn-outline-success btn-warning" style="font-weight: 600;">Check-In Now</button>
-                   <button type="button" onclick="wishlist('{{.roomid}}','{{.roomname}}')" class="btn btn-outline-danger btn-light" style="font-weight: 600;">Add to Wishlist</button>
+                   <h1> <p class="card-text text-white fw-bold" id="price">Rs {{.discount}} /-</p></h1>
+                   <button type="button" onclick="checkin('{{.roomid}}','{{.roomname}}','{{.discount}}')" class="btn btn-outline-success btn-warning border-0 text-white" style="font-weight: 600;">Check-In Now</button>
+                   <button type="button" onclick="wishlist('{{.roomid}}','{{.roomname}}')" class="btn btn-outline-danger btn-info border-0 text-white" style="font-weight: 600;">Add to Wishlist</button>
                   
                    {{else}}
                   <h1>  <p class="card-text text-white" id="price">Rs {{.roomprice}} /-</p>
                    </h1>
-                  <button type="button" onclick="checkin('{{.roomid}}','{{.roomname}}','{{.roomprice}}')" class="btn btn-outline-success btn-warning" style="font-weight: 600;">Check-In Now</button>
-                  <button type="button" onclick="wishlist('{{.roomid}}','{{.roomname}}')" class="btn btn-outline-danger btn-light" style="font-weight: 600;">Add to Wishlist</button>
+                  <button type="button" onclick="checkin('{{.roomid}}','{{.roomname}}','{{.roomprice}}')" class="btn btn-outline-success border-0 btn-warning" style="font-weight: 600;">Check-In Now</button>
+                  <button type="button" onclick="wishlist('{{.roomid}}','{{.roomname}}')" class="btn btn-outline-danger border-0 btn-info" style="font-weight: 600;">Add to Wishlist</button>
                   {{end}}
-                  <br><small class="text-muted bg-info">{{.status}}</small>
+                  <br><small class="text-white bg-success">{{.status}}</small>
                   
                 </div>
               </div>
           </div>
+          <!-- <div class="col-md-2"></div> -->
 
           {{end}}
           
