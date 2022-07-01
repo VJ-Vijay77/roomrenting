@@ -68,34 +68,39 @@
     
     <div class="row ms-1">
       
+     
       <div class="col-md-3 d-flex justify-content-center">
-        <div class="row">
+        <div class="row filterinfo mt-5 mb-5">
           <div class="col-md-12">
             <h3>Filter</h3> <hr>
-          </div>
+         
+            
+            <p class="text-secondary" style="font-size: large;">Choose By Date<br></p> 
 
-          <div class="col-md-12">Choose By Date</div>
-          <div class="col-md-12">
-            Available from<br> <input type="date" value="{{.cdate}}" min="{{.cdate}}" id="sdate" oninput="isavailable()"><br>
-          </div>
-          <div class="col-md-12">
-            Choose By Price
-          </div>
-          <div class="col-md-12">
-            <label for="customRange3" class="form-label">Price range : Rs 7500/-</label>
+        
+           <p class="fw-bold">Available from </p> <input type="date" value="{{.cdate}}" min="{{.cdate}}" id="sdate" oninput="isavailable()"><br>
+         
+          
+        
+
+          
+           <p class="fw-bold mt-3">Choose By Price</p> 
+         
+            <label for="customRange3" class="form-label fw-bold">Price range : Rs 7500/-</label>
 <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRange3">
           </div>
+          <div class="pricebuttonsof3">
           <div class="col-md-3">
-            <a href="" class="btn btn-secondary btn-outline-dark text-white btn-sm">Above 5k</a>
+            <a href="" class="btn btn-secondary btn-outline-dark border-0 text-white btn-sm">Above 5k</a>
           </div>
           <div class="col-md-3">
-            <a href="" class="btn btn-secondary btn-outline-dark text-white btn-sm">Above 7k</a>
+            <a href="" class="btn btn-secondary btn-outline-dark border-0 text-white btn-sm">Above 7k</a>
           </div>
           <div class="col-md-3">
-            <a href="" class="btn btn-secondary btn-outline-dark text-white btn-sm">Below 5k</a>
+            <a href="" class="btn btn-secondary btn-outline-dark border-0 text-white btn-sm">Below 5k</a>
           </div>
          
-          <hr>
+          </div>
         </div>
         
         
