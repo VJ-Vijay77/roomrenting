@@ -1,0 +1,118 @@
+body{
+    overflow-x: hidden;
+}
+.theprofilecard{
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+}
+
+.theleftpic{
+    max-width: 5rem;
+}
+
+.checkprofileitem{
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    font-size: smaller;
+}
+
+.secondsection{
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+}
+
+.coverarea{
+  
+    max-width: 16rem !important;
+}
+
+.roomnamei{
+    letter-spacing: 1px;
+    font-weight: 400;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+.roomnameii{
+    letter-spacing: 1px;
+    font-weight: 600;
+    font-family: sans-serif;
+    font-size: large;
+
+}
+
+.roompricei{
+    font-weight: 800;
+    font-family: sans-serif;
+    font-size: 1.4rem;
+}
+.roompriceii{
+    color: green;
+    font-weight: 800;
+    font-family: sans-serif;
+    font-size: 1.4rem;
+}
+
+.deleteiconinwish:hover{
+    color: red;
+}
+
+.myorderspart{
+    
+    
+    box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+
+}
+.myorderswriting{
+    font-weight: 900;
+    color: rgb(9, 77, 104);
+    font-size: larger;
+}
+
+.textdec{
+    color: rgb(19, 19, 51);
+    text-decoration: none;
+}
+
+.jcs{
+    display: flex;
+    justify-content: center;
+}
+.theiconnearprice{
+    display: none;
+}
+
+@media only screen and (max-width: 1400px) {
+    .thedetailstabisthis{
+        margin-left: 5%;
+    }
+    .theremoveicon{
+        display: none;
+    }
+    .theiconnearprice{
+        display: block;
+    }
+
+}
+
+@media only screen and (max-width: 1200px) {
+    .thedetailstabisthis{
+        margin-left: 20%;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .thedetailstabisthis{
+        margin-left: 35%;
+    }
+    .thedescsection{
+        display: none;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .thedetailstabisthis{
+        margin-left: 0%;
+    }
+    .thesidecolumnofwish{
+        display: none;
+    }
+
+}

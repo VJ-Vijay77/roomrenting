@@ -6,8 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wishlist</title>
+  <link rel="stylesheet" href="/static/footer/footer.css">
   <link rel="stylesheet" href="/static/navbar/navbar.css">
-
+  <link rel="stylesheet" href="/static/wishlist/wishlist.css">
   <script src="/static/wishlist/wishlist.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -15,62 +16,186 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
     crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://kit.fontawesome.com/d67b07a9d9.js" crossorigin="anonymous"></script>
-<style>
-  .start-100 {
-    left: 97% !important;
-}
-</style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://kit.fontawesome.com/d67b07a9d9.js" crossorigin="anonymous"></script>
+  <style>
+    .start-100 {
+      left: 97% !important;
+    }
+  </style>
 </head>
 
 <body>
   <!-- navbar start -->
-{{template "navbar/navbar.gohtml" .}}
-<!-- navbar ends -->
+  {{template "navbar/navbar.gohtml" .}}
+  <!-- navbar ends -->
 
 
   <hr>
-  {{if .wishlist}}
   
-  
+
+
+
+  <hr>
+
   <div class="container">
     <div class="row">
-    {{range .wishlist}}
-    
-     
-        <div class="col-12 col-md-4">
-      <div class="card" style="width: 18rem;">
-        <img src="/public/{{.Cover}}" class="card-img-top" alt="...">
-        {{if eq .Status "available"}}<div class="w-100 bg-success text-center text-white">{{.Status}}</div>
-        {{else}}<div class="w-100 bg-warning text-center text-white">{{.Status}}</div>{{end}}
-        <div class="card-body">
-          <p class="card-text">2 Bedroom 1 Bathroom 1 Hall Breezing Balcony.</p>
-          <p class="card-text">Room Name:{{.Room_Name}}</p>
-          <p class="card-text">Category:{{.Category}}</p>
-          <p class="card-text">Room ID:{{.Wishroomsid}} /-</p>
-          <p class="card-text">Rs {{.Room_Price}} /-</p>
-          <p class="card-text">Wishlist ID:{{.Wishlistid}} /-</p>
-         
+      <div class="col-md">
+        <div class="row">
+          <div class="col-md-3 thesidecolumnofwish">
+            <div class="row">
+              <div class="col-md-12 theprofilecard mb-2">
+                <img src="/public/profile/pf.png" alt="" class="theleftpic">
+                Hello,
+                {{.username}}
+                <br><a href="/user/profile" class="text-muted checkprofileitem">Check Profile</a>
+              </div>
+              <div class="col-md-12 myorderspart d-flex justify-content-center">
+                <p class="myorderswriting"><i class="fa-solid fa-bag-shopping"></i> &nbsp; &nbsp; &nbsp; My Orders <i class="fa-solid fa-circle-arrow-right"></i></p>
+              </div>
+              <div class="col-md-12 mt-2 myorderspart d-flex justify-content-center">
+                <div class="row">
 
-       {{if eq .Status "available"}}   <button type="button" class="btn btn-warning" onclick="wishlistTocart('{{.Wishroomsid}}','{{.Room_Name}}')">Book Now</button>
-       {{else}}
-       <button type="button" class="btn btn-secondary" disabled>Book Now</button> {{end}}
-  
-      
-  
-          <button type="button" class="btn btn-danger" onclick="removefromwishlist('{{.Wishlistid}}')">Remove Item</button>
-  
+                  <div class="col-md-12 jcs">
+                <p class="myorderswriting"><i class="fa-solid fa-user mt-1"></i> &nbsp;&nbsp;&nbsp; Account Settings</p>  
+                  </div>
+                  <div class="col-md-12 jcs ms-1 mb-3">
+                    <a href="" class=" textdec">Profile Information</a>
+                  </div>
+                  <div class="col-md-12 jcs ms-1 mb-3">
+                    <a href="" class=" textdec">Manage Address</a>
+                  </div>
+                  <div class="col-md-12 jcs ms-1 mb-3">
+                    <a href="" class=" textdec">Other Informations</a>
+                  </div>
+                  <div class="col-md-12 jcs ms-1 mb-3">
+                    <a href="" class=" textdec">Edit Profile</a>
+                  </div>
+                 
+
+                </div>
+              </div>
+              <div class="col-md-12 myorderspart jcs mt-2">
+
+                <div class="row">
+                  <div class="col-md-12 jcs">
+                <p class="myorderswriting"><i class="fa-solid fa-credit-card"></i> &nbsp;&nbsp;&nbsp; Payment Informations</p>
+                  </div>
+                  <div class="col-md-12 jcs ms-1 mb-3">
+                    <a href="" class=" textdec">Credit Card</a>
+                  </div>
+
+                  <div class="col-md-12 jcs ms-1 mb-3">
+                    <a href="" class=" textdec">Debit Card</a>
+                  </div>
+
+                  <div class="col-md-12 jcs ms-1 mb-3">
+                    <a href="" class=" textdec">Payment At Office</a>
+                  </div>
+
+                  <div class="col-md-12 jcs ms-1 mb-3">
+                    <a href="" class=" textdec">Wallets</a>
+                  </div>
+                </div>
+
+              </div>
+
+
+
+              <div class="col-md-12 myorderspart mt-3">
+                <div class="row">
+                  <div class="col-md-12 jcs">
+                    <p class="myorderswriting"><i class="fa-solid fa-gear"></i> &nbsp;&nbsp; SETTINGS</p>
+                  </div>
+
+                  <div class="col-md-12 jcs ms-1 mb-3">
+                    <a href="" class=" textdec">Go To Settings</a>
+                  </div>
+                  <div class="col-md-12 jcs ms-1 mb-3">
+                    <a href="" class=" textdec">Password Management</a>
+                  </div>
+                  <div class="col-md-12 jcs ms-1 mb-3">
+                    <a href="" class=" textdec">Help</a>
+                  </div>
+
+                </div>
+              </div>
+              
+              <div class="col-md-12 myorderspart mt-2 jcs">
+                <a href="" class="myorderswriting textdec"><i class="fa-solid fa-power-off"></i> &nbsp;&nbsp; Logout</a>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-8 ms-2">
+            <div class="row">
+              {{range .wishlist}}
+              <div class="col-md-12 secondsection mb-2">
+                <div class="row">
+                  
+                  <div class="col-md-4 link">
+                    <div class="row">
+                      <div class="col-md-12">
+               <a href="/user/room_info/{{.Wishroomsid}}">   <img class="coverarea mt-2 mb-2" src="/public/{{.Cover}}" alt=""></a>
+
+                      </div>
+                      {{if eq .Status "available"}}
+                      <div class="col-md-12 w-50 bg-success jcs text-white">
+                        {{.Status}}
+                      </div>
+                      {{else}}
+                      <div class="col-md-12 w-50 jcs bg-warning text-white">
+                        {{.Status}}
+                      </div>
+                      {{end}}
+                    </div>
+                  </div>
+                  <div class="col-md-8 mt-2 mb-2">
+
+                    <div class="row">
+                      <div class="col-md-11 thedetailstabisthis">
+                        <div style="display: flex;"><p class="roomnamei">Room Name : </p> <p class="roomnameii">&nbsp; {{.Room_Name}}</p></div>
+                 <div class="thedescsection"> <p class="fw-bold">{{.Description}}</p> </div>
+                 <div style="display: flex;"><p class="roomnamei">Category : </p> <p class="roomnameii">&nbsp; {{.Category}}</p></div>
+                  
+                 <div style="display: flex;"><p class="roompricei">Rs : </p> <p class="roompriceii">&nbsp; {{.Room_Price}} /-</p></div>
+                 <div class="theiconnearprice">
+                 <i class="fa-solid fa-trash deleteiconinwish" onclick="removefromwishlist('{{.Wishlistid}}')"></i>
+                 </div>
+                      </div>
+                      <div class="col-md-1 theremoveicon">
+                 <i class="fa-solid fa-trash deleteiconinwish" onclick="removefromwishlist('{{.Wishlistid}}')"></i>
+
+                      </div>
+                    </div>
+
+                    
+
+                
+
+                </div>
+              
+                </div>
+              </div>
+            {{end}}
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    {{end}}
   </div>
-  </div>
-  {{else}}
-  <h3 class="text-center">Nothing in Wishlist</h3>
-  {{end}}
-  
+
+
+
+
+
+
+
+   <!-- footer -->
+ {{template "navbar/footer.gohtml" .}}
+
+ <!-- footer ends here -->
+
 </body>
 
 </html>

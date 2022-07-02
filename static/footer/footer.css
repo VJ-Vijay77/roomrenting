@@ -1,0 +1,53 @@
+
+
+.footerconn{
+    background-color: rgb(172, 66, 182);
+    height: 3rem;
+    display: flex;
+    align-items: center;
+
+}
+.conn{
+    margin-top: 1rem !important;
+    display: inline;
+    color: white;
+    font-weight: 600;
+    font-size: 1.8rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.fb{
+    color: white;
+    font-size: 1.3rem;
+    margin-right: 1rem;
+}
+
+.footerleft{
+    color: white !important;
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.footerul{
+    list-style-type: none;
+}
+
+.intoggleform{
+   display: none !important;
+}
+
+@media only screen and (max-width: 992px) {
+    .searchsection {
+        display: none !important;
+        
+    }
+    .intoggleform{
+        display: inline !important;
+       
+    }
+}
+
+.thestatusarea{
+    font-size: x-small;
+}
+

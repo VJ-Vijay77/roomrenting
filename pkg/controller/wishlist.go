@@ -34,7 +34,7 @@ func Wishlish(c *gin.Context) {
 	db.Raw("SELECT first_name FROM users where email=?", user_ID).Scan(&userinfos)
 	UserName := userinfos.First_Name
 	var wishlistitems []models.Wishlist_Infos
-	db.Raw("SELECT wishlists.wishlistid,users.id,rooms.room_name,rooms.cover,rooms.status,rooms.room_price,rooms.category,wishlists.wishroomsid FROM wishlists INNER JOIN rooms ON rooms.id=wishlists.wishroomsid INNER JOIN users ON wishlists.user_id=users.id WHERE user_id=?", UserID).Scan(&wishlistitems)
+	db.Raw("SELECT wishlists.wishlistid,users.id,rooms.room_name,rooms.cover,rooms.status,rooms.room_price,rooms.category,wishlists.wishroomsid,rooms.description FROM wishlists INNER JOIN rooms ON rooms.id=wishlists.wishroomsid INNER JOIN users ON wishlists.user_id=users.id WHERE user_id=?", UserID).Scan(&wishlistitems)
 	c.HTML(200, "wishlist.gohtml", gin.H{
 		"wishlist":     wishlistitems,
 		"username": UserName,

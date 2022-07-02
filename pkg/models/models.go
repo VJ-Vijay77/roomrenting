@@ -78,6 +78,7 @@ type Wishlist_Infos struct {
 	Category    string
 	User_Id     int
 	Status      string
+	Description string
 }
 
 type Orders struct {
