@@ -1,0 +1,68 @@
+
+@media only screen and (max-width: 1216px) {
+.theroomcards{
+   min-width: 18rem !important; 
+   max-width: 18rem !important; 
+}
+.descriptionoftheroom{
+    display: none;
+}
+}
+
+@media only screen and (max-width: 1164px) {
+    .theroomcards{
+        min-width: 15rem !important; 
+        max-width: 15rem !important; 
+     }
+}
+
+@media only screen and (max-width: 986px) {
+    .categoryoftheroom{
+        display: none;
+    }
+    .theroomcards{
+        min-width: 13rem !important; 
+        max-width: 13rem !important; 
+     }
+
+}
+
+@media only screen and (max-width: 848px) {
+    .theroomcards{
+        min-width: 12rem !important; 
+        max-width: 12rem !important; 
+     }
+     .theavailability{
+        display: none;
+     }
+}
+
+@media only screen and (max-width: 764px) {
+    .theroomcards{
+        min-width: 27rem !important; 
+        max-width: 27rem !important; 
+        min-height: 29rem !important; 
+        max-height: 29rem !important;
+       margin-top: 1rem;
+     }
+     .thebookedroomcards{
+        min-width: 27rem !important; 
+        max-width: 27rem !important; 
+        min-height: 33rem !important; 
+        max-height: 33rem !important; 
+     }
+     .theavailability{
+        display: block;
+     }
+     .categoryoftheroom{
+        display: block;
+    }
+    .descriptionoftheroom{
+        display: block;
+    }
+    .navimages{
+        max-height: 15rem !important;
+        min-height: 15rem !important;
+    }
+
+}

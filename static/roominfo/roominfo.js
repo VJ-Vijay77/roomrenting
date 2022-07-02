@@ -38,8 +38,10 @@ function date(Roomprice,save,Oroomprice){
 
            
 
-            swal("Room Name:"+RName+"\nRoom Price:"+Price*days+"/-","Room Id:"+RID+"\n1 Bedroom 2 Bathroom 1 Hall", {           
-  buttons: {
+            swal("Room Price: Rs "+Price*days+"/-","Room Name:"+RName+"\nRoom Id:"+RID+"\n1 Bedroom 2 Bathroom 1 Hall", {           
+  
+              
+    buttons: {
     cancel: "Cancel",
     catch: {
       text: "Add to Cart",
@@ -47,6 +49,7 @@ function date(Roomprice,save,Oroomprice){
     },
     
   },
+  
 })
 .then((value) => {
   switch (value) {
