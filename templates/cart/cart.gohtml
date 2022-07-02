@@ -8,6 +8,7 @@
   <title>Cart</title>
   <link rel="stylesheet" href="/static/navbar/navbar.css">
   <link rel="stylesheet" href="/static/cart/cart.css">
+ <link rel="stylesheet" href="/static/footer/footer.css">
   <script src="/static/cart/cart.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -33,75 +34,7 @@
 <div id="userids" class="visually-hidden">{{.userid}}</div>
  <hr>
 
-   {{if .total}}
-   <table class="table table-info table-hover table-striped-columns">
-    <thead>
-      <tr>
-        <th scope="col">Room ID</th>
-        <th scope="col">Room</th>
-        
-        <th scope="col">Original Price/day</th>
-        <th scope="col">Total days</th>
-        <th scope="col">Total After Offers</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{range .cart}}
-      <tr>
-        <th scope="row">{{.Cartsroomid}}</th>
-        <td>
-          <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="/public/{{.Cover}}" class="img-fluid rounded-start" alt="...">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">{{.Room_Name}}</h5>
-                  <p class="card-text">3 Bedroom 2 Bathroom 1 Hall Balcony with breezing wind</p>
-                  <p class="card-text">Category:{{.Category}}</p>
-                  <p class="card-text"><small class="text-muted">Available at kochi</small></p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="v text-muted" style="font-size: 13px;">  <i class="fa-solid fa-wallet" style="color: rgb(250, 71, 6);"></i> Deduct From Wallet in Payment Gateway<br><br></div>
-          <button type="button" class="btn btn-danger" onclick="removecartitem('{{.Cartsid}}')">Remove Item</button>
-         
-            <button type="button" onclick="proceedtocheckout('{{.Cartsroomid}}','{{.Total}}','{{.Startdate}}','{{.Endate}}')" class="btn btn-outline-success btn-warning w-50">Proceed to Checkout</button>
-         
-        </td>
-      
-        <td><s class="text-danger">Rs {{.Room_Price}} /-</s><br>
-        Rs {{.Discountprice}} /-</td>
-        <td><div style="font-size: smaller;">{{.Startdate}}</div>-to-<div id="endate" style="font-size: smaller;">{{.Endate}}</div><br> = {{.Days}} Days</td>
-        <td><br>Rs {{.Total}} /-</td>
-
-      
-      </tr>
-     
-     {{end}}
-    </tbody>
-  </table>
- 
-  <!-- <div class="text-center">
-    <button type="button" onclick="proceedtocheckout('{{.total}}','{{.userid}}')" class="btn btn-outline-success btn-warning w-75" style="font-size: 2rem;">Proceed to Checkout</button>
-  </div> -->
-
-  <div class="row">
-    <div class="col-7 col-md-8 col-lg-8">
-    <h2 class="text-center">Total </h2>
-    </div>
-    <div class="col-5 col-md-4 col-lg-4 ">
-     <h3 class="text-danger text-center">Rs {{.total}} /-</h3>
-     
-    </div>
-   
-  </div>
-  {{else}}
-  <h2 class="text-center">Nothing in Cart</h2>
-  {{end}}
-
+  
 <hr>
 <div class="container">
 
@@ -115,27 +48,27 @@
         <div class="col-md-12 theaddresscart">
           <div class="row">
             <div class="col-md-3 mycartdivisthis jcc">
-          <p class="mycartwriting fw-semibold" style="font-size: 1.5rem;">My Cart</p>
+          <p class="mycartwriting fw-semibold" style="font-size: 1.5rem;">My Cart({{.cartcount}})</p>
 
             </div>
 
-            <div class="col-md-7 jcc">
-              Deliver to -
+            <div class="col-md-7 jcc mycartplacewriting">
+              Deliver to: <p class="fw-bold">&nbsp;{{.place}}-{{.pin}}</p> 
             </div>
             <div class="col-md-2 jcc">
-              <button class="btn btn-light  btn-outline-primary changebutton  btn-sm ">change</button>
+              <button class="btn btn-light  btn-outline-primary changebutton  btn-sm" disabled>change</button>
             </div>
           </div>
         
         </div>
 
 {{range .cart}}
-        <div class="col-md-12 theitempart">
+        <div class="col-md-12 mb-2 theitempart">
           <div class="row">
-            <div class="col-md-3 ">
-            <img src="/public/{{.Cover}}" class="mt-1 mb-1" alt="" style="max-width: 10rem;min-height: 10rem;">  
+            <div class="col-md-3">
+            <img src="/public/{{.Cover}}" class="mt-1 mb-1 roomscover" alt="" style="max-width: 10rem;min-height: 10rem;">  
             </div>
-            <div class="col-md-7">
+            <div class="col-md-5 theroomdetailwritings">
               <p class="cartroomname fw-semibold" style="font-size: large;">{{.Room_Name}}</p>
             <p class="categoryareaisthis text-muted">Category : {{.Category}}</p>
             <small>{{.Description}}</small><br>
@@ -146,7 +79,7 @@
             </p>
             
             </div>
-            <div class="col-md-2">
+            <div class="col-md-4">
               <p class="fw-bold">Date</p>
               <p style="font-size: small;">{{.Startdate}} to {{.Endate}}({{.Days}} days)</p>
             <button type="button" onclick="proceedtocheckout('{{.Cartsroomid}}','{{.Total}}','{{.Startdate}}','{{.Endate}}')" class="btn btn-outline-dark btn-primary btn-sm text-white border-0">Checkout</button>
@@ -163,7 +96,57 @@
     <div class="col-md-3 ms-3 theitempart1">
       <div class="row">
         <div class="col-md12 theitempart pricedetailshead jcc">PRICE DETAILS</div>
-        <div class="col-md12">1</div>
+        <div class="col-md12 pricecountinright">
+          <div class="row">
+            <div class="col-md-8">
+          Price({{.cartcount}}) Items
+
+            </div>
+            <div class="col-md-4">
+              <i class="fa-solid fa-indian-rupee-sign"></i> {{.total}}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-8">
+              <p class="fw-bold text-success"><i class="fa-solid fa-tags"></i> Offer Available</p>
+          
+
+            </div>
+            <div class="col-md-4">
+              <p class="text-success">Applied!</p>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-md-8">
+              <p class="text-black">Miscellenous Expenses</p>
+            </div>
+            <div class="col-md-4">
+              <p class="text-black">
+                <i class="fa-solid fa-indian-rupee-sign"></i> 0.00
+              </p>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-md-8">
+              Office Expense
+            </div>
+            <div class="col-md-4">
+              
+                <i class="fa-solid fa-indian-rupee-sign"></i> 0.00
+              
+            </div>
+          </div>
+          <hr>
+          <div class="col-md-12 jcc pricecountinright1">
+         <p class="pricedetailshead" style="margin-top: -1px;font-size: x-large;">TOTAL</p>    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fa-solid fa-indian-rupee-sign mt-2 theindianrupee" style="font-size: large;"></i>&nbsp; <p class="fw-bold thetotalpriceincart" style="font-size: x-large;">{{.total}}</p>
+          </div>
+<hr>
+        </div>
       </div>
       
     </div>
@@ -182,8 +165,68 @@
 
 
 
+  <div class="row mt-5">
+    <div class="col-md-12 mt-5 thefoodsection">
+      <div class="row" style="background-color: rgb(242, 241, 241);">
+        <div class="col-md-12 mb-3 fw-bold" style="font-size: large;">Food Items (<small class="text-secondary" style="font-size: smaller;">Coming Soon..</small>) </div>
+     
+        <div class="col-md-2 mb-3">
+          <div class="row jcc">
+            <div class="col-md-12 jcc">
+              <img id="thefoodimage" src="https://images.herzindagi.info/image/2021/Sep/chaii-samosa.jpg" class="rounded" alt="" style="max-height:4rem;">
+            </div>
+            <div id="thefoodimage" class="col-md-12 w-50 bg-danger text-white fw-bold jcc">
+              Add Item
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-2 mb-3">
+          <div class="row jcc">
+            <div class="col-md-12 jcc">
+              <img id="thefoodimage" src="https://www.holidify.com/images/cmsuploads/compressed/indian-1768906_1920_20180322173733.jpg" class="rounded" alt="" style="max-height:4rem;">
+            </div>
+            <div id="thefoodimage" class="col-md-12 w-50 bg-danger text-white fw-bold jcc">
+              Add Item
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-2 mb-3">
+          <div class="row jcc">
+            <div class="col-md-12 jcc">
+              <img id="thefoodimage" src="https://post.healthline.com/wp-content/uploads/2020/03/adhd-foods-to-avoid_thumb-732x549.jpg" class="rounded" alt="" style="max-height:4rem;">
+            </div>
+            <div id="thefoodimage" class="col-md-12 w-50 bg-danger text-white fw-bold jcc">
+              Add Item
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-2 mb-3">
+          <div class="row jcc">
+            <div class="col-md-12 jcc">
+              <img id="thefoodimage" src="https://www.mamaxpert.com/media/magefan_blog/Food-Items-To-Avoid-After-Pregnancy.jpg" class="rounded" alt="" style="max-height:4rem;">
+            </div>
+            <div id="thefoodimage" class="col-md-12 w-50 bg-danger text-white fw-bold jcc">
+              Add Item
+            </div>
+          </div>
+        </div>
+
+      
+     
+      </div>
+    </div>
+  </div>
+
 
 </div>
+
+ <!-- footer -->
+ {{template "navbar/footer.gohtml" .}}
+
+ <!-- footer ends here -->
 
 </body>
 

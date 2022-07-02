@@ -38,3 +38,90 @@ color: red !important;
     padding-bottom: 3%;
 
 }
+
+.theitempart1{
+    height: 99% !important;
+}
+
+.thefoodsection{
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+
+}
+
+#thefoodimage {
+    opacity: 0.4;
+    filter: alpha(opacity=40);
+}
+
+
+@media only screen and (max-width: 1200px) {
+       .theroomdetailwritings{
+        width: 37% !important;
+        margin-left: 4% !important;
+       }
+}
+
+@media only screen and (max-width: 992px) {
+    .theroomdetailwritings{
+        width: 60% !important;
+    margin-left: 13% !important;
+
+    }
+    .mycartwriting{
+        font-size: 1.1rem !important;
+    }
+
+    .mycartplacewriting{
+        font-size: smaller;
+    }
+
+    .pricecountinright{
+        font-size: smaller;
+
+    }
+    .pricedetailshead{
+        font-size: small !important;
+
+    }
+    .theindianrupee{
+        font-size: small !important;
+    }
+    .thetotalpriceincart{
+        font-size: medium !important;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .theroomdetailwritings{
+        width: 60% !important;
+    margin-left: 1% !important;
+
+    }
+    .mycartwriting{
+        font-size: 1.1rem !important;
+    }
+
+    .mycartplacewriting{
+        font-size: smaller;
+    }
+
+    .pricecountinright{
+        font-size: smaller;
+
+    }
+    .pricedetailshead{
+        font-size: small !important;
+
+    }
+    .theindianrupee{
+        font-size: small !important;
+    }
+    .thetotalpriceincart{
+        font-size: medium !important;
+    }
+    .roomscover{
+        max-width: 20rem !important;
+        min-height: 20rem !important;
+    }
+   
+}

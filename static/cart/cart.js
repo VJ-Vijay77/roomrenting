@@ -31,3 +31,4 @@ function proceedtocheckout(RID,Total,Startdate,Endate){
   
 }
 
+

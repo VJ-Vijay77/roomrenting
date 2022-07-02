@@ -28,8 +28,15 @@ func Cart(c *gin.Context) {
 	var wishlistcount int
 	db.Raw("SELECT COUNT(user_id) FROM wishlists WHERE user_id=?",UserID).Scan(&wishlistcount)
 	
-
-
+	//cart count
+	var cartitemscout int
+	db.Raw("SELECT COUNT(user_id) FROM carts WHERE user_id=?",UserID).Scan(&cartitemscout)
+	
+	// address
+	var place string
+	var pin string
+	db.Raw("SELECT place FROM useraddresses where user_id=?",UserID).Scan(&place)
+	db.Raw("SELECT pin FROM useraddresses where user_id=?",UserID).Scan(&pin)
 
 	var userinfos models.Users
 	db.Raw("SELECT first_name FROM users where email=?", user_ID).Scan(&userinfos)
@@ -73,6 +80,9 @@ func Cart(c *gin.Context) {
 		"count":count,
 		"wcount":wishlistcount,
 		"total":GrandTotal,
+		"cartcount":cartitemscout,
+	    "place":place,
+		"pin":pin,
 	})
 }
 
