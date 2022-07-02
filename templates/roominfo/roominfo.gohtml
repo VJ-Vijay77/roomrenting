@@ -35,7 +35,7 @@
 
 
   <div class="container">
-  <div class="navbelow pt-2 ">R4Rooms : Home : Rooms > Search > Location > Room > Room ID {{.roomid}}</div>
+  <div class="navbelow pt-2 ">R4Rooms : Home : Rooms > Search > Location > Room > ID {{.roomid}}</div>
   </div>
   <hr>
 
@@ -89,7 +89,7 @@
     {{if eq .status "booked"}}
 
     <div class="col-md-5">
-      <div class="card roompricediv" style="width: 80%;overflow-x: hidden;">
+      <div class="card roompricediv" style="width: 70%;overflow-x: hidden;overflow-y: hidden;">
         <div class="card-body bg-secondary">
 
           <h5 class="card-title theroomname">
@@ -140,7 +140,7 @@
     {{else}}
 
     <div class="col-md-5">
-      <div class="card roompricediv" style="width: 70%;overflow-x: hidden;">
+      <div class="card roompricediv" style="width: 70%;overflow-x: hidden; overflow-y: hidden;">
         <div class="card-body">
 
           <h5 class="card-title theroomname">

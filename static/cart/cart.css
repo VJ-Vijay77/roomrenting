@@ -1,0 +1,40 @@
+
+.theaddresscart{
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;  
+}
+
+.jcc{
+    display: flex !important;
+    justify-content: center !important;
+    align-self: center !important;
+}
+
+
+.theitempart{
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;  
+
+}
+.cartpriceofitem{
+    display: inline;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+}
+
+.thecartdeleteicon:hover{
+color: red !important;
+}
+
+.theitempart1{
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.pricedetailshead{
+    color: #878787;
+    font-family: 'Roboto', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 22.4px;
+    font-weight: 600;
+    padding-top: 3%;
+    padding-bottom: 3%;
+
+}

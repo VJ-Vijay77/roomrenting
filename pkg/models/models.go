@@ -60,6 +60,7 @@ type Cart_Infos struct {
 	Startdate   string
 	Endate      string
 	Discountprice int
+	Description string
 	
 }
 

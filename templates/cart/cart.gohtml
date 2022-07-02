@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cart</title>
   <link rel="stylesheet" href="/static/navbar/navbar.css">
-
+  <link rel="stylesheet" href="/static/cart/cart.css">
   <script src="/static/cart/cart.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -24,7 +24,7 @@
 </style>
 </head>
 
-<body>
+<body style="overflow-x: hidden;">
 
  <!-- navbar start -->
  {{template "navbar/navbar.gohtml" .}}
@@ -101,6 +101,89 @@
   {{else}}
   <h2 class="text-center">Nothing in Cart</h2>
   {{end}}
+
+<hr>
+<div class="container">
+
+  
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+    
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-12 theaddresscart">
+          <div class="row">
+            <div class="col-md-3 mycartdivisthis jcc">
+          <p class="mycartwriting fw-semibold" style="font-size: 1.5rem;">My Cart</p>
+
+            </div>
+
+            <div class="col-md-7 jcc">
+              Deliver to -
+            </div>
+            <div class="col-md-2 jcc">
+              <button class="btn btn-light  btn-outline-primary changebutton  btn-sm ">change</button>
+            </div>
+          </div>
+        
+        </div>
+
+{{range .cart}}
+        <div class="col-md-12 theitempart">
+          <div class="row">
+            <div class="col-md-3 ">
+            <img src="/public/{{.Cover}}" class="mt-1 mb-1" alt="" style="max-width: 10rem;min-height: 10rem;">  
+            </div>
+            <div class="col-md-7">
+              <p class="cartroomname fw-semibold" style="font-size: large;">{{.Room_Name}}</p>
+            <p class="categoryareaisthis text-muted">Category : {{.Category}}</p>
+            <small>{{.Description}}</small><br>
+            <p style="display: inline;">
+              <s class="text-muted" style="font-size: small;">Rs {{.Room_Price}}</s>
+              <p class="cartpriceofitem">Rs {{.Discountprice}} /-</p>
+              <p class="fw-bold text-success"><i class="fa-solid fa-tags"></i> Offer Available</p>
+            </p>
+            
+            </div>
+            <div class="col-md-2">
+              <p class="fw-bold">Date</p>
+              <p style="font-size: small;">{{.Startdate}} to {{.Endate}}({{.Days}} days)</p>
+            <button type="button" onclick="proceedtocheckout('{{.Cartsroomid}}','{{.Total}}','{{.Startdate}}','{{.Endate}}')" class="btn btn-outline-dark btn-primary btn-sm text-white border-0">Checkout</button>
+            &nbsp; &nbsp;&nbsp; <i class="fa-solid fa-trash thecartdeleteicon" onclick="removecartitem('{{.Cartsid}}')" ></i>
+            </div>
+          </div>
+        </div> 
+{{end}}
+
+
+      </div>
+    </div>
+
+    <div class="col-md-3 ms-3 theitempart1">
+      <div class="row">
+        <div class="col-md12 theitempart pricedetailshead jcc">PRICE DETAILS</div>
+        <div class="col-md12">1</div>
+      </div>
+      
+    </div>
+
+   
+         
+
+
+
+
+
+  </div>
+</div>
+  </div>
+
+
+
+
+
+</div>
 
 </body>
 

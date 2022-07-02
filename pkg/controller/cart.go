@@ -35,7 +35,7 @@ func Cart(c *gin.Context) {
 	db.Raw("SELECT first_name FROM users where email=?", user_ID).Scan(&userinfos)
 	UserName := userinfos.First_Name
 	var cartitems []models.Cart_Infos
-	db.Raw("SELECT carts.cartsid,users.id,users.first_name,rooms.room_name,rooms.discountprice,carts.cartsroomid,rooms.cover,rooms.room_price,rooms.category,carts.days,carts.total,carts.startdate,carts.endate FROM carts INNER JOIN rooms ON rooms.id=carts.cartsroomid INNER JOIN users ON carts.user_id=users.id WHERE user_id=?", UserID).Scan(&cartitems)
+	db.Raw("SELECT carts.cartsid,users.id,users.first_name,rooms.room_name,rooms.discountprice,carts.cartsroomid,rooms.cover,rooms.room_price,rooms.category,rooms.description,carts.days,carts.total,carts.startdate,carts.endate FROM carts INNER JOIN rooms ON rooms.id=carts.cartsroomid INNER JOIN users ON carts.user_id=users.id WHERE user_id=?", UserID).Scan(&cartitems)
 
 	
 	//roomsid
