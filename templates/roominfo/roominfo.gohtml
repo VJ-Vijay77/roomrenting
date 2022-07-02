@@ -110,26 +110,26 @@
 
           <!-- <p class="card-text text-white">1 Hall 2 Bedroom 1 Bathroom Balcony</p> -->
           <h3>{{if eq .Offers "true"}}
-            <p class="card-text text-warning"><strike>Rs {{.roomprice}} /-</strike></p>
+            <p class="card-text text-warning theorginalpricearea"><strike>Rs {{.roomprice}} /-</strike></p>
           </h3>
           <h5>
-            <p class="card-text text-bg-primary" style="display: inline;font-size: smaller;">{{.off}}% You save Rs
-            <p class="text-bg-primary" style="display: inline;font-size: smaller;" id="savingprice">{{.save}}</p>
+            <p class="card-text text-bg-primary thesavingarea1" style="display: inline;font-size: smaller;">{{.off}}% You save Rs
+            <p class="text-bg-primary thesavingarea2" style="display: inline;font-size: smaller;" id="savingprice">{{.save}}</p>
             </p>
           </h5>
 
           <h3>
-            <p class="card-text text-white fw-bold">Rs {{.discount}} /-</p>
+            <p class="card-text text-white fw-bold" id="price">Rs {{.discount}} /-</p>
           </h3>
           {{else}}
           <h3>
-            <p class="card-text text-white fw-bold">Rs {{.roomprice}} /-</p>
+            <p class="card-text text-white fw-bold" id="price">Rs {{.roomprice}} /-</p>
             {{end}}
           </h3>
-          <button type="button" onclick="booked()" class="btn btn-outline-secondary border-0 btn-light"
+          <button type="button" onclick="booked()" class="btn thecheckinbutton btn-outline-secondary border-0 btn-light"
             style="font-weight: 600;">Check-In Now</button>
           <button type="button" onclick="wishlist('{{.roomid}}','{{.roomname}}')"
-            class="btn btn-outline-secondary btn-light border-0" style="font-weight: 600;">Add to Wishlist</button>
+            class="btn btn-outline-secondary btn-light border-0 thecheckinbutton" style="font-weight: 600;">Add to Wishlist</button>
           <br><small class="text-white bg-danger">{{.status}}</small>
           &nbsp; <small class="text-white bg-success">Available from {{.checkout}}</small>
 
@@ -152,17 +152,17 @@
           <br><label for="startdate" class="startdateofroom">SELECT DATE</label><br>
           <input class="text-success rounded-3" type="date" id="startdate" value="{{.cdate}}" min="{{.cdate}}">
           <br>
-          <p class="text-white fw-bold" style="display: inline;">TO</p> <br>
+          <p class="text-white fw-bold thetoofdate" style="display: inline;">TO</p> <br>
           <input class="text-success rounded-3 mb-2" type="date" value="{{.ndate}}" id="endate"
             oninput="date('{{.discount}}','{{.save}}','{{.roomprice}}')" min="{{.ndate}}">
 
           <h3>{{if eq .Offers "true"}}
-            <p class="card-text text-danger">Rs<strike id="roomorginalprice"> {{.roomprice}} </strike>/-</p>
+            <p class="card-text text-danger theorginalpricearea">Rs<strike id="roomorginalprice"> {{.roomprice}} </strike>/-</p>
           </h3>
           <h5>
-            <p class="card-text text-bg-primary fw-bold" style="display: inline;font-size: smaller;">{{.off}}% You save
+            <p class="card-text text-bg-primary fw-bold thesavingarea1" style="display: inline;font-size: smaller;">{{.off}}% You save
               Rs
-            <p class="text-bg-primary fw-bold" style="display: inline;font-size: smaller;" id="savingprice">{{.save}}
+            <p class="text-bg-primary fw-bold thesavingarea2" style="display: inline;font-size: smaller;" id="savingprice">{{.save}}
             </p>
             </p>
           </h5>
@@ -171,10 +171,10 @@
             <p class="card-text text-white fw-bold" id="price">Rs {{.discount}} /-</p>
           </h3>
           <button type="button" onclick="checkin('{{.roomid}}','{{.roomname}}','{{.discount}}')"
-            class="btn btn-outline-success btn-warning border-0 text-white" style="font-weight: 600;">Check-In
+            class="btn btn-outline-success btn-warning border-0 text-white thecheckinbutton" style="font-weight: 600;">Check-In
             Now</button>
           <button type="button" onclick="wishlist('{{.roomid}}','{{.roomname}}')"
-            class="btn btn-outline-danger btn-info border-0 text-white" style="font-weight: 600;">Add to
+            class="btn btn-outline-danger btn-info border-0 text-white thecheckinbutton" style="font-weight: 600;">Add to
             Wishlist</button>
 
           {{else}}
@@ -182,9 +182,9 @@
             <p class="card-text text-white" id="price">Rs {{.roomprice}} /-</p>
           </h3>
           <button type="button" onclick="checkin('{{.roomid}}','{{.roomname}}','{{.roomprice}}')"
-            class="btn btn-outline-success border-0 btn-warning" style="font-weight: 600;">Check-In Now</button>
+            class="btn btn-outline-success border-0 btn-warning thecheckinbutton" style="font-weight: 600;">Check-In Now</button>
           <button type="button" onclick="wishlist('{{.roomid}}','{{.roomname}}')"
-            class="btn btn-outline-danger border-0 btn-info" style="font-weight: 600;">Add to Wishlist</button>
+            class="btn btn-outline-danger border-0 btn-info thecheckinbutton" style="font-weight: 600;">Add to Wishlist</button>
           {{end}}
           <br>
           <small class="text-white bg-success">{{.status}}</small>
@@ -209,19 +209,19 @@
     <div class="col-md-7">
       <div class="container ms-5">
         <div class="row thesubpicscolor">
-          <div class="col-md-3  mt-1 mb-1">
+          <div class="col-3 col-md-3  mt-1 mb-1">
             <img src="/public/{{.sub1}}" alt="" class="subimagesection">
           
           </div>
-          <div class="col-md-3  mt-1 mb-1">
+          <div class="col-3 col-md-3  mt-1 mb-1">
             <img src="/public/{{.sub2}}" alt="" class="subimagesection">
 
           </div>
-          <div class="col-md-3  mt-1 mb-1">
+          <div class="col-3 col-md-3  mt-1 mb-1">
             <img src="/public/{{.sub3}}" alt="" class="subimagesection">
 
           </div>
-          <div class="col-md-3  mt-1 mb-1 thelastimagediv">
+          <div class="col-3 col-md-3  mt-1 mb-1 thelastimagediv">
             <img src="/public/{{.sub4}}" alt="" class="subimagesection">
             
           </div>
@@ -232,7 +232,7 @@
 
     </div>
 
-    <div class="col-md-3 thelocationdiv">
+    <div class="col-12 col-md-3 thelocationdiv">
      <p class="fw-bold">Location</p> 
      <p>Kolkata
       <br>

@@ -1,29 +1,29 @@
-body{
+body {
     overflow-x: hidden;
     background-image: url(https://img.freepik.com/free-vector/gradient-white-monochrome-background_23-2149011361.jpg?w=1060&t=st=1656704825~exp=1656705425~hmac=2012999d0e1ec6bfcc438cf368231318da3125b511ae53d0cf8a3de463b3b35c);
-   /* background-image: url(/public/rominfo/rmbg.jpg); */
+    /* background-image: url(/public/rominfo/rmbg.jpg); */
     background-size: cover;
 }
 
-.roominfoimages{
+.roominfoimages {
     height: 27rem !important;
     width: 27rem !important;
 }
 
-.roomcard{
-    
+.roomcard {
+
     margin-left: 20% !important;
     margin-right: 20% !important;
 }
 
-.imagecontainer{
+.imagecontainer {
     position: relative;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 
 }
 
-.R4Roomwriting{
-    
+.R4Roomwriting {
+
     top: 92%;
     color: white;
     position: absolute;
@@ -32,22 +32,23 @@ body{
     font-size: 1.3rem;
 }
 
-.roompricediv{
+.roompricediv {
     height: 99.5% !important;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-    background-color: rgb(2,36,60) !important;
+    background-color: rgb(2, 36, 60) !important;
 }
 
-.theroomname{
-    
+.theroomname {
+
     letter-spacing: 2px;
     font-weight: 700;
     color: white !important;
     font-size: 1.5rem;
     font-family: Arial 'narrow';
 }
-.theroomname1{
-    
+
+.theroomname1 {
+
     letter-spacing: 2px;
     font-weight: 400;
     color: white !important;
@@ -55,33 +56,34 @@ body{
     font-family: Arial 'narrow';
 }
 
-.theroomcategory{
+.theroomcategory {
     color: white !important;
 
 }
 
-.theroomcategory1{
+.theroomcategory1 {
     display: inline;
     background-color: rgb(14, 109, 85);
 
 }
-.startdateofroom{
+
+.startdateofroom {
     color: white !important;
     font-weight: 600;
 }
 
-.thepricediv{
+.thepricediv {
     margin-top: 1px;
 }
 
-.navbelow{
+.navbelow {
     font-weight: 500;
     margin-left: 4%;
     word-spacing: 3px;
     letter-spacing: 1px !important;
 }
 
-.thesubpicscolor{
+.thesubpicscolor {
     position: relative;
     box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
     width: 100% !important;
@@ -89,49 +91,50 @@ body{
 
 
 
-.subimagesection{
+.subimagesection {
     height: 6rem;
     width: 8rem;
 }
 
-.thelocationdiv{
+.thelocationdiv {
     margin-left: 2rem !important;
     width: 26.5% !important;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
 }
 
-.descrsection{
+.descrsection {
     width: 82.5% !important;
     margin-left: 3.8rem !important;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
 
 }
 
-.thedetailstab{
+.thedetailstab {
     width: 82.5% !important;
     margin-left: 3.8rem !important;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
 
-    
+
 }
 
-.descrsection2{
+.descrsection2 {
     font-family: Arial;
     font-size: 1.5rem;
 }
 
-.thedetail{
+.thedetail {
     font-weight: 600;
     font-family: Arial, Helvetica, sans-serif;
 }
-.theadsectionis1{
-  
+
+.theadsectionis1 {
+
     width: 82.5% !important;
     margin-left: 3.8rem !important;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
 }
 
-.theadsectionis{
+.theadsectionis {
     overflow-x: scroll !important;
     overflow-y: hidden !important;
     width: 82.5% !important;
@@ -139,40 +142,135 @@ body{
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
 }
 
-.relatedad{
+.relatedad {
     font-size: 1.3rem;
     font-family: Arial;
 
 }
 
 
-.theadcards{
+.theadcards {
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 
 
-.imagesofcard{
+.imagesofcard {
     transition: transform .2s;
 }
 
-.imagesofcard:hover{
+.imagesofcard:hover {
     -ms-transform: scale(1.5);
     -webkit-transform: scale(1.5);
     transform: scale(1.06);
 }
 
+@media only screen and (max-width: 1200px) {
+    .theroomname1 {
+        display: none !important;
+    }
+
+    .startdateofroom {
+        font-size: smaller;
+    }
+
+    .thetoofdate {
+        font-size: smaller;
+    }
+
+    .theorginalpricearea {
+        font-size: smaller;
+    }
+
+    .thesavingarea1 {
+        display: none !important;
+    }
+
+    .thesavingarea2 {
+        display: none !important;
+    }
+
+    #price {
+        font-size: smaller;
+    }
+
+    .thecheckinbutton {
+        font-size: .7rem !important;
+    }
+
+}
+
+
+
+@media only screen and (max-width: 1000px) {
+    .R4Roomwriting{
+        z-index: 2;
+    }
+    .subimagesection {
+        height: 4rem;
+        width: 6rem;
+    }
+}
+
+
+@media only screen and (max-width: 770px) {
+    .roomcard{
+        margin-left: 10% !important;
+        margin-right: 10% !important;
+    }
+    .R4Roomwriting{
+        z-index: 2;
+    }
+    .roompricediv{
+       width: 100% !important;
+    }
+   
+    .thelocationdiv{
+        width: 83% !important;
+        margin-left: 11% !important;
+    }
+
+    .thesubpicscolor{
+        width: 90.8% !important;
+    margin-left: -2.3% !important;
+    }
+
+    .navbelow{
+        font-size: small;
+        letter-spacing: 0px;
+        word-spacing: -1px;
+    }
+
+}
 
 
 
 
-.footerconn{
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* footer csss starts here */
+
+
+.footerconn {
     background-color: rgb(172, 66, 182);
     height: 3rem;
     display: flex;
     align-items: center;
 
 }
-.conn{
+
+.conn {
     margin-top: 1rem !important;
     display: inline;
     color: white;
@@ -181,34 +279,36 @@ body{
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.fb{
+.fb {
     color: white;
     font-size: 1.3rem;
     margin-right: 1rem;
 }
 
-.footerleft{
+.footerleft {
     color: white !important;
     font-weight: 600;
     font-size: 1.5rem;
 }
 
-.footerul{
+.footerul {
     list-style-type: none;
 }
 
-.intoggleform{
-   display: none !important;
+.intoggleform {
+    display: none !important;
 }
 
 @media only screen and (max-width: 992px) {
     .searchsection {
         display: none !important;
-        
+
     }
-    .intoggleform{
+
+    .intoggleform {
         display: inline !important;
-       
+
     }
 }
 
+/* footer css ends here */
