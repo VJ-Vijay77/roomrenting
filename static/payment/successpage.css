@@ -1,0 +1,25 @@
+body{
+    background-image: url(https://images.unsplash.com/photo-1624139283078-74a0492f2ee3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=627&q=80) !important;
+    background-size: cover;
+}
+
+#successpage {
+    position:fixed;
+    top: 45%;
+    left: 50%;
+    width:33em;
+    /* height:29.2em; */
+    margin-top: -9em; /*set to a negative number 1/2 of your height*/
+    margin-left: -15em; /*set to a negative number 1/2 of your width*/
+    border: 1px solid #ccc;
+    background-color: #f3f3f3;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+@media only screen and (max-width: 768px) {
+
+#successpage {
+    width: 30rem !important;
+}
+
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart</title>
+  <link rel="stylesheet" href="/static/navbar/navbar.css">
+
+  <link rel="stylesheet" href="/static/payment/successpage.css">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/d67b07a9d9.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+<style>
+  .start-100 {
+    left: 97% !important;
+}
+</style>
+</head>
+
+<body>
+ 
+ <!-- navbar start -->
+ {{template "navbar/navbar.gohtml" .}}
+ <!-- navbar ends -->
+ {{$d := .details}}
+
+<div id="successpage" class="text-white">
+    <div class="row">
+        <div class="col-md-12"><div class="row">
+            <div class="col-md-12 d-flex justify-content-center">
+                <i class="fa-solid fa-circle-check" style="color: green;font-size: 3.5rem;"></i>
+            </div>
+
+            <div class="col-md-12 d-flex justify-content-center">
+                <h3 class="fw-bold text-success">Payment Successful!!</h3>
+            </div>
+            <br>
+            <div class="col-md-12 d-flex justify-content-end fw-bold text-black">
+             <p class="me-2" style="font-size: smaller;">   <i class="fa-solid fa-download"></i> Download </p>
+            </div>
+            <br>
+            <div class="col-md-12 position-static">
+           <div class="row ms-5 mt-2">
+            <div class="col-md-6 text-black">Payment Type</div>
+            <div class="col-md-6 text-black">Razor Pay</div>
+           </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="row ms-5 mt-2">
+             <div class="col-md-6 text-black">Mobile</div>
+             <div class="col-md-6 text-black">{{$d.Mobile}}</div>
+            </div>
+         </div>
+
+         <div class="col-md-12">
+            <div class="row ms-5 mt-2">
+             <div class="col-md-6 text-black">Email</div>
+             <div class="col-md-6 text-black">{{.email}}</div>
+            </div>
+         </div>
+
+         <div class="col-md-12">
+            <div class="row ms-5 mt-2">
+             <div class="col-md-6 text-black">Order Id</div>
+             <div class="col-md-6 text-black">{{.ordid}}</div>
+            </div>
+         </div>
+
+         <div class="col-md-12">
+            <div class="row ms-5 mt-2">
+             <div class="col-md-6 text-black">Payment Id</div>
+             <div class="col-md-6 text-black">{{.payid}}</div>
+            </div>
+         </div>
+         <div class="col-md-12">
+            <div class="row ms-5 mt-2">
+             <div class="col-md-6 text-black fw-bold">Amount Paid</div>
+             <div class="col-md-6 text-black fw-bold">Rs {{$d.Totalprice}}</div>
+            </div>
+         </div>
+
+         <div class="col-md-12 d-flex justify-content-center mt-4">
+            <img src="/public/qr/QR.png" alt="" style="max-height: 4rem;">
+         </div>
+
+         <div class="col-md-12 d-flex justify-content-center mt-3">
+            <a href="/user_home" class="btn w-100 btn-dark btn-outline-primary border-0 text-white fw-bold">Home</a>
+         </div>
+
+
+        </div></div>
+    </div>
+</div>
+
+
+</body>
+
+</html>

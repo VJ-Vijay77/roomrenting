@@ -99,6 +99,7 @@ type Orders struct {
 	Checkoutdate string
 	Wallet int
 	Roomid int
+	Refid string
 }
 
 type Orderedrooms struct {

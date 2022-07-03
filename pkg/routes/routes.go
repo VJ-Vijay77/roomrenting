@@ -112,7 +112,7 @@ func InitRoutes(api *gin.Engine) {
 	//payment Rozor pay
 	api.GET("/user/payment/razorpay/:total/:uid/:start/:end/:wallet/:roomid",controller.RazorPay)
 	api.GET("/user/payment/razorypaysuccess/:rpid/:roid/:rsign/:start/:end/:total/:wallet/:roomid",controller.RazorPaySuccess)
-	api.GET("/user/payment/razorpay/successpage/:pid/:orderid/:signature")
+	api.GET("/user/payment/razorpay/successpage/:pid/:orderid/:signature/:refid",controller.RPSuccess)
 
 	//user profile
 	api.GET("/user/profile",controller.UserProfile)

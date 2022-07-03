@@ -2,14 +2,17 @@ package controller
 
 import (
 	"fmt"
+	"math/rand"
 	"os"
 	"strconv"
+	"time"
 
+	"github.com/VJ-Vijay77/r4room/pkg/controllertwo/orderid"
 	"github.com/VJ-Vijay77/r4room/pkg/database"
 	"github.com/VJ-Vijay77/r4room/pkg/models"
+
 	"github.com/gin-gonic/gin"
 	razorpay "github.com/razorpay/razorpay-go"
-	
 )
 
 func Payment(c *gin.Context) {
@@ -34,11 +37,11 @@ func Payment(c *gin.Context) {
 	Roomid := c.Param("Roomid")
 	Startdate := c.Param("Startdate")
 	Endate := c.Param("Endate")
-	RID,_ := strconv.Atoi(Roomid) 
+	RID, _ := strconv.Atoi(Roomid)
 	Usersid, _ := strconv.Atoi(UserID)
-	
-	TP,_ := strconv.Atoi(TotalPrice)
-	
+
+	TP, _ := strconv.Atoi(TotalPrice)
+
 	//taking order details
 	var roomnames string
 	// db.Raw("SELECT rooms.room_name FROM carts INNER JOIN rooms ON rooms.id=carts.cartsroomid WHERE carts.user_id=?", Usersid).Scan(&roomnames)
@@ -46,8 +49,7 @@ func Payment(c *gin.Context) {
 	// for i := range roomnames {
 	// 	sendinginfo += roomnames[i]
 	// }
-	db.Raw("SELECT room_name FROM rooms WHERE id=?",RID).Scan(&roomnames)
-
+	db.Raw("SELECT room_name FROM rooms WHERE id=?", RID).Scan(&roomnames)
 
 	//parsing address of the user
 	var address []models.Useraddress
@@ -56,17 +58,17 @@ func Payment(c *gin.Context) {
 	//taking wallet balance
 	var wallet models.Wallets
 	var walletbal int
-	db.Select("balance").Where("user_id=?",Usersid).Find(&wallet)
+	db.Select("balance").Where("user_id=?", Usersid).Find(&wallet)
 
-	if wallet.Balance >= TP{
-		walletbal = TP-1
-	}else if wallet.Balance < TP{
+	if wallet.Balance >= TP {
+		walletbal = TP - 1
+	} else if wallet.Balance < TP {
 		walletbal = wallet.Balance
 	}
 
 	//getting category of room
 	var category string
-	db.Raw("SELECT category FROM rooms WHERE id=?",RID).Scan(&category)
+	db.Raw("SELECT category FROM rooms WHERE id=?", RID).Scan(&category)
 
 	//gettting coupons
 	var coupons []models.Coupons
@@ -82,13 +84,11 @@ func Payment(c *gin.Context) {
 		"startdate": Startdate,
 		"endate":    Endate,
 		"roomid":    Roomid,
-		"wbal":walletbal,
-		"coupon":coupons,
-		"category":category,
+		"wbal":      walletbal,
+		"coupon":    coupons,
+		"category":  category,
 	})
 }
-
-
 
 func PaymentConfirm(c *gin.Context) {
 	db := database.GetDb()
@@ -106,51 +106,50 @@ func PaymentConfirm(c *gin.Context) {
 	// var roomsids []models.Carts
 	// db.Select("cartsroomid").Where("user_id=?", UserID).Find(&roomsids)
 
-	
-
-	
 	start := c.Param("start")
 	end := c.Param("end")
 	wallet := c.Param("wallet")
 	wtotal := c.Param("total")
-	
-	var Wallbal int 
-	var zero int= 0
+
+	var Wallbal int
+	var zero int = 0
 	var walbalets models.Wallets
-	if wallet == "0"{
+	if wallet == "0" {
 		Wallbal = 0
-	}else{
-		k,_ := strconv.Atoi(wallet)
+	} else {
+		k, _ := strconv.Atoi(wallet)
 		Wallbal = k
-		db.Raw("UPDATE wallets SET balance=? WHERE user_id=?",zero,UserID).Scan(&walbalets)
+		db.Raw("UPDATE wallets SET balance=? WHERE user_id=?", zero, UserID).Scan(&walbalets)
 	}
 
-
-
 	//fmt.Println(start,end)
-	 FName := c.PostForm("firstnamef")	
+	FName := c.PostForm("firstnamef")
 	LName := c.PostForm("lastnamef")
 	HName := c.PostForm("housenamef")
 	Place := c.PostForm("placef")
 	State := c.PostForm("statef")
 	Mobile := c.PostForm("mobilef")
 	Roomid := c.PostForm("roomid")
-	RID,_ := strconv.Atoi(Roomid)
+	RID, _ := strconv.Atoi(Roomid)
 	Allrooms := c.PostForm("roomnames")
-	total,_ := strconv.Atoi(wtotal) 
+	total, _ := strconv.Atoi(wtotal)
+
+
+	rand.Seed(time.Now().UnixNano())
+	Refid := orderid.OrderIdGeneration(5)
+	RefereceId := "RP_"+Refid
+
 
 	var status = "checkedin"
 
 	var idsofroom models.Orderedrooms
-	
-		idsofroom.Roomid = RID
-		idsofroom.User_Id = UserID
-		idsofroom.Status = status
-		idsofroom.Checkindate = start
-		idsofroom.Checkoutdate = end
-		db.Select("roomid", "user_id", "status","checkindate","checkoutdate").Create(&idsofroom)
-	
-	
+
+	idsofroom.Roomid = RID
+	idsofroom.User_Id = UserID
+	idsofroom.Status = status
+	idsofroom.Checkindate = start
+	idsofroom.Checkoutdate = end
+	db.Select("roomid", "user_id", "status", "checkindate", "checkoutdate").Create(&idsofroom)
 
 	var paymode string = "Payment At Office"
 
@@ -166,29 +165,25 @@ func PaymentConfirm(c *gin.Context) {
 	orderdetails.Paymentmethod = paymode
 	orderdetails.Roomnames = Allrooms
 	orderdetails.Accountholder = UserName
-	orderdetails.Checkindate = start 
-	orderdetails.Checkoutdate = end 
+	orderdetails.Checkindate = start
+	orderdetails.Checkoutdate = end
 	orderdetails.Wallet = Wallbal
 	orderdetails.Roomid = RID
-	db.Select("user_id", "firstname", "lastname", "housename", "place", "state", "mobile", "totalprice","paymentmethod","roomnames", "accountholder","checkindate","checkoutdate","wallet","roomid").Create(&orderdetails)
+	orderdetails.Refid = RefereceId
 
-	
+	db.Select("user_id", "firstname", "lastname", "housename", "place", "state", "mobile", "totalprice", "paymentmethod", "roomnames", "accountholder", "checkindate", "checkoutdate", "wallet", "roomid","refid").Create(&orderdetails)
 
 	var checkoutdate models.Rooms
-	db.Raw("UPDATE rooms SET checkoutdate=? WHERE id=?",end,RID).Scan(&checkoutdate)
+	db.Raw("UPDATE rooms SET checkoutdate=? WHERE id=?", end, RID).Scan(&checkoutdate)
 
 	var deletefromcart models.Carts
 	db.Raw("DELETE FROM carts WHERE cartsroomid =?", RID).Scan(&deletefromcart)
 
 	var updateroomstatus models.Rooms
 
+	db.Raw("UPDATE rooms SET status='booked' WHERE id=?", RID).Scan(&updateroomstatus)
 
-
-		db.Raw("UPDATE rooms SET status='booked' WHERE id=?", RID).Scan(&updateroomstatus)
-	
-
-	}
-
+}
 
 func PaymentSuccess(c *gin.Context) {
 	db := database.GetDb()
@@ -240,8 +235,8 @@ func PaymentAddressPick(c *gin.Context) {
 	Roomid := c.Param("Roomid")
 	Startdate := c.Param("Startdate")
 	Endate := c.Param("Endate")
-	RID,_ := strconv.Atoi(Roomid) 
-	
+	RID, _ := strconv.Atoi(Roomid)
+
 	UID, _ := strconv.Atoi(UserID)
 
 	//taking order details
@@ -251,8 +246,7 @@ func PaymentAddressPick(c *gin.Context) {
 	// for i := range roomnames {
 	// 	sendinginfo += roomnames[i]
 	// }
-	db.Raw("SELECT room_name FROM rooms WHERE id=?",RID).Scan(&roomnames)
-
+	db.Raw("SELECT room_name FROM rooms WHERE id=?", RID).Scan(&roomnames)
 
 	//parsing address of the user
 	var address []models.Useraddress
@@ -265,11 +259,11 @@ func PaymentAddressPick(c *gin.Context) {
 
 	//taking wallet balance
 	var wallet models.Wallets
-	db.Select("balance").Where("user_id=?",UID).Find(&wallet)
+	db.Select("balance").Where("user_id=?", UID).Find(&wallet)
 
 	//getting category of room
 	var category string
-	db.Raw("SELECT category FROM rooms WHERE id=?",RID).Scan(&category)
+	db.Raw("SELECT category FROM rooms WHERE id=?", RID).Scan(&category)
 
 	//gettting coupons
 	var coupons []models.Coupons
@@ -287,9 +281,9 @@ func PaymentAddressPick(c *gin.Context) {
 		"startdate": Startdate,
 		"endate":    Endate,
 		"roomid":    Roomid,
-		"wbal":wallet.Balance,
-		"coupon":coupons,
-		"category":category,
+		"wbal":      wallet.Balance,
+		"coupon":    coupons,
+		"category":  category,
 	})
 }
 
@@ -309,7 +303,7 @@ func RazorPay(c *gin.Context) {
 	total, _ := strconv.Atoi(Grandtotal)
 	Wallet := c.Param("wallet")
 	Roomid := c.Param("roomid")
-	RID,_ := strconv.Atoi(Roomid)
+	RID, _ := strconv.Atoi(Roomid)
 	var userinfos models.Users
 	db.Where("id=?", UID).Find(&userinfos)
 
@@ -348,10 +342,10 @@ func RazorPay(c *gin.Context) {
 		"email":    userinfos.Email,
 		"mobile":   userinfos.Mobile,
 		"address":  address,
-		"start":Startdate,
-		"end":Endate,
-		"wallet":Wallet,
-		"roomid":RID,
+		"start":    Startdate,
+		"end":      Endate,
+		"wallet":   Wallet,
+		"roomid":   RID,
 	})
 
 }
@@ -370,7 +364,6 @@ func RazorPaySuccess(c *gin.Context) {
 	var UserID int
 	db.Raw("SELECT id FROM users WHERE email=?", userID).Scan(&UserID)
 
-
 	PayId := c.Param("rpid")
 	OrderId := c.Param("roid")
 	Signature := c.Param("rsign")
@@ -379,43 +372,38 @@ func RazorPaySuccess(c *gin.Context) {
 	Total := c.Param("total")
 	Wallet := c.Param("wallet")
 	Roomid := c.Param("roomid")
-	RID , _ := strconv.Atoi(Roomid)
-	var Wallbal int 
-	var zero int= 0
+	RID, _ := strconv.Atoi(Roomid)
+	var Wallbal int
+	var zero int = 0
 	var walbalets models.Wallets
-	if Wallet == "0"{
+	if Wallet == "0" {
 		Wallbal = 0
-	}else{
-		k,_ := strconv.Atoi(Wallet)
+	} else {
+		k, _ := strconv.Atoi(Wallet)
 		Wallbal = k
-		db.Raw("UPDATE wallets SET balance=? WHERE user_id=?",zero,UserID).Scan(&walbalets)
+		db.Raw("UPDATE wallets SET balance=? WHERE user_id=?", zero, UserID).Scan(&walbalets)
 	}
 
+	totalint, _ := strconv.Atoi(Total)
+	GrandTotal := totalint / 100
 
-	totalint,_ := strconv.Atoi(Total)
-	GrandTotal := totalint/100
+	rand.Seed(time.Now().UnixNano())
+	Refid := orderid.OrderIdGeneration(5)
+	RefereceId := "RP_"+Refid
 
-	
-
-	
-	
-	
 	var status = "checkedin"
 
 	var idsofroom models.Orderedrooms
-	
-		idsofroom.Roomid = RID
-		idsofroom.User_Id = UserID
-		idsofroom.Status = status
-		idsofroom.Checkindate = Startdate
-		idsofroom.Checkoutdate = Endate
-		db.Select("roomid", "user_id", "status","checkindate","checkoutdate").Create(&idsofroom)
-	
 
-	
+	idsofroom.Roomid = RID
+	idsofroom.User_Id = UserID
+	idsofroom.Status = status
+	idsofroom.Checkindate = Startdate
+	idsofroom.Checkoutdate = Endate
+	db.Select("roomid", "user_id", "status", "checkindate", "checkoutdate").Create(&idsofroom)
+
 	var roomnames string
-	db.Raw("SELECT room_name FROM rooms WHERE id=?",RID).Scan(&roomnames)
-
+	db.Raw("SELECT room_name FROM rooms WHERE id=?", RID).Scan(&roomnames)
 
 	var paymode string = "Razor Pay"
 	var orderdetails models.Orders
@@ -436,22 +424,19 @@ func RazorPaySuccess(c *gin.Context) {
 	orderdetails.Checkoutdate = Endate
 	orderdetails.Wallet = Wallbal
 	orderdetails.Roomid = RID
+	orderdetails.Refid = RefereceId
 
-	db.Select("user_id", "firstname", "lastname", "housename", "place", "state", "mobile", "totalprice","paymentmethod","roomnames", "accountholder","checkindate","checkoutdate","wallet","roomid").Create(&orderdetails)
+	db.Select("user_id", "firstname", "lastname", "housename", "place", "state", "mobile", "totalprice", "paymentmethod", "roomnames", "accountholder", "checkindate", "checkoutdate", "wallet", "roomid","refid").Create(&orderdetails)
 
 	var checkoutdate models.Rooms
-	db.Raw("UPDATE rooms SET checkoutdate=? WHERE id=?",Endate,RID).Scan(&checkoutdate)
-
+	db.Raw("UPDATE rooms SET checkoutdate=? WHERE id=?", Endate, RID).Scan(&checkoutdate)
 
 	var deletefromcart models.Carts
 	db.Raw("DELETE FROM carts WHERE cartsroomid =?", RID).Scan(&deletefromcart)
-	
+
 	var updateroomstatus models.Rooms
 
-	
-
 	db.Raw("UPDATE rooms SET status='booked' WHERE id=?", RID).Scan(&updateroomstatus)
-	
 
 	db.AutoMigrate(models.Razorpaydetails{})
 	var razor models.Razorpaydetails
@@ -461,8 +446,49 @@ func RazorPaySuccess(c *gin.Context) {
 	razor.Signature = Signature
 	db.Select("user_id", "payid", "orderid", "signature").Create(&razor)
 
-	
-	c.Redirect(303, "/user/payment/success")
-	
+	c.Redirect(303, "/user/payment/razorpay/successpage/"+PayId+"/"+OrderId+"/"+Signature+"/"+RefereceId)
 
+}
+
+func RPSuccess(c *gin.Context){
+
+	db := database.GetDb()
+	session, _ := Store.Get(c.Request, "session")
+	useriD := session.Values["userID"]
+	userID := fmt.Sprintf("%s", useriD)
+	var userinfos models.Users
+
+	db.Raw("SELECT first_name,last_name FROM users where email=?", userID).Scan(&userinfos)
+	username := userinfos.First_Name
+
+	var UserID int
+	db.Raw("SELECT id FROM users WHERE email=?", userID).Scan(&UserID)
+
+	//cart count
+	var count int
+	db.Raw("SELECT COUNT(user_id) FROM carts WHERE user_id=?", UserID).Scan(&count)
+	//wishlist count
+	var wishlistcount int
+	db.Raw("SELECT COUNT(user_id) FROM wishlists WHERE user_id=?", UserID).Scan(&wishlistcount)
+
+
+	PID := c.Param("pid")
+	OrdID := c.Param("orderid")
+	Sign := c.Param("signature")
+	Refid := c.Param("refid")
+
+	var orderdetails models.Orders
+	db.Where("refid=?",Refid).Find(&orderdetails)
+	
+	c.HTML(200,"successpage.gohtml",gin.H{
+		"payid":PID,
+		"ordid":OrdID,
+		"sign":Sign,
+		"refid":Refid,
+		"username": username,
+		"count":    count,
+		"wcount":   wishlistcount,
+		"details":orderdetails,
+		"email":userID,
+	})
 }
