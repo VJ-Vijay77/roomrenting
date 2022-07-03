@@ -26,6 +26,7 @@ color: red !important;
 
 .theitempart1{
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    margin-left: 1rem;
 }
 
 .pricedetailshead{
@@ -110,18 +111,29 @@ color: red !important;
 
     }
     .pricedetailshead{
+        margin-top: -10px !important;
         font-size: small !important;
 
     }
     .theindianrupee{
         font-size: small !important;
     }
+    .forthemargin{
+        margin-top: 17px !important;
+    }
     .thetotalpriceincart{
+        margin-top: 11px !important;
         font-size: medium !important;
     }
     .roomscover{
         max-width: 20rem !important;
         min-height: 20rem !important;
     }
+
+    .theitempart1{
+        margin-left: 0 !important;
+        margin-top: 15px !important;
+    }
+    
    
 }
