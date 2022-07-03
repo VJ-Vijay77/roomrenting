@@ -16,7 +16,7 @@
     <script src="https://kit.fontawesome.com/d67b07a9d9.js" crossorigin="anonymous"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  
+
 </head>
 
 <body onload="hidingfunc()">
@@ -108,7 +108,7 @@
         <!-- modal end -->
 
         <div class="container">
-          <p class="text-white">  Saved Cards (coming soon..)</p>
+            <p class="text-white"> Saved Cards (coming soon..)</p>
 
             <div class="row">
                 <div class="col-lg-4 mb-lg-0 mb-3">
@@ -185,30 +185,37 @@
                                                 <ul>
                                                     <li>{{.allrooms}}</li>
                                                     <li>Roomid : {{.roomid}}<br><strong>From</strong> {{.startdate}}
-                                                        <strong>To</strong> {{.endate}}</li>
+                                                        <strong>To</strong> {{.endate}}
+                                                    </li>
 
                                                 </ul>
                                             </span></p>
                                         <p>
                                             <input type="checkbox" name="wallet" id="wallet"
                                                 onchange="wallet('{{.wbal}}','{{.total}}')">
-                                            <button class="btn btn-secondary btn-outline-dark border-0 btn-sm text-white"> <label
-                                                    for="wallet" style="color: rgb(255, 255, 255);font-weight: 600;"> <i
-                                                        class="fa-solid fa-wallet" style="color: rgb(255, 255, 255);"></i> Deduct from
+                                            <button
+                                                class="btn btn-secondary btn-outline-dark border-0 btn-sm text-white">
+                                                <label for="wallet" style="color: rgb(255, 255, 255);font-weight: 600;">
+                                                    <i class="fa-solid fa-wallet"
+                                                        style="color: rgb(255, 255, 255);"></i> Deduct from
                                                     wallet Rs {{.wbal}}</label></button>
                                         </p>
                                         <p class="mb-0"><span class="fw-bold">Total Price:</span>
-                                            <span><h3 class="text-danger">Rs <strong id="raztotal">{{.total}}</strong>/-
-                                                </h3> </span>
+                                            <span>
+                                                <h3 class="text-danger">Rs <strong id="raztotal">{{.total}}</strong>/-
+                                                </h3>
+                                            </span>
                                         </p>
                                         <p class="mb-1">
-                                            Pay using Razorpay, one of our most trusted payment gateway with utmost privacy to user informations.
+                                            Pay using Razorpay, one of our most trusted payment gateway with utmost
+                                            privacy to user informations.
                                         </p>
                                     </div>
                                     <!-- <a href="/user/payment/razorpay/{{.total}}/{{.uid}}/{{.startdate}}/{{.endate}}" type="button" class="btn btn-warning btn-outline-primary">Pay Now</a> -->
                                     <button
                                         onclick="payment('{{.total}}','{{.uid}}','{{.startdate}}','{{.endate}}','{{.wbal}}','{{.roomid}}')"
-                                        type="button" class="btn btn-dark btn-outline-primary border-0 text-white">Pay Now</button>
+                                        type="button" class="btn btn-dark btn-outline-primary border-0 text-white">Pay
+                                        Now</button>
 
                                 </div>
                             </div>
@@ -231,42 +238,49 @@
                                     <div class="col-lg-5 mb-lg-0 mb-3">
                                         <p class="h4 mb-0">Summary</p>
                                         <p class="mb-0"><span class="fw-bold">Items:</span><span class="c-green">: <ul>
-                                                   <li>{{.allrooms}}</li>
+                                                    <li>{{.allrooms}}</li>
                                                     <li>Roomid : {{.roomid}}<br><strong>From</strong> {{.startdate}}
-                                                        <strong>To</strong> {{.endate}}</li>
+                                                        <strong>To</strong> {{.endate}}
+                                                    </li>
 
                                                 </ul></span>
                                         </p>
-                                        
+
 
 
                                         <p>
                                             <input type="checkbox" name="wallets" id="wallets"
                                                 onchange="wallets('{{.wbal}}','{{.total}}')">
-                                            <button class="btn btn-sm btn-dark btn-outline-secondary text-white" id="walletbutton"> <label
-                                                    for="wallets" style="color: rgb(255, 255, 255);font-weight: 600;">
-                                                    <i class="fa-solid fa-wallet" style="color: rgb(255, 255, 255);"></i> Deduct from
+                                            <button class="btn btn-sm btn-dark btn-outline-secondary text-white"
+                                                id="walletbutton"> <label for="wallets"
+                                                    style="color: rgb(255, 255, 255);font-weight: 600;">
+                                                    <i class="fa-solid fa-wallet"
+                                                        style="color: rgb(255, 255, 255);"></i> Deduct from
                                                     wallet Rs {{.wbal}}</label></button>
                                         </p>
 
                                         <p>
-                                            <div class="coupon">
-                                                <button id="buttons" type="button" class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                                                    <input type="checkbox" name="couponstatus" id="couponstatus"> Apply
-                                                    Coupon
-                                                </button>
-    
-                                            </div>
-                                            <div id="cpn" style="color: green;font-size: small;display: inline;"></div> <i
-                                                class="btn btn-outline-danger fa-solid fa-xmark" id="closebutton" onclick="removecoupon()"></i>
-    
-                                            </p>
+                                        <div class="coupon">
+                                            <button id="buttons" type="button" class="btn btn-sm btn-secondary"
+                                                data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                                                <input type="checkbox" name="couponstatus" id="couponstatus"> Apply
+                                                Coupon
+                                            </button>
+
+                                        </div>
+                                        <div id="cpn" style="color: green;font-size: small;display: inline;"></div> <i
+                                            class="btn btn-outline-danger fa-solid fa-xmark" id="closebutton"
+                                            onclick="removecoupon()"></i>
+
+                                        </p>
 
 
                                         <p class="mb-0">
                                             <span class="fw-bold">Total Price:</span>
-                                            <span><h3 class="text-danger">Rs <strong id="paototal">{{.total}}</strong>/-
-                                                </h3> </span>
+                                            <span>
+                                                <h3 class="text-danger">Rs <strong id="paototal">{{.total}}</strong>/-
+                                                </h3>
+                                            </span>
                                         </p>
                                         <p class="mb-0">Give us your address just for a precaution to avoid future
                                             dilemmas.Thankyou. </p>
@@ -274,9 +288,10 @@
                                     <div class="col-lg-7">
 
                                         <!-- Button trigger modal -->
-                                        <div> <button type="button" class="btn btn-secondary bg-outline-dark border-0 text-white"
+                                        <div> <button type="button"
+                                                class="btn btn-secondary bg-outline-dark border-0 text-white"
                                                 data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                <i class="fa-solid fa-circle-dot"></i>    Choose Address
+                                                <i class="fa-solid fa-circle-dot"></i> Choose Address
                                             </button></div>
 
 
@@ -289,7 +304,8 @@
                                                         <input value="{{.username}}" name="firstnamef" type="text"
                                                             id="firstname" class="form-control"
                                                             placeholder="First Name">
-                                                        <label for="" class="form__label text-bg-dark">First Name</label>
+                                                        <label for="" class="form__label text-bg-dark">First
+                                                            Name</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
@@ -338,7 +354,7 @@
 
 
 
-                                                
+
                                                 <div class="col-3">
                                                     <div class="form__div">
                                                         <label for="rooms">Rooms</label>
@@ -346,7 +362,7 @@
                                                             class="form-control" value="{{.allrooms}}" readonly>
                                                     </div>
                                                 </div>
-                                               
+
                                                 <div class="col-6">
                                                     <div class="form__div">
                                                         <label for="allrooms">Account Holder Name</label>
@@ -467,9 +483,30 @@
 
 
                                 var data = $('form').serialize();
-                                $.post('/user/payment/confirm/' + startdate + '/' + endate + '/' + wallet + '/' + wtotal, data);
+                                // $.post('/user/payment/confirm/' + startdate + '/' + endate + '/' + wallet + '/' + wtotal, data);
+                               
+                               
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '/user/payment/confirm/' + startdate + '/' + endate + '/' + wallet + '/' + wtotal,
+                                    data: data,
+                                    // dataType: 'json',
+                                    success: function (k) {
+                                      
                                 swal("Check-In Sucessful", "Read our terms and conditions carefully to know about cancellation policies", "success");
-                                setTimeout(() => { location.href = "/user/payment/success"; }, 1700);
+                                        
+                                setTimeout(() => { location.href = "/user/payment/success/poa/"+k; }, 1500);
+                                        
+
+                                    }
+                                });
+                               
+                               
+                               
+                               
+                               
+                                // swal("Check-In Sucessful", "Read our terms and conditions carefully to know about cancellation policies", "success");
+                                // setTimeout(() => { location.href = "/user/payment/success"; }, 1700);
 
 
 
@@ -478,9 +515,29 @@
 
 
                                 var data = $('form').serialize();
-                                $.post('/user/payment/confirm/' + startdate + '/' + endate + '/' + wall + '/' + total, data);
+                                // $.post('/user/payment/confirm/' + startdate + '/' + endate + '/' + wall + '/' + total, data);
+
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '/user/payment/confirm/' + startdate + '/' + endate + '/' + wall + '/' + total,
+                                    data: data,
+                                    // dataType: 'json',
+                                    success: function (k) {
+                                      
                                 swal("Check-In Sucessful", "Read our terms and conditions carefully to know about cancellation policies", "success");
-                                setTimeout(() => { location.href = "/user/payment/success"; }, 1700);
+                                        
+                                setTimeout(() => { location.href = "/user/payment/success/poa/"+k; }, 1500);
+                                        
+
+                                    }
+                                });
+
+
+
+
+
+                                // swal("Check-In Sucessful", "Read our terms and conditions carefully to know about cancellation policies", "success");
+                                // setTimeout(() => { location.href = "/user/payment/success"; }, 1700);
 
 
                             } else if ($("#couponstatus").prop('checked') == true) {
@@ -489,8 +546,32 @@
 
                                 var data = $('form').serialize();
                                 $.post('/user/payment/confirm/' + startdate + '/' + endate + '/' + wals + '/' + ctotal, data);
+                                
+                                
+                                
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '/user/payment/confirm/' + startdate + '/' + endate + '/' + wals + '/' + ctotal,
+                                    data: data,
+                                    // dataType: 'json',
+                                    success: function (k) {
+                                      
                                 swal("Check-In Sucessful", "Read our terms and conditions carefully to know about cancellation policies", "success");
-                                setTimeout(() => { location.href = "/user/payment/success"; }, 1700);
+                                        
+                                setTimeout(() => { location.href = "/user/payment/success/poa/"+k; }, 1500);
+                                        
+
+                                    }
+                                });
+                               
+                                
+                                
+                                
+                                
+                                
+                                
+                                // swal("Check-In Sucessful", "Read our terms and conditions carefully to know about cancellation policies", "success");
+                                // setTimeout(() => { location.href = "/user/payment/success"; }, 1700);
 
 
                             }
@@ -516,7 +597,7 @@
 
             }
 
-            function payment(total, uid, start, end, bal,rid) {
+            function payment(total, uid, start, end, bal, rid) {
                 // /user/payment/razorpay/{{.total}}/{{.uid}}/{{.startdate}}/{{.endate}}"
 
                 if ($("#wallet").prop('checked') == true) {
@@ -527,7 +608,7 @@
 
                 } else {
                     const wall = "0"
-                    location.href = '/user/payment/razorpay/' + total + '/' + uid + '/' + start + '/' + end + '/' + wall +'/' + rid;
+                    location.href = '/user/payment/razorpay/' + total + '/' + uid + '/' + start + '/' + end + '/' + wall + '/' + rid;
 
                 }
 
@@ -562,41 +643,41 @@
             function applycoupon(id, value) {
 
 
-const total = document.getElementById("paototal").innerText
+                const total = document.getElementById("paototal").innerText
 
-const newt = total * (100 - value) / 100
-const rnew = Math.round(newt)
-document.getElementById("paototal").innerHTML = rnew
-document.getElementById("cpn").innerHTML = "Coupon Applied " + value + "%"
+                const newt = total * (100 - value) / 100
+                const rnew = Math.round(newt)
+                document.getElementById("paototal").innerHTML = rnew
+                document.getElementById("cpn").innerHTML = "Coupon Applied " + value + "%"
 
-document.getElementById("couponstatus").checked = true;
+                document.getElementById("couponstatus").checked = true;
 
-const close = document.getElementById("closebutton");
-close.style.visibility = "visible";
+                const close = document.getElementById("closebutton");
+                close.style.visibility = "visible";
 
-const button = document.getElementById("buttons")
-button.disabled = true
+                const button = document.getElementById("buttons")
+                button.disabled = true
 
-const wallet = document.getElementById("wallets")
-wallet.disabled = true
+                const wallet = document.getElementById("wallets")
+                wallet.disabled = true
 
-const walletbutt = document.getElementById("walletbutton")
-walletbutt.disabled = true
-
-
+                const walletbutt = document.getElementById("walletbutton")
+                walletbutt.disabled = true
 
 
-}
 
-function hidingfunc() {
 
-const close = document.getElementById("closebutton");
-close.style.visibility = "hidden";
-}
+            }
 
-function removecoupon() {
-window.location.reload(true)
-}
+            function hidingfunc() {
+
+                const close = document.getElementById("closebutton");
+                close.style.visibility = "hidden";
+            }
+
+            function removecoupon() {
+                window.location.reload(true)
+            }
 
 
 

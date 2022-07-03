@@ -473,9 +473,29 @@
 
 
                                 var data = $('form').serialize();
-                                $.post('/user/payment/confirm/' + startdate + '/' + endate + '/' + wallet + '/' + wtotal, data);
+                                // $.post('/user/payment/confirm/' + startdate + '/' + endate + '/' + wallet + '/' + wtotal, data);
+                                
+                                
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '/user/payment/confirm/' + startdate + '/' + endate + '/' + wallet + '/' + wtotal,
+                                    data: data,
+                                    // dataType: 'json',
+                                    success: function (k) {
+                                      
                                 swal("Check-In Sucessful", "Read our terms and conditions carefully to know about cancellation policies", "success");
-                                setTimeout(() => { location.href = "/user/payment/success"; }, 1700);
+                                        
+                                setTimeout(() => { location.href = "/user/payment/success/poa/"+k; }, 1500);
+                                        
+
+                                    }
+                                });
+                                
+                                
+                                
+                                
+                                // swal("Check-In Sucessful", "Read our terms and conditions carefully to know about cancellation policies", "success");
+                                // setTimeout(() => { location.href = "/user/payment/success"; }, 1700);
 
 
 
@@ -485,8 +505,31 @@
 
                                 var data = $('form').serialize();
                                 $.post('/user/payment/confirm/' + startdate + '/' + endate + '/' + wall + '/' + total, data);
+                                
+                                
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '/user/payment/confirm/' + startdate + '/' + endate + '/' + wall + '/' + total,
+                                    data: data,
+                                    // dataType: 'json',
+                                    success: function (k) {
+                                      
                                 swal("Check-In Sucessful", "Read our terms and conditions carefully to know about cancellation policies", "success");
-                                setTimeout(() => { location.href = "/user/payment/success"; }, 1700);
+                                        
+                                setTimeout(() => { location.href = "/user/payment/success/poa/"+k; }, 1500);
+                                        
+
+                                    }
+                                });
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                // swal("Check-In Sucessful", "Read our terms and conditions carefully to know about cancellation policies", "success");
+                                // setTimeout(() => { location.href = "/user/payment/success"; }, 1700);
 
 
                             } else if ($("#couponstatus").prop('checked') == true) {
@@ -495,8 +538,33 @@
                                 const wals = "0"
                                 var data = $('form').serialize();
                                 $.post('/user/payment/confirm/' + startdate + '/' + endate + '/' + wals + '/' + ctotal, data);
+                                
+                                
+                                
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '/user/payment/confirm/' + startdate + '/' + endate + '/' + wals + '/' + ctotal,
+                                    data: data,
+                                    // dataType: 'json',
+                                    success: function (k) {
+                                      
                                 swal("Check-In Sucessful", "Read our terms and conditions carefully to know about cancellation policies", "success");
-                                setTimeout(() => { location.href = "/user/payment/success"; }, 1700);
+                                        
+                                setTimeout(() => { location.href = "/user/payment/success/poa/"+k; }, 1500);
+                                        
+
+                                    }
+                                });
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                // swal("Check-In Sucessful", "Read our terms and conditions carefully to know about cancellation policies", "success");
+                                // setTimeout(() => { location.href = "/user/payment/success"; }, 1700);
 
 
                             }

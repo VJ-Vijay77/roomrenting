@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"encoding/json"
 	"fmt"
 	"math/rand"
 	"os"
@@ -134,11 +135,9 @@ func PaymentConfirm(c *gin.Context) {
 	Allrooms := c.PostForm("roomnames")
 	total, _ := strconv.Atoi(wtotal)
 
-
 	rand.Seed(time.Now().UnixNano())
 	Refid := orderid.OrderIdGeneration(5)
-	RefereceId := "RP_"+Refid
-
+	RefereceId := "RP_" + Refid
 
 	var status = "checkedin"
 
@@ -171,7 +170,7 @@ func PaymentConfirm(c *gin.Context) {
 	orderdetails.Roomid = RID
 	orderdetails.Refid = RefereceId
 
-	db.Select("user_id", "firstname", "lastname", "housename", "place", "state", "mobile", "totalprice", "paymentmethod", "roomnames", "accountholder", "checkindate", "checkoutdate", "wallet", "roomid","refid").Create(&orderdetails)
+	db.Select("user_id", "firstname", "lastname", "housename", "place", "state", "mobile", "totalprice", "paymentmethod", "roomnames", "accountholder", "checkindate", "checkoutdate", "wallet", "roomid", "refid").Create(&orderdetails)
 
 	var checkoutdate models.Rooms
 	db.Raw("UPDATE rooms SET checkoutdate=? WHERE id=?", end, RID).Scan(&checkoutdate)
@@ -182,6 +181,11 @@ func PaymentConfirm(c *gin.Context) {
 	var updateroomstatus models.Rooms
 
 	db.Raw("UPDATE rooms SET status='booked' WHERE id=?", RID).Scan(&updateroomstatus)
+
+	ok := RefereceId
+	k, _ := json.Marshal(ok)
+	c.Writer.Header().Set("Content-Type", "application/json")
+	c.Writer.Write(k)
 
 }
 
@@ -205,10 +209,17 @@ func PaymentSuccess(c *gin.Context) {
 	var wishlistcount int
 	db.Raw("SELECT COUNT(user_id) FROM wishlists WHERE user_id=?", UserID).Scan(&wishlistcount)
 
+	RefId := c.Param("refid")
+
+	var details models.Orders
+	db.Where("refid=?", RefId).Find(&details)
+
 	c.HTML(200, "paymentsuccess.gohtml", gin.H{
 		"username": UserName,
 		"count":    count,
 		"wcount":   wishlistcount,
+		"details":  details,
+		"email":    userID,
 	})
 }
 
@@ -389,7 +400,7 @@ func RazorPaySuccess(c *gin.Context) {
 
 	rand.Seed(time.Now().UnixNano())
 	Refid := orderid.OrderIdGeneration(5)
-	RefereceId := "RP_"+Refid
+	RefereceId := "RP_" + Refid
 
 	var status = "checkedin"
 
@@ -426,7 +437,7 @@ func RazorPaySuccess(c *gin.Context) {
 	orderdetails.Roomid = RID
 	orderdetails.Refid = RefereceId
 
-	db.Select("user_id", "firstname", "lastname", "housename", "place", "state", "mobile", "totalprice", "paymentmethod", "roomnames", "accountholder", "checkindate", "checkoutdate", "wallet", "roomid","refid").Create(&orderdetails)
+	db.Select("user_id", "firstname", "lastname", "housename", "place", "state", "mobile", "totalprice", "paymentmethod", "roomnames", "accountholder", "checkindate", "checkoutdate", "wallet", "roomid", "refid").Create(&orderdetails)
 
 	var checkoutdate models.Rooms
 	db.Raw("UPDATE rooms SET checkoutdate=? WHERE id=?", Endate, RID).Scan(&checkoutdate)
@@ -450,7 +461,7 @@ func RazorPaySuccess(c *gin.Context) {
 
 }
 
-func RPSuccess(c *gin.Context){
+func RPSuccess(c *gin.Context) {
 
 	db := database.GetDb()
 	session, _ := Store.Get(c.Request, "session")
@@ -471,24 +482,23 @@ func RPSuccess(c *gin.Context){
 	var wishlistcount int
 	db.Raw("SELECT COUNT(user_id) FROM wishlists WHERE user_id=?", UserID).Scan(&wishlistcount)
 
-
 	PID := c.Param("pid")
 	OrdID := c.Param("orderid")
 	Sign := c.Param("signature")
 	Refid := c.Param("refid")
 
 	var orderdetails models.Orders
-	db.Where("refid=?",Refid).Find(&orderdetails)
-	
-	c.HTML(200,"successpage.gohtml",gin.H{
-		"payid":PID,
-		"ordid":OrdID,
-		"sign":Sign,
-		"refid":Refid,
+	db.Where("refid=?", Refid).Find(&orderdetails)
+
+	c.HTML(200, "successpage.gohtml", gin.H{
+		"payid":    PID,
+		"ordid":    OrdID,
+		"sign":     Sign,
+		"refid":    Refid,
 		"username": username,
 		"count":    count,
 		"wcount":   wishlistcount,
-		"details":orderdetails,
-		"email":userID,
+		"details":  orderdetails,
+		"email":    userID,
 	})
 }
