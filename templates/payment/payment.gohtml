@@ -108,10 +108,13 @@
 
         <!-- modal end -->
 
+
+
         <div class="container">
+          <p class="text-white">  Saved Cards (coming soon..)</p>
             <div class="row">
                 <div class="col-lg-4 mb-lg-0 mb-3">
-                    <div class="card p-3">
+                    <div class="card p-3 rounded-4 thevisacard">
                         <div class="img-box">
                             <img src="https://www.freepnglogos.com/uploads/visa-logo-download-png-21.png" alt="">
                         </div>
@@ -119,13 +122,13 @@
                             <label class="fw-bold" for="">**** **** **** 1060</label>
                         </div>
                         <div class="d-flex align-items-center justify-content-between">
-                            <small><span class="fw-bold">Expiry date:</span><span>10/16</span></small>
+                            <small><span class="fw-bold">Expiry date:</span><span>10/26</span></small>
                             <small><span class="fw-bold">Name:</span><span>{{.username}}</span></small>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 mb-lg-0 mb-3">
-                    <div class="card p-3">
+                    <div class="card p-3 rounded-4 themastercard">
                         <div class="img-box">
                             <img src="https://www.freepnglogos.com/uploads/mastercard-png/file-mastercard-logo-svg-wikimedia-commons-4.png"
                                 alt="">
@@ -134,13 +137,13 @@
                             <label class="fw-bold">**** **** **** 1060</label>
                         </div>
                         <div class="d-flex align-items-center justify-content-between">
-                            <small><span class="fw-bold">Expiry date:</span><span>10/16</span></small>
+                            <small><span class="fw-bold">Expiry date:</span><span>10/26</span></small>
                             <small><span class="fw-bold">Name:</span><span>{{.username}}</span></small>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 mb-lg-0 mb-3">
-                    <div class="card p-3">
+                    <div class="card p-3 rounded-4 thediscovercard">
                         <div class="img-box">
                             <img src="https://www.freepnglogos.com/uploads/discover-png-logo/credit-cards-discover-png-logo-4.png"
                                 alt="">
@@ -149,30 +152,33 @@
                             <label class="fw-bold">**** **** **** 1060</label>
                         </div>
                         <div class="d-flex align-items-center justify-content-between">
-                            <small><span class="fw-bold">Expiry date:</span><span>10/16</span></small>
+                            <small><span class="fw-bold">Expiry date:</span><span>10/26</span></small>
                             <small><span class="fw-bold">Name:</span><span>{{.username}}</span></small>
                         </div>
                     </div>
                 </div>
                 <div class="col-12 mt-4">
-                    <div class="card p-3">
-                        <p class="mb-0 fw-bold h4">Payment Methods</p>
+                    <div class="card p-3 paymentmethodsarea">
+                        <p class="mb-0 fw-bold h4 d-flex justify-content-center">Payment Methods</p>
                     </div>
                 </div>
+                <div class="col-12 fw-bold ms-2 text-white">
+                    Choose Payment Options
+                </div>
                 <div class="col-12">
-                    <div class="card p-3">
+                    <div class="card p-3 bg-dark">
                         <div class="card-body border p-0">
                             <p>
-                                <a class="btn btn-primary w-100 h-100 d-flex align-items-center justify-content-between"
+                                <a class="btn btn-dark btn-outline-secondary border-0 text-white w-100 h-100 d-flex align-items-center justify-content-between"
                                     data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true"
                                     aria-controls="collapseExample">
                                     <span class="fw-bold">Razor Pay</span>
-                                    <span class="fab fa-cc-paypal">
+                                    <span class="fa-solid fa-credit-card">
                                     </span>
                                 </a>
                             </p>
                             <div class="collapse p-3 pt-0" id="collapseExample">
-                                <div class="row">
+                                <div class="row razorpaycardisthis text-white">
                                     <div class="col-8">
                                         <p class="h4 mb-0">Summary</p>
                                         <p class="mb-0"><span class="fw-bold">Product:</span><span class="c-green">
@@ -186,33 +192,29 @@
                                         <p>
                                             <input type="checkbox" name="wallet" id="wallet"
                                                 onchange="wallet('{{.wbal}}','{{.total}}')">
-                                            <button class="btn btn-info btn-outline-success text-white"> <label
+                                            <button class="btn btn-sm btn-secondary border-0 btn-outline-dark text-white"> <label
                                                     for="wallet" style="color: rgb(255, 255, 255);font-weight: 600;"> <i
-                                                        class="fa-solid fa-wallet" style="color: blue;"></i> Deduct from
+                                                        class="fa-solid fa-wallet" style="color: white;"></i> Deduct from
                                                     wallet Rs {{.wbal}}</label></button>
                                         </p>
                                         <p class="mb-0"><span class="fw-bold">Total Price:</span>
-                                            <span>Rs<h3 class="text-danger"><strong id="raztotal">{{.total}}</strong>
+                                            <span><h3 class="text-white">Rs <strong id="raztotal"> {{.total}}</strong>/-
                                                 </h3>
                                             </span>
                                         </p>
-                                        <p class="mb-0">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque
-                                            nihil neque
-                                            quisquam aut
-                                            repellendus, dicta vero? Animi dicta cupiditate, facilis provident quibusdam
-                                            ab
-                                            quis,
-                                            iste harum ipsum hic, nemo qui!</p>
+                                        <p class="mb-1">
+                                            Pay using Razorpay, one of our most trusted payment gateway with utmost privacy to user informations.
+                                        </p>
                                     </div>
                                     <button
                                         onclick="payment('{{.total}}','{{.uid}}','{{.startdate}}','{{.endate}}','{{.wbal}}','{{.roomid}}')"
-                                        type="button" class="btn btn-warning btn-outline-primary">Pay Now</button>
+                                        type="button" class="btn border-0 text-white btn-dark btn-outline-primary">Pay Now</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body border p-0">
+                        <div class="card-body text-white paymentatofficeisthis border p-0">
                             <p>
-                                <a class="btn btn-primary p-2 w-100 h-100 d-flex align-items-center justify-content-between"
+                                <a class="btn btn-dark btn-outline-secondary border-0 text-white p-2 w-100 h-100 d-flex align-items-center justify-content-between"
                                     data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true"
                                     aria-controls="collapseExample">
                                     <span class="fw-bold">Payment At Office</span>
@@ -240,15 +242,15 @@
                                         <p>
                                             <input type="checkbox" name="wallets" id="wallets"
                                                 onchange="wallets('{{.wbal}}','{{.total}}')">
-                                            <button class="btn btn-info btn-outline-success" id="walletbutton"> <label
-                                                    for="wallets" style="color: rgb(0, 0, 0);font-weight: 600;"> <i
-                                                        class="fa-solid fa-wallet" style="color: blue;"></i> Deduct from
+                                            <button class="btn btn-sm btn-dark btn-outline-secondary" id="walletbutton"> <label
+                                                    for="wallets" style="color: rgb(255, 255, 255);font-weight: 600;"> <i
+                                                        class="fa-solid fa-wallet" style="color: rgb(255, 255, 255);"></i> Deduct from
                                                     wallet Rs {{.wbal}}</label></button>
                                         </p>
 
                                         <p>
                                         <div class="coupon">
-                                            <button id="buttons" type="button" class="btn btn-secondary"
+                                            <button id="buttons" type="button" class="btn btn-sm btn-secondary"
                                                 data-bs-toggle="modal" data-bs-target="#exampleModal2">
                                                 <input type="checkbox" name="couponstatus" id="couponstatus"> Apply
                                                 Coupon
@@ -264,7 +266,7 @@
                                         <p class="mb-0">
 
                                             <span class="fw-bold">Total Price:</span>
-                                            <span>Rs<h3 class="text-danger"><strong id="paototal">{{.total}}</strong>
+                                            <span><h3 class="text-danger">Rs <strong id="paototal"> {{.total}}</strong>/-
                                                 </h3>
                                             </span>
                                         </p>
@@ -275,9 +277,9 @@
 
                                         <!-- Button trigger modal -->
 
-                                        <div> <button type="button" class="btn btn-primary bg-info"
+                                        <div> <button type="button" class="btn btn-secondary btn-outline-dark border-0 text-white"
                                                 data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                Choose Address
+                                                <i class="fa-solid fa-circle-dot"></i>  Choose Address
                                             </button></div>
 
 
@@ -289,14 +291,14 @@
                                                     <div class="form__div">
                                                         <input name="firstnamef" type="text" id="firstname"
                                                             class="form-control" placeholder="First Name">
-                                                        <label for="" class="form__label">First Name</label>
+                                                        <label for="" class="form__label text-bg-dark">First Name</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form__div">
                                                         <input name="lastnamef" type="text" id="lastname"
                                                             class="form-control" placeholder="LastName">
-                                                        <label for="" class="form__label">Last Name</label>
+                                                        <label for="" class="form__label text-bg-dark">Last Name</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
@@ -346,10 +348,15 @@
                                                 </div>
 
                                                 <div class="col-6">
-                                                    <div class="form__div">
+                                                    <!-- <div class="form__div">
                                                         <label for="allrooms">AllRooms</label>
                                                         <input name="allroomnames" type="text" id="allrooms"
                                                             class="form-control" value="{{.allrooms}}" readonly>
+                                                    </div> -->
+                                                    <div class="form__div">
+                                                        <label for="allrooms">Account Holder Name</label>
+                                                        <input name="allroomnames" type="text" id="allrooms"
+                                                            class="form-control" value="{{.username}}" readonly>
                                                     </div>
                                                 </div>
 
@@ -359,7 +366,7 @@
 
                                                 <button type="submit"
                                                     onclick="checkinnow('{{.startdate}}','{{.endate}}','{{.wbal}}','{{.total}}')"
-                                                    class="btn w-100 btn-outline-primary btn-success text-white"
+                                                    class="btn mt-2 w-100 btn-outline-primary border-0 btn-dark text-white"
                                                     style="font-weight: 600;">Check-In Now</button>
 
                                             </div>

@@ -128,7 +128,7 @@ func PaymentConfirm(c *gin.Context) {
 	Mobile := c.PostForm("mobilef")
 	Roomid := c.PostForm("roomid")
 	RID,_ := strconv.Atoi(Roomid)
-	Allrooms := c.PostForm("allroomnames")
+	Allrooms := c.PostForm("roomnames")
 	total,_ := strconv.Atoi(wtotal) 
 
 	var status = "checkedin"

@@ -19,7 +19,8 @@
 }
 
 body {
-    background: #eee
+    background-image: url(https://media.istockphoto.com/photos/purple-pink-black-abstract-background-picture-id1148136785?k=20&m=1148136785&s=612x612&w=0&h=eRVh-AhddT9IpFEWah7XYa61Sb4eBqh4n3B88pC7R8w=) !important;
+    background-size: cover;
 }
 
 
@@ -147,4 +148,54 @@ body {
 .form-control:focus {
     border: 1.5px solid #1A73E8;
     box-shadow: none;
+}
+
+.thevisacard{
+    background-image: url(https://images.designtrends.com/wp-content/uploads/2016/03/29112538/Abstract-Grey-and-White-Background.jpg?width=600) !important;
+    transition: transform .3s;
+
+}
+
+.themastercard{
+    background-image: url(https://images.designtrends.com/wp-content/uploads/2016/03/29091111/White-and-Gold-Background21.jpg?width=600) !important;
+    transition: transform .3s;
+
+}
+
+.thediscovercard{
+    background-image: url(https://images.designtrends.com/wp-content/uploads/2016/03/29095040/White-Geometric-Pattern.jpg?width=600) !important;
+    transition: transform .3s;
+
+}
+
+
+/* hovercards */
+.thevisacard:hover{
+    -ms-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.06);
+}
+
+.themastercard:hover{
+    -ms-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.06);
+}
+
+.thediscovercard:hover{
+    -ms-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.06);
+}
+
+.paymentmethodsarea{
+    background-image: url(https://images.unsplash.com/photo-1547104442-044448b73426?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80) !important;
+}
+
+.razorpaycardisthis{
+    background-image: url(https://images.unsplash.com/photo-1512358958014-b651a7ee1773?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80) !important;
+}
+
+.paymentatofficeisthis{
+    background-image: url(https://images.unsplash.com/photo-1537724326059-2ea20251b9c8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80) !important;
 }
