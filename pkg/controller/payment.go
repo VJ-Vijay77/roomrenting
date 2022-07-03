@@ -37,6 +37,7 @@ func Payment(c *gin.Context) {
 	RID,_ := strconv.Atoi(Roomid) 
 	Usersid, _ := strconv.Atoi(UserID)
 	
+	TP,_ := strconv.Atoi(TotalPrice)
 	
 	//taking order details
 	var roomnames string
@@ -54,7 +55,14 @@ func Payment(c *gin.Context) {
 
 	//taking wallet balance
 	var wallet models.Wallets
+	var walletbal int
 	db.Select("balance").Where("user_id=?",Usersid).Find(&wallet)
+
+	if wallet.Balance >= TP{
+		walletbal = TP-1
+	}else if wallet.Balance < TP{
+		walletbal = wallet.Balance
+	}
 
 	//getting category of room
 	var category string
@@ -74,7 +82,7 @@ func Payment(c *gin.Context) {
 		"startdate": Startdate,
 		"endate":    Endate,
 		"roomid":    Roomid,
-		"wbal":wallet.Balance,
+		"wbal":walletbal,
 		"coupon":coupons,
 		"category":category,
 	})
@@ -391,9 +399,7 @@ func RazorPaySuccess(c *gin.Context) {
 
 	
 	
-	// var roomsids []models.Carts
-	// db.Select("cartsroomid").Where("user_id=?", UserID).Find(&roomsids)
-
+	
 	var status = "checkedin"
 
 	var idsofroom models.Orderedrooms
@@ -406,12 +412,7 @@ func RazorPaySuccess(c *gin.Context) {
 		db.Select("roomid", "user_id", "status","checkindate","checkoutdate").Create(&idsofroom)
 	
 
-	// var roomnames []string
-	// db.Raw("SELECT rooms.room_name FROM carts INNER JOIN rooms ON rooms.id=carts.cartsroomid WHERE carts.user_id=?", UserID).Scan(&roomnames)
-	// var sendinginfo string
-	// for i := range roomnames {
-	// 	sendinginfo += roomnames[i]
-	// }
+	
 	var roomnames string
 	db.Raw("SELECT room_name FROM rooms WHERE id=?",RID).Scan(&roomnames)
 
@@ -462,5 +463,6 @@ func RazorPaySuccess(c *gin.Context) {
 
 	
 	c.Redirect(303, "/user/payment/success")
+	
 
 }

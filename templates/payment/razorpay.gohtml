@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RazorPay</title>
+    <link rel="stylesheet" href="/static/payment/razorpaypage.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
@@ -21,17 +22,58 @@
     {{$edate := .end}}
     {{$wallet := .wallet}}
     {{$roomid := .roomid}}
-    <div class="container mt-5">
-        <p><strong>{{.username}}</strong><br>
-        {{$add.Housename}}<br>
-        {{$add.Place}}<br>
-        {{$add.State}}  <br>      
-        {{$add.PIN}}  <br>      
-    </p>
-        <h4 id="start">{{$sdate}}</h4>To <h4 id="end">{{$edate}}</h4>
-        <h1>Pay With Razor Pay</h1>
-    <button class="mt-5 text-white w-50 btn btn-lg btn-success btn-outline-secondary" id="rzp-button1">Pay</button>
-</div>
+  
+
+<hr class="text-white">
+
+    <div class="container d-flex justify-content-center">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+
+
+
+                        <div class="card therazorcard text-white" style="width: 18rem;">
+                            <img src="https://www.fintechfutures.com/files/2021/12/razorpay-logo.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title d-flex justify-content-center">Name : {{.username}}</h5>
+                              <p class="card-text">House Name : {{$add.Housename}}</p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                              <li class="list-group-item theitemlist text-white">{{$add.Place}},{{$add.State}}</li>
+                              <li class="list-group-item theitemlist text-white">{{$add.PIN}}</li>
+                              <li class="list-group-item theitemlist text-white">Date: {{$sdate}} to {{$edate}}</li>
+                            </ul>
+                            <div class="card-body">
+    <button class="fw-bold w-100 btn btn-light btn-outline-primary border-0" id="rzp-button1">Pay</button>
+                              
+                              
+                            </div>
+                          </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>

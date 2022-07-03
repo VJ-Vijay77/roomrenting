@@ -1,0 +1,16 @@
+body{
+    background-image: url(https://img.freepik.com/free-vector/dark-wavy-background_23-2148421508.jpg?w=826) !important;
+    background-size: cover;
+    height: 100% !important;
+    vertical-align: middle;
+}
+
+
+.therazorcard{
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+    background-image: url(https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80) !important;
+}
+
+.theitemlist{
+    background-image: url(https://images.unsplash.com/photo-1523821741446-edb2b68bb7a0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80) !important;
+}
