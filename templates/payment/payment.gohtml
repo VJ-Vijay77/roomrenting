@@ -205,7 +205,7 @@
                                             iste harum ipsum hic, nemo qui!</p>
                                     </div>
                                     <button
-                                        onclick="payment('{{.total}}','{{.uid}}','{{.startdate}}','{{.endate}}','{{.wbal}}')"
+                                        onclick="payment('{{.total}}','{{.uid}}','{{.startdate}}','{{.endate}}','{{.wbal}}','{{.roomid}}')"
                                         type="button" class="btn btn-warning btn-outline-primary">Pay Now</button>
                                 </div>
                             </div>
@@ -515,18 +515,19 @@
 
             }
 
-            function payment(total, uid, start, end, bal) {
+            function payment(total, uid, start, end, bal,rid) {
+                
                 // /user/payment/razorpay/{{.total}}/{{.uid}}/{{.startdate}}/{{.endate}}"
 
                 if ($("#wallet").prop('checked') == true) {
 
                     const wtotal = total - bal
-                    location.href = '/user/payment/razorpay/' + wtotal + '/' + uid + '/' + start + '/' + end + '/' + bal;
+                    location.href = '/user/payment/razorpay/' + wtotal + '/' + uid + '/' + start + '/' + end + '/' + bal + '/' + rid;
 
 
                 } else {
                     const wall = "0"
-                    location.href = '/user/payment/razorpay/' + total + '/' + uid + '/' + start + '/' + end + '/' + wall;
+                    location.href = '/user/payment/razorpay/' + total + '/' + uid + '/' + start + '/' + end + '/' + wall + '/' + rid;
 
                 }
 

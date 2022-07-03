@@ -95,8 +95,8 @@ func PaymentConfirm(c *gin.Context) {
 	var UserID int
 	db.Raw("SELECT id FROM users WHERE email=?", userID).Scan(&UserID)
 
-	var roomsids []models.Carts
-	db.Select("cartsroomid").Where("user_id=?", UserID).Find(&roomsids)
+	// var roomsids []models.Carts
+	// db.Select("cartsroomid").Where("user_id=?", UserID).Find(&roomsids)
 
 	
 
@@ -134,14 +134,14 @@ func PaymentConfirm(c *gin.Context) {
 	var status = "checkedin"
 
 	var idsofroom models.Orderedrooms
-	for _, val := range roomsids {
-		idsofroom.Roomid = val.Cartsroomid
+	
+		idsofroom.Roomid = RID
 		idsofroom.User_Id = UserID
 		idsofroom.Status = status
 		idsofroom.Checkindate = start
 		idsofroom.Checkoutdate = end
 		db.Select("roomid", "user_id", "status","checkindate","checkoutdate").Create(&idsofroom)
-	}
+	
 	
 
 	var paymode string = "Payment At Office"
@@ -161,24 +161,26 @@ func PaymentConfirm(c *gin.Context) {
 	orderdetails.Checkindate = start 
 	orderdetails.Checkoutdate = end 
 	orderdetails.Wallet = Wallbal
-	db.Select("user_id", "firstname", "lastname", "housename", "place", "state", "mobile", "totalprice","paymentmethod","roomnames", "accountholder","checkindate","checkoutdate","wallet").Create(&orderdetails)
+	orderdetails.Roomid = RID
+	db.Select("user_id", "firstname", "lastname", "housename", "place", "state", "mobile", "totalprice","paymentmethod","roomnames", "accountholder","checkindate","checkoutdate","wallet","roomid").Create(&orderdetails)
 
 	
 
 	var checkoutdate models.Rooms
-	db.Raw("UPDATE rooms SET checkoutdate=? WHERE room_name=?",end,Allrooms).Scan(&checkoutdate)
+	db.Raw("UPDATE rooms SET checkoutdate=? WHERE id=?",end,RID).Scan(&checkoutdate)
 
 	var deletefromcart models.Carts
 	db.Raw("DELETE FROM carts WHERE cartsroomid =?", RID).Scan(&deletefromcart)
 
 	var updateroomstatus models.Rooms
 
-	for _, val := range roomsids {
 
-		db.Raw("UPDATE rooms SET status='booked' WHERE id=?", val.Cartsroomid).Scan(&updateroomstatus)
+
+		db.Raw("UPDATE rooms SET status='booked' WHERE id=?", RID).Scan(&updateroomstatus)
+	
+
 	}
 
-}
 
 func PaymentSuccess(c *gin.Context) {
 	db := database.GetDb()
@@ -298,7 +300,8 @@ func RazorPay(c *gin.Context) {
 	Grandtotal := Total + "00"
 	total, _ := strconv.Atoi(Grandtotal)
 	Wallet := c.Param("wallet")
-
+	Roomid := c.Param("roomid")
+	RID,_ := strconv.Atoi(Roomid)
 	var userinfos models.Users
 	db.Where("id=?", UID).Find(&userinfos)
 
@@ -340,6 +343,7 @@ func RazorPay(c *gin.Context) {
 		"start":Startdate,
 		"end":Endate,
 		"wallet":Wallet,
+		"roomid":RID,
 	})
 
 }
@@ -366,6 +370,8 @@ func RazorPaySuccess(c *gin.Context) {
 	Endate := c.Param("end")
 	Total := c.Param("total")
 	Wallet := c.Param("wallet")
+	Roomid := c.Param("roomid")
+	RID , _ := strconv.Atoi(Roomid)
 	var Wallbal int 
 	var zero int= 0
 	var walbalets models.Wallets
@@ -385,30 +391,32 @@ func RazorPaySuccess(c *gin.Context) {
 
 	
 	
-	var roomsids []models.Carts
-	db.Select("cartsroomid").Where("user_id=?", UserID).Find(&roomsids)
+	// var roomsids []models.Carts
+	// db.Select("cartsroomid").Where("user_id=?", UserID).Find(&roomsids)
 
 	var status = "checkedin"
 
 	var idsofroom models.Orderedrooms
-	for _, val := range roomsids {
-		idsofroom.Roomid = val.Cartsroomid
+	
+		idsofroom.Roomid = RID
 		idsofroom.User_Id = UserID
 		idsofroom.Status = status
 		idsofroom.Checkindate = Startdate
 		idsofroom.Checkoutdate = Endate
 		db.Select("roomid", "user_id", "status","checkindate","checkoutdate").Create(&idsofroom)
-	}
-
-	var roomnames []string
-	db.Raw("SELECT rooms.room_name FROM carts INNER JOIN rooms ON rooms.id=carts.cartsroomid WHERE carts.user_id=?", UserID).Scan(&roomnames)
-	var sendinginfo string
-	for i := range roomnames {
-		sendinginfo += roomnames[i]
-	}
 	
 
-		var paymode string = "Razor Pay"
+	// var roomnames []string
+	// db.Raw("SELECT rooms.room_name FROM carts INNER JOIN rooms ON rooms.id=carts.cartsroomid WHERE carts.user_id=?", UserID).Scan(&roomnames)
+	// var sendinginfo string
+	// for i := range roomnames {
+	// 	sendinginfo += roomnames[i]
+	// }
+	var roomnames string
+	db.Raw("SELECT room_name FROM rooms WHERE id=?",RID).Scan(&roomnames)
+
+
+	var paymode string = "Razor Pay"
 	var orderdetails models.Orders
 	var adress models.Useraddress
 	db.Where("user_id=? AND main='true'", UserID).Find(&adress)
@@ -421,27 +429,28 @@ func RazorPaySuccess(c *gin.Context) {
 	orderdetails.Mobile = adress.Mobile
 	orderdetails.Totalprice = GrandTotal
 	orderdetails.Paymentmethod = paymode
-	orderdetails.Roomnames = sendinginfo
+	orderdetails.Roomnames = roomnames
 	orderdetails.Accountholder = username
 	orderdetails.Checkindate = Startdate
 	orderdetails.Checkoutdate = Endate
 	orderdetails.Wallet = Wallbal
+	orderdetails.Roomid = RID
 
-	db.Select("user_id", "firstname", "lastname", "housename", "place", "state", "mobile", "totalprice","paymentmethod","roomnames", "accountholder","checkindate","checkoutdate","wallet").Create(&orderdetails)
+	db.Select("user_id", "firstname", "lastname", "housename", "place", "state", "mobile", "totalprice","paymentmethod","roomnames", "accountholder","checkindate","checkoutdate","wallet","roomid").Create(&orderdetails)
 
 	var checkoutdate models.Rooms
-	db.Raw("UPDATE rooms SET checkoutdate=? WHERE room_name=?",Endate,sendinginfo).Scan(&checkoutdate)
+	db.Raw("UPDATE rooms SET checkoutdate=? WHERE id=?",Endate,RID).Scan(&checkoutdate)
 
 
 	var deletefromcart models.Carts
-	db.Raw("DELETE FROM carts WHERE user_id=?", UserID).Scan(&deletefromcart)
-
+	db.Raw("DELETE FROM carts WHERE cartsroomid =?", RID).Scan(&deletefromcart)
+	
 	var updateroomstatus models.Rooms
 
-	for _, val := range roomsids {
+	
 
-		db.Raw("UPDATE rooms SET status='booked' WHERE id=?", val.Cartsroomid).Scan(&updateroomstatus)
-	}
+	db.Raw("UPDATE rooms SET status='booked' WHERE id=?", RID).Scan(&updateroomstatus)
+	
 
 	db.AutoMigrate(models.Razorpaydetails{})
 	var razor models.Razorpaydetails

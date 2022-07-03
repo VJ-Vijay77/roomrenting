@@ -20,6 +20,7 @@
     {{$sdate := .start}}
     {{$edate := .end}}
     {{$wallet := .wallet}}
+    {{$roomid := .roomid}}
     <div class="container mt-5">
         <p><strong>{{.username}}</strong><br>
         {{$add.Housename}}<br>
@@ -51,7 +52,7 @@ var options = {
         
         let rsign = response.razorpay_signature; 
         
-        location.href='/user/payment/razorypaysuccess/'+rpid+'/'+roid+'/'+rsign+'/'+'{{$sdate}}'+'/'+'{{$edate}}'+'/'+'{{.total}}'+'/'+'{{$wallet}}';
+        location.href='/user/payment/razorypaysuccess/'+rpid+'/'+roid+'/'+rsign+'/'+'{{$sdate}}'+'/'+'{{$edate}}'+'/'+'{{.total}}'+'/'+'{{$wallet}}'+'/'+'{{$roomid}}';
     },
     "prefill": {
         "name": "{{$name}}",
