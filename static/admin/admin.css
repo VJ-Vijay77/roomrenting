@@ -1,0 +1,57 @@
+body{
+    overflow-x: hidden;
+    background-color: rgb(235, 232, 232) !important;
+}
+
+.adminhead{
+    font-size: 1.3rem;
+    font-weight: 600;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: rgb(17, 18, 101);
+}
+
+
+.theheader{
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+    background-color: white;
+}
+
+
+
+.themainside{
+    background-image: url(https://deckademics.com/wp-content/uploads/2016/02/green-gradient.png);
+    background-size: cover;
+    height: 1000px;
+
+}
+
+.textbig{
+    color: rgb(12, 12, 46);
+    padding-left: 8% !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+}
+
+
+
+.textdecnone{
+    text-decoration: none;
+    color:  white !important;
+}
+
+.textdecnone:hover{
+    color: red !important;
+    
+}
+
+.hrline1{
+    background-color: black !important;
+    height: 7px !important;
+}
+
+.firstrow{
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+.theportfolio{
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}

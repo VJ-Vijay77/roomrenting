@@ -5,9 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home | Admin</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-    
+    <link rel="stylesheet" href="/static/admin/admin.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/d67b07a9d9.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
 </head>
 <body>
     <div class="container">
@@ -28,9 +37,265 @@
 
 </div>
 
+<hr>
 
 
 
+    <!-- header -->
+    <div class="row theheader">
+
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="/public/favicon/R4Rooms.png"
+                        alt="" style="max-height: 3rem;">
+                </div>
+
+                <div class="col-md-4">
+                    <h1 class="adminhead mt-3">Admin Dashboard</h1>
+
+                </div>
+
+                <div class="col-md-4 d-flex justify-content-end">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-md-9 fw-bold">Vijay Dinesh</div>
+                        <div class="col-md-2"><i class="fa-solid fa-gear"></i></div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+    <!-- header ends -->
+
+
+
+    <!-- the sidebar -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-3 col-lg-2 themainside">
+                    <div class="row theside1 text-white">
+                        <div class="col-md-12 shadow textbig">
+                            <i class="fa-solid fa-gauge"></i> DashBoard
+                        </div>
+                        <div class="col-md-12 fw-bold ps-4 mt-2">
+                            <a href="" class="textdecnone"><i class="fa-solid fa-magnifying-glass-chart"></i>
+                                Analytics</a>
+                        </div>
+                        <div class="col-md-12 fw-bold ps-4 mt-2">
+                            <a href="" class="textdecnone"><i class="fa-solid fa-sack-dollar"></i> Sales</a>
+                        </div>
+
+                        <div class="col-md-12  ps-5 mt-2">
+                            <a href="" class="textdecnone"><i class="fa-solid fa-money-bill-1"></i> Daily-Sales</a>
+                        </div>
+                        <div class="col-md-12  ps-5 mt-2">
+                            <a href="" class="textdecnone"><i class="fa-solid fa-money-bill-1"></i> Weekly-Sales</a>
+
+                        </div>
+                        <div class="col-md-12 ps-5 mt-2">
+                            <a href="" class="textdecnone"><i class="fa-solid fa-money-bill-1"></i> Monthly-Sales</a>
+
+                        </div>
+                        <div class="col-md-12 ps-5 mt-2">
+                            <a href="" class="textdecnone"><i class="fa-solid fa-money-bill-1"></i> yearly-Sales</a>
+
+                        </div>
+                        <div class="col-md-12 shadow textbig mt-3">
+                            <i class="fa-solid fa-diamond"></i> Coupons
+                        </div>
+                        <div class="col-md-12 fw-bold ps-4 mt-2">
+                            <a href="" class="textdecnone"><i class="fa-solid fa-circle-plus"></i> Add Coupons</a>
+
+                        </div>
+                        <div class="col-md-12 shadow textbig mt-3">
+                            <i class="fa-solid fa-percent"></i> Offers
+                        </div>
+                        <div class="col-md-12 fw-bold ps-4 mt-2">
+                            <a href="" class="textdecnone"><i class="fa-solid fa-tag"></i> Add Offers</a>
+
+                        </div>
+                        <div class="col-md-12 shadow textbig mt-3">
+                            <i class="fa-solid fa-bed"></i> Room Management
+                        </div>
+                        <div class="col-md-12 fw-bold ps-4 mt-2">
+                            <a href="" class="textdecnone"><i class="fa-solid fa-bed-pulse"></i> Add Rooms</a>
+                        </div>
+                        <div class="col-md-12 fw-bold ps-4 mt-2">
+                            <a href="" class="textdecnone"><i class="fa-solid fa-ticket"></i> Active Bookings</a>
+                        </div>
+                        <div class="col-md-12 fw-bold ps-4 mt-2">
+                            <a href="" class="textdecnone"><i class="fa-solid fa-ban"></i> RemoveRooms</a>
+                        </div>
+
+                        <div class="col-md-12 shadow textbig mt-3">
+                            <i class="fa-solid fa-bed"></i> User Management
+                        </div>
+                        <div class="col-md-12 fw-bold ps-4 mt-2">
+                            <a href="" class="textdecnone"><i class="fa-solid fa-pen"></i> Management</a>
+                        </div>
+                        
+
+
+
+
+
+
+
+                    </div>
+                </div>
+                <div class="col-md-8 col-lg-9">
+                    <div class="container">
+                        
+                        
+                        <div class="row mt-3 firstrow">
+                            <div class="col-md-6 bg-light">
+                                    <div class="row"><div class="col-md-12">
+                                        <h3 class="text-black">Weekly Revenue (Last Week)</h3>
+                                        <div id="myPlot" style="width:100%;"></div>
+                        
+                                    </div></div>
+                               
+
+                            </div>
+                             <div class="col-md-6 bg-light">
+                                <div class="row"><div class="col-md-12">
+
+                                <h3 class="text-black">Yearly Revenue Generation 2016-2022</h3>
+
+                                <div id="chartContainer" style="height: 28rem; width: 100%;"></div>
+
+                                </div></div>
+
+                            </div>
+
+
+                        </div> <hr class="hrline1">
+
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12 mt-4 mb-2 theportfolio  bg-light">
+                                        <div class="row firstrow"><div class="col-md-10 fw-bold">
+                                            Portfolio Performance
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button class="btn btn-dark btn-sm">View Details</button>
+                                        </div>
+                                    </div>
+                                        </div>
+                                    <div class="col-md-2  bg-light">Earnings Today</div>
+                                    <div class="col-md-2  bg-light"></div>
+                                    <div class="col-md-2 bg-light">Weekly Collection</div>
+                                    <div class="col-md-2 bg-light"></div>
+                                    <div class="col-md-2 bg-light">Yearly Cash</div>
+                                    <div class="col-md-2 bg-light"></div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- the sidebar ends -->
+
+
+
+
+
+
+   
     
+
+    <script>
+
+        
+        var xArray = ["{{.fday}}", "{{.sday}}", "{{.tday}}", "{{.foday}}", "{{.fifday}}","{{.sixday}}","{{.seday}}"];
+        var yArray = ['{{.first}}', '{{.second}}', '{{.third}}', '{{.fourth}}', '{{.five}}','{{.six}}','{{.seven}}'];
+        
+        var data = [{
+          x: xArray,
+          y: yArray,
+          type: "bar"  }];
+        var layout = {title:"Day by day collection from last week"};
+        
+        Plotly.newPlot("myPlot", data, layout);
+        
+        // charts differentiated here
+        
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        
+        function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Contry', 'Revenue'],
+          ['Jan',150000],
+          ['Feb',290000],
+          ['Mar',300000],
+          ['Apr',200000],
+          ['May','{{.may}}'],
+          ['Jun','{{.june}}'],
+          ['Jul',0],
+          ['Aug',0],
+          ['Sep',0],
+          ['Oct',15],
+          ['Nov',15],
+          ['Dec',15],
+        ]);
+        
+        var options = {
+          title:'Monthly Revenue'
+        };
+        
+        var chart = new google.visualization.BarChart(document.getElementById('myChart'));
+          chart.draw(data, options);
+        }
+        
+        
+        // third chart from here
+        window.onload = function() {
+        
+        var chart = new CanvasJS.Chart("chartContainer", {
+            theme: "light2", // "light1", "light2", "dark1", "dark2"
+            exportEnabled: true,
+            animationEnabled: true,
+            // title: {
+            //     text: "Yearly Revenue Generation"
+            // },
+            data: [{
+                type: "pie",
+                startAngle: 25,
+                toolTipContent: "<b>{label}</b>: {y}%",
+                showInLegend: "true",
+                legendText: "{label}",
+                indexLabelFontSize: 16,
+                indexLabel: "{label} - {y}%",
+                dataPoints: [
+                    { y: 93, label: "2022" },
+                    { y: 2, label: " 2021" },
+                    { y: 1, label: "2020" },
+                    { y: 1, label: "2019" },
+                    { y: 1, label: "2018" },
+                    { y: 1, label: "2017" },
+                    { y: 1, label: "2016" }
+                ]
+            }]
+        });
+        chart.render();
+        
+        }
+        
+            </script>
 </body>
 </html>

@@ -17,11 +17,11 @@
     <form class="row g-3" id="form" method="post" action="/admin/add_room" enctype="multipart/form-data">
         <div class="col-md-6">
           <label for="inputRoom4" class="form-label">Room Name</label>
-          <input type="text" name="roomname" class="form-control" required id="inputRoom4">
+          <input type="text" name="roomname" placeholder="Room 303" class="form-control" required id="inputRoom4">
         </div>
         <div class="col-md-6">
           <label for="inputroomprice" class="form-label">Room Price</label>
-          <input type="text" name="roomprice" class="form-control" required id="inputroomprice">
+          <input type="text" placeholder="Eg:5677" name="roomprice" class="form-control" required id="inputroomprice">
         </div>
 
 
@@ -62,6 +62,11 @@
             <div class="col-md-12">
               <label for="description" class="form-label">Description</label>
               <input type="text" placeholder="write in minimum 20 words" name="description" class="form-control" required id="description">
+            </div>
+
+            <div class="col-md-6">
+              <label for="location" class="form-label">Location</label>
+              <input type="text" placeholder="Eg:Kerala" name="location" class="form-control" required id="location">
             </div>
         
         <div class="col-12">
