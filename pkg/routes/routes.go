@@ -165,4 +165,7 @@ func InitRoutes(api *gin.Engine) {
 	api.GET("/user/refund/success",controllertwo.RSuccess)
 
 
+	//location of rooms
+	api.GET("/user/location/:name",controllertwo.Location)
+	
 }

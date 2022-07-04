@@ -29,6 +29,7 @@ type Rooms struct {
 	Offers string
 	Value int
 	Discountprice int
+	Location string
 }
 
 type Category struct {

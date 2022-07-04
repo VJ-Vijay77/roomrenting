@@ -137,7 +137,7 @@ func PaymentConfirm(c *gin.Context) {
 
 	rand.Seed(time.Now().UnixNano())
 	Refid := orderid.OrderIdGeneration(5)
-	RefereceId := "RP_" + Refid
+	RefereceId := "PAO_" + Refid
 
 	var status = "checkedin"
 

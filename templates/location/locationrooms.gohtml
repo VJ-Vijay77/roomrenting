@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R4Rooms | SearchRooms</title>
+    <link rel="stylesheet" href="/static/navbar/navbar.css">
+  <link rel="stylesheet" href="/static/searchpage/css/allroom.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+   <script src="/static/allrooms/allrooms.js"></script>
+    <script src="https://kit.fontawesome.com/d67b07a9d9.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+   
+   <style>
+      .start-100 {
+        left: 97% !important;
+    }
+    </style>
+</head>
+<body style="overflow-x: hidden;background-image: url(/public/bodybg/4853433.jpg);">
+    
+   
+ <!-- navbar start -->
+ {{template "navbar/navbar.gohtml" .}}
+ <!-- navbar ends -->
+  <!-- navbar end -->
+
+
+  <div class="row mt-1 ms-2">
+    <div class="col-md-10">
+    <div class="hstack gap-3">
+      <a href="/user/all_room_search" class="btn btn-dark btn-sm"> All Rooms </a>
+      <a href="/user/room_search" class="btn btn-outline-secondary btn-sm"> Available Rooms </a>
+      <a href="/user/room_booked_search" class="btn btn-sm btn-outline-secondary"> Booked Rooms</a>
+      
+     </div>
+    
+  
+  </div>
+  <div class="col-md-2">
+    <div class="dropdown">
+      <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+       Sort By
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <li><a class="dropdown-item " href="/user/filter/singleroom">Single Rooms</a></li>
+        <li><a class="dropdown-item " href="/user/filter/doubleroom">Double Rooms</a></li>
+        <li><a class="dropdown-item " href="">4 BHK</a></li>
+      </ul>
+    </div>
+  </div>
+</div> 
+<hr>
+   
+  
+
+
+
+
+
+
+
+
+    <!-- search rooms start -->
+    
+    <div class="row ms-1">
+      
+      <div class="col-md-3 d-flex justify-content-center">
+        <div class="row filterinfo mt-5 mb-5">
+          <div class="col-md-12">
+            <h3>Filter</h3> <hr>
+         
+        <input type="text" value="{{.location}}">
+            
+            <p class="text-secondary" style="font-size: large;">Choose By Date<br></p> 
+
+        
+           <p class="fw-bold">Available from </p> <input type="date" value="{{.cdate}}" min="{{.cdate}}" id="sdate" oninput="isavailable()"><br>
+         
+          
+
+          
+           <p class="fw-bold mt-3">Choose By Price</p> 
+         
+           
+            <label for="customRange3" class="form-label fw-bold" id="rangeid">Price range : Rs 7500/-</label>
+          
+
+            <input type="range" class="form-range" min="0" max="2" step="1" id="customRange3" onchange="range()">
+           
+
+          </div>
+          <div class="pricebuttonsof3">
+          <div class="col-md-3 me-1">
+            <a href="/user/filter/abovefive" class="btn btn-secondary border-0 btn-outline-dark text-white btn-sm">Above 5k</a>
+          </div>
+          <div class="col-md-3 me-1">
+            <a href="/user/filter/aboveseven" class="btn btn-secondary border-0 btn-outline-dark text-white btn-sm">Above 7k</a>
+          </div>
+          <div class="col-md-3">
+            <a href="/user/filter/belowfive" class="btn btn-secondary border-0 btn-outline-dark text-white btn-sm">Below 5k</a>
+          </div>
+        </div>
+         
+          
+        </div>
+        
+        
+      
+       
+      </div>
+     
+
+
+      {{template "navbar/card.gohtml" .}}
+      
+
+
+
+      
+    </div>
+        <!--card ends here  -->
+           
+         
+
+
+            
+<!-- search rooms end -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</body>
+</html>

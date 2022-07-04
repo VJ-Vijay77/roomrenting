@@ -51,11 +51,21 @@ func UserHome(c *gin.Context) {
     			
 		}
 	}
+
+	var allrooms []models.Rooms
+	var allroomses []models.Rooms
+	var adroom models.Rooms
+	db.Find(&adroom).Where("id=?",65)
+	db.Limit(4).Find(&allrooms)
+	db.Limit(4).Offset(4).Find(&allroomses)
 	
 	c.HTML(200, "userhome.gohtml", gin.H{
 		"data":     userinfos,
 		"username": UserName,
 		"count":    count,
 		"wcount":   wishlistcount,
+		"ad":adroom,
+		"rooms":allrooms,
+		"offrooms":allroomses,
 	})
 }
