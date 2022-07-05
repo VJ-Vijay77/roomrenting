@@ -25,6 +25,16 @@ func AdminHome(c *gin.Context) {
 
 	db := database.GetDb()
 
+	current := time.Now().Format("2006-01-02")
+
+	// //daily sales
+	// var dailysales []models.Orders
+	// db.Where("checkindate=?", current).Find(&dailysales)
+    //total daily revenue
+    var TotalRevenue int64
+    db.Raw("SELECT SUM(totalprice) FROM orders WHERE checkindate=?", current).Scan(&TotalRevenue)
+	
+
 	timed := time.Now()
 	time2 := timed.AddDate(0, 0, -6)
 
@@ -150,6 +160,16 @@ func AdminHome(c *gin.Context) {
 
 
 
+	weektimestart := timed.Format("2006-01-02")
+	todaytimes := time2.Format("2006-01-02")
+
+	var weekdatas []models.Orders
+	db.Where("checkindate > ?", todaytime).Find(&weekdata)
+	
+	var wrevenue int
+	for _, i := range weekdata {
+		wrevenue += i.Totalprice
+	}
 
 
 
@@ -173,7 +193,14 @@ func AdminHome(c *gin.Context) {
 		"seday":days7,
 		"june":monthlytotal,
 		"may":maytotal,
-		"2022":yearlytotal,
+		"yearly":yearlytotal,
+		"daily":TotalRevenue,
+
+		"wstart":        weektimestart,
+		"wend":          todaytimes,
+		
+		"weeklydetails": weekdatas,
+		"wtotal":        wrevenue,
 	})
 }
 

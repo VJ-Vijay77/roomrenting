@@ -5,54 +5,64 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AddRoom</title>
+    <link rel="stylesheet" href="/static/rooms/addroom.css">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/d67b07a9d9.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
-    <h1>Add room here</h1>
+  <div class="row">
+    <div class="col-md-12 mt-4">
+    <h1 class="fw-bold d-flex justify-content-center addroomhead"><i class="fa-solid fa-bed"></i> Add Rooms</h1>
 
-    <div class="container">
+    </div>
+  </div>
+
+
+
+    <div class="container addroomhead mt-4">
     <form class="row g-3" id="form" method="post" action="/admin/add_room" enctype="multipart/form-data">
         <div class="col-md-6">
-          <label for="inputRoom4" class="form-label">Room Name</label>
+          <label for="inputRoom4" class="fw-bold form-label">Room Name</label>
           <input type="text" name="roomname" placeholder="Room 303" class="form-control" required id="inputRoom4">
         </div>
         <div class="col-md-6">
-          <label for="inputroomprice" class="form-label">Room Price</label>
+          <label for="inputroomprice" class="fw-bold form-label">Room Price</label>
           <input type="text" placeholder="Eg:5677" name="roomprice" class="form-control" required id="inputroomprice">
         </div>
 
 
         <!-- pic path -->
         <div class="col-md-6">
-          <label for="inputroompath" class="form-label">Room CoverPic Path</label>
+          <label for="inputroompath" class="fw-bold form-label">Room CoverPic Path</label>
           <input type="file" id="roompicpath" name="roompicpath" class="form-control" required id="inputroompath">
         </div>
         <div class="col-md-3">
-          <label for="inputroompath1" class="form-label">Room SubPic1 Path</label>
+          <label for="inputroompath1" class="fw-bold form-label">Room SubPic1 Path</label>
           <input type="file" id="roompicpath1" name="roompicpath1" class="form-control" required id="inputroompath1">
         </div> <div class="col-md-3">
-          <label for="inputroompath2" class="form-label">Room subPic2 Path</label>
+          <label for="inputroompath2" class="fw-bold form-label">Room subPic2 Path</label>
           <input type="file" id="roompicpath2" name="roompicpath2" class="form-control" required id="inputroompath2">
         </div> <div class="col-md-3">
-          <label for="inputroompath3" class="form-label">Room subPic3 Path</label>
+          <label for="inputroompath3" class="fw-bold form-label">Room subPic3 Path</label>
           <input type="file" id="roompicpath3" name="roompicpath3" class="form-control" required id="inputroompath3">
         </div>
         <div class="col-md-3">
-          <label for="inputroompath4" class="form-label">Room subPic4 Path</label>
+          <label for="inputroompath4" class="fw-bold form-label">Room subPic4 Path</label>
           <input type="file" id="roompicpath4" name="roompicpath4" class="form-control" required id="inputroompath4">
         </div>
 <!-- pic path end -->
         
           <!-- <div class="col-md-6">
-            <label for="inputroomcategory" class="form-label">Room Category</label>
+            <label for="inputroomcategory" class="fw-bold form-label">Room Category</label>
             <input type="text" name="roomcategory" class="form-control" id="inputroomcategory">
           </div> -->
          
           <div class="col-md-6">
-            <label for="roomcategory" class="form-label">Category</label>
+            <label for="roomcategory" class="fw-bold form-label">Category</label>
             <select class="form-select" name="roomcategory"  id="roomcategory">
               <option selected disabled value="">Choose a Category</option>
               {{range .category}}<option value="{{.Category_Name}}">{{.Category_Name}}</option>{{end}}
@@ -60,16 +70,16 @@
             </div>
             
             <div class="col-md-12">
-              <label for="description" class="form-label">Description</label>
+              <label for="description" class="fw-bold form-label">Description</label>
               <input type="text" placeholder="write in minimum 20 words" name="description" class="form-control" required id="description">
             </div>
 
             <div class="col-md-6">
-              <label for="location" class="form-label">Location</label>
+              <label for="location" class="fw-bold form-label">Location</label>
               <input type="text" placeholder="Eg:Kerala" name="location" class="form-control" required id="location">
             </div>
         
-        <div class="col-12">
+        <div class="col-12 mb-3">
           <button type="submit" class="btn btn-primary">Add Room</button>
         </div>
       </form>

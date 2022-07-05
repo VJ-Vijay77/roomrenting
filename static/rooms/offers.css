@@ -1,0 +1,8 @@
+body{
+    background-image: url(https://www.citizensforethics.org/wp-content/uploads/2022/01/piles-of-money-01.png) !important;
+    background-size: cover;
+    overflow-x: hidden;
+}
+.thetopcont{
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}

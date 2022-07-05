@@ -1,0 +1,12 @@
+body{
+    background-image: url(https://images.unsplash.com/photo-1616163527093-41acfce459ce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80) !important;
+    background-size: cover;
+    overflow-x: hidden;
+}
+.thetopcont{
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.addroomhead{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}

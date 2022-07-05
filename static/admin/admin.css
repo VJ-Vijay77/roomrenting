@@ -1,6 +1,8 @@
 body{
     overflow-x: hidden;
-    background-color: rgb(235, 232, 232) !important;
+    background-image: url(https://images.unsplash.com/photo-1536518976183-ed4a9971a06d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80) !important;
+    background-size: cover;
+    /* background-color: rgb(235, 232, 232) !important; */
 }
 
 .adminhead{
@@ -21,7 +23,7 @@ body{
 .themainside{
     background-image: url(https://deckademics.com/wp-content/uploads/2016/02/green-gradient.png);
     background-size: cover;
-    height: 1000px;
+    /* height: 1000px; */
 
 }
 
@@ -54,4 +56,13 @@ body{
 }
 .theportfolio{
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+
+.thetodayearnings{
+    font-weight: 700;
+    font-size: 1.4rem !important;
+}
+
+.thesecondcard{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
