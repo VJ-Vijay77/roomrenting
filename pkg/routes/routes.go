@@ -142,6 +142,7 @@ func InitRoutes(api *gin.Engine) {
 	api.POST("/user/refund/:RID/:UID/:Total",controllertwo.Refund)
 	//admin list bookings
 	api.GET("/admin/list_bookings",admincontroller.ListBookings)
+	api.GET("/admin/list_all_bookings",admincontroller.AllListBookings)
 	api.GET("/admin/list_bookings/checkout/:RID/:OID",admincontroller.CheckoutBookings)
 
 	//Admin sales report

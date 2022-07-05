@@ -150,11 +150,11 @@
           </h6>
 
           <br><label for="startdate" class="startdateofroom">SELECT DATE</label><br>
-          <input class="text-success rounded-3" type="date" id="startdate" value="{{.cdate}}" min="{{.cdate}}">
+          <input class="text-success rounded-3" type="date" id="startdate" value="{{.cdate}}" min="{{.cdate}}" max="{{.maxdate}}">
           <br>
           <p class="text-white fw-bold thetoofdate" style="display: inline;">TO</p> <br>
           <input class="text-success rounded-3 mb-2" type="date" value="{{.ndate}}" id="endate"
-            oninput="date('{{.discount}}','{{.save}}','{{.roomprice}}')" min="{{.ndate}}">
+            oninput="date('{{.discount}}','{{.save}}','{{.roomprice}}')" min="{{.ndate}}" max="{{.maxdate}}">
 
           <h3>{{if eq .Offers "true"}}
             <p class="card-text text-danger theorginalpricearea">Rs<strike id="roomorginalprice"> {{.roomprice}} </strike>/-</p>
@@ -234,9 +234,9 @@
 
     <div class="col-12 col-md-3 thelocationdiv">
      <p class="fw-bold">Location</p> 
-     <p>Kolkata
+     <p>{{.location}}
       <br>
-      Near National Park
+      Near {{.location}} Park
      </p>
     </div>
     
@@ -352,21 +352,25 @@
   </div>
   <div class="col-md-12 theadsectionis">
    <div class="row">
+
+    {{range .ads}}
     <div class="col-md-3 mt-2 mb-2">
 
       <div class="card theadcards imagesofcard" style="width: 15rem;">
-     <a href=""> <img src="https://images.unsplash.com/photo-1560448205-4d9b3e6bb6db?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fHJvb218ZW58MHx8MHx8&w=1000&q=80" class="card-img-top" alt="...">
+     <a href="/user/room_info/{{.ID}}"> <img src="/public/{{.Cover}}" class="card-img-top" alt="..." style="min-height: 11rem !important;max-height: 11rem !important;">
      </a>  
         <div class="card-body">
-          <h3 class="card-title fw-bold">Rs 6000</h3>
-          <p class="card-text">1 Bd 1 Hl 2Br 1k</p>
+          <h3 class="card-title fw-bold">Rs {{.Discountprice}}</h3>
+          <p class="card-text text-success"><i class="fa-solid fa-tags"></i> Offer Available</p>
           <p class="card-text text-muted">Good room with all facilites available</p>
         </div>
       </div>
 
 
     </div>
-    <div class="col-md-3 mt-2 mb-2">
+    {{end}}
+
+    <!-- <div class="col-md-3 mt-2 mb-2">
 
       <div class="card theadcards imagesofcard" style="width: 15rem;">
         <a href=""> <img src="https://images.unsplash.com/flagged/photo-1573168710865-2e4c680d921a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGJlZCUyMHJvb218ZW58MHx8MHx8&w=1000&q=80" class="card-img-top" alt="..."></a>
@@ -406,7 +410,7 @@
       </div>
 
 
-    </div>
+    </div> -->
 
 
 

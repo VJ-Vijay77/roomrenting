@@ -114,6 +114,13 @@ func RoomInfo(c *gin.Context) {
 	cdate := currentTime.Format("2006-01-02")
 	cdate2 := currentTime.AddDate(0, 0, 1)
 	nextday := cdate2.Format("2006-01-02")
+	max := currentTime.AddDate(0,0,20)
+	maxdate := max.Format("2006-01-02")
+
+	var allrooms []models.Rooms
+	status := "available"
+	db.Limit(4).Where("status=?",status).Find(&allrooms)
+
 
 	c.HTML(200, "roominfo.gohtml", gin.H{
 		"roomname":     roominfo.Room_Name,
@@ -133,11 +140,14 @@ func RoomInfo(c *gin.Context) {
 		"off":roominfo.Value,
 		"save":roominfo.Room_Price - roominfo.Discountprice,
 		"discount":roominfo.Discountprice,
+		"location":roominfo.Location,
 		"username":     UserName,
 		"count":        count,
 		"wcount":       wishlistcount,
 		"cdate":        cdate,
 		"ndate":        nextday,
+		"maxdate": maxdate,
+		"ads":allrooms,
 	})
 }
 

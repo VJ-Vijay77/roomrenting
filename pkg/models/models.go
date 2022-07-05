@@ -143,6 +143,11 @@ type ListBookings struct {
 	User_Id    int
 	Totalprice string
 	Status     string
+	Refid string
+	Roomnames string
+	Firstname string
+	Checkindate string
+	Checkoutdate string
 }
 
 type Razorpaydetails struct {

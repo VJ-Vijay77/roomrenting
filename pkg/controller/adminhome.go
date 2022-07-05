@@ -2,6 +2,7 @@ package controller
 
 import (
 	"encoding/json"
+	"fmt"
 	"path/filepath"
 	"strconv"
 	"time"
@@ -21,19 +22,27 @@ func AdminHome(c *gin.Context) {
 		c.Redirect(303, "/admin_login")
 		return
 	}
-
+	session, _ := Store.Get(c.Request, "adminsession")
+	email := session.Values["userID"]
+	user_ID := fmt.Sprintf("%v", email)
 
 	db := database.GetDb()
+
+	var userinfos models.Users
+
+	db.Raw("SELECT first_name,last_name FROM users where email=?", user_ID).Scan(&userinfos)
+	UserName := userinfos.First_Name
+	LastName := userinfos.Last_Name
+
 
 	current := time.Now().Format("2006-01-02")
 
 	// //daily sales
 	// var dailysales []models.Orders
 	// db.Where("checkindate=?", current).Find(&dailysales)
-    //total daily revenue
-    var TotalRevenue int64
-    db.Raw("SELECT SUM(totalprice) FROM orders WHERE checkindate=?", current).Scan(&TotalRevenue)
-	
+	//total daily revenue
+	var TotalRevenue int64
+	db.Raw("SELECT SUM(totalprice) FROM orders WHERE checkindate=?", current).Scan(&TotalRevenue)
 
 	timed := time.Now()
 	time2 := timed.AddDate(0, 0, -6)
@@ -114,8 +123,6 @@ func AdminHome(c *gin.Context) {
 		seven += i.Totalprice
 	}
 
-
-
 	// june stats here
 	k := "2022-05-31"
 	var junedetails []models.Orders
@@ -127,8 +134,6 @@ func AdminHome(c *gin.Context) {
 	for _, i := range junedetails {
 		monthlytotal += i.Totalprice
 	}
-
-
 
 	//may stats starts here
 	may := "2022-05-01"
@@ -142,7 +147,6 @@ func AdminHome(c *gin.Context) {
 	for _, i := range maydetails {
 		maytotal += i.Totalprice
 	}
-
 
 	//yearly graph report
 	yearstart := "2022-01-01"
@@ -158,49 +162,47 @@ func AdminHome(c *gin.Context) {
 		yearlytotal += i.Totalprice
 	}
 
-
-
 	weektimestart := timed.Format("2006-01-02")
 	todaytimes := time2.Format("2006-01-02")
 
 	var weekdatas []models.Orders
 	db.Where("checkindate > ?", todaytime).Find(&weekdata)
-	
+
 	var wrevenue int
 	for _, i := range weekdata {
 		wrevenue += i.Totalprice
 	}
 
-
-
 	c.HTML(200, "adminhome.gohtml", gin.H{
 		"first":  first,
-		"fday":days1,
+		"fday":   days1,
 		"second": second,
-		"sday":days2,
+		"sday":   days2,
 		"third":  third,
-		"tday":days3,
+		"tday":   days3,
 		"fourth": fourth,
-		"foday":days4,
+		"foday":  days4,
 
 		"five":   five,
-		"fifday":days5,
+		"fifday": days5,
 
 		"six":    six,
-		"sixday":days6,
+		"sixday": days6,
 
 		"seven":  seven,
-		"seday":days7,
-		"june":monthlytotal,
-		"may":maytotal,
-		"yearly":yearlytotal,
-		"daily":TotalRevenue,
+		"seday":  days7,
+		"june":   monthlytotal,
+		"may":    maytotal,
+		"yearly": yearlytotal,
+		"daily":  TotalRevenue,
 
-		"wstart":        weektimestart,
-		"wend":          todaytimes,
-		
+		"wstart": weektimestart,
+		"wend":   todaytimes,
+
 		"weeklydetails": weekdatas,
 		"wtotal":        wrevenue,
+		"firstname":UserName,
+		"lastname":LastName,
 	})
 }
 
@@ -273,7 +275,7 @@ func PAddRoom(c *gin.Context) {
 	c.SaveUploadedFile(CoverPicPath, "./public/"+Cover)
 
 	RoomPrice := c.PostForm("roomprice")
-	RoomCost ,_ := strconv.Atoi(RoomPrice)
+	RoomCost, _ := strconv.Atoi(RoomPrice)
 	RoomCategory := c.PostForm("roomcategory")
 	RoomDescription := c.PostForm("description")
 	RoomLocation := c.PostForm("location")
@@ -325,7 +327,7 @@ func PAddRoom(c *gin.Context) {
 	addroom.Description = RoomDescription
 	addroom.Location = RoomLocation
 
-	db.Select("room_name", "room_price", "category", "cover", "sub1", "sub2", "sub3", "sub4", "sub5", "status","description","location").Create(&addroom)
+	db.Select("room_name", "room_price", "category", "cover", "sub1", "sub2", "sub3", "sub4", "sub5", "status", "description", "location").Create(&addroom)
 
 	ok = true
 	k, _ := json.Marshal(ok)

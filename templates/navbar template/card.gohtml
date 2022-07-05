@@ -55,15 +55,15 @@
                  
                  {{end}}
                       <p class="card-text">{{.Room_Name}}</p>
-                  <p class="card-text categoryoftheroom">{{.Category}}</p>
+                  <p class="card-text categoryoftheroom">{{.Location}} : {{.Category}}(category)</p>
                   <p class="card-text descriptionoftheroom">{{.Description}}</p>
                   <a href="/user/room_info/{{.ID}}" class="btn btn-primary fw-bold">Check-In Now</a>
               
                   {{if eq .Status "booked"}}    
-                <p class="text-muted bg-danger theavailability" style="color: white !important; font-size: smaller;">Available from {{.Checkoutdate}}</p>
+                  <p class="text-muted text-bg-danger theavailability" style="color: white !important; font-size: smaller;">Available from {{.Checkoutdate}}</p>
                  
                  {{else}}
-                  <p class="card-text theavailability"><small class="text-muted bg-warning">{{.Status}}</small></p>
+                  <p class="card-text theavailability"><small class="text-muted bg-warning" style="display: inline;">{{.Status}}</small></p>
                         {{end}}
                 </div>
                 

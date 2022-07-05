@@ -14,9 +14,24 @@ func ListBookings(c *gin.Context) {
 	db := database.GetDb()
 
 	var bookings []models.ListBookings
-	db.Raw("SELECT orders.orderid,orderedrooms.roomid,orders.user_id,orders.totalprice,orderedrooms.status FROM orders INNER JOIN orderedrooms ON orders.orderid=orderedrooms.id").Scan(&bookings)
+	var check = "checkedin"
+	db.Raw("SELECT orders.orderid,orderedrooms.roomid,orders.user_id,orders.totalprice,orderedrooms.status,orders.refid,orders.roomnames,orders.firstname,orders.checkindate,orders.checkoutdate FROM orders INNER JOIN orderedrooms ON orders.orderid=orderedrooms.id WHERE orderedrooms.status=?",check).Scan(&bookings)
 
+	
 	c.HTML(200, "listbookings.gohtml", gin.H{
+		"bookings": bookings,
+	})
+
+}
+func AllListBookings(c *gin.Context) {
+	db := database.GetDb()
+
+	var bookings []models.ListBookings
+
+	db.Raw("SELECT orders.orderid,orderedrooms.roomid,orders.user_id,orders.totalprice,orderedrooms.status,orders.refid,orders.roomnames,orders.firstname,orders.checkindate,orders.checkoutdate FROM orders INNER JOIN orderedrooms ON orders.orderid=orderedrooms.id").Scan(&bookings)
+
+	
+	c.HTML(200, "alllistbookings.gohtml", gin.H{
 		"bookings": bookings,
 	})
 
