@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/VJ-Vijay77/r4room/pkg/database"
+	"github.com/joho/godotenv"
 	"github.com/twilio/twilio-go"
 	openapi "github.com/twilio/twilio-go/rest/api/v2010"
 
@@ -81,64 +82,65 @@ func PUserOtpLogin(c *gin.Context) {
 		return
 	}
 
-	store,_ := Store.Get(c.Request,"session")
-	store.Values["userMob"]=Mobile
-	store.Save(c.Request,c.Writer)
-	c.Redirect(303,"/validate_otp") 
-	
-
+	store, _ := Store.Get(c.Request, "session")
+	store.Values["userMob"] = Mobile
+	store.Save(c.Request, c.Writer)
+	c.Redirect(303, "/validate_otp")
 
 }
 
 func ValidateOtp(c *gin.Context) {
-	store,_ := Store.Get(c.Request,"session")
+	error := godotenv.Load(".env")
+	if error != nil {
+		fmt.Println("Unable to get data from env!!")
+	}
+
+	store, _ := Store.Get(c.Request, "session")
 	Mob := store.Values["userMob"]
-	Converted := fmt.Sprintf("%v",Mob)
-	Mobile := "+91"+Converted
-	
+	Converted := fmt.Sprintf("%v", Mob)
+	Mobile := "+91" + Converted
+
 	rand.Seed(time.Now().UnixNano())
 
 	value := rand.Intn(9999-1000) + 1000
 	otp := strconv.Itoa(value)
 
-	accountSid := "ACdac52be2b71187a48f36876f6343f734"
-	authToken := "7cdff407c08ba5cb0ed3e13fbe255776"
+	accountSid := os.Getenv("ASID")
+	// accountSid := "ACdac52be2b71187a48f36876f6343f734"
+	authToken := os.Getenv("AuthToken")
+	// authToken := "7cdff407c08ba5cb0ed3e13fbe255776"
 
 	client := twilio.NewRestClientWithParams(twilio.ClientParams{
 		Username: accountSid,
 		Password: authToken,
 	})
-	
+
 	params := &openapi.CreateMessageParams{}
 	params.SetTo(Mobile)
 	params.SetFrom("+19844647150")
-	params.SetBody("Hello,Your OTP for logging into R4Rooms is - "+otp)
+	params.SetBody("Hello,Your OTP for logging into R4Rooms is - " + otp)
 
 	_, err := client.Api.CreateMessage(params)
 	if err != nil {
 		fmt.Println(err.Error())
 		err = nil
-	}else{
+	} else {
 		fmt.Println("OTP sent successfully!")
 	}
-	
 
-	
-	store.Values["OTP"]=otp
-	store.Save(c.Request,c.Writer)
-
+	store.Values["OTP"] = otp
+	store.Save(c.Request, c.Writer)
 
 	c.HTML(200, "validateotp.gohtml", nil)
 
 }
 
-
 func PValidateOtp(c *gin.Context) {
-	store,_ := Store.Get(c.Request,"session")
-	 OTPcode:= store.Values["OTP"]
-	 Mob := store.Values["userMob"]
-	 Mobile := fmt.Sprintf("%v",Mob)
-	OTP := fmt.Sprintf("%v",OTPcode)
+	store, _ := Store.Get(c.Request, "session")
+	OTPcode := store.Values["OTP"]
+	Mob := store.Values["userMob"]
+	Mobile := fmt.Sprintf("%v", Mob)
+	OTP := fmt.Sprintf("%v", OTPcode)
 	userOTP := c.PostForm("otp")
 	db := database.GetDb()
 
@@ -150,27 +152,20 @@ func PValidateOtp(c *gin.Context) {
 		}
 		sessions.Save(c.Request, c.Writer)
 		dialog.Alert("OTP is Incorrect !")
-		c.Redirect(303,"/login_with_otp")
+		c.Redirect(303, "/login_with_otp")
 		return
 	}
 	dialog.Alert("OTP verified successfully!")
-	
+
 	var userinfo models.Users
-	db.Raw("SELECT first_name,email FROM users WHERE mobile=?",Mobile).Scan(&userinfo)
-	store.Values["userID"]=userinfo.Email
-	store.Save(c.Request,c.Writer)
-	dialog.Alert("Welcome %s !!",userinfo.First_Name)
+	db.Raw("SELECT first_name,email FROM users WHERE mobile=?", Mobile).Scan(&userinfo)
+	store.Values["userID"] = userinfo.Email
+	store.Save(c.Request, c.Writer)
+	dialog.Alert("Welcome %s !!", userinfo.First_Name)
 
+	c.Redirect(303, "/user_home")
 
-	c.Redirect(303,"/user_home")
-
-
-	
 }
-
-
-
-
 
 func UserLogout(c *gin.Context) {
 	session, err := Store.Get(c.Request, "session")
