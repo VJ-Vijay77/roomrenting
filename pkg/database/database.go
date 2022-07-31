@@ -2,7 +2,6 @@ package database
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
@@ -15,7 +14,8 @@ func GetDb() *gorm.DB {
 	if err != nil {
 		fmt.Println("Unable to get data from env!!")
 	}
-	dsn := os.Getenv("database_address")
+	// dsn := os.Getenv("database_address")
+	dsn := "host=localhost user=vijay password=zmxmcmvbn dbname=r4room port=5432 sslmode=disable TimeZone=Asia/Shanghai"
 
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {

@@ -3,7 +3,9 @@ module github.com/VJ-Vijay77/r4room
 go 1.18
 
 require (
+	github.com/google/uuid v1.3.0
 	github.com/joho/godotenv v1.4.0
+	github.com/razorpay/razorpay-go v0.0.0-20220513105205-d3f04070e418
 	gorm.io/driver/postgres v1.3.7
 	gorm.io/gorm v1.23.5
 )
@@ -11,11 +13,9 @@ require (
 require (
 	github.com/go-co-op/gocron v1.14.0 // indirect
 	github.com/golang/mock v1.6.0 // indirect
-	github.com/google/uuid v1.3.0 // indirect
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646 // indirect
 	github.com/olahol/go-imageupload v0.0.0-20160503070439-09d2b92fa05e // indirect
 	github.com/pkg/errors v0.9.1 // indirect
-	github.com/razorpay/razorpay-go v0.0.0-20220513105205-d3f04070e418 // indirect
 	github.com/robfig/cron/v3 v3.0.1 // indirect
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c // indirect
 )
