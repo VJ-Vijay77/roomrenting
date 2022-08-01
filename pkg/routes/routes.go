@@ -145,6 +145,11 @@ func InitRoutes(api *gin.Engine) {
 	api.GET("/admin/list_all_bookings",admincontroller.AllListBookings)
 	api.GET("/admin/list_bookings/checkout/:RID/:OID",admincontroller.CheckoutBookings)
 
+	//admin add category
+	api.GET("/admin/add_category",admincontroller.AddCategory)
+	api.POST("/admin/add_category",admincontroller.PAddCategory)
+
+
 	//Admin sales report
 	api.GET("/admin/salesreport",admincontroller.SalesReport)
 	api.GET("/admin/salesreport/monthly",admincontroller.SalesReportMonthly)

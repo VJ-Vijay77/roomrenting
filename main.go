@@ -17,6 +17,6 @@ func main() {
 	routes.InitRoutes(Engine)
 
 	//starting the port
-	Engine.Run(":9990")
+	Engine.Run(":8080")
 
 }

@@ -45,3 +45,30 @@ func StopOffers(c *gin.Context){
 
 	c.Redirect(303,"/admin/offers")
 }
+
+
+func AddCategory(c *gin.Context){
+	db := database.GetDb()
+
+	var category []models.Category
+	db.Raw("SELECT category_name FROM category").Scan(&category)
+	c.HTML(200,"addcategory.gohtml",gin.H{
+		"categories" : category,
+	})
+}
+
+func PAddCategory(c *gin.Context){
+	db := database.GetDb()
+
+	CategoryName := c.PostForm("thecategory")
+
+	var category models.Category
+	category.Category_Name = CategoryName
+
+	// db.Select("category_name").Create(&category)
+	db.Raw("INSERT INTO category(category_name) VALUES (?)",CategoryName).Create(&category)
+
+	c.Redirect(303,"/admin/add_category")
+
+	
+}
