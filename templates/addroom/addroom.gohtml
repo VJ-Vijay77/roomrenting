@@ -117,6 +117,7 @@ $.ajax({
  
       if (k==true){
         swal("Successfully Added!", "You Added a room", "success");
+        setTimeout(() => { location.reload();  }, 2000);
       }else if(k==false){
         swal("Error!", "Room already exists!", "error");
       }
