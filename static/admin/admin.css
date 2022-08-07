@@ -21,14 +21,15 @@ body{
 
 
 .themainside{
-    background-image: url(https://deckademics.com/wp-content/uploads/2016/02/green-gradient.png);
+    /* background-image: url(https://deckademics.com/wp-content/uploads/2016/02/green-gradient.png); */
+    background-image: url(https://mcdn.wallpapersafari.com/medium/41/17/pItFRM.jpg);
     background-size: cover;
     /* height: 1000px; */
 
 }
 
 .textbig{
-    color: rgb(12, 12, 46);
+    color: rgb(32, 213, 12);
     padding-left: 8% !important;
     font-size: 1rem !important;
     font-weight: 600 !important;
