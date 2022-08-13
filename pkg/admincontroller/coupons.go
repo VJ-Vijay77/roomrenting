@@ -86,6 +86,7 @@ func InactiveCoupons(c *gin.Context){
 }
 
 func ActiveCoupons(c *gin.Context){
+	//setting coupons
 	ID := c.Param("ID")
 	cid, _ := strconv.Atoi(ID)
 	

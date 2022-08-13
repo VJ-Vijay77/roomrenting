@@ -1,6 +1,6 @@
 body {
     width: 100%;
-    overflow-x: hidden;
+    overflow-x: hidden !important;
 
 }
 
@@ -415,9 +415,10 @@ body {
         display: none !important;
         
     }
-    
+
     .intoggleform{
         display: inline !important;
        
     }
+    
 }
