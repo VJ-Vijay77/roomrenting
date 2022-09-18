@@ -59,7 +59,7 @@ db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 #### Features;
 
-  1.User Side
+##### User Side
 
 * User can search,filter,sort and book rooms
 * User can prebook rooms
@@ -70,7 +70,7 @@ db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 * Profile picture updation facility
 * User can apply categorised coupons when booking
 
-  2.Admin Side
+#####  Admin Side
 
 * User management like user creation,updation,deletion and blocking
 * Add rooms ,pictures and manage rooms like delete,edit and add rooms
